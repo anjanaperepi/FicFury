@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | FIC FURY</title>
+
+    <!-- Font -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Global CSS -->
+    <link rel="stylesheet"
+          href="../css/assets/layout.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/components.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/responsive.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/forms.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/tables.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/animations.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/theme.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/toast.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/utilities.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/sidebar.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet"
+          href="../css/profile.css">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div id="sidebar"></div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="main-content">
+
+        <div class="page-container">
+
+
+            <!-- ================= HERO ================= -->
+
+            <section class="profile-hero">
+
+                <div class="profile-hero-content">
+
+                    <div>
+
+                        <span class="hero-badge">
+                            My Profile
+                        </span>
+
+                        <h1>
+
+                            Hello,
+                            <span id="profileName">
+                                User Name
+                            </span>
+
+                            👋
+
+                        </h1>
+
+                        <p>
+                            Manage your FIC FURY identity,
+                            registrations and participation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="profile-avatar">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= PROFILE SUMMARY ================= -->
+
+            <section class="profile-summary">
+
+                <div class="identity-card">
+
+                    <div class="identity-icon">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            CURRENT ROLE
+                        </span>
+
+                        <h3 id="profileRole">
+                            Delegate
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+                <div class="identity-card">
+
+                    <div class="identity-icon">
+
+                        <i class="fa-solid fa-certificate"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            CERTIFICATE
+                        </span>
+
+                        <h3 id="certificateEligibility">
+                            Checking...
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= STATISTICS ================= -->
+
+            <section class="stats-grid profile-stats">
+
+
+                <!-- Registrations -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <i class="fa-solid fa-building-columns"></i>
+
+                        <h4>
+                            Registrations
+                        </h4>
+
+                    </div>
+
+                    <h2 id="totalRegistrations">
+                        0
+                    </h2>
+
+                    <p>
+                        Total committee registrations
+                    </p>
+
+                </div>
+
+
+                <!-- Approved -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                        <h4>
+                            Approved
+                        </h4>
+
+                    </div>
+
+                    <h2 id="approvedRegistrations">
+                        0
+                    </h2>
+
+                    <p>
+                        Confirmed registrations
+                    </p>
+
+                </div>
+
+
+                <!-- Pending -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <i class="fa-solid fa-hourglass-half"></i>
+
+                        <h4>
+                            Pending
+                        </h4>
+
+                    </div>
+
+                    <h2 id="pendingRegistrations">
+                        0
+                    </h2>
+
+                    <p>
+                        Registrations awaiting approval
+                    </p>
+
+                </div>
+
+
+                <!-- Attendance -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                        <h4>
+                            Attendance
+                        </h4>
+
+                    </div>
+
+                    <h2 id="attendancePercentage">
+                        0%
+                    </h2>
+
+                    <p>
+                        Overall attendance
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= REGISTRATIONS ================= -->
+
+            <section class="registrations-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            PARTICIPATION
+                        </span>
+
+                        <h2>
+                            My Registrations
+                        </h2>
+
+                        <p>
+                            Committees and characters assigned
+                            to your FIC FURY account.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="registration-table-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        <i class="fa-solid fa-building-columns"></i>
+                                        Committee
+                                    </th>
+
+                                    <th>
+                                        <i class="fa-solid fa-user-secret"></i>
+                                        Character
+                                    </th>
+
+                                    <th>
+                                        <i class="fa-solid fa-circle-info"></i>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="registrationsBody">
+
+                                <tr>
+
+                                    <td colspan="3"
+                                        class="profile-empty-state">
+
+                                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                        Loading registrations...
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <!-- Footer -->
+
+        <div id="footer"></div>
+
+    </main>
+
+</div>
+
+
+<!-- Components -->
+
+<script src="../js/component-loader.js"></script>
+
+
+<!-- Core -->
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+
+<!-- Profile -->
+
+<script src="../js/profile.js"></script>
+
+
+<script>
+
+    requireLogin();
+
+</script>
+
+</body>
+
+</html>

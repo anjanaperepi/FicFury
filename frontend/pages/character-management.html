@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Character Management | FIC FURY</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Global Styles -->
+
+    <link rel="stylesheet"
+          href="../css/assets/theme.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/layout.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/components.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/forms.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/tables.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/utilities.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/responsive.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/sidebar.css">
+
+    <!-- Page Styles -->
+
+        <link rel="stylesheet"
+          href="../css/character-management.css">
+
+</head>
+
+<body>
+
+    <div class="app-layout">
+
+        <!-- Sidebar -->
+
+        <div id="sidebar"></div>
+
+        <!-- Main Content -->
+
+        <main class="main-content">
+
+            <div class="page-container">
+
+<!-- =========================================================
+     HERO SECTION
+========================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+
+            ADMIN PANEL
+
+        </span>
+
+        <h1>
+
+            Character Management
+
+        </h1>
+
+        <p>
+
+            Create, edit, organize and manage committee
+            characters for FIC FURY.
+
+        </p>
+
+        <div class="hero-actions">
+
+            <button
+                id="newCharacterBtn"
+                class="btn btn-primary">
+
+                <i class="fa-solid fa-plus"></i>
+
+                New Character
+
+            </button>
+
+            <button
+                id="refreshCharacters"
+                class="btn btn-secondary">
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+                Refresh
+
+            </button>
+
+            <button
+                id="exportCharacters"
+                class="btn btn-outline">
+
+                <i class="fa-solid fa-file-export"></i>
+
+                Export
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="hero-illustration">
+
+        <i class="fa-solid fa-user-secret"></i>
+
+    </div>
+
+</section>
+<!-- =========================================================
+     STATISTICS
+========================================================== -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+         <div class="stat-icon">
+
+        <i class="fa-solid fa-user-secret"></i></div>
+
+        <div class = "stat-content">
+
+            <h2 id="characterCount">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Characters
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+         <div class="stat-icon">
+
+        <i class="fa-solid fa-building-columns"></i>
+            </div>
+        <div class = "stat-content">
+
+            <h2 id="committeeCount">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Committees
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+             <div class="stat-icon">
+        <i class="fa-solid fa-flag"></i></div>
+
+        <div class="stat-content">
+
+            <h2 id="factionCount">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Factions
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+         <div class="stat-icon">
+
+        <i class="fa-solid fa-fire"></i></div>
+
+        <div class = "stat-content">
+
+            <h2 id="hardCharacterCount">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Hard Characters
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =========================================================
+     FILTER TOOLBAR
+========================================================== -->
+
+<section class="card">
+
+    <div class="toolbar">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-search"></i>
+
+            <input
+                type="text"
+                id="characterSearch"
+                placeholder="Search characters...">
+
+        </div>
+
+        <!-- Committee Filter -->
+
+        <select id="committeeFilter">
+
+            <option value="">
+
+                All Committees
+
+            </option>
+
+        </select>
+
+        <!-- Difficulty Filter -->
+
+        <select id="difficultyFilter">
+
+            <option value="">
+
+                All Difficulties
+
+            </option>
+
+        </select>
+
+        <!-- Faction Filter -->
+
+        <select id="factionFilter">
+
+            <option value="">
+
+                All Factions
+
+            </option>
+
+        </select>
+
+        <!-- Sort -->
+
+        <select id="sortFilter">
+
+            <option value="name">
+
+                Name
+
+            </option>
+
+            <option value="committee">
+
+                Committee
+
+            </option>
+
+            <option value="difficulty">
+
+                Difficulty
+
+            </option>
+
+            <option value="faction">
+
+                Faction
+
+            </option>
+
+        </select>
+
+    </div>
+
+</section>
+<!-- =========================================================
+     CHARACTER TABLE
+========================================================== -->
+
+<section class="panel">
+
+    <div class="card-header">
+
+        <div>
+
+            <h2>
+
+                Character Directory
+
+            </h2>
+
+            <p class = "section-description">
+ 
+                View and manage all committee characters.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="table-container">
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Character</th>
+
+                    <th>Committee</th>
+
+                    <th>Difficulty</th>
+
+                    <th>Faction</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="characterTableBody">
+
+                <!-- Populated by JavaScript -->
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <!-- Empty State -->
+
+    <div
+        id="emptyState"
+        class="empty-state hidden">
+
+    </div>
+
+</section>
+
+<!-- =========================================================
+     PAGINATION
+========================================================== -->
+
+<div
+    id="pagination"
+    class="pagination">
+
+</div>
+<!-- =========================================================
+     CHARACTER DRAWER
+========================================================== -->
+
+<aside
+    id="characterDrawer"
+    class="drawer">
+
+    <div class="drawer-header">
+
+        <h2>
+
+            Character Details
+
+        </h2>
+
+        <button
+            id="closeDrawer"
+            class="icon-btn"
+            type="button">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+    <div class="drawer-body">
+
+        <div class="drawer-content">
+
+            <label>
+
+                Character Name
+
+            </label>
+
+            <p id="drawerName">
+
+                -
+
+            </p>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Title
+
+            </label>
+
+            <p id="drawerTitle">
+
+                -
+
+            </p>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Committee
+
+            </label>
+
+            <p id="drawerCommittee">
+
+                -
+
+            </p>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Difficulty
+
+            </label>
+
+            <div id="drawerDifficulty">
+
+                -
+
+            </div>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Faction
+
+            </label>
+
+            <p id="drawerFaction">
+
+                -
+
+            </p>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Description
+
+            </label>
+
+            <p id="drawerDescription">
+
+                -
+
+            </p>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Background
+
+            </label>
+
+            <p id="drawerBackground">
+
+                -
+
+            </p>
+
+        </div>
+
+        <div class="drawer-content">
+
+            <label>
+
+                Objectives
+
+            </label>
+
+            <p id="drawerObjectives">
+
+                -
+
+            </p>
+
+        </div>
+
+    </div>
+
+</aside>
+<!-- =========================================================
+     CHARACTER MODAL
+========================================================== -->
+
+<div
+    id="characterModal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2 id="characterModalTitle">
+
+                Create Character
+
+            </h2>
+
+            <button
+    type="button"
+    class="close-modal">
+
+    <i class="fa-solid fa-xmark"></i>
+
+</button>
+
+        </div>
+
+        <form id="characterForm">
+
+            <div class="form-grid">
+
+                <!-- Character Name -->
+
+                <div class="form-group">
+
+                    <label for="name">
+
+                        Character Name *
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <!-- Title -->
+
+                <div class="form-group">
+
+                    <label for="title">
+
+                        Title
+
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        class="form-control">
+
+                </div>
+
+            </div>
+
+            <div class="form-grid">
+
+                <!-- Committee -->
+
+                <div class="form-group">
+
+                    <label for="committee">
+
+                        Committee *
+
+                    </label>
+
+                    <select
+                        id="committee"
+                        class="form-control"
+                        required>
+
+                        <option value="">
+
+                            Select Committee
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <!-- Difficulty -->
+
+                <div class="form-group">
+
+                    <label for="difficulty">
+
+                        Difficulty *
+
+                    </label>
+
+                    <select
+                        id="difficulty"
+                        class="form-control"
+                        required>
+
+                        <option value="">
+
+                            Select Difficulty
+
+                        </option>
+
+                        <option value="Easy">
+
+                            Easy
+
+                        </option>
+
+                        <option value="Medium">
+
+                            Medium
+
+                        </option>
+
+                        <option value="Hard">
+
+                            Hard
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- Faction -->
+
+            <div class="form-group">
+
+                <label for="faction">
+
+                    Faction
+
+                </label>
+
+                <input
+                    type="text"
+                    id="faction"
+                    class="form-control">
+
+            </div>
+
+            <!-- Description -->
+
+            <div class="form-group">
+
+                <label for="description">
+
+                    Description
+
+                </label>
+
+                <textarea
+                    id="description"
+                    rows="4"
+                    class="form-control"></textarea>
+
+            </div>
+
+            <!-- Background -->
+
+            <div class="form-group">
+
+                <label for="background">
+
+                    Background
+
+                </label>
+
+                <textarea
+                    id="background"
+                    rows="4"
+                    class="form-control"></textarea>
+
+            </div>
+
+            <!-- Objectives -->
+
+            <div class="form-group">
+
+                <label for="objectives">
+
+                    Objectives
+
+                </label>
+
+                <textarea
+                    id="objectives"
+                    rows="4"
+                    class="form-control"></textarea>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    id="cancelCharacterBtn"
+                    class="btn btn-outline">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="button"
+                    id="saveCharacterBtn"
+                    class="btn btn-primary">
+
+                    Create Character
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+            </div>
+<div id="footer"></div>
+        </main>
+
+    </div>
+
+    <!-- =========================================================
+     DELETE CONFIRMATION MODAL
+========================================================== -->
+
+<div
+    id="deleteModal"
+    class="modal hidden">
+
+    <div class="modal-content modal-sm">
+
+        <div class="modal-header">
+
+            <h2>
+
+                Delete Character
+
+            </h2>
+
+        </div>
+
+        <div class="modal-body">
+
+            <p>
+
+                Are you sure you want to delete this character?
+
+            </p>
+
+            <p>
+
+                This action cannot be undone.
+
+            </p>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                type="button"
+                id="cancelDeleteCharacter"
+                class="btn btn-outline">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="button"
+                id="confirmDeleteCharacter"
+                class="btn btn-danger">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- =========================================================
+     LOADING OVERLAY
+========================================================== -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay hidden">
+
+    <div class="spinner"></div>
+
+</div>
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/character-management.js"></script>
+
+</body>
+</html>

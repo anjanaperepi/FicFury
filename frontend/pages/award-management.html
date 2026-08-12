@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Award Management | FIC FURY</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Global Styles -->
+
+    <link rel="stylesheet"
+          href="../css/assets/theme.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/layout.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/components.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/forms.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/tables.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/utilities.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/responsive.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/sidebar.css">
+
+    <!-- Page Styles -->
+<link
+    rel="stylesheet"
+    href="../css/award-management.css">
+    
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <aside id="sidebar"></aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+<div class = "page-container">
+       
+
+        <!-- Hero -->
+        <section class="hero-section">
+
+            <div class="hero-content">
+                <h1>
+                  <span class = "hero-badge">  <i class="fas fa-trophy"></i>
+                    Awards Management
+                </h1>
+            </span>
+
+                <p>
+                    Manage delegate awards, recognitions and certificates.
+                </p>
+            </div>
+                <div class = "hero-actions">
+            <button class="btn btn-primary" id="addAwardBtn">
+                <i class="fas fa-plus"></i>
+                New Award
+            </button>
+            </div>
+        </section>
+
+
+        <div
+    id="awardSessionStatus"
+    class="award-session-status locked">
+
+    <div class="award-session-icon">
+
+        <i class="fas fa-lock"></i>
+
+    </div>
+
+    <div class="award-session-content">
+
+        <strong id="awardSessionTitle">
+            Awards Locked
+        </strong>
+
+        <p id="awardSessionMessage">
+            Awards will become available after
+            the debate session is completed.
+        </p>
+
+    </div>
+
+</div>
+        <!-- Statistics -->
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <div class = "stat-icon">
+                <i class="fas fa-trophy"></i></div>
+                <div class = 'stat-content'>
+                <h2 id="totalAwards">0</h2>
+                <p>Total Awards</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-medal"></i>
+                <h2 id="bestDelegateCount">0</h2>
+                <p>Best Delegate</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-star"></i>
+                <h2 id="outstandingCount">0</h2>
+                <p>Outstanding Delegate</p>
+            </div>
+
+            <div class="stat-card">
+                <i class="fas fa-award"></i>
+                <h2 id="participationCount">0</h2>
+                <p>Participation</p>
+            </div>
+
+        </section>
+
+        <!-- Toolbar -->
+        <section class="card">
+            <div class = "toolbar">
+
+           <div class="search-box">
+
+    <i class="fa-solid fa-search"></i>
+
+    <input
+        id="searchInput">
+
+</div>
+
+            <select id="committeeFilter">
+                <option value="">All Committees</option>
+            </select>
+
+            <select id="awardFilter">
+                <option value="">All Awards</option>
+            </select>
+
+            <button class="btn btn-secondary" id="exportBtn">
+                <i class="fas fa-file-export"></i>
+                Export
+            </button>
+            </div>
+        </section>
+
+        <section class="panel">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+
+                Award Directory
+
+            </h2>
+
+            <p class="section-description">
+
+                Manage all delegate awards and recognitions.
+
+            </p>
+
+        </div>
+
+    </div>
+        <div class="table-container">
+
+            <table class="table">
+
+                <thead>
+
+                <tr>
+
+                    <th>Delegate</th>
+
+                    <th>Committee</th>
+
+                    <th>Character</th>
+
+                    <th>Award</th>
+
+                    <th>Presented By</th>
+
+                    <th>Date</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="TableBody" class = "table-body">
+
+                </tbody>
+
+            </table>
+        </div>
+
+        <div
+    id="emptyState"
+    class="empty-state hidden">
+
+    <i class="fa-solid fa-trophy"></i>
+
+    <h2>No Awards Found</h2>
+
+    <p>
+
+        No awards match the selected filters.
+
+    </p>
+
+    <button
+        class="btn btn-primary"
+        id="addAwardBtnEmpty">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Create Award
+
+    </button>
+
+</div>
+        </section>
+</div>
+    <div id="footer"></div>
+</main>
+
+</div>
+
+<div
+    id="awardDrawer"
+    class="drawer">
+
+    <div class="drawer-header">
+
+        ...
+
+    </div>
+
+    <div class="drawer-body">
+
+        <div
+            id="drawerContent"
+            class="drawer-content">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================
+     ADD / EDIT AWARD MODAL
+     ========================================================== -->
+
+<div
+    id="awardModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="awardModalTitle">
+
+    <div class="modal-content">
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="awardModalTitle">
+                    New Award
+                </h2>
+
+                <p class="modal-subtitle">
+                    Recognize a delegate for their performance.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeAwardModal"
+                aria-label="Close">
+
+                <i class="fas fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form id="awardForm">
+
+            <!-- Delegate -->
+
+            <div class="form-group">
+
+                <label for="delegate">
+                    Delegate
+                </label>
+
+                <select
+                    id="delegate"
+                    required>
+
+                    <option value="">
+                        Select a delegate
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Award -->
+
+            <div class="form-group">
+
+                <label for="awardType">
+                    Award
+                </label>
+
+                <select
+                    id="awardType"
+                    required>
+
+                    <option value="">
+                        Select an award
+                    </option>
+
+                    <option value="BEST_DELEGATE">
+                        Best Delegate
+                    </option>
+
+                    <option value="OUTSTANDING_DELEGATE">
+                        Outstanding Delegate
+                    </option>
+
+                    <option value="HIGH_COMMENDATION">
+                        High Commendation
+                    </option>
+
+                    <option value="SPECIAL_MENTION">
+                        Special Mention
+                    </option>
+
+                    <option value="VERBAL_MENTION">
+                        Verbal Mention
+                    </option>
+
+                    <option value="PARTICIPATION">
+                        Participation
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Presented By -->
+
+            <div class="form-group">
+
+                <label for="presentedBy">
+                    Presented By
+                </label>
+
+                <input
+                    type="text"
+                    id="presentedBy"
+                    placeholder="Enter chairperson name"
+                    autocomplete="off"
+                    required>
+
+            </div>
+
+
+            <!-- Date -->
+
+            <div class="form-group">
+
+                <label for="awardDate">
+                    Presented Date
+                </label>
+
+                <input
+                    type="date"
+                    id="awardDate"
+                    required>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="cancelAward">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="saveAwardBtn">
+
+                    <i class="fas fa-trophy"></i>
+
+                    Save Award
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+<!-- ==========================================================
+     DELETE AWARD CONFIRMATION MODAL
+     ========================================================== -->
+
+<div
+    id="deleteModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="deleteModalTitle">
+
+    <div class="modal-content delete-modal-content">
+
+        <!-- HEADER -->
+
+        <div class="delete-modal-header">
+
+            <div class="delete-icon">
+
+                <i class="fas fa-trash"></i>
+
+            </div>
+
+            <div>
+
+                <h2 id="deleteModalTitle">
+                    Delete Award?
+                </h2>
+
+                <p>
+                    This action cannot be undone.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BODY -->
+
+        <div class="delete-modal-body">
+
+            <p>
+                Are you sure you want to permanently
+                delete this award?
+            </p>
+
+            <div class="delete-warning">
+
+                <i class="fas fa-triangle-exclamation"></i>
+
+                <span>
+                    The award will be removed from the
+                    committee's records.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="delete-modal-actions">
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                id="cancelDeleteBtn">
+
+                <i class="fas fa-xmark"></i>
+                Cancel
+
+            </button>
+
+
+            <button
+                type="button"
+                class="btn btn-danger"
+                id="confirmDeleteBtn">
+
+                <i class="fas fa-trash"></i>
+                Delete Award
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/award-management.js"></script>
+
+</body>
+</html>

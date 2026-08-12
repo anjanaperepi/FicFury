@@ -1,0 +1,1054 @@
+/* =========================================================
+   FIC FURY — DELEGATE RESOURCES
+   ========================================================= */
+
+.resources-page {
+    width: 100%;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+
+    background: #ffffff;
+    border: 4px solid #000000;
+    box-shadow: 8px 8px #000000;
+
+    padding: 42px 48px;
+    margin-bottom: 42px;
+
+    overflow: hidden;
+}
+
+.hero-section::after {
+    content: "";
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -70px;
+    top: -70px;
+
+    background: #fff4bf;
+    border-radius: 50%;
+
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+
+    background: #ffd60a;
+    color: #000000;
+
+    border: 3px solid #000000;
+    box-shadow: 4px 4px #000000;
+
+    padding: 9px 18px;
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    margin-bottom: 22px;
+}
+
+.hero-badge::before {
+    content: "★";
+    margin-right: 9px;
+    color: #ff3b30;
+}
+
+.hero-content h1 {
+    margin: 0 0 14px;
+
+    color: #151515;
+
+    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    line-height: 0.98;
+    font-weight: 800;
+    letter-spacing: -2px;
+}
+
+.hero-content p {
+    max-width: 680px;
+
+    margin: 0;
+
+    color: #5f6368;
+
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.hero-illustration {
+    position: relative;
+    z-index: 1;
+
+    flex-shrink: 0;
+
+    width: 125px;
+    height: 125px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffd60a;
+
+    border: 4px solid #000000;
+    box-shadow: 7px 7px #000000;
+}
+
+.hero-illustration i {
+    font-size: 48px;
+    color: #ff3b30;
+}
+
+
+/* =========================================================
+   STATISTICS
+   ========================================================= */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 22px;
+
+    margin-bottom: 38px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    min-height: 125px;
+
+    background: #ffffff;
+
+    border: 4px solid #000000;
+    box-shadow: 6px 6px #000000;
+
+    padding: 22px;
+}
+
+.stat-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border: 3px solid #000000;
+    box-shadow: 4px 4px #000000;
+
+    font-size: 23px;
+}
+
+.stat-icon.blue {
+    background: #72b9f2;
+}
+
+.stat-icon.green {
+    background: #7bea79;
+}
+
+.stat-icon.orange {
+    background: #ffd166;
+}
+
+.stat-content h2 {
+    margin: 0 0 3px;
+
+    color: #151515;
+
+    font-size: 30px;
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+.stat-content p {
+    margin: 0;
+
+    color: #5f6368;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   FILTER BAR
+   ========================================================= */
+
+.section {
+    width: 100%;
+}
+
+.toolbar {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.6fr)
+        minmax(300px, 1fr);
+
+    gap: 18px;
+
+    background: #ffffff;
+
+    border: 4px solid #000000;
+    box-shadow: 7px 7px #000000;
+
+    padding: 24px;
+
+    margin-bottom: 42px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box::before {
+    content: "\f002";
+
+    position: absolute;
+
+    left: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+
+    color: #6b7280;
+
+    pointer-events: none;
+}
+
+.search-box input {
+    width: 100%;
+    height: 62px;
+
+    border: 3px solid #000000;
+
+    background: #ffffff;
+
+    padding: 0 18px 0 52px;
+
+    font-size: 16px;
+    font-family: inherit;
+
+    outline: none;
+
+    transition: box-shadow 0.15s ease;
+}
+
+.search-box input:focus {
+    box-shadow: 4px 4px #ffd60a;
+}
+
+.filter-group {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.filter-group select {
+    width: 100%;
+    height: 62px;
+
+    background: #ffffff;
+
+    border: 3px solid #000000;
+
+    padding: 0 16px;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.filter-group select:focus {
+    box-shadow: 4px 4px #ffd60a;
+}
+
+
+/* =========================================================
+   RESULTS HEADER
+   ========================================================= */
+
+.resources-section {
+    width: 100%;
+}
+
+.results-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 24px;
+}
+
+.section-eyebrow {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ff3b30;
+
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.results-header h2 {
+    margin: 0;
+
+    color: #151515;
+
+    font-size: 32px;
+    line-height: 1.1;
+
+    font-weight: 800;
+}
+
+.results-count {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 48px;
+
+    padding: 0 18px;
+
+    background: #ffffff;
+
+    border: 3px solid #000000;
+    box-shadow: 4px 4px #000000;
+
+    color: #151515;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   RESOURCE GRID
+   ========================================================= */
+
+.resource-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 24px;
+}
+
+.resource-card {
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 4px solid #000000;
+    box-shadow: 7px 7px #000000;
+
+    overflow: hidden;
+
+    min-height: 300px;
+}
+
+
+/* =========================================================
+   RESOURCE CARD HEADER
+   ========================================================= */
+
+.resource-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #ff3b30;
+
+    border-bottom: 4px solid #000000;
+
+    padding: 15px 20px;
+}
+
+.resource-header h3 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+}
+
+.resource-header .badge {
+    flex-shrink: 0;
+
+    background: #ffd60a;
+    color: #000000;
+
+    border: 2px solid #000000;
+
+    padding: 6px 11px;
+
+    font-size: 11px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+
+/* =========================================================
+   RESOURCE CARD CONTENT
+   ========================================================= */
+
+.resource-card > p {
+    margin: 0;
+
+    padding: 20px 22px 14px;
+
+    color: #5f6368;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    min-height: 70px;
+}
+
+.resource-meta {
+    margin: 0 22px;
+
+    border: 3px solid #000000;
+
+    background: #fffaf0;
+
+    padding: 13px 16px;
+}
+
+.resource-meta p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin: 0;
+
+    padding: 7px 0;
+
+    color: #5f6368;
+
+    font-size: 14px;
+}
+
+.resource-meta p + p {
+    border-top: 1px dashed #cfcfcf;
+}
+
+.resource-meta strong {
+    color: #151515;
+    font-weight: 800;
+}
+
+.resource-meta span {
+    text-align: right;
+}
+
+
+/* =========================================================
+   RESOURCE ACTION
+   ========================================================= */
+
+.resource-actions {
+    margin-top: auto;
+
+    padding: 18px 22px 22px;
+}
+
+.resource-actions .btn {
+    width: 100%;
+
+    min-height: 50px;
+
+    border: 3px solid #000000;
+
+    font-family: inherit;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+}
+
+.resource-actions .btn-primary {
+    background: #ffd60a;
+    color: #000000;
+
+    box-shadow: 4px 4px #000000;
+}
+
+.resource-actions .btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px #000000;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+
+.empty-state {
+    background: #ffffff;
+
+    border: 4px solid #000000;
+    box-shadow: 7px 7px #000000;
+
+    text-align: center;
+
+    padding: 55px 25px;
+
+    margin-top: 10px;
+}
+
+.empty-state i {
+    display: block;
+
+    margin-bottom: 15px;
+
+    color: #ff3b30;
+
+    font-size: 42px;
+}
+
+.empty-state h3 {
+    margin: 0 0 8px;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.empty-state p {
+    margin: 0;
+
+    color: #6b7280;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   RESOURCE MODAL
+   ========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+
+    background: rgba(0, 0, 0, 0.68);
+
+    backdrop-filter: blur(4px);
+}
+
+.modal-content.large {
+    width: min(760px, 100%);
+    max-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff;
+
+    border: 4px solid #000000;
+    box-shadow: 9px 9px #000000;
+
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background: #ffd60a;
+
+    border-bottom: 4px solid #000000;
+
+    padding: 20px 24px;
+}
+
+.modal-header h2 {
+    margin: 0;
+
+    color: #151515;
+
+    font-size: 26px;
+    font-weight: 800;
+
+    overflow-wrap: anywhere;
+}
+
+.modal-header button {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    border: 3px solid #000000;
+
+    font-size: 20px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow: 3px 3px #000000;
+}
+
+.modal-body {
+    overflow-y: auto;
+
+    padding: 25px;
+}
+
+.resource-info {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1.4fr;
+
+    border: 3px solid #000000;
+
+    margin-bottom: 20px;
+}
+
+.detail-label,
+.detail-value {
+    padding: 14px 16px;
+
+    border-bottom: 1px solid #d6d6d6;
+}
+
+.detail-label {
+    color: #151515;
+    font-weight: 800;
+}
+
+.detail-value {
+    color: #5f6368;
+    text-align: right;
+}
+
+.resource-info > :nth-last-child(-n + 2) {
+    border-bottom: none;
+}
+
+.resource-description {
+    border: 3px solid #000000;
+
+    padding: 20px;
+
+    background: #fffaf0;
+}
+
+.resource-description h3 {
+    margin: 0 0 10px;
+
+    font-size: 19px;
+    font-weight: 800;
+}
+
+.resource-description p {
+    margin: 0;
+
+    color: #5f6368;
+
+    line-height: 1.7;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 14px;
+
+    padding: 18px 24px;
+
+    border-top: 4px solid #000000;
+
+    background: #ffffff;
+}
+
+.modal-footer .btn {
+    min-width: 165px;
+    min-height: 50px;
+
+    border: 3px solid #000000;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.modal-footer .btn-primary {
+    background: #ff3b30;
+    color: #ffffff;
+
+    box-shadow: 4px 4px #000000;
+}
+
+.modal-footer .btn-outline {
+    background: #ffffff;
+    color: #151515;
+
+    box-shadow: 4px 4px #000000;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.loading-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 214, 10, 0.72);
+
+    backdrop-filter: blur(3px);
+}
+
+.loader {
+    background: #ffffff;
+
+    border: 4px solid #000000;
+    box-shadow: 7px 7px #000000;
+
+    padding: 30px 40px;
+
+    text-align: center;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+
+    margin: 0 auto 15px;
+
+    border: 5px solid #e5e5e5;
+    border-top-color: #ff3b30;
+    border-radius: 50%;
+
+    animation: resourceSpin 0.8s linear infinite;
+}
+
+.loader p {
+    margin: 0;
+
+    font-weight: 800;
+}
+
+@keyframes resourceSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+    .toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 760px) {
+
+    .hero-section {
+        align-items: flex-start;
+
+        padding: 30px 25px;
+    }
+
+    .hero-illustration {
+        display: none;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-group {
+        grid-template-columns: 1fr;
+    }
+
+    .results-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .resource-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .resource-meta p {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .resource-meta span {
+        text-align: left;
+    }
+
+    .resource-info {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-value {
+        text-align: left;
+        border-bottom: 1px solid #d6d6d6;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .modal-footer .btn {
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .toolbar {
+        padding: 16px;
+    }
+
+    .results-header h2 {
+        font-size: 27px;
+    }
+
+}
+/* ==========================================================
+   FINAL UI REFINEMENTS
+   Delegate Resources Page
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   HERO — BETTER PROPORTIONS
+   ---------------------------------------------------------- */
+
+.hero-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 170px;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-content {
+    min-width: 0;
+    max-width: none;
+}
+
+.hero-content h1 {
+    margin-bottom: 14px;
+}
+
+.hero-content p {
+    max-width: 720px;
+    line-height: 1.65;
+}
+
+.hero-illustration {
+    width: 150px;
+    height: 150px;
+    justify-self: end;
+}
+
+
+/* ----------------------------------------------------------
+   STATS — MORE COMPACT
+   ---------------------------------------------------------- */
+
+.stats-grid {
+    gap: 20px;
+}
+
+.stat-card {
+    min-height: 0;
+    padding: 20px 22px;
+    gap: 14px;
+}
+
+.stat-icon {
+    width: 58px;
+    height: 58px;
+}
+
+.stat-content h2 {
+    font-size: 1.8rem;
+}
+
+.stat-content p {
+    margin-top: 2px;
+}
+
+
+/* ----------------------------------------------------------
+   RESOURCE GRID
+   ---------------------------------------------------------- */
+
+.resource-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+
+/* ----------------------------------------------------------
+   SINGLE RESOURCE — USE FULL WIDTH
+   ---------------------------------------------------------- */
+
+.resource-grid:has(.resource-card:only-child) {
+    grid-template-columns: 1fr;
+}
+
+.resource-grid:has(.resource-card:only-child) .resource-card {
+    width: 100%;
+}
+
+
+/* ----------------------------------------------------------
+   RESOURCE CARD — BETTER USE OF SPACE
+   ---------------------------------------------------------- */
+
+.resource-card {
+    min-width: 0;
+}
+
+.resource-card p {
+    line-height: 1.6;
+}
+
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+
+    .hero-section {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .hero-illustration {
+        justify-self: start;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section {
+        text-align: left;
+    }
+
+    .hero-illustration {
+        width: 120px;
+        height: 120px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}

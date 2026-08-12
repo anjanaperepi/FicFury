@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Announcement Management | FIC FURY
+    </title>
+
+    <!-- Google Font -->
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Shared CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/layout.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/forms.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/tables.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/animations.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/theme.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/components.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/toast.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/utilities.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/sidebar.css">
+
+    <!-- Page CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/announcement-management.css">
+
+</head>
+
+
+<body>
+
+<div class="app-layout">
+
+    <!-- ======================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <div id="sidebar"></div>
+
+
+    <!-- ======================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="main-content">
+
+        <div class="page-container">
+
+            <main class="content-wrapper">
+
+
+                <!-- ======================================================
+                     PAGE HEADER
+                ====================================================== -->
+
+                <section class="hero-section">
+
+                    <div class="hero-content">
+
+                        <span class="hero-badge">
+                            FIC FURY • COMMUNICATIONS
+                        </span>
+
+                        <h1>
+                            Announcements
+                        </h1>
+
+                        <p>
+                            Create, publish and manage important
+                            updates for your committee.
+                        </p>
+
+                        <div class="hero-actions">
+
+                            <button
+                                class="btn btn-primary"
+                                id="addAnnouncementBtn">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                New Announcement
+
+                            </button>
+
+                            <button
+                                class="btn btn-outline"
+                                id="refreshAnnouncements">
+
+                                <i class="fa-solid fa-rotate"></i>
+
+                                Refresh
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="hero-illustration">
+
+                        <i class="fa-solid fa-bullhorn"></i>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ======================================================
+                     ANNOUNCEMENT STATS
+                ====================================================== -->
+
+                <section class="stats-grid">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+
+                            <i class="fa-solid fa-bullhorn"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <h2 id="totalAnnouncements">
+                                0
+                            </h2>
+
+                            <p>
+                                Total Announcements
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <h2 id="publishedAnnouncements">
+                                0
+                            </h2>
+
+                            <p>
+                                Published
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+
+                            <i class="fa-solid fa-file-lines"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <h2 id="draftAnnouncements">
+                                0
+                            </h2>
+
+                            <p>
+                                Drafts
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+
+                            <i class="fa-solid fa-building-columns"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <h2 id="committeeAnnouncementCount">
+                                0
+                            </h2>
+
+                            <p>
+                                Committees
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ======================================================
+                     ANNOUNCEMENT MANAGEMENT
+                ====================================================== -->
+
+                <section class="section">
+
+                    <div class="section-header">
+
+                        <div>
+
+                            <h2>
+
+                                <i class="fa-solid fa-bullhorn"></i>
+
+                                Manage Announcements
+
+                            </h2>
+
+                            <p>
+                                Review, edit, publish and remove announcements.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FILTER BAR -->
+
+                    <div class="card announcement-toolbar">
+
+                        <div class="search-wrapper">
+
+                            <i class="fa-solid fa-search"></i>
+
+                            <input
+                                type="search"
+                                id="announcementSearch"
+                                placeholder="Search announcements...">
+
+                        </div>
+
+
+                        <div class="filter-wrapper">
+
+                            <select id="statusFilter">
+
+                                <option value="ALL">
+                                    All Status
+                                </option>
+
+                                <option value="PUBLISHED">
+                                    Published
+                                </option>
+
+                                <option value="DRAFT">
+                                    Drafts
+                                </option>
+
+                            </select>
+
+
+                            <select id="committeeFilter">
+
+                                <option value="ALL">
+                                    All Committees
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ANNOUNCEMENT LIST -->
+
+                    <div
+                        id="announcementList"
+                        class="announcement-list">
+
+                    </div>
+
+
+                    <!-- EMPTY STATE -->
+
+                    <div
+                        id="announcementEmptyState"
+                        class="card announcement-empty hidden">
+
+                        <div class="empty-icon">
+
+                            <i class="fa-solid fa-bullhorn"></i>
+
+                        </div>
+
+                        <h3>
+                            No Announcements Found
+                        </h3>
+
+                        <p>
+                            There are no announcements matching
+                            your current filters.
+                        </p>
+
+                        <button
+                            class="btn btn-primary"
+                            id="emptyCreateBtn">
+
+                            <i class="fa-solid fa-plus"></i>
+
+                            Create Announcement
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+
+            </main>
+
+
+            <!-- ======================================================
+                 FOOTER
+            ====================================================== -->
+
+            <footer id="footer"></footer>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================================
+     CREATE / EDIT ANNOUNCEMENT MODAL
+========================================================== -->
+
+<div
+    id="announcementModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="announcementModalTitle">
+
+    <div class="modal-content announcement-modal-content">
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="hero-badge">
+                    FIC FURY • COMMUNICATIONS
+                </span>
+
+                <h2 id="announcementModalTitle">
+                    New Announcement
+                </h2>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeAnnouncementModal"
+                aria-label="Close">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <form id="announcementForm">
+
+            <div class="form-group">
+
+                <label for="announcementTitle">
+                    Title
+                </label>
+
+                <input
+                    type="text"
+                    id="announcementTitle"
+                    name="title"
+                    maxlength="150"
+                    placeholder="Enter announcement title"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="announcementContent">
+                    Announcement
+                </label>
+
+                <textarea
+                    id="announcementContent"
+                    name="content"
+                    rows="7"
+                    maxlength="5000"
+                    placeholder="Write your announcement..."
+                    required></textarea>
+
+            </div>
+
+
+<div class="form-row">
+
+    <!-- Scope / Committee -->
+    <div class="form-group">
+
+        <label for="announcementCommittee">
+            Announcement Scope
+        </label>
+
+        <select
+            id="announcementCommittee"
+            name="committeeId">
+
+            <option value="">
+                🌐 Global — All FIC FURY
+            </option>
+
+        </select>
+
+        <small class="form-help"
+               id="committeeHelp">
+            Choose Global or a specific committee.
+        </small>
+
+    </div>
+
+
+    <!-- Audience -->
+    <div class="form-group">
+
+        <label for="announcementAudience">
+            Audience
+        </label>
+
+        <select
+            id="announcementAudience"
+            name="audience"
+            required>
+
+            <option value="CHAIRS_AND_DELEGATES">
+                Chairs &amp; Delegates
+            </option>
+
+            <option value="CHAIRS_ONLY">
+                Chairs Only
+            </option>
+
+            <option value="DELEGATES_ONLY">
+                Delegates Only
+            </option>
+
+        </select>
+
+        <small class="form-help"
+               id="audienceHelp">
+            Choose who should receive this announcement.
+        </small>
+
+    </div>
+
+</div>
+
+
+<!-- Status -->
+<div class="form-group">
+
+    <label for="announcementStatus">
+        Status
+    </label>
+
+    <select
+        id="announcementStatus"
+        name="status">
+
+        <option value="DRAFT">
+            Draft
+        </option>
+
+    </select>
+
+</div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn btn-outline"
+                    id="cancelAnnouncementBtn">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                    id="saveAnnouncementBtn">
+
+                    <i class="fa-solid fa-save"></i>
+
+                    Save Announcement
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- ==========================================================
+     DELETE CONFIRMATION MODAL
+========================================================== -->
+
+<div
+    id="deleteAnnouncementModal"
+    class="modal hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="deleteAnnouncementTitle">
+
+    <div class="modal-content delete-announcement-modal">
+
+        <div class="delete-icon">
+
+            <i class="fa-solid fa-trash"></i>
+
+        </div>
+
+        <h2 id="deleteAnnouncementTitle">
+            Delete Announcement?
+        </h2>
+
+        <p>
+            This announcement will be permanently removed.
+            This action cannot be undone.
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                type="button"
+                class="btn btn-outline"
+                id="cancelDeleteAnnouncement">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-danger"
+                id="confirmDeleteAnnouncement">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     LOADING OVERLAY
+====================================================== -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay hidden">
+
+    <div class="loader">
+
+        <div class="spinner"></div>
+
+        <p>
+            Loading announcements...
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/component-loader.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+<script src="../js/announcement-management.js"></script>
+
+</body>
+
+</html>

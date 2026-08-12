@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Chairperson Management | FIC FURY</title>
+
+<link rel="stylesheet" href="../css/chairperson-management.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            ⚡ FIC FURY
+        </div>
+
+        <div class="admin-badge">
+            ADMIN CONTROL
+        </div>
+
+        <ul>
+
+            <li>📊 Dashboard</li>
+            <li>🏛 Committees</li>
+            <li>🎭 Characters</li>
+            <li>👥 Users</li>
+
+            <li class="active">
+                🎙 Chairpersons
+            </li>
+
+            <li>📜 Registrations</li>
+            <li>📈 Reports</li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <section class="header-panel">
+
+            <h1>🎙 CHAIRPERSON MANAGEMENT</h1>
+
+            <button class="add-btn">
+                + ADD CHAIRPERSON
+            </button>
+
+        </section>
+
+        <!-- STATS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+                <h2>42</h2>
+                <p>Total Chairpersons</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>18</h2>
+                <p>Active Committees</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>14</h2>
+                <p>Online Now</p>
+            </div>
+
+            <div class="stat-card">
+                <h2>96%</h2>
+                <p>Performance Rating</p>
+            </div>
+
+        </section>
+
+        <!-- ASSIGN CHAIR -->
+
+        <section class="panel">
+
+            <h2>ASSIGN CHAIRPERSON</h2>
+
+            <form class="assign-form">
+
+                <select>
+                    <option>Select Chairperson</option>
+                    <option>Dr. Nova Astra</option>
+                    <option>Commander Zenith</option>
+                    <option>Professor Merlin</option>
+                </select>
+
+                <select>
+                    <option>Select Committee</option>
+                    <option>Galactic Senate</option>
+                    <option>Wizard Council</option>
+                    <option>Council of Olympus</option>
+                </select>
+
+                <button>
+                    Assign Committee
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- CHAIRPERSON TABLE -->
+
+        <section class="panel">
+
+            <h2>ACTIVE CHAIRPERSONS</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Name</th>
+                            <th>Committee</th>
+                            <th>Status</th>
+                            <th>Delegates</th>
+                            <th>Actions</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+
+                            <td>Dr. Nova Astra</td>
+
+                            <td>Galactic Senate</td>
+
+                            <td>
+                                <span class="status online">
+                                    Online
+                                </span>
+                            </td>
+
+                            <td>75</td>
+
+                            <td>
+
+                                <button class="view">
+                                    View
+                                </button>
+
+                                <button class="edit">
+                                    Edit
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Professor Merlin</td>
+
+                            <td>Wizard Council</td>
+
+                            <td>
+                                <span class="status offline">
+                                    Offline
+                                </span>
+                            </td>
+
+                            <td>50</td>
+
+                            <td>
+
+                                <button class="view">
+                                    View
+                                </button>
+
+                                <button class="edit">
+                                    Edit
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <td>Lady Athena</td>
+
+                            <td>Council of Olympus</td>
+
+                            <td>
+                                <span class="status online">
+                                    Online
+                                </span>
+                            </td>
+
+                            <td>40</td>
+
+                            <td>
+
+                                <button class="view">
+                                    View
+                                </button>
+
+                                <button class="edit">
+                                    Edit
+                                </button>
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- PERMISSIONS -->
+
+        <section class="panel">
+
+            <h2>CHAIRPERSON PERMISSIONS</h2>
+
+            <div class="permissions-grid">
+
+                <div class="permission-card">
+                    ✅ Approve Resolutions
+                </div>
+
+                <div class="permission-card">
+                    ✅ Create Crisis Events
+                </div>
+
+                <div class="permission-card">
+                    ✅ Upload Resources
+                </div>
+
+                <div class="permission-card">
+                    ✅ Manage Attendance
+                </div>
+
+                <div class="permission-card">
+                    ✅ Broadcast Messages
+                </div>
+
+                <div class="permission-card">
+                    ✅ Start Voting Sessions
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>

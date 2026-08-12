@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Chair Dashboard | FIC FURY
+
+    </title>
+
+    <!-- Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Shared Styles -->
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <link rel="stylesheet" href="../css/assets/layout.css">
+
+    <link rel="stylesheet" href="../css/assets/sidebar.css">
+    <link rel="stylesheet" href="../css/assets/layout.css">
+    <link rel="stylesheet" href="../css/assets/components.css">
+    <link rel="stylesheet" href="../css/assets/theme.css">
+
+   
+
+    <!-- Page Styles -->
+
+    <link rel="stylesheet"
+          href="../css/chair-dashboard.css">
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+
+        
+
+        <div class="page-container">
+            <!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="hero-section">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+
+            Committee Chair
+
+        </span>
+
+        <h1>
+
+            Welcome back,
+
+            <span id="chairName">
+
+                Chairperson
+
+            </span>
+
+        </h1>
+
+        <p>
+
+            Manage your committee, delegates, attendance,
+            position papers and debate sessions.
+
+        </p>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="committee-card">
+
+            <span>
+
+                Committee
+
+            </span>
+
+            <select id="committeeSelector" class="committee-selector">
+</select>
+
+            <small id="committeeAgenda">
+
+                Agenda loading...
+
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="stats-grid">
+
+    <div class="stat-card">
+
+        <div class="stat-icon blue">
+
+            <i class="fa-solid fa-users"></i>
+
+        </div>
+
+        <div>
+
+            <h2 id="delegateCount">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Delegates
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon green">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+        </div>
+
+        <div>
+
+            <h2 id="attendancePercentage">
+
+                0%
+
+            </h2>
+
+            <p>
+
+                Attendance
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon purple">
+
+            <i class="fa-solid fa-file-lines"></i>
+
+        </div>
+
+        <div>
+
+            <h2 id="paperCount">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Position Papers
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon orange">
+
+            <i class="fa-solid fa-comments"></i>
+
+        </div>
+
+        <div>
+
+            <h2 id="activeDebates">
+
+                0
+
+            </h2>
+
+            <p>
+
+                Debate Sessions
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================================================
+     QUICK ACTIONS
+====================================================== -->
+
+<section class="dashboard-section">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>
+
+                <i class="fa-solid fa-bolt"></i>
+
+                Quick Actions
+
+            </h2>
+
+            <p>
+
+                Frequently used committee management actions.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="quick-actions-grid">
+
+        <!-- Attendance -->
+
+        <div
+            class="action-card"
+            data-page="attendance-management.html">
+
+            <div class="action-icon green">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+            </div>
+
+            <h3>
+
+                Take Attendance
+
+            </h3>
+
+            <p>
+
+                Mark delegate attendance for today's session.
+
+            </p>
+
+        </div>
+
+        <!-- Delegates -->
+
+        <div
+            class="action-card"
+            data-page="committee-members.html">
+
+            <div class="action-icon blue">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+            <h3>
+
+                Delegates
+
+            </h3>
+
+            <p>
+
+                View committee delegates and assignments.
+
+            </p>
+
+        </div>
+
+        <!-- Position Papers -->
+
+        <div
+            class="action-card"
+            data-page="position-papers.html">
+
+            <div class="action-icon purple">
+
+                <i class="fa-solid fa-file-lines"></i>
+
+            </div>
+
+            <h3>
+
+                Position Papers
+
+            </h3>
+
+            <p>
+
+                Review submitted position papers.
+
+            </p>
+
+        </div>
+
+        <!-- Resources -->
+
+        <div
+            class="action-card"
+            data-page="resources.html">
+
+            <div class="action-icon teal">
+
+                <i class="fa-solid fa-book"></i>
+
+            </div>
+
+            <h3>
+
+                Committee Resources
+
+            </h3>
+
+            <p>
+
+                Access study guides and committee documents.
+
+            </p>
+
+        </div>
+
+        <!-- Announcements -->
+
+        <div
+            class="action-card"
+            data-page="announcements.html">
+
+            <div class="action-icon orange">
+
+                <i class="fa-solid fa-bullhorn"></i>
+
+            </div>
+
+            <h3>
+
+                Announcements
+
+            </h3>
+
+            <p>
+
+                Publish announcements to delegates.
+
+            </p>
+
+        </div>
+
+        <!-- Debate -->
+
+        <div
+            class="action-card"
+            data-page="debate-room.html">
+
+            <div class="action-icon gold">
+
+                <i class="fa-solid fa-comments"></i>
+
+            </div>
+
+            <h3>
+
+                Debate Room
+
+            </h3>
+
+            <p>
+
+                Start or continue committee debate sessions.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================================================
+     COMMITTEE CONTROL CENTER
+====================================================== -->
+
+<section class="dashboard-content">
+
+    <!-- ======================================
+         SESSION OVERVIEW
+    ======================================= -->
+<section class="dashboard-card session-management">
+
+    <div class="card-header">
+
+        <h2>
+            <i class="fa-solid fa-gavel"></i>
+            Debate Session
+        </h2>
+
+    </div>
+
+    <div class="card-body">
+
+<div class="session-info">
+
+    <label>Committee</label>
+
+    <h3 id="debateCommitteeName">
+        -
+    </h3>
+
+<div
+    id="sessionStatusBadge"
+    class="status-badge draft">
+
+    No Session
+
+</div>
+
+    <p id="sessionDescription">
+    Create the official debate session for this committee.
+</p>
+
+<div id="sessionActionContainer">
+
+    <button
+        id="createSessionBtn"
+        class="btn btn-primary">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Create Debate Session
+
+    </button>
+
+</div>
+
+</section>
+        <!-- ======================================
+         ATTENDANCE SUMMARY
+    ======================================= -->
+
+    <div class="dashboard-card">
+
+        <div class="section-header">
+
+            <h2>
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                Attendance Summary
+
+            </h2>
+
+        </div>
+
+        <div class="attendance-overview">
+
+            <div class="attendance-stat">
+
+                <h2 id="presentCount">
+
+                    0
+
+                </h2>
+
+                <p>
+
+                    Present
+
+                </p>
+
+            </div>
+
+            <div class="attendance-stat">
+
+                <h2 id="absentCount">
+
+                    0
+
+                </h2>
+
+                <p>
+
+                    Absent
+
+                </p>
+
+            </div>
+
+            <div class="attendance-stat">
+
+                <h2 id="lateCount">
+
+                    0
+
+                </h2>
+
+                <p>
+
+                    Late
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div
+                id="attendanceProgress"
+                class="progress-fill">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     BOTTOM SECTION
+====================================================== -->
+
+<section class="dashboard-content">
+
+    <section class="dashboard-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-user-check"></i>
+
+            Pending Registrations
+
+        </h2>
+
+    </div>
+
+    <div id="pendingRegistrations">
+
+        <div class="empty-state">
+
+            Loading registrations...
+
+        </div>
+
+    </div>
+
+</section>
+
+    <!-- ======================================
+         RECENT ACTIVITY
+    ======================================= -->
+
+    <div class="dashboard-card">
+
+        <div class="section-header">
+
+<h2>
+    <i class="fa-solid fa-bullhorn"></i>
+    Announcements
+</h2>
+
+        </div>
+
+<div
+    id="committeeActivity"
+    class="activity-feed">
+
+    <div class="activity-item">
+
+        <div class="activity-icon">
+            <i class="fa-solid fa-bullhorn"></i>
+        </div>
+
+        <div>
+            <strong>Loading announcements...</strong>
+            <p>Please wait.</p>
+        </div>
+
+    </div>
+
+</div>
+
+    </div>
+
+    <!-- ======================================
+         POSITION PAPERS
+    ======================================= -->
+
+    <div class="dashboard-card">
+
+        <div class="section-header">
+
+            <h2>
+
+                <i class="fa-solid fa-file-lines"></i>
+
+                Pending Position Papers
+
+            </h2>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="dashboard-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+
+                            Delegate
+
+                        </th>
+
+                        <th>
+
+                            Country
+
+                        </th>
+
+                        <th>
+
+                            Status
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="pendingPapers">
+
+                    <tr>
+
+                        <td colspan="3">
+
+                            No pending submissions.
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================================================
+     TODAY'S SCHEDULE
+====================================================== -->
+
+<section class="dashboard-section">
+
+    <div class="section-header">
+
+        <h2>
+
+            <i class="fa-solid fa-calendar-day"></i>
+
+            Today's Schedule
+
+        </h2>
+
+    </div>
+
+    <div class="timeline">
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+
+                09:00
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    Roll Call
+
+                </strong>
+
+                <p>
+
+                    Attendance verification.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+
+                10:00
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    Opening Statements
+
+                </strong>
+
+                <p>
+
+                    Delegates present opening speeches.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+
+                11:30
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    Moderated Caucus
+
+                </strong>
+
+                <p>
+
+                    Formal discussion on the agenda.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+
+                14:00
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    Draft Resolution
+
+                </strong>
+
+                <p>
+
+                    Bloc discussions and drafting.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item">
+
+            <div class="timeline-date">
+
+                16:00
+
+            </div>
+
+            <div>
+
+                <strong>
+
+                    Voting Procedure
+
+                </strong>
+
+                <p>
+
+                    Final voting session.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ======================================================
+     LOADING
+====================================================== -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay hidden">
+
+    <div class="loader">
+
+        <div class="spinner"></div>
+
+        <p>
+
+            Loading Dashboard...
+
+        </p>
+
+    </div>
+
+</div>
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/component-loader.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+<script src="../js/chair-dashboard.js"></script>
+
+</body>
+
+</html>

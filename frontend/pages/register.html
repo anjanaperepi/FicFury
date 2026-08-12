@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Register | FIC FURY</title>
+
+<link rel="stylesheet" href="../css/auth.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="auth-container">
+
+    <!-- LEFT PANEL -->
+
+    <section class="auth-banner">
+
+        <div class="comic-badge">
+            ⚡ JOIN THE UNIVERSE
+        </div>
+
+        <h1>FIC FURY</h1>
+
+        <p>
+            Build alliances. Represent iconic characters.
+            Debate legendary scenarios.
+            Become part of the world's most immersive fictional committee platform.
+        </p>
+
+        <div class="banner-features">
+
+            <div class="feature">
+                🏛 40+ Fictional Committees
+            </div>
+
+            <div class="feature">
+                🎭 Hundreds of Playable Characters
+            </div>
+
+            <div class="feature">
+                🏆 Awards & Rankings
+            </div>
+
+            <div class="feature">
+                🌍 Global Delegate Community
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RIGHT PANEL -->
+
+    <section class="auth-card">
+
+        <div class="logo">
+            ⚡ FIC FURY
+        </div>
+
+        <h2>Create Account</h2>
+
+        <p class="subtitle">
+            Begin your delegate journey.
+        </p>
+
+        <form id="registerForm">
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    type="date">
+            </div>
+
+            <div class="form-group">
+                <label>Country</label>
+
+                <select
+                    id="country"
+                    name="country">
+
+                    <option value="">Select Country</option>
+
+                    <option>India</option>
+                    <option>United States</option>
+                    <option>United Kingdom</option>
+                    <option>Canada</option>
+                    <option>Australia</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        id="password"
+                        type="password"
+                        required>
+
+                    <button
+                        type="button"
+                        class="toggle-password">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="passwordStrength"
+                    class="strength-text">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+    <label>Confirm Password</label>
+
+    <div class="password-wrapper">
+
+        <input
+            id="confirmPassword"
+            type="password"
+            required>
+
+        <button
+            type="button"
+            class="toggle-password">
+
+            <i class="fa-solid fa-eye"></i>
+
+        </button>
+
+    </div>
+
+    <div
+        id="passwordMatch"
+        class="match-text">
+    </div>
+
+</div>
+
+<label class="terms">
+
+    <input
+        id="terms"
+        type="checkbox"
+        required>
+
+    <span>
+        I agree to the Terms & Conditions
+    </span>
+
+</label>
+
+<button
+    id="registerBtn"
+    class="login-btn"
+    type="submit">
+
+    ⚡ CREATE ACCOUNT
+
+</button>
+
+</form>
+
+<div class="auth-footer">
+
+    Already have an account?
+
+    <a href="login.html">
+        Login
+    </a>
+
+</div>
+
+</section>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/register.js"></script>
+
+</body>
+</html>

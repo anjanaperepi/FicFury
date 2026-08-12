@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chair Dashboard | FIC FURY</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Shared FIC FURY styles -->
+    <link rel="stylesheet" href="../css/assets/layout.css">
+    <link rel="stylesheet" href="../css/assets/sidebar.css">
+    <link rel="stylesheet" href="../css/assets/components.css">
+    <link rel="stylesheet" href="../css/assets/theme.css">
+    <link rel="stylesheet" href="../css/assets/forms.css">
+    <link rel="stylesheet" href="../css/assets/responsive.css">
+
+    <!-- Chair dashboard styles -->
+    <link rel="stylesheet" href="../css/chair-dashboard.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- Shared sidebar -->
+    <aside id="sidebar"></aside>
+
+    <!-- Main content -->
+    <main class="main-content chair-dashboard-page">
+
+        <div class="page-container">
+
+            <!-- =====================================================
+                 HERO
+            ====================================================== -->
+            <section class="chair-hero">
+
+                <div class="hero-left">
+
+                    <span class="hero-badge">
+                        <i class="fa-solid fa-star"></i>
+                        Committee Chair
+                    </span>
+
+                    <h1>
+                        Welcome back,
+                        <span id="chairName">Chairperson</span>
+                    </h1>
+
+                    <p>
+                        Manage your committee, delegates, resources and debate sessions
+                        from one place.
+                    </p>
+
+                </div>
+
+                <div class="hero-right">
+
+                    <div class="committee-card">
+
+                        <label for="committeeSelector">
+                            Committee
+                        </label>
+
+                        <select id="committeeSelector"
+                                class="committee-selector">
+                        </select>
+
+                        <small id="committeeAgenda">
+                            Agenda loading...
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =====================================================
+                 TOP CONTROL ROW
+                 2 STAT CARDS + QUICK ACTIONS
+            ====================================================== -->
+            <section class="top-control-grid">
+
+                <!-- STAT CARDS -->
+                <div class="chair-stats">
+
+                    <article class="chair-stat-card delegates-stat">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div class="stat-value"
+                             id="delegateCount">
+                            0
+                        </div>
+
+                        <div class="stat-label">
+                            Delegates
+                        </div>
+
+                    </article>
+
+
+                    <article class="chair-stat-card debate-stat">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+
+                        <div class="stat-value"
+                             id="activeDebates">
+                            NO SESSION
+                        </div>
+
+                        <div class="stat-label">
+                            Debate Status
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+                <section class="quick-actions-card">
+
+                    <div class="section-heading">
+                        <div>
+                            <h2>
+                                <i class="fa-solid fa-bolt"></i>
+                                Quick Actions
+                            </h2>
+
+                            <p>
+                                Frequently used committee actions.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="quick-actions-grid">
+
+                        <button class="quick-action"
+                                type="button"
+                                data-page="committee-members.html">
+
+                            <i class="fa-solid fa-users"></i>
+                            <span>Delegates</span>
+
+                        </button>
+
+
+                        <button class="quick-action"
+                                type="button"
+                                data-page="resources.html">
+
+                            <i class="fa-solid fa-book"></i>
+                            <span>Committee Resources</span>
+
+                        </button>
+
+
+                        <button class="quick-action"
+                                type="button"
+                                data-page="announcements.html">
+
+                            <i class="fa-solid fa-bullhorn"></i>
+                            <span>Announcements</span>
+
+                        </button>
+
+
+                        <button class="quick-action"
+                                type="button"
+                                data-page="debate-room.html">
+
+                            <i class="fa-solid fa-comments"></i>
+                            <span>Debate Room</span>
+
+                        </button>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- =====================================================
+                 MAIN TWO-COLUMN ROW
+                 DEBATE SESSION + ANNOUNCEMENTS
+            ====================================================== -->
+            <section class="main-dashboard-grid">
+
+
+                <!-- DEBATE SESSION -->
+                <section class="dashboard-card debate-session-card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            <i class="fa-solid fa-gavel"></i>
+                            Debate Session
+                        </h2>
+
+                    </div>
+
+
+                    <div class="debate-session-content">
+
+                        <span class="content-label">
+                            Committee
+                        </span>
+
+                        <h3 id="debateCommitteeName">
+                            -
+                        </h3>
+
+                        <span id="sessionStatusBadge"
+                              class="session-status no-session">
+                            No Session
+                        </span>
+
+                        <p id="sessionDescription">
+                            Create the official debate session for this committee.
+                        </p>
+
+                        <div id="sessionActionContainer">
+
+                            <button id="createSessionBtn"
+                                    class="primary-action"
+                                    type="button">
+
+                                <i class="fa-solid fa-plus"></i>
+                                Create Debate Session
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ANNOUNCEMENTS -->
+                <section class="dashboard-card announcements-card">
+
+                    <div class="card-heading">
+
+                        <h2>
+                            <i class="fa-solid fa-bullhorn"></i>
+                            Announcements
+                        </h2>
+
+                    </div>
+
+
+                    <!-- The existing chair JS renders announcements here. -->
+                    <div id="committeeActivity"
+                         class="announcements-list">
+
+                        <div class="announcement-empty">
+                            Loading announcements...
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+            <!-- =====================================================
+                 FOOTER
+            ====================================================== -->
+            <footer class="chair-footer">
+
+                <div>
+                    © 2026 FIC FURY. All Rights Reserved.
+                </div>
+
+                <nav>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span>|</span>
+                    <a href="terms.html">Terms of Service</a>
+                    <span>|</span>
+                    <a href="help.html">Help Center</a>
+                </nav>
+
+            </footer>
+
+
+            <!-- =====================================================
+                 HIDDEN JS COMPATIBILITY FIELDS
+                 Kept so the existing chair-dashboard.js does not
+                 break while attendance/position-paper modules are
+                 removed from the visual dashboard.
+            ====================================================== -->
+            <div class="js-compatibility" aria-hidden="true">
+
+                <span id="attendancePercentage">0</span>
+                <span id="paperCount">0</span>
+
+                <span id="presentCount">0</span>
+                <span id="absentCount">0</span>
+                <span id="lateCount">0</span>
+
+                <span id="attendanceProgress"></span>
+
+                <span id="pendingRegistrations"></span>
+
+            </div>
+
+
+            <!-- Loading overlay -->
+            <div id="loadingOverlay"
+                 class="loading-overlay hidden">
+
+                <div class="loader">
+                    <div class="spinner"></div>
+                    <p>Loading Dashboard...</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- Existing application scripts -->
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/chair-dashboard.js"></script>
+
+<script>
+/*
+ * Lightweight navigation for the four quick actions.
+ * Existing chair-dashboard.js can still handle its own action-card
+ * navigation; this also supports the new button markup.
+ */
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.querySelectorAll(".quick-action").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const page = button.dataset.page;
+
+            if (page) {
+                window.location.href = page;
+            }
+
+        });
+
+    });
+
+});
+</script>
+
+</body>
+</html>

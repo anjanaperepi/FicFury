@@ -1,0 +1,344 @@
+/* ==========================================================
+   FIC FURY
+   Forms
+========================================================== */
+
+.form-container{
+
+    width:100%;
+
+    max-width:700px;
+
+    margin:auto;
+
+    background:var(--surface);
+
+    border-radius:var(--radius-lg);
+
+    padding:35px;
+
+    box-shadow:var(--shadow-md);
+
+    border:1px solid var(--border);
+
+}
+
+.form-title{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.form-title h2{
+
+    margin-bottom:8px;
+
+}
+
+.form-title p{
+
+    color:var(--text-secondary);
+
+}
+
+.form-group{
+
+    margin-bottom:22px;
+
+}
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:var(--text);
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:14px 18px;
+
+    border:1px solid var(--border);
+
+    border-radius:12px;
+
+    background:white;
+
+    font-size:15px;
+
+    transition:var(--transition);
+
+    outline:none;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+        0 0 0 4px rgba(79,70,229,.15);
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-height:140px;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:var(--text-light);
+
+}
+
+.search-box{
+
+    position:relative;
+
+    margin-bottom:25px;
+
+}
+
+.search-box input{
+
+    padding-left:45px;
+
+}
+
+.search-box i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:var(--text-secondary);
+
+}
+
+.checkbox-group{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.checkbox-group input{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+.radio-group{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.file-upload{
+
+    border:2px dashed var(--border);
+
+    border-radius:16px;
+
+    padding:35px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.file-upload:hover{
+
+    border-color:var(--primary);
+
+    background:#eef2ff;
+
+}
+
+
+.input-error{
+
+    border-color:var(--danger)!important;
+
+}
+
+.error-text{
+
+    color:var(--danger);
+
+    font-size:13px;
+
+    margin-top:6px;
+
+}
+
+.input-success{
+
+    border-color:var(--success)!important;
+
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled{
+
+    background:#f1f5f9;
+
+    cursor:not-allowed;
+
+}
+
+.form-actions{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+.auth-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+}
+
+.auth-card{
+
+    width:100%;
+
+    max-width:460px;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:40px;
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.form-divider{
+
+    display:flex;
+
+    align-items:center;
+
+    margin:25px 0;
+
+}
+
+.form-divider::before,
+.form-divider::after{
+
+    content:"";
+
+    flex:1;
+
+    height:1px;
+
+    background:var(--border);
+
+}
+
+.form-divider span{
+
+    padding:0 15px;
+
+    color:var(--text-secondary);
+
+}
+
+.helper-text{
+
+    color:var(--text-secondary);
+
+    font-size:13px;
+
+    margin-top:6px;
+
+}
+
+.required{
+
+    color:var(--danger);
+
+}
+
+@media(max-width:768px){
+
+.form-row{
+
+grid-template-columns:1fr;
+
+}
+
+.form-container{
+
+padding:25px;
+
+}
+
+.auth-card{
+
+padding:30px;
+
+}
+
+}
+

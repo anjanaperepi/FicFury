@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Reports & Analytics | FIC FURY</title>
+
+<link rel="stylesheet" href="../css/reports-analytics.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            ⚡ FIC FURY
+        </div>
+
+        <div class="admin-badge">
+            ADMIN CONTROL
+        </div>
+
+        <ul>
+
+            <li>📊 Dashboard</li>
+            <li>🏛 Committees</li>
+            <li>🎭 Characters</li>
+            <li>👥 Users</li>
+            <li>🎙 Chairpersons</li>
+            <li>📜 Registrations</li>
+
+            <li class="active">
+                📈 Reports
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <section class="header-panel">
+
+            <div>
+
+                <h1>📈 REPORTS & ANALYTICS</h1>
+
+                <p>
+                    Monitor performance across the entire platform.
+                </p>
+
+            </div>
+
+            <button class="export-btn">
+                Export Report
+            </button>
+
+        </section>
+
+        <!-- KPI CARDS -->
+
+        <section class="kpi-grid">
+
+            <div class="kpi-card">
+                <h2 id="totalUsers">1,254</h2>
+                <p>Total Users</p>
+            </div>
+
+            <div class="kpi-card">
+                <h2 id="totalRegistrations">632</h2>
+                <p>Registrations</p>
+            </div>
+
+            <div class="kpi-card">
+                <h2 id="attendanceRate">91%</h2>
+                <p>Attendance Rate</p>
+            </div>
+
+            <div class="kpi-card">
+                <h2 id="totalResolutions">184</h2>
+                <p>Resolutions Submitted</p>
+            </div>
+
+        </section>
+
+        <!-- POPULAR COMMITTEES -->
+
+        <section class="panel">
+
+            <h2>🔥 MOST POPULAR COMMITTEES</h2>
+
+            <div
+class="ranking-list"
+id="committeeRankingList">
+</div>
+
+        </section>
+
+        <!-- DELEGATE PERFORMANCE -->
+
+        <section class="panel">
+
+            <h2>🏆 TOP DELEGATES</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Name</th>
+                        <th>Committee</th>
+                        <th>Points</th>
+                        <th>Awards</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="delegateTableBody">
+
+</tbody>
+
+            </table>
+
+        </section>
+
+        <!-- ACTIVITY METRICS -->
+
+        <section class="panel">
+
+            <h2>⚡ PLATFORM ACTIVITY</h2>
+
+            <div class="activity-grid">
+
+                <div class="metric-card">
+                    <h3 id="activityResolutions">184</h3>
+                    <p>Resolutions Submitted</p>
+                </div>
+
+                <div class="metric-card">
+                    <h3 id="activityMessages">2,436</h3>
+                    <p>Debate Messages</p>
+                </div>
+
+                <div class="metric-card">
+                    <h3 id="activityCrises">68</h3>
+                    <p>Crisis Events</p>
+                </div>
+
+                <div class="metric-card">
+                    <h3 id="activityDownloads">312</h3>
+                    <p>Resources Downloaded</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- CHAIR PERFORMANCE -->
+
+        <section class="panel">
+
+            <h2>🎙 CHAIRPERSON PERFORMANCE</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Chairperson</th>
+                        <th>Committee</th>
+                        <th>Attendance</th>
+                        <th>Rating</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="chairTableBody">
+
+                    <tr>
+                        <td>Dr. Nova Astra</td>
+                        <td>Galactic Senate</td>
+                        <td>95%</td>
+                        <td>4.9 / 5</td>
+                    </tr>
+
+                    <tr>
+                        <td>Professor Merlin</td>
+                        <td>Wizard Council</td>
+                        <td>92%</td>
+                        <td>4.8 / 5</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="../../js/config.js"></script>
+<script src="../../js/utils.js"></script>
+<script src="../../js/api.js"></script>
+<script src="../../js/auth.js"></script>
+<script src="../../js/admin/reports.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explore Committees | FIC FURY</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/theme.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/layout.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/components.css">
+
+    
+    <link rel="stylesheet"
+          href="../css/assets/sidebar.css">
+
+     <link rel="stylesheet"
+          href="../css/committee-explorer.css">
+    
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <div id="sidebar"></div>
+
+    <main class="main-content">
+
+
+        <div class="page-container">
+
+            <!-- HERO -->
+
+            <section class="hero-section">
+
+<div class="hero-content">
+
+    <div>
+
+        <span class="hero-badge">
+
+            Choose Your Stage
+
+        </span>
+
+        <h1>
+
+            Explore Committees
+
+        </h1>
+
+        <p>
+
+            Browse committees, compare agendas,
+            and find the perfect debate.
+
+        </p>
+
+    </div>
+
+</div>
+
+            </section>
+<!-- EXISTING REGISTRATION NOTICE -->
+<section
+    id="registrationNotice"
+    class="registration-notice hidden">
+
+    <div class="registration-notice-icon">
+        <i class="fa-solid fa-circle-check"></i>
+    </div>
+
+    <div class="registration-notice-content">
+
+        <strong>
+            You're already registered for a committee
+        </strong>
+
+        <p id="registeredCommitteeMessage">
+            You can continue browsing committees,
+            but you cannot register for another committee
+            until your current registration is no longer active.
+        </p>
+
+    </div>
+
+</section>
+            <!-- FILTER BAR -->
+
+            <section class="filter-bar">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search committees..." />
+
+                </div>
+                <div class="filter-group">
+                <select id="categoryFilter">
+
+                    <option value="">All Categories</option>
+
+                </select>
+
+                <select id="modeFilter">
+
+                    <option value="">All Modes</option>
+
+                    <option>Online</option>
+
+                    <option>Offline</option>
+
+                    <option>Hybrid</option>
+
+                </select>
+                </div>
+
+            </section>
+            <div class="results-header">
+
+    <h2>
+
+        Available Committees
+
+    </h2>
+
+    <span id="resultsCount">
+
+        0 Committees
+
+    </span>
+
+</div>
+<div
+    id="emptyState"
+    class="empty-state hidden">
+
+    <i class="fa-solid fa-users-slash"></i>
+
+    <h3>
+        No Committees Found
+    </h3>
+
+    <p>
+        No committees match your current search and filters.
+        Try changing your search or selecting different filters.
+    </p>
+
+</div>
+
+            <!-- GRID -->
+
+            <section
+                id="committeeGrid"
+                class="committee-grid">
+
+            </section>
+
+        </div>
+<!-- Committee Details Modal -->
+<div id="committeeModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle"></h2>
+            <button id = "closeModal" class="close-btn">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div id="committeeDetails"></div>
+        </div>
+    </div>
+</div>
+
+
+ <div
+        id="loadingOverlay"
+        class="loading-overlay hidden">
+
+        <div class="loader">
+
+            <div class="spinner"></div>
+
+            <p>Loading Committees...</p>
+
+        </div>
+
+    </div>
+<div id="footer"></div>
+    </main>
+
+</div>
+
+
+<script src="../js/component-loader.js"></script>
+<script src="../js/config.js"></script>
+<script src="../js/sidebar.js"></script>
+
+
+
+<script src="../js/committee-explorer.js"></script>
+
+</body>
+
+</html>

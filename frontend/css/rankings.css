@@ -1,0 +1,105 @@
+.rankings-hero{
+    text-align:center;
+    padding:80px 10%;
+}
+
+.rankings-hero h1{
+    font-family:'Bangers',cursive;
+    font-size:5rem;
+}
+
+/* PODIUM */
+
+.podium{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:20px;
+    padding:50px;
+    flex-wrap:wrap;
+}
+
+.first,
+.second,
+.third{
+
+    border:5px solid black;
+    padding:30px;
+    text-align:center;
+    box-shadow:8px 8px black;
+}
+
+.first{
+    background:#FFD700;
+    height:280px;
+}
+
+.second{
+    background:#C0C0C0;
+    height:220px;
+}
+
+.third{
+    background:#CD7F32;
+    height:180px;
+}
+
+/* LEADERBOARD */
+
+.leaderboard{
+    padding:80px 10%;
+}
+
+.leaderboard h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#FF3B30;
+    color:white;
+}
+
+th,td{
+    border:3px solid black;
+    padding:15px;
+    text-align:center;
+}
+
+/* COMMITTEE RANKINGS */
+
+.committee-rankings{
+    padding:80px 10%;
+}
+
+.committee-rankings h2{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.committee-ranks{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+}
+
+.rank-card{
+    background:white;
+    border:5px solid black;
+    box-shadow:8px 8px black;
+    padding:30px;
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
+.rank-card span{
+    display:block;
+    margin-top:10px;
+    color:#FF3B30;
+}

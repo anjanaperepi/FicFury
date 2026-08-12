@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | FIC FURY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/assets/layout.css">
+    <link rel="stylesheet" href="../css/assets/responsive.css">
+    <link rel="stylesheet" href="../css/assets/forms.css">
+    <link rel="stylesheet" href="../css/assets/tables.css">
+    <link rel="stylesheet" href="../css/assets/animations.css">
+    <link rel="stylesheet" href="../css/assets/theme.css">
+    <link rel="stylesheet" href="../css/assets/components.css">
+    <link rel="stylesheet" href="../css/assets/toast.css">
+    <link rel="stylesheet" href="../css/assets/utilities.css">
+    <link rel="stylesheet" href="../css/assets/sidebar.css">
+
+    <link rel="stylesheet" href="../css/admin-dashboard.css">
+</head>
+
+<body>
+<div class="app-layout">
+
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+        <div class="page-container">
+            <main class="content-wrapper admin-dashboard">
+
+                <!-- ==================================================
+                     HERO / COMMAND CENTER
+                =================================================== -->
+                <section class="admin-hero">
+                    <div class="hero-decoration hero-decoration-one"></div>
+                    <div class="hero-decoration hero-decoration-two"></div>
+
+                    <div class="hero-copy">
+                        <span class="hero-badge">
+                            <i class="fa-solid fa-star"></i>
+                            ADMINISTRATION COMMAND CENTER
+                        </span>
+
+                        <h1>
+                            Good Afternoon,
+                            <span id="adminName">Administrator</span>
+                            <span class="hero-wave">👋</span>
+                        </h1>
+
+                        <p>
+                            Welcome back to <strong>FIC FURY</strong>.
+                            Manage your fictional universe, committees,
+                            characters, registrations and conference operations
+                            from one centralized workspace.
+                        </p>
+                    </div>
+
+                    <div class="hero-controls">
+                        <button class="command-btn command-btn-primary" id="createCommitteeBtn">
+                            <i class="fa-solid fa-plus"></i>
+                            Create Committee
+                        </button>
+
+                        <button class="command-btn command-btn-secondary" id="refreshDashboard">
+                            <i class="fa-solid fa-rotate"></i>
+                            Refresh
+                        </button>
+                    </div>
+                </section>
+
+                <!-- ==================================================
+                     PLATFORM SNAPSHOT
+                =================================================== -->
+                <section class="dashboard-section snapshot-section">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">PLATFORM SNAPSHOT</span>
+                            <h2>FIC FURY AT A GLANCE</h2>
+                        </div>
+                        <p>Everything you need to know before you take action.</p>
+                    </div>
+
+                    <div class="snapshot-grid">
+
+                        <article class="snapshot-card snapshot-users">
+                            <div class="snapshot-icon">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <div class="snapshot-value" id="userCount">0</div>
+                            <div class="snapshot-label">Total Users</div>
+                        </article>
+
+                        <article class="snapshot-card snapshot-committees">
+                            <div class="snapshot-icon">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
+                            <div class="snapshot-value" id="committeeCount">0</div>
+                            <div class="snapshot-label">Committees</div>
+                        </article>
+
+                        <article class="snapshot-card snapshot-characters">
+                            <div class="snapshot-icon">
+                                <i class="fa-solid fa-masks-theater"></i>
+                            </div>
+                            <div class="snapshot-value" id="characterCount">0</div>
+                            <div class="snapshot-label">Characters</div>
+                        </article>
+
+                        <article class="snapshot-card snapshot-registrations">
+                            <div class="snapshot-icon">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                            </div>
+                            <div class="snapshot-value" id="registrationCount">0</div>
+                            <div class="snapshot-label">Registrations</div>
+                        </article>
+
+                    </div>
+                </section>
+
+                <!-- ==================================================
+                     OPERATIONS: QUICK ACTIONS + CONFERENCE PULSE
+                =================================================== -->
+                <section class="dashboard-section operations-section">
+
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">OPERATIONS</span>
+                            <h2>COMMAND CENTER</h2>
+                        </div>
+                        <p>Frequently used administrative controls.</p>
+                    </div>
+
+                    <div class="operations-grid">
+
+                        <!-- QUICK ACTIONS -->
+                        <div class="quick-actions-panel">
+                            <div class="panel-heading">
+                                <div class="panel-heading-title">
+                                    <span class="heading-icon">
+                                        <i class="fa-solid fa-bolt"></i>
+                                    </span>
+                                    <div>
+                                        <h3>Quick Actions</h3>
+                                        <p>Jump straight into management.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="quick-action-list">
+
+                                <div class="quick-action-item" data-page="committee-management.html">
+                                    <span class="quick-action-icon yellow">
+                                        <i class="fa-solid fa-building-columns"></i>
+                                    </span>
+                                    <span class="quick-action-copy">
+                                        <strong>Committees</strong>
+                                        <small>Create, edit and manage committees.</small>
+                                    </span>
+                                    <i class="fa-solid fa-arrow-right quick-action-arrow"></i>
+                                </div>
+
+                                <div class="quick-action-item" data-page="character-management.html">
+                                    <span class="quick-action-icon purple">
+                                        <i class="fa-solid fa-masks-theater"></i>
+                                    </span>
+                                    <span class="quick-action-copy">
+                                        <strong>Characters</strong>
+                                        <small>Manage delegates and characters.</small>
+                                    </span>
+                                    <i class="fa-solid fa-arrow-right quick-action-arrow"></i>
+                                </div>
+
+                                <div class="quick-action-item" data-page="registration-management.html">
+                                    <span class="quick-action-icon red">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </span>
+                                    <span class="quick-action-copy">
+                                        <strong>Registrations</strong>
+                                        <small>Review delegate registrations.</small>
+                                    </span>
+                                    <i class="fa-solid fa-arrow-right quick-action-arrow"></i>
+                                </div>
+
+                                <div class="quick-action-item" data-page="resource-management.html">
+                                    <span class="quick-action-icon cyan">
+                                        <i class="fa-solid fa-book"></i>
+                                    </span>
+                                    <span class="quick-action-copy">
+                                        <strong>Resources</strong>
+                                        <small>Upload and manage resources.</small>
+                                    </span>
+                                    <i class="fa-solid fa-arrow-right quick-action-arrow"></i>
+                                </div>
+
+                                <div class="quick-action-item" data-page="awards-management.html">
+                                    <span class="quick-action-icon gold">
+                                        <i class="fa-solid fa-trophy"></i>
+                                    </span>
+                                    <span class="quick-action-copy">
+                                        <strong>Awards</strong>
+                                        <small>Manage awards and recognitions.</small>
+                                    </span>
+                                    <i class="fa-solid fa-arrow-right quick-action-arrow"></i>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- CONFERENCE PULSE -->
+                        <aside class="conference-pulse-panel">
+                            <div class="panel-heading">
+                                <div class="panel-heading-title">
+                                    <span class="heading-icon pulse-heading-icon">
+                                        <i class="fa-solid fa-wave-square"></i>
+                                    </span>
+                                    <div>
+                                        <h3>Conference Pulse</h3>
+                                        <p>What is happening across FIC FURY.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="pulse-status">
+                                <span class="pulse-dot"></span>
+                                <div>
+                                    <span class="pulse-label">CONFERENCE STATUS</span>
+                                    <strong>ACTIVE</strong>
+                                </div>
+                            </div>
+
+                            <div class="pulse-divider"></div>
+
+                            <div class="pulse-stat">
+                                <span class="pulse-stat-icon">
+                                    <i class="fa-solid fa-building-columns"></i>
+                                </span>
+                                <div>
+                                    <small>Active Committees</small>
+                                    <strong id="pulseCommitteeCount">0</strong>
+                                </div>
+                            </div>
+
+                            <div class="pulse-stat">
+                                <span class="pulse-stat-icon">
+                                    <i class="fa-solid fa-user-plus"></i>
+                                </span>
+                                <div>
+                                    <small>Registrations</small>
+                                    <strong id="pulseRegistrationCount">0</strong>
+                                </div>
+                            </div>
+
+                            <div class="pulse-stat pulse-next-session">
+                                <span class="pulse-stat-icon">
+                                    <i class="fa-solid fa-calendar-day"></i>
+                                </span>
+                                <div>
+                                    <small>Next Session</small>
+                                    <strong id="nextSessionName">Loading...</strong>
+                                    <em id="nextSessionMeta">Checking committee schedule</em>
+                                </div>
+                            </div>
+
+                            <a class="pulse-button" href="committee-explorer.html">
+                                View Committees
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+                        </aside>
+
+                    </div>
+                </section>
+
+                <!-- ==================================================
+                     COMMITTEE SPOTLIGHT
+                =================================================== -->
+                <section class="dashboard-section committees-section">
+
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">YOUR FICTIONAL UNIVERSE</span>
+                            <h2>COMMITTEE SPOTLIGHT</h2>
+                        </div>
+                        <a class="section-link" href="committee-management.html">
+                            Manage All
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div id="committeeSpotlight" class="committee-spotlight-grid">
+                        <div class="committee-empty">
+                            <i class="fa-solid fa-building-columns"></i>
+                            <strong>Loading committees...</strong>
+                            <span>Your active fictional worlds will appear here.</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ==================================================
+                     RECENT REGISTRATIONS
+                =================================================== -->
+                <section class="dashboard-section registrations-section">
+
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">LATEST MOVES</span>
+                            <h2>RECENT REGISTRATIONS</h2>
+                        </div>
+                        <a class="section-link" href="registration-management.html">
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="registrations-panel">
+                        <div class="table-responsive">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>DELEGATE</th>
+                                        <th>COMMITTEE</th>
+                                        <th>STATUS</th>
+                                        <th>REGISTERED</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="recentRegistrations">
+                                    <tr>
+                                        <td colspan="4" class="table-empty">
+                                            Loading registrations...
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loader">
+            <div class="spinner"></div>
+            <p>Loading FIC FURY...</p>
+        </div>
+    </div>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/admin-dashboard.js"></script>
+
+</body>
+</html>

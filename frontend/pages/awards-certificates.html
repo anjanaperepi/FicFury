@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Awards & Certificates | FIC FURY</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         FIC FURY SHARED STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/responsive.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/forms.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/tables.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/animations.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/toast.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/utilities.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/sidebar.css"
+    >
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/awards-certificates.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside
+        id="sidebar"
+        class="sidebar"
+    ></aside>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <div class="achievements-page">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <section class="achievements-header">
+
+                <div class="achievements-header-content">
+
+
+                    <div class="achievements-title-area">
+
+                        <div class="achievements-eyebrow">
+
+                            <i class="fa-solid fa-star"></i>
+
+                            MY ACHIEVEMENTS
+
+                        </div>
+
+
+                        <h1>
+                            Awards &
+                            <span>Certificates</span>
+                        </h1>
+
+
+                        <p>
+                            A record of the recognition and
+                            certificates you have earned during
+                            your FIC FURY journey.
+                        </p>
+
+                    </div>
+
+
+                    <div class="achievements-header-icon">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <section class="achievement-summary">
+
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon award-summary-icon">
+
+                        <i class="fa-solid fa-trophy"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span>
+                            Awards Earned
+                        </span>
+
+                        <strong id="awardCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="summary-card">
+
+
+                    <div class="summary-icon certificate-summary-icon">
+
+                        <i class="fa-solid fa-certificate"></i>
+
+                    </div>
+
+
+                    <div class="summary-content">
+
+                        <span>
+                            Certificates
+                        </span>
+
+                        <strong id="certificateCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 AWARDS SECTION
+            ================================================== -->
+
+            <section class="achievement-panel">
+
+
+                <div class="panel-heading">
+
+
+                    <div class="panel-heading-left">
+
+
+                        <div class="panel-icon award-panel-icon">
+
+                            <i class="fa-solid fa-trophy"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h2>
+                                My Awards
+                            </h2>
+
+                            <p>
+                                Recognition earned for your
+                                performance and participation.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <span
+                        id="awardSectionCount"
+                        class="panel-count"
+                    >
+                        0 Awards
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    id="awardsList"
+                    class="achievement-list"
+                >
+
+                    <div class="achievement-loading">
+
+                        <i
+                            class="fa-solid fa-spinner fa-spin"
+                        ></i>
+
+                        <span>
+                            Loading awards...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CERTIFICATES SECTION
+            ================================================== -->
+
+            <section class="achievement-panel">
+
+
+                <div class="panel-heading">
+
+
+                    <div class="panel-heading-left">
+
+
+                        <div
+                            class="panel-icon certificate-panel-icon"
+                        >
+
+                            <i class="fa-solid fa-certificate"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h2>
+                                My Certificates
+                            </h2>
+
+                            <p>
+                                Official certificates issued to you
+                                by FIC FURY.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <span
+                        id="certificateSectionCount"
+                        class="panel-count"
+                    >
+                        0 Certificates
+                    </span>
+
+
+                </div>
+
+
+
+                <div
+                    id="certificatesList"
+                    class="achievement-list"
+                >
+
+                    <div class="achievement-loading">
+
+                        <i
+                            class="fa-solid fa-spinner fa-spin"
+                        ></i>
+
+                        <span>
+                            Loading certificates...
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+        </div>
+
+
+
+        <!-- =====================================================
+             FOOTER
+        ====================================================== -->
+
+        <div id="footer"></div>
+
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     SHARED COMPONENTS
+========================================================= -->
+
+<script src="../js/component-loader.js"></script>
+
+
+
+<!-- =========================================================
+     CORE JAVASCRIPT
+========================================================= -->
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+
+
+<!-- =========================================================
+     PAGE JAVASCRIPT
+========================================================= -->
+
+<script src="../js/awards-certificates.js"></script>
+
+
+
+<script>
+
+    requireLogin();
+
+</script>
+
+
+</body>
+
+</html>

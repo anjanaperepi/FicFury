@@ -1,0 +1,868 @@
+
+/* ==========================================================
+   FIC FURY
+   CHAIR DASHBOARD
+========================================================== */
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.chair-hero{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:40px;
+
+    margin-bottom:40px;
+
+    padding:35px;
+
+    border-radius:24px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #2563eb,
+
+            #1d4ed8
+
+        );
+
+    color:white;
+
+    box-shadow:
+
+        0 20px 45px rgba(37,99,235,.25);
+
+}
+.hero-left{
+
+    flex:1;
+
+}
+
+.hero-left h1{
+
+    font-size:2.3rem;
+
+    margin:15px 0;
+
+    font-weight:700;
+
+}
+
+.hero-left p{
+
+    line-height:1.7;
+
+    opacity:.95;
+
+    max-width:650px;
+
+}
+.hero-badge{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.18);
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+}
+.hero-right{
+
+    width:350px;
+
+}
+.committee-card{
+
+    background:rgba(255,255,255,.15);
+
+    backdrop-filter:blur(12px);
+
+    padding:28px;
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+}
+.committee-card span{
+
+    opacity:.8;
+
+    font-size:.9rem;
+
+}
+.committee-card h2{
+
+    margin:12px 0;
+
+    font-size:1.5rem;
+
+}
+.committee-card small{
+
+    opacity:.9;
+
+    line-height:1.6;
+
+    display:block;
+
+}
+/* ==========================================================
+   COMMITTEE SESSION
+========================================================== */
+
+.committee-details{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:22px;
+
+    margin:30px 0;
+
+}
+.detail-item{
+
+    background:#f8fafc;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    transition:.3s ease;
+
+}
+.detail-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 25px rgba(0,0,0,.08);
+
+}
+.detail-item span:first-child{
+
+    font-size:.85rem;
+
+    color:var(--text-light);
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+.detail-item strong{
+
+    font-size:1.05rem;
+
+    color:var(--text);
+
+    font-weight:700;
+
+}
+.session-actions{
+
+    display:flex;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+    margin-top:25px;
+
+}
+.session-actions .btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:14px 24px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s ease;
+
+}
+.btn-primary{
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--primary),
+
+        var(--primary-light)
+
+    );
+
+    color:white;
+
+}
+.btn-danger{
+
+    background:#ef4444;
+
+    color:white;
+
+}
+.session-actions .btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 22px rgba(0,0,0,.12);
+
+}
+/* ==========================================================
+   ATTENDANCE
+========================================================== */
+
+.attendance-overview{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    margin:30px 0;
+
+}
+.attendance-stat{
+
+    background:#f8fafc;
+
+    border-radius:16px;
+
+    padding:24px;
+
+    text-align:center;
+
+    transition:.3s ease;
+
+}
+.attendance-stat:hover{
+
+    transform:translateY(-5px);
+
+}
+.attendance-stat h2{
+
+    font-size:2.3rem;
+
+    color:var(--primary);
+
+    margin-bottom:10px;
+
+}
+.attendance-stat p{
+
+    color:var(--text-light);
+
+    font-weight:500;
+
+}
+.progress-bar{
+
+    width:100%;
+
+    height:12px;
+
+    background:#e5e7eb;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+    margin-top:25px;
+
+}
+.progress-fill{
+
+    width:85%;
+
+    height:100%;
+
+    background:linear-gradient(
+
+        90deg,
+
+        #22c55e,
+
+        #16a34a
+
+    );
+
+    transition:width .4s ease;
+
+}
+/* ==========================================================
+   COMMITTEE ACTIVITY
+========================================================== */
+
+.activity-feed{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+.activity-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+    padding:18px;
+
+    border-radius:16px;
+
+    background:#f8fafc;
+
+    transition:.3s ease;
+
+}
+.activity-item:hover{
+
+    background:#eef4ff;
+
+    transform:translateX(6px);
+
+}
+.activity-icon{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--primary),
+
+        var(--primary-light)
+
+    );
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+    font-size:1rem;
+
+}
+.activity-item strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    font-size:1rem;
+
+}
+
+.activity-item p{
+
+    color:var(--text-light);
+
+    line-height:1.6;
+
+}
+/* ==========================================================
+   POSITION PAPERS
+========================================================== */
+
+.dashboard-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+.dashboard-table th{
+
+    background:#f8fafc;
+
+    padding:18px;
+
+    text-align:left;
+
+    font-weight:600;
+
+    border-bottom:1px solid var(--border);
+
+}
+.dashboard-table td{
+
+    padding:18px;
+
+    border-bottom:1px solid var(--border);
+
+}
+.dashboard-table tbody tr{
+
+    transition:.25s ease;
+
+}
+.dashboard-table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+/* ==========================================================
+   TIMELINE
+========================================================== */
+
+.timeline{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+.timeline-item{
+
+    display:flex;
+
+    gap:22px;
+
+    align-items:flex-start;
+
+}
+.timeline-date{
+
+    min-width:85px;
+
+    text-align:center;
+
+    background:linear-gradient(
+
+        135deg,
+
+        var(--primary),
+
+        var(--primary-light)
+
+    );
+
+    color:white;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    font-weight:700;
+
+    box-shadow:0 8px 18px rgba(37,99,235,.25);
+
+}
+.timeline-item strong{
+
+    display:block;
+
+    margin-bottom:8px;
+
+}
+
+.timeline-item p{
+
+    color:var(--text-light);
+
+    line-height:1.6;
+
+}
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+}
+.status.approved{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.status.pending{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+.status.closed{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+.status.approved{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.status.pending{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+.status.closed{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+.loader{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+.spinner{
+
+    width:60px;
+
+    height:60px;
+
+    border:6px solid #e5e7eb;
+
+    border-top-color:var(--primary);
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+.dashboard-card,
+
+.stat-card,
+
+.action-card,
+
+.committee-card,
+
+.attendance-stat,
+
+.detail-item{
+
+    animation:fadeUp .45s ease;
+
+}
+.action-card:hover .action-icon{
+
+    transform:scale(1.08);
+
+}
+
+.action-icon{
+
+    transition:.3s ease;
+
+}
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:1200px){
+
+.chair-hero{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.hero-right{
+
+    width:100%;
+
+}
+
+.committee-details{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+@media(max-width:900px){
+
+.attendance-overview{
+
+    grid-template-columns:1fr;
+
+}
+
+.committee-details{
+
+    grid-template-columns:1fr;
+
+}
+
+.session-actions{
+
+    flex-direction:column;
+
+}
+
+.session-actions .btn{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+}
+@media(max-width:768px){
+
+.hero-left h1{
+
+    font-size:1.8rem;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.quick-actions-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.dashboard-content{
+
+    grid-template-columns:1fr;
+
+}
+
+.timeline-item{
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.timeline-date{
+
+    width:100%;
+
+}
+
+.dashboard-table{
+
+    font-size:.9rem;
+
+}
+
+.dashboard-table th,
+
+.dashboard-table td{
+
+    padding:12px;
+
+}
+
+}
+/* ==========================================================
+   UTILITIES
+========================================================== */
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+.registration-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+    margin-bottom:18px;
+
+    background:white;
+
+    border-radius:16px;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.05);
+
+}
+
+.registration-card h3{
+
+    margin-bottom:6px;
+
+}
+
+.registration-card small{
+
+    color:#64748b;
+
+}
+.committee-selector{
+    width:100%;
+    margin-top:10px;
+    padding:10px 14px;
+    font-size:16px;
+    border-radius:10px;
+    border:1px solid #dcdcdc;
+    background:#fff;
+    cursor:pointer;
+}
+
+.status-badge.draft {
+
+    background: #e3f2fd;
+
+    color: #1565c0;
+
+}
+
+.status-badge.pending {
+
+    background: #fff3cd;
+
+    color: #856404;
+
+}
+
+.status-badge.live {
+
+    background: #d4edda;
+
+    color: #155724;
+
+}

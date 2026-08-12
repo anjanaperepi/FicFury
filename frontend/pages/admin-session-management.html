@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+     <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <title>Session Management | FIC FURY</title>
+
+<link
+        rel="stylesheet"
+        href="../css/assets/layout.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/responsive.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/forms.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/tables.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/animations.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/theme.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/components.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/toast.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/utilities.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/sidebar.css">
+
+   
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <aside id="sidebar"></aside>
+
+    <main class="main-content">
+
+        <div class="page-header">
+
+            <h1>Debate Session Management</h1>
+
+            <p>
+                Activate, stop and archive debate sessions.
+            </p>
+
+        </div>
+
+        <div class="session-card">
+
+            <table class = "table" id="sessionTable">
+
+                <thead>
+
+                <tr>
+
+                    <th>Committee</th>
+
+                    <th>Status</th>
+
+                    <th>Mode</th>
+
+                    <th>Chair</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+                </thead>
+
+                <tbody id="sessionTableBody">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/debate-api.js"></script>
+<script src="../js/debate-utils.js"></script>
+<script src="../js/component-loader.js"></script>
+
+<script src="../js/admin-session-management.js"></script>
+
+</body>
+
+</html>

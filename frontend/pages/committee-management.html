@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Committee Management | FIC FURY</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../css/assets/theme.css">
+    <link rel="stylesheet" href="../css/assets/layout.css">
+    <link rel="stylesheet" href="../css/assets/components.css">
+    <link rel="stylesheet" href="../css/assets/forms.css">
+    <link rel="stylesheet" href="../css/assets/tables.css">
+    <link rel="stylesheet" href="../css/assets/utilities.css">
+    <link rel="stylesheet" href="../css/assets/responsive.css">
+    <link rel="stylesheet" href="../css/assets/sidebar.css">
+
+    <!-- Page CSS -->
+    
+<link rel="stylesheet" href="../css/committee-management.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- Sidebar -->
+    <div id="sidebar"></div>
+
+    <main class="main-content">
+
+        <div class="page-container">
+
+            <!-- Hero -->
+
+            <section class="hero-section">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            ADMIN PANEL
+        </span>
+
+        <h1>
+            Committee Management
+        </h1>
+
+        <p>
+            Create, organize and manage committees, assign chairpersons,
+            monitor delegates and oversee every committee session from one
+            centralized workspace.
+        </p>
+
+        <div class="hero-actions">
+
+            <button class="btn btn-primary"
+                    id="newCommitteeBtn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                New Committee
+
+            </button>
+
+            <button class="btn btn-secondary"
+                    id="refreshCommittees">
+
+                <i class="fa-solid fa-rotate-right"></i>
+
+                Refresh
+
+            </button>
+
+            <button class="btn btn-outline"
+                    id="exportCommittees">
+
+                <i class="fa-solid fa-file-export"></i>
+
+                Export
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="hero-illustration">
+
+        <i class="fa-solid fa-building-columns"></i>
+
+    </div>
+
+</section>
+
+            <!-- Statistics -->
+
+<section class="stats-grid">
+
+    <div class="stat-card">
+        <div class = "stat-icon">
+        <i class="fa-solid fa-building-columns"></i>
+            </div>
+        <div class = "stat-content">
+
+            <h2 id="committeeCount">0</h2>
+
+            <p>Committees</p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+        <div class = "stat-icon">
+
+        <i class="fa-solid fa-user-tie"></i>
+            </div>
+        <div class = "stat-content">
+
+            <h2 id="chairCount">0</h2>
+
+            <p>Chairpersons</p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+        <div class = "stat-icon">
+
+        <i class="fa-solid fa-calendar-days"></i>
+        </div>
+        <div class = "stat-content">
+
+            <h2 id="sessionCount">0</h2>
+
+            <p>Sessions</p>
+
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+        <div class = "stat-icon">
+        <i class="fa-solid fa-users"></i>
+</div>
+        <div class = "stat-content">
+
+            <h2 id="delegateCount">0</h2>
+
+            <p>Delegates</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+            <!-- Filters -->
+
+<section class="card">
+
+    <div class="toolbar">
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-search"></i>
+
+            <input type="text"
+                   id="committeeSearch"
+                   placeholder="Search committees...">
+
+        </div>
+
+        <select id="modeFilter">
+            <option value="">All Modes</option>
+            <option>Online</option>
+            <option>Offline</option>
+            <option>Hybrid</option>
+        </select>
+
+        <select id="categoryFilter">
+
+            <option value="">All Categories</option>
+
+        </select>
+
+        <select id="sortFilter">
+
+            <option value="name">
+                Name
+            </option>
+
+            <option value="date">
+                Date
+            </option>
+
+        </select>
+
+    </div>
+
+</section>
+
+            <!-- Committee Directory -->
+
+<section class="panel">
+
+    <div class="section-header">
+
+        <div>
+
+            <h2>Committee Directory</h2>
+
+            <p class = "section-description">
+                View and manage every committee.
+            </p>
+
+        </div>
+
+        <span id="committeeTotal"
+              class="badge badge-primary">
+
+            0 Committees
+
+        </span>
+
+    </div>
+
+    <div class="table-container">
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Committee</th>
+
+                    <th>Chairperson</th>
+
+                    <th>Mode</th>
+
+                    <th>Date</th>
+
+                    <th>Delegates</th>
+
+                    <th>Status</th>
+
+                    <th>Actions</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="committeeTableBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+    <div id="emptyState"
+     class="empty-state hidden">
+
+    <i class="fa-solid fa-building-columns"></i>
+
+    <h2>No Committees Found</h2>
+
+    <p>
+
+        There are no committees matching your search.
+
+    </p>
+
+    <button
+        class="btn btn-primary"
+        onclick="openCreateModal()">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Create Committee
+
+    </button>
+
+</div>
+</section >
+       </div>
+<div id="footer"></div>
+    </main>
+
+</div>
+
+<section class="panel">
+    <div id="detailsDrawer"
+     class="drawer">
+
+    <div class="drawer-header">
+
+        <h2>Committee Details</h2>
+
+        <button id="closeDrawer"
+                class="icon-btn">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+    <div id="drawerContent" class = "drawer-content">
+
+    </div>
+
+</div>
+
+<div id="drawerOverlay"
+     class="drawer-overlay">
+</div>
+</section>
+
+            <!-- Pagination -->
+             <div id="pagination"
+     class="pagination">
+</div>
+
+<div id="committeeModal"
+     class="modal hidden">
+
+    <div class="modal-content committee-modal">
+
+        <div class="modal-header">
+
+            <h2 id="modalTitle">
+                Create Committee
+            </h2>
+
+            <button
+                class="close-modal"
+                id="closeCommitteeModal">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="committeeForm">
+
+            <input
+                type="hidden"
+                id="committeeId">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Committee Name *</label>
+
+                    <input
+                        id="committeeName"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Category *</label>
+
+                    <input
+                        id="committeeCategory"
+                        class="form-control"
+                        required>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Description</label>
+
+                <textarea
+                    id="committeeDescription"
+                    rows="5"
+                    class="form-control"></textarea>
+
+            </div>
+
+            <div class="form-grid-3">
+
+                <div class="form-group">
+
+                    <label>Date</label>
+
+                    <input
+                        type="date"
+                        id="committeeDate"
+                        class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Time</label>
+
+                    <input
+                        type="time"
+                        id="committeeTime"
+                        class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Mode</label>
+
+                    <select
+                        id="committeeMode"
+                        class="form-control">
+
+                        <option>Online</option>
+                        <option>Offline</option>
+                        <option>Hybrid</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Venue</label>
+
+                    <input
+                        id="committeeVenue"
+                        class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Meeting Link</label>
+
+                    <input
+                        id="committeeMeetingLink"
+                        class="form-control">
+
+                </div>
+
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>Chairperson</label>
+
+                    <input
+                        id="chairpersonName"
+                        class="form-control">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Chair Email</label>
+
+                    <input
+                        id="chairpersonEmail"
+                        type="email"
+                        class="form-control">
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button
+                    type="button"
+                    id="cancelCommittee"
+                    class="btn btn-outline">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+
+                    Save Committee
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- Delete Committee Modal -->
+
+<div id="deleteCommitteeModal"
+     class="modal hidden">
+
+    <div class="modal-content modal-sm">
+
+        <div class="modal-header">
+
+            <h2>
+
+                <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+
+                Delete Committee
+
+            </h2>
+
+        </div>
+
+        <div class="modal-body">
+
+            <p>
+
+                Are you sure you want to delete
+
+                <strong id="deleteCommitteeName"></strong>?
+
+            </p>
+
+            <p class="text-secondary">
+
+                This action cannot be undone.
+
+            </p>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button
+                id="cancelDeleteCommittee"
+                class="btn btn-outline">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="confirmDeleteCommittee"
+                class="btn btn-danger">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/sidebar.js"></script>
+
+<script src="../js/admin/committee-management.js"></script>
+
+</body>
+
+</html>

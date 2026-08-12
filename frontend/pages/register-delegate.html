@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register Delegate | FIC FURY</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/register-delegate.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+
+        <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav>
+
+        <div class="logo">
+            ⚡ FIC FURY
+        </div>
+
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="committees.html">Committees</a></li>
+            <li><a href="rankings.html">Rankings</a></li>
+        </ul>
+
+    </nav>
+
+    <!-- PAGE HEADER -->
+
+    <section class="register-header">
+
+        <span class="comic-badge">REGISTRATION OPEN</span>
+
+        <h1>JOIN THE FURY</h1>
+
+        <p>
+            Complete your registration to secure your place in the committee.
+        </p>
+
+    </section>
+
+    <!-- SELECTED ROLE -->
+
+    <section class="selection-summary">
+
+        <div class="summary-card">
+
+            <h2>YOUR SELECTION</h2>
+
+            <div class="summary-grid">
+
+                <div>
+                    <h3>Committee</h3>
+                    <p id="committee-name">
+                        🚀 Galactic Senate
+                    </p>
+                </div>
+
+                <div>
+                    <h3>Character</h3>
+                    <p id="character-name">
+                        Governor of Mars
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- REGISTRATION FORM -->
+
+    <section class="registration-form-section">
+
+        <form id="delegateRegistrationForm">
+
+   <select id="committee" required>
+
+    <option value="">
+        Loading Committees...
+    </option>
+
+</select>
+<select id="character" required>
+
+    <option value="">
+        Select Character
+    </option>
+
+</select>
+    <button type="submit">
+        Register
+    </button>
+
+</form>
+
+    </section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <h3>⚡ FIC FURY</h3>
+
+        <p>Choose Your World. Shape Its Destiny.</p>
+
+        <p>© 2026 FIC FURY</p>
+
+    </footer>
+<script src="../js/config.js"></script>
+
+<script src="../js/committee-api.js"></script>
+
+<script src="../js/character-api.js"></script>
+
+<script src="../js/register-delegate.js"></script>
+</body>
+
+</html>

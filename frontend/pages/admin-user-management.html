@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>User Management | FIC FURY</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/theme.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/layout.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/components.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/sidebar.css">
+
+    <link rel="stylesheet"
+          href="../css/admin-user-management.css">
+
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <div id="sidebar"></div>
+
+    <main class="main-content">
+
+        <div class="page-container">
+
+            <!-- ===========================
+                 HERO
+            ============================ -->
+
+            <section class="hero-section">
+
+                <div>
+
+                    <h1>User Management</h1>
+
+                    <p>
+
+                        Manage delegates, chairs and administrators,
+                        monitor account activity and maintain platform security.
+
+                    </p>
+
+                </div>
+
+                <button
+                        id="addUserBtn"
+                        class="btn-primary">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                    Add User
+
+                </button>
+
+            </section>
+
+            <!-- ===========================
+                 STATISTICS
+            ============================ -->
+
+            <section class="stats-grid">
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <h3>Total Users</h3>
+
+                    <h2 id="totalUsers">0</h2>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    <h3>Delegates</h3>
+
+                    <h2 id="delegateCount">0</h2>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-user-tie"></i>
+
+                    <h3>Chairs</h3>
+
+                    <h2 id="chairCount">0</h2>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                    <h3>Admins</h3>
+
+                    <h2 id="adminCount">0</h2>
+
+                </div>
+
+                <div class="stat-card">
+
+                    <i class="fa-solid fa-user-slash"></i>
+
+                    <h3>Inactive</h3>
+
+                    <h2 id="inactiveCount">0</h2>
+
+                </div>
+
+            </section>
+
+            <!-- ===========================
+                 FILTERS
+            ============================ -->
+
+            <section class="filter-bar">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-search"></i>
+
+                    <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search users...">
+
+                </div>
+
+                <select id="roleFilter">
+
+                    <option value="">All Roles</option>
+
+                    <option value="ADMIN">Admin</option>
+
+                    <option value="CHAIR">Chair</option>
+
+                    <option value="DELEGATE">Delegate</option>
+
+                </select>
+
+                <select id="statusFilter">
+
+                    <option value="">All Status</option>
+
+                    <option value="ACTIVE">Active</option>
+
+                    <option value="INACTIVE">Inactive</option>
+
+                </select>
+
+                <button
+                        id="resetFilters"
+                        class="btn-secondary">
+
+                    <i class="fa-solid fa-rotate"></i>
+
+                    Reset
+
+                </button>
+
+            </section>
+
+            <!-- ===========================
+                 USER TABLE
+            ============================ -->
+
+            <section class="table-card">
+
+                <table class="user-table">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>User</th>
+
+                        <th>Email</th>
+
+                        <th>Role</th>
+
+                        <th>Status</th>
+
+                        <th>Actions</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody id="userTableBody">
+
+                    <!-- JS -->
+
+                    </tbody>
+
+                </table>
+                <div id="pagination" class="pagination"></div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- ===========================
+     USER DETAILS MODAL
+=========================== -->
+
+<div
+        id="userModal"
+        class="modal hidden">
+
+    <div class="modal-content large-modal">
+
+        <button
+                id="closeModal"
+                class="modal-close">
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div id="userDetails">
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+     DELETE MODAL
+=========================== -->
+
+<div
+        id="deleteModal"
+        class="modal hidden">
+
+    <div class="modal-content small-modal">
+
+        <h2>
+
+            Delete User
+
+        </h2>
+
+        <p id="deleteMessage">
+
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                    id="cancelDelete"
+                    class="btn-secondary">
+
+                Cancel
+
+            </button>
+
+            <button
+                    id="confirmDelete"
+                    class="btn-danger">
+
+                Delete
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+<div
+        id="loadingOverlay"
+        class="loading-overlay hidden">
+
+    <div class="loader"></div>
+
+</div>
+
+
+
+
+<script src="../js/component-loader.js"></script>
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+<script src="../js/admin-user-management.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delegate Management | FIC FURY</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="../css/assets/theme.css">
+<link rel="stylesheet" href="../css/assets/layout.css">
+<link rel="stylesheet" href="../css/assets/components.css">
+<link rel="stylesheet" href="../css/assets/forms.css">
+<link rel="stylesheet" href="../css/assets/tables.css">
+
+
+<link rel="stylesheet" href="../css/assets/sidebar.css">
+
+
+</head>
+
+<body>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+    </div>
+<div class = "app-layout">
+    <!-- Sidebar -->
+    <div id="sidebar"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Navbar -->
+        <div id="navbar"></div>
+
+        <!-- Hero -->
+        <section class="hero-section">
+
+            <div class="hero-content">
+                <span class = "hero-badge">ADMIN PANEL</span>
+                <div>
+                    <h1>Delegate Management</h1>
+
+                    <p>
+                        Manage delegate registrations, approvals,
+                        committee assignments and participation.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+        <section class="stats-grid">
+
+    <div class="stat-card">
+        <h3>Total Delegates</h3>
+        <span id="totalDelegates">0</span>
+    </div>
+
+    <div class="stat-card">
+        <h3>Pending Reviews</h3>
+        <span id="pendingDelegates">0</span>
+    </div>
+
+    <div class="stat-card">
+        <h3>Approved</h3>
+        <span id="approvedDelegates">0</span>
+    </div>
+
+    <div class="stat-card">
+        <h3>Rejected</h3>
+        <span id="rejectedDelegates">0</span>
+    </div>
+
+</section>
+
+<section class="card">
+    <div class="toolbar">
+<div class="search-box">
+    <i class="fa-solid fa-search"></i>
+    <input
+        id="delegateSearch"
+        type="text"
+        placeholder="Search delegate..."
+    >
+    </div>
+
+    <select id="committeeFilter">
+        <option value="">All Committees</option>
+    </select>
+
+    <select id="characterFilter">
+        <option value="">All Characters</option>
+    </select>
+
+    <select id="statusFilter">
+        <option value="">All Status</option>
+        <option value="PENDING">Pending</option>
+        <option value="APPROVED">Approved</option>
+        <option value="REJECTED">Rejected</option>
+    </select>
+
+    <select id="chairReviewFilter">
+        <option value="">Chair Review</option>
+        <option value="APPROVED">Approved</option>
+        <option value="PENDING">Pending</option>
+        <option value="REJECTED">Rejected</option>
+    </select>
+
+    <select id="sortFilter">
+
+        <option value="name">
+            Delegate Name
+        </option>
+
+        <option value="committee">
+            Committee
+        </option>
+
+        <option value="registered">
+            Registration Date
+        </option>
+
+    </select>
+
+    <button
+        id="exportDelegates"
+        class="btn btn-primary">
+
+        Export CSV
+
+    </button>
+    </div>
+
+</section>
+<section class = "panel">
+<div class="table-container">
+
+    <table class="table">
+
+        <thead>
+
+        <tr>
+
+            <th>Delegate</th>
+
+            <th>Committee</th>
+
+            <th>Character</th>
+
+            <th>Chair Review</th>
+
+            <th>Admin Review</th>
+
+            <th>Final Status</th>
+
+            <th>Actions</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody id="delegateTableBody">
+
+        </tbody>
+
+    </table>
+
+   
+</div>
+
+ <div
+        id="emptyState"
+        class="empty-state hidden">
+
+        <i class="fa-solid fa-users"></i>
+
+        <h2>No Delegates Found</h2>
+
+        <p>
+            There are no delegates matching the selected filters.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<div id="pagination"></div>
+
+<div
+    id="delegateDrawer"
+    class="drawer-content">
+
+    <div class="drawer-header">
+
+        <h2>Delegate Details</h2>
+
+        <button id="closeDrawer">
+
+            &times;
+
+        </button>
+
+    </div>
+<div class="drawer-body">
+    <div
+        id="drawerContent"
+        class="drawer-content">
+
+    </div>
+
+</div>
+
+<div
+    id="delegateModal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Edit Delegate</h2>
+
+        </div>
+
+        <form id="delegateForm">
+
+            <!-- Committee (Admin only) -->
+
+            <div id="committeeGroup"class="form-group">
+
+                <label>Committee</label>
+
+                <select id="committee" class = "form-control"></select>
+
+            </div>
+<div class = "form-group">
+            <label>Character</label>
+
+            <select id="character" class = "form-control"></select>
+            </div>
+<div class = "form-group">
+            <label>Status</label>
+            
+
+            <select id="status" class = "form-control">
+
+                <option>Pending</option>
+
+                <option>Approved</option>
+
+                <option>Rejected</option>
+
+            </select></div>
+            <div class = "form-group">
+
+            <label>Chair Notes</label>
+
+            <textarea id="chairNotes"></textarea>
+            </div>
+
+            <label>Admin Notes</label>
+
+            <textarea id="adminNotes"></textarea>
+
+        </form>
+
+        <div class="modal-footer">
+
+            <button
+                id="cancelDelegateBtn"
+                class="btn btn-outline">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="saveDelegateBtn"
+                class="btn btn-primary">
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    id="removeModal"
+    class="modal hidden">
+
+    <div class="modal-header">
+
+        <h2>Remove Delegate</h2>
+
+        <p class = "modal-body">
+
+            Remove this delegate from the committee?
+
+        </p>
+
+        <div class="modal-footer">
+
+            <button id="cancelRemoveDelegate">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="confirmRemoveDelegate"
+                class="btn btn-danger">
+
+                Remove
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</main>
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/sidebar.js"></script>
+<script src="../js/delegate-management.js"></script>
+
+</body>
+
+</html>

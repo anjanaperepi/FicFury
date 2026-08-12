@@ -1,0 +1,63 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+}
+
+.page-container{
+    padding:30px;
+}
+
+.page-header{
+    margin-bottom:25px;
+}
+
+.page-header h1{
+    margin-bottom:10px;
+}
+
+.table-container{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:14px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+th{
+    background:#f0f2f5;
+}
+
+button{
+    padding:8px 14px;
+    margin-right:8px;
+    cursor:pointer;
+    border:none;
+    border-radius:6px;
+}
+
+.approve-btn{
+    background:#28a745;
+    color:white;
+}
+
+.reject-btn{
+    background:#dc3545;
+    color:white;
+}

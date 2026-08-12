@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Delegate Dashboard | FIC FURY</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="../css/assets/layout.css">
+    <link rel="stylesheet" href="../css/assets/components.css">
+    <link rel="stylesheet" href="../css/assets/responsive.css">
+    <link rel="stylesheet" href="../css/assets/forms.css">
+    <link rel="stylesheet" href="../css/assets/tables.css">
+    <link rel="stylesheet" href="../css/assets/animations.css">
+    <link rel="stylesheet" href="../css/assets/theme.css">
+    <link rel="stylesheet" href="../css/assets/toast.css">
+    <link rel="stylesheet" href="../css/assets/utilities.css">
+    <link rel="stylesheet" href="../css/assets/sidebar.css">
+
+    <!-- Dashboard -->
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <div id="sidebar"></div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+        <div class="page-container">
+
+
+            <!-- =================================================
+                 HERO
+            ================================================== -->
+
+            <section class="hero-section">
+
+                <div class="hero-content">
+
+                    <div class="hero-text">
+
+                        <span class="hero-badge">
+                            Welcome Back
+                        </span>
+
+                        <h1>
+                            Hello,
+                            <span id="userName">
+                                Delegate
+                            </span>
+                            👋
+                        </h1>
+
+                        <p>
+                            Your FIC FURY conference workspace.
+                            Stay updated, track your participation,
+                            and manage your conference activities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="hero-buttons">
+
+                        <a
+                            href="profile.html"
+                            class="btn btn-primary">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            My Profile
+
+                        </a>
+
+
+                        <a
+                            href="resources.html"
+                            class="btn btn-outline">
+
+                            <i class="fa-solid fa-book"></i>
+
+                            Resources
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 QUICK STATS
+            ================================================== -->
+
+            <section class="stats-grid">
+
+
+                <!-- COMMITTEE -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+
+                        <div>
+                            <h4>My Committee</h4>
+                            <span class="stat-label">
+                                Registered committee
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <h2 id="committeeName">
+                        Not Registered
+                    </h2>
+
+                </div>
+
+
+
+                <!-- CHARACTER -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+
+                        <div>
+                            <h4>My Character</h4>
+                            <span class="stat-label">
+                                Assigned role
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <h2 id="characterName">
+                        Not Assigned
+                    </h2>
+
+                </div>
+
+
+
+<div class="stat-card">
+
+    <div class="stat-header">
+
+        <div class="stat-icon">
+            <i class="fa-solid fa-certificate"></i>
+        </div>
+
+        <div>
+            <h4>Certificate</h4>
+
+            <span class="stat-label">
+                Eligibility status
+            </span>
+        </div>
+
+    </div>
+
+
+    <h2 id="certificateStatus">
+        Checking...
+    </h2>
+
+</div>
+
+
+
+                <!-- AWARDS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-header">
+
+                        <div class="stat-icon">
+                            <i class="fa-solid fa-trophy"></i>
+                        </div>
+
+                        <div>
+                            <h4>My Awards</h4>
+                            <span class="stat-label">
+                                Recognition earned
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <h2 id="awardCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 CONFERENCE INFORMATION
+            ================================================== -->
+
+            <section class="dashboard-grid">
+
+
+                <!-- MY CONFERENCE -->
+
+                <section class="dashboard-card conference-card">
+
+                    <div class="dashboard-card-header">
+
+                        <div>
+
+                            <span class="card-kicker">
+                                YOUR CONFERENCE
+                            </span>
+
+                            <h2>
+                                <i class="fa-solid fa-building-columns"></i>
+                                My Conference
+                            </h2>
+
+                        </div>
+
+                        <span class="card-number">
+                            01
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="committeeCard"
+                        class="conference-content">
+
+                        <div class="dashboard-loading">
+
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                            Loading conference details...
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <section class="dashboard-card actions-card">
+
+                    <div class="dashboard-card-header">
+
+                        <div>
+
+                            <span class="card-kicker">
+                                QUICK ACCESS
+                            </span>
+
+                            <h2>
+                                <i class="fa-solid fa-bolt"></i>
+                                Quick Actions
+                            </h2>
+
+                        </div>
+
+                        <span class="card-number">
+                            02
+                        </span>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <a
+                            href="debate-room.html"
+                            class="quick-action">
+
+                            <span class="quick-action-icon">
+                                <i class="fa-solid fa-comments"></i>
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    Debate Room
+                                </strong>
+
+                                <small>
+                                    Join your committee
+                                </small>
+
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+
+                        <a
+                            href="resources.html"
+                            class="quick-action">
+
+                            <span class="quick-action-icon">
+                                <i class="fa-solid fa-book"></i>
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    Resources
+                                </strong>
+
+                                <small>
+                                    View conference materials
+                                </small>
+
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+
+                        <a
+                            href="awards-certificates.html"
+                            class="quick-action">
+
+                            <span class="quick-action-icon">
+                                <i class="fa-solid fa-award"></i>
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    Awards & Certificates
+                                </strong>
+
+                                <small>
+                                    View your achievements
+                                </small>
+
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+
+                        <a
+                            href="profile.html"
+                            class="quick-action">
+
+                            <span class="quick-action-icon">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+
+                            <span>
+
+                                <strong>
+                                    My Profile
+                                </strong>
+
+                                <small>
+                                    View your delegate profile
+                                </small>
+
+                            </span>
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ANNOUNCEMENTS
+            ================================================== -->
+
+            <section class="dashboard-section announcements-section">
+
+<div class="section-header">
+
+    <div>
+        <span class="section-kicker">
+            STAY INFORMED
+        </span>
+
+        <h2>
+            <i class="fa-solid fa-bullhorn"></i>
+            Announcements
+        </h2>
+
+        <p>
+            Important updates from FIC FURY
+            and your committee.
+        </p>
+    </div>
+
+    <span class="announcement-count" id="announcementCount">
+        Latest Updates
+    </span>
+
+</div>
+
+                <div
+                    id="announcementFeed"
+                    class="activity-feed">
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon">
+
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Loading announcements...
+                            </strong>
+
+                            <p>
+                                Please wait.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 ACHIEVEMENT PROMO
+            ================================================== -->
+
+            <section class="achievement-banner">
+
+                <div class="achievement-icon">
+
+                    <i class="fa-solid fa-trophy"></i>
+
+                </div>
+
+
+                <div class="achievement-content">
+
+                    <span>
+                        YOUR FIC FURY JOURNEY
+                    </span>
+
+                    <h2>
+                        Make your debate count.
+                    </h2>
+
+                    <p>
+                        Track your attendance, awards and
+                        certificates throughout the conference.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="awards-certificates.html"
+                    class="btn btn-primary">
+
+                    View Achievements
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+            </section>
+
+
+        </div>
+
+
+        <!-- Footer -->
+
+        <div id="footer"></div>
+
+    </main>
+
+</div>
+
+
+<!-- =========================================================
+     COMPONENTS
+========================================================= -->
+
+<script src="../js/component-loader.js"></script>
+
+<!-- Core -->
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/sidebar.js"></script>
+
+<!-- Dashboard -->
+
+<script src="../js/dashboard.js"></script>
+
+
+<script>
+    requireLogin();
+</script>
+
+</body>
+
+</html>

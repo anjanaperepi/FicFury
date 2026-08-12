@@ -1,0 +1,183 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#FFD60A;
+}
+
+.admin-layout{
+display:grid;
+grid-template-columns:280px 1fr;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar{
+background:#111;
+color:white;
+padding:30px;
+}
+
+.logo{
+font-family:'Bangers',cursive;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.admin-badge{
+background:#FF3B30;
+padding:12px;
+text-align:center;
+border:3px solid white;
+margin-bottom:30px;
+}
+
+.sidebar ul{
+list-style:none;
+}
+
+.sidebar li{
+padding:15px;
+border:3px solid white;
+margin-bottom:10px;
+}
+
+.active{
+background:#FF3B30;
+}
+
+/* MAIN */
+
+.main-content{
+padding:40px;
+}
+
+.header-panel{
+background:white;
+border:5px solid black;
+padding:25px;
+box-shadow:10px 10px black;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.header-panel h1{
+font-family:'Bangers',cursive;
+font-size:3rem;
+}
+
+.export-btn{
+background:#FF3B30;
+color:white;
+padding:15px 20px;
+border:4px solid black;
+font-weight:bold;
+}
+
+/* KPI */
+
+.kpi-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.kpi-card{
+background:white;
+border:5px solid black;
+padding:25px;
+text-align:center;
+box-shadow:8px 8px black;
+}
+
+.kpi-card h2{
+font-size:2rem;
+color:#FF3B30;
+}
+
+/* PANELS */
+
+.panel{
+background:white;
+border:5px solid black;
+padding:25px;
+box-shadow:8px 8px black;
+margin-top:30px;
+}
+
+.panel h2{
+font-family:'Bangers',cursive;
+margin-bottom:20px;
+}
+
+.rank-item{
+padding:15px;
+border:3px solid black;
+margin-bottom:10px;
+background:#FFF8DC;
+}
+
+/* TABLES */
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+th{
+background:#111;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+border-bottom:2px solid #ddd;
+}
+
+/* ACTIVITY */
+
+.activity-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.metric-card{
+background:#FFF8DC;
+border:4px solid black;
+padding:20px;
+text-align:center;
+}
+
+.metric-card h3{
+color:#FF3B30;
+font-size:2rem;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.admin-layout{
+grid-template-columns:1fr;
+}
+
+.sidebar{
+display:none;
+}
+
+.header-panel{
+flex-direction:column;
+gap:20px;
+text-align:center;
+}
+
+}

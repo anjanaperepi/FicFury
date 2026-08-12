@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources | FIC FURY</title>
+
+     <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Shared CSS -->
+
+    
+
+   
+
+    <link
+        rel="stylesheet"
+        href="../css/dashboard.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/layout.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/responsive.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/forms.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/tables.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/animations.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/theme.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/components.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/toast.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/utilities.css">
+    <link
+        rel="stylesheet"
+        href="../css/assets/sidebar.css">
+    <link
+        rel="stylesheet"
+        href="../css/admin-resources.css">
+
+<body>
+
+<div class="app-layout">
+
+    <div id="sidebar"></div>
+
+    <div class="main-content">
+
+        <div class="page-container">
+
+            <main class="content-wrapper">
+
+                <!-- ===================================================== -->
+                <!-- PAGE HEADER -->
+                <!-- ===================================================== -->
+
+                <section class="hero-section">
+
+                    <div class="hero-content">
+
+                        <span class="hero-badge">
+                            Administration
+                        </span>
+
+                        <h1>
+                            Resource Management
+                        </h1>
+
+                        <p>
+                            Review, approve, reject and manage all committee
+                            resources uploaded by chairpersons.
+                        </p>
+
+                    </div>
+
+                    <div class="hero-illustration">
+                        <i class="fa-solid fa-book"></i>
+                    </div>
+
+                </section>
+
+                <!-- ===================================================== -->
+                <!-- STATISTICS -->
+                <!-- ===================================================== -->
+
+                <section class="stats-grid">
+
+                    <div class="stat-card">
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <h2 id="totalResources">0</h2>
+                            <p>Total Resources</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <h2 id="pendingResources">0</h2>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <h2 id="approvedResources">0</h2>
+                            <p>Approved</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon red">
+                            <i class="fa-solid fa-circle-xmark"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <h2 id="rejectedResources">0</h2>
+                            <p>Rejected</p>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- ===================================================== -->
+                <!-- FILTERS -->
+                <!-- ===================================================== -->
+
+                <section class="section">
+
+                    <div class="section-header">
+
+                        <h2>
+                            <i class="fa-solid fa-filter"></i>
+                            Resources
+                        </h2>
+
+                    </div>
+
+                    <div class="toolbar">
+
+                        <input
+                            type="text"
+                            id="searchInput"
+                            placeholder="Search by title...">
+
+                        <select id="committeeFilter">
+
+                            <option value="">
+                                All Committees
+                            </option>
+
+                        </select>
+
+                        <select id="statusFilter">
+
+                            <option value="">
+                                All Status
+                            </option>
+
+                            <option value="PENDING">
+                                Pending
+                            </option>
+
+                            <option value="APPROVED">
+                                Approved
+                            </option>
+
+                            <option value="REJECTED">
+                                Rejected
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </section>
+
+                <!-- ===================================================== -->
+                <!-- RESOURCE GRID -->
+                <!-- ===================================================== -->
+
+                <section class="section">
+
+                    <div
+                        id="resourceGrid"
+                        class="resource-grid">
+
+                    </div>
+
+                </section>
+<div id="footer"></div>
+            </main>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- REJECTION MODAL -->
+<!-- ===================================================== -->
+
+<div
+    id="rejectModal"
+    class="modal hidden">
+
+    <div class="modal-content">
+
+        <h2>Reject Resource</h2>
+
+        <textarea
+            id="feedback"
+            rows="5"
+            placeholder="Enter rejection feedback...">
+        </textarea>
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelReject"
+                class="btn btn-outline">
+
+                Cancel
+
+            </button>
+
+            <button
+                id="confirmReject"
+                class="btn btn-danger">
+
+                Reject
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ===================================================== -->
+<!-- LOADING -->
+<!-- ===================================================== -->
+
+<div
+    id="loadingOverlay"
+    class="loading-overlay hidden">
+
+    <div class="loader">
+
+        <div class="spinner"></div>
+
+        <p>
+            Loading Resources...
+        </p>
+
+    </div>
+
+</div>
+
+<!-- Shared JS -->
+
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/component-loader.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/sidebar.js"></script>
+
+<!-- Page JS -->
+
+<script src="../js/admin-resources.js"></script>
+
+</body>
+</html>

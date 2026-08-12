@@ -1,0 +1,874 @@
+/* ==========================================================
+   FIC FURY
+   PROFILE PAGE
+   ========================================================== */
+
+
+/* ==========================================================
+   PROFILE HERO
+   ========================================================== */
+
+.profile-hero {
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--primary);
+
+    border: 5px solid var(--border-heavy);
+
+    box-shadow: 10px 10px 0 var(--border-heavy);
+
+    padding: 40px;
+
+}
+
+
+/* Comic decoration */
+
+.profile-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+
+    height: 320px;
+
+    right: -120px;
+
+    top: -150px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.16);
+
+}
+
+
+.profile-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 180px;
+
+    left: -70px;
+
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.12);
+
+}
+
+
+/* ==========================================================
+   HERO CONTENT
+   ========================================================== */
+
+.profile-hero-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+.profile-hero h1 {
+
+    margin: 14px 0;
+
+    font-size: 2.8rem;
+
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    color: var(--text);
+
+}
+
+
+.profile-hero h1 span {
+
+    color: var(--secondary);
+
+}
+
+
+.profile-hero p {
+
+    margin-top: 15px;
+
+    max-width: 650px;
+
+    color: var(--text-light);
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+
+}
+
+
+/* ==========================================================
+   BADGE
+   ========================================================== */
+
+.profile-hero .hero-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 18px;
+
+    background: white;
+
+    border: 3px solid var(--border-heavy);
+
+    box-shadow: 5px 5px 0 var(--border-heavy);
+
+    font-size: .8rem;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+}
+
+
+.profile-hero .hero-badge::before {
+
+    content: "★";
+
+    color: var(--secondary);
+
+}
+
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
+.profile-avatar {
+
+    width: 120px;
+
+    height: 120px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: var(--surface);
+
+    border: 5px solid var(--border-heavy);
+
+    box-shadow: 8px 8px 0 var(--border-heavy);
+
+    font-size: 3rem;
+
+    color: var(--primary);
+
+}
+
+
+/* ==========================================================
+   PROFILE SUMMARY
+   ========================================================== */
+
+.profile-summary {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 28px;
+
+}
+
+
+/* ==========================================================
+   IDENTITY CARD
+   ========================================================== */
+
+.identity-card {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 25px 28px;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+
+    box-shadow: 7px 7px 0 var(--border-heavy);
+
+}
+
+
+.identity-card:nth-child(1) {
+
+    border-left: 10px solid #A40BA2;
+
+}
+
+
+.identity-card:nth-child(2) {
+
+    border-left: 10px solid #10B981;
+
+}
+
+
+.identity-icon {
+
+    width: 62px;
+
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    background: var(--primary);
+
+    border: 4px solid var(--border-heavy);
+
+    box-shadow: 5px 5px 0 var(--border-heavy);
+
+    font-size: 1.5rem;
+
+}
+
+
+.identity-card span {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: .75rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: var(--text-light);
+
+}
+
+
+.identity-card h3 {
+
+    margin: 0;
+
+    font-size: 1.25rem;
+
+    font-weight: 900;
+
+    color: var(--text);
+
+}
+
+
+/* ==========================================================
+   PROFILE STATISTICS
+   ========================================================== */
+
+.profile-stats {
+
+    margin-top: 0;
+
+}
+
+
+/* Preserve dashboard stat-card style */
+
+.profile-stats .stat-card {
+
+    min-height: 190px;
+
+}
+
+
+.profile-stats .stat-card p {
+
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: .82rem;
+
+    line-height: 1.5;
+
+}
+
+
+/* ==========================================================
+   STAT ICON COLORS
+   ========================================================== */
+
+.profile-stats .stat-card:nth-child(1) {
+
+    border-left: 10px solid #A40BA2;
+
+}
+
+
+.profile-stats .stat-card:nth-child(2) {
+
+    border-left: 10px solid #EF4444;
+
+}
+
+
+.profile-stats .stat-card:nth-child(3) {
+
+    border-left: 10px solid #3B82F6;
+
+}
+
+
+.profile-stats .stat-card:nth-child(4) {
+
+    border-left: 10px solid #10B981;
+
+}
+
+
+/* ==========================================================
+   REGISTRATIONS SECTION
+   ========================================================== */
+
+.registrations-section {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+.section-heading {
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+}
+
+
+.section-label {
+
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    font-size: .75rem;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    color: var(--secondary);
+
+}
+
+
+.section-heading h2 {
+
+    margin: 0;
+
+    font-size: 2rem;
+
+    font-weight: 900;
+
+    color: var(--text);
+
+}
+
+
+.section-heading p {
+
+    margin-top: 8px;
+
+    color: var(--text-light);
+
+    font-size: .9rem;
+
+}
+
+
+/* ==========================================================
+   REGISTRATION TABLE
+   ========================================================== */
+
+.registration-table-card {
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+
+    box-shadow: 8px 8px 0 var(--border-heavy);
+
+    overflow: hidden;
+}
+
+
+.registration-table-card table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+
+.registration-table-card th {
+
+    background: var(--primary);
+
+    color: var(--text);
+
+    padding: 17px 24px;
+
+    text-align: left;
+
+    font-size: .78rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    border-bottom: 4px solid var(--border-heavy);
+}
+
+
+.registration-table-card th:nth-child(1) {
+    width: 40%;
+}
+
+
+.registration-table-card th:nth-child(2) {
+    width: 35%;
+}
+
+
+.registration-table-card th:nth-child(3) {
+    width: 25%;
+}
+
+
+.registration-table-card td {
+
+    padding: 18px 24px;
+
+    background: white;
+
+    border-bottom: 2px solid #111;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    color: var(--text);
+}
+
+
+.registration-table-card tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+.registration-table-card tbody tr:hover td {
+
+    background: #fffbea;
+}
+
+/* ==========================================================
+   REGISTRATION STATUS
+   ========================================================== */
+
+.registration-status {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-width: 90px;
+
+    padding: 6px 12px;
+
+    border: 3px solid var(--border-heavy);
+
+    box-shadow: 3px 3px 0 var(--border-heavy);
+
+    font-size: .7rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: .6px;
+}
+
+
+.registration-status.active {
+
+    background: #10B981;
+
+    color: #000;
+}
+
+
+.registration-status.approved {
+
+    background: #10B981;
+
+    color: #000;
+}
+
+
+.registration-status.pending {
+
+    background: #FFD60A;
+
+    color: #000;
+}
+
+
+.registration-status.rejected {
+
+    background: #EF4444;
+
+    color: #fff;
+}
+
+
+/* ==========================================================
+   EMPTY STATE
+   ========================================================== */
+
+.profile-empty-state {
+
+    padding: 55px 20px !important;
+
+    text-align: center;
+
+    color: var(--text-light) !important;
+
+}
+
+
+.profile-empty-state i {
+
+    margin-right: 8px;
+
+    color: var(--secondary);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+   ========================================================== */
+
+@media (max-width: 900px) {
+
+    .profile-hero-content {
+
+        align-items: flex-start;
+
+    }
+
+
+    .profile-summary {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .profile-avatar {
+
+        width: 95px;
+
+        height: 95px;
+
+        font-size: 2.4rem;
+
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .profile-hero {
+
+        padding: 28px;
+
+    }
+
+
+    .profile-hero-content {
+
+        flex-direction: column-reverse;
+
+        align-items: flex-start;
+
+    }
+
+
+    .profile-hero h1 {
+
+        font-size: 2rem;
+
+    }
+
+
+    .profile-avatar {
+
+        width: 85px;
+
+        height: 85px;
+
+        font-size: 2rem;
+
+    }
+
+
+    .section-heading {
+
+        align-items: flex-start;
+
+    }
+
+
+    .registration-table-card {
+
+        overflow-x: auto;
+
+    }
+
+
+    .registration-table-card table {
+
+        min-width: 650px;
+
+    }
+
+}
+
+/* ==========================================================
+   PROFILE PAGE SPACING REFINEMENT
+   ========================================================== */
+
+/*
+   Profile layout rhythm:
+   HERO
+      ↓ 32px
+   ROLE / CERTIFICATE
+      ↓ 32px
+   STATISTICS
+      ↓ 42px
+   REGISTRATIONS
+*/
+
+.profile-page-container {
+    gap: 0;
+}
+
+
+/* HERO → ROLE / CERTIFICATE */
+.profile-hero {
+    margin-bottom: 32px;
+}
+
+
+/* ROLE / CERTIFICATE ROW */
+.profile-summary {
+    margin-top: 0;
+    margin-bottom: 32px;
+    gap: 28px;
+}
+
+
+/* STATISTICS */
+.profile-stats {
+    margin-top: 0;
+    margin-bottom: 42px;
+    gap: 18px;
+}
+
+
+/* Keep the current card sizing */
+.profile-stats .stat-card {
+    min-height: 175px;
+    padding: 22px;
+}
+
+
+/* STATISTICS → REGISTRATIONS */
+.registrations-section {
+    margin-top: 0;
+    margin-bottom: 40px;
+}
+
+
+/* Heading / table separation */
+.registrations-section .section-heading {
+    margin-bottom: 4px;
+}
+
+.registrations-section .registration-table-card {
+    margin-top: 0;
+}
+
+
+/* ==========================================================
+   CERTIFICATE STATUS
+   ========================================================== */
+
+.certificate-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 15px;
+
+    background: var(--primary);
+
+    border: 3px solid var(--border-heavy);
+
+    box-shadow: 4px 4px 0 var(--border-heavy);
+
+    font-size: .75rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+
+/* Eligible */
+
+.certificate-status.eligible {
+    background: #10B981;
+}
+
+
+/* Not eligible */
+
+.certificate-status.not-eligible {
+    background: #EF4444;
+}
+
+
+/* Pending */
+
+.certificate-status.pending {
+    background: var(--primary);
+}
+/* ==========================================================
+   PROFILE PAGE — SECTION SPACING
+   ========================================================== */
+
+/* Space below the hero */
+.profile-page .hero-section,
+.hero-section {
+    margin-bottom: 32px;
+}
+
+
+/* Space between major profile sections */
+.profile-section {
+    margin-bottom: 32px;
+}
+
+
+/* Space below the role / certificate row */
+.profile-summary,
+.profile-info-grid,
+.profile-top-row {
+    margin-bottom: 32px;
+}
+
+
+/* Space between the stat cards and the next section */
+.stats-grid {
+    margin-bottom: 38px;
+}
+
+
+/* Registration section */
+.registration-section,
+.registrations-section {
+    margin-top: 32px;
+    margin-bottom: 40px;
+}
+
+
+/* Headings such as "PARTICIPATION" */
+.section-header {
+    margin-bottom: 20px;
+}
+
+
+/* Prevent sections from visually touching */
+main > section {
+    margin-bottom: 32px;
+}
+
+
+/* Keep the final section from creating unnecessary bottom space */
+main > section:last-child {
+    margin-bottom: 0;
+}

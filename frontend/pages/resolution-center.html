@@ -1,0 +1,269 @@
+<div class="resolution-center">
+
+    <!-- =========================================================
+         DELEGATE RESOLUTION VIEW
+         ========================================================= -->
+    <section id="resolutionDelegateView" class="resolution-view">
+
+        <!-- Section Header -->
+        <div class="resolution-section-header">
+            <div>
+                <span class="section-eyebrow">DEBATE WORKSPACE</span>
+                <h2>Resolution Center</h2>
+                <p>
+                    Draft, develop and submit resolutions for committee review.
+                </p>
+            </div>
+
+            <button
+                id="newResolutionBtn"
+                class="resolution-new-btn"
+                type="button"
+            >
+                <i class="fa-solid fa-plus"></i>
+                <span>New Resolution</span>
+            </button>
+        </div>
+
+
+        <!-- Main Resolution Workspace -->
+        <div class="resolution-workspace">
+
+            <!-- =================================================
+                 LEFT: RESOLUTION LIST
+                 ================================================= -->
+            <aside class="resolution-list-panel">
+
+                <div class="resolution-list-header">
+                    <div>
+                        <span class="panel-label">YOUR WORK</span>
+                        <h3>Resolutions</h3>
+                    </div>
+
+                    <span class="resolution-list-icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </span>
+                </div>
+
+                <div
+                    id="resolutionList"
+                    class="resolution-list"
+                >
+                    <div class="empty-feed">
+                        No resolutions available.
+                    </div>
+                </div>
+
+            </aside>
+
+
+            <!-- =================================================
+                 RIGHT: RESOLUTION EDITOR
+                 ================================================= -->
+            <section class="resolution-editor-panel">
+
+                <div class="resolution-editor-header">
+
+                    <div>
+                        <span class="panel-label">DOCUMENT EDITOR</span>
+                        <h3>Resolution Draft</h3>
+                    </div>
+
+                    <span class="draft-indicator">
+                        <span class="draft-dot"></span>
+                        Draft
+                    </span>
+
+                </div>
+
+
+                <!-- Title -->
+                <div class="resolution-form-group">
+
+                    <label for="resolutionTitle">
+                        Resolution Title
+                    </label>
+
+                    <input
+                        id="resolutionTitle"
+                        type="text"
+                        placeholder="Enter a title for your resolution..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <!-- Content -->
+                <div class="resolution-form-group">
+
+                    <label for="resolutionContent">
+                        Resolution Content
+                    </label>
+
+                    <textarea
+                        id="resolutionContent"
+                        rows="12"
+                        placeholder="Write the operative content of your resolution..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     PARTICIPANTS
+                     ================================================= -->
+                <div class="resolution-participants">
+
+                    <!-- Sponsors -->
+                    <div class="participant-section">
+
+                        <div class="participant-section-header">
+
+                            <div>
+                                <span class="participant-label">
+                                    SPONSORS
+                                </span>
+
+                                <h4>Resolution Sponsors</h4>
+                            </div>
+
+                            <button
+                                id="becomeSponsorBtn"
+                                class="participant-action-btn"
+                                type="button"
+                            >
+                                <i class="fa-solid fa-handshake"></i>
+                                Become Sponsor
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="sponsorList"
+                            class="participant-list"
+                        >
+                            <div class="empty-feed">
+                                No Sponsors
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Signatories -->
+                    <div class="participant-section">
+
+                        <div class="participant-section-header">
+
+                            <div>
+                                <span class="participant-label">
+                                    SIGNATORIES
+                                </span>
+
+                                <h4>Resolution Signatories</h4>
+                            </div>
+
+                            <button
+                                id="becomeSignatoryBtn"
+                                class="participant-action-btn"
+                                type="button"
+                            >
+                                <i class="fa-solid fa-signature"></i>
+                                Become Signatory
+                            </button>
+
+                        </div>
+
+                        <div
+                            id="signatoryList"
+                            class="participant-list"
+                        >
+                            <div class="empty-feed">
+                                No Signatories
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     EDITOR ACTIONS
+                     ================================================= -->
+                <div class="resolution-editor-actions">
+
+                    <button
+                        id="saveResolutionBtn"
+                        class="secondary-btn"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-floppy-disk"></i>
+                        Save Draft
+                    </button>
+
+                    <button
+                        id="submitResolutionBtn"
+                        class="primary-btn"
+                        type="button"
+                    >
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Submit Resolution
+                    </button>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         CHAIR VIEW
+         ========================================================= -->
+    <section
+        id="resolutionChairView"
+        class="resolution-view hidden"
+    >
+
+        <!-- Chair Header -->
+        <div class="resolution-section-header chair-header">
+
+            <div>
+                <span class="section-eyebrow">
+                    CHAIR CONTROL
+                </span>
+
+                <h2>Resolution Review</h2>
+
+                <p>
+                    Review submitted resolutions and manage their workflow.
+                </p>
+            </div>
+
+            <div
+                id="pendingResolutionCount"
+                class="active-resolution-count"
+            >
+                0 Active
+            </div>
+
+        </div>
+
+
+        <!-- Pending / Active Resolutions -->
+        <div
+            id="pendingResolutionList"
+            class="pending-resolution-list"
+        >
+            <div class="empty-feed">
+                No submitted resolutions.
+            </div>
+        </div>
+
+    </section>
+
+</div>

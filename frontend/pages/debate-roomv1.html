@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Debate Room | FIC FURY</title>
+
+<link rel="preconnect"
+      href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet">
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<link rel="stylesheet"
+      href="../css/assets/theme.css">
+<link rel="stylesheet"
+      href="../css/assets/layout.css">
+<link rel="stylesheet"
+      href="../css/assets/components.css">
+<link rel="stylesheet"
+      href="../css/result-center.css"> 
+<link rel="stylesheet"
+      href="../css/timeline-center.css"> 
+<link rel="stylesheet"
+      href="../css/debate-room.css">
+
+
+</head>
+
+<body>
+
+<div class="debate-layout">
+
+    <header class="debate-header">
+
+<button id="exitDebateBtn" class="secondary-btn">
+    <i class="fa-solid fa-right-from-bracket"></i>
+    Exit Debate
+</button>
+
+        <div class="header-center">
+
+            <h1>
+
+                Debate Room
+
+            </h1>
+
+<span
+    id="sessionBadge"
+    class="session-status waiting">
+
+    WAITING
+
+</span>
+
+        </div>
+
+        <div
+            id="sessionTimer"
+            class="session-timer">
+
+            00:00:00
+
+        </div>
+
+    </header>
+
+
+<main class="debate-content">
+
+    <!-- ========================================= -->
+    <!-- LEFT SIDEBAR -->
+    <!-- ========================================= -->
+
+    <aside class="left-panel">
+
+        <!-- Committee -->
+
+        <section class="committee-card">
+
+            <h2>Committee</h2>
+
+            <div class="info-item">
+
+                <span>Name</span>
+
+                <strong id="committeeName">Loading...</strong>
+
+            </div>
+
+            <div class="info-item">
+
+                <span>Chair</span>
+
+                <strong id="chairName">Loading...</strong>
+
+            </div>
+
+            <div class="info-item">
+
+                <span>Mode</span>
+
+                <strong id="committeeMode">Loading...</strong>
+
+            </div>
+
+        </section>
+
+        <!-- Speaker Queue -->
+
+        <section class="speaker-queue-card">
+
+            <div class="panel-header">
+
+                <h2>Speaker Queue</h2>
+
+                <span id="queueCount">0 Speakers</span>
+
+            </div>
+
+            <div class="current-speaker">
+
+                <span class="speaker-label">
+
+                    Current Speaker
+
+                </span>
+
+                <h3 id="currentSpeakerName">
+
+                    No Active Speaker
+
+                </h3>
+
+                <div
+                    id="speakerTimer"
+                    class="speaker-timer">
+
+                    --:--
+
+                </div>
+
+            </div>
+
+            <div class="next-speakers">
+
+                <h4>Next Speakers</h4>
+
+                <ul id="speakerQueueList">
+
+                    <li class="empty">
+
+                        No speakers in queue.
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </section>
+
+        <!-- Announcements -->
+
+        <section class="announcement-card">
+
+            <div class="panel-header">
+
+                <h2>Announcements</h2>
+
+            </div>
+
+            <div id="announcementList">
+
+                <div class="announcement">
+
+                    No announcements yet.
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+    </aside>
+
+    <!-- ========================================= -->
+    <!-- DEBATE WORKSPACE -->
+    <!-- ========================================= -->
+
+    <section id="debateWorkspace"
+             class="debate-workspace">
+
+        <div class="panel-header">
+
+            <h2>
+
+                Debate Workspace
+
+            </h2>
+
+        </div>
+
+        <!-- Tabs -->
+
+        <div class="debate-tabs">
+
+            <button
+                class="debate-tab active"
+                data-workspace="motions">
+
+                Motions
+
+            </button>
+
+            <button
+                class="debate-tab"
+                data-workspace="resolutions">
+
+                Resolutions
+
+            </button>
+
+            <button
+                class="debate-tab"
+                data-workspace="amendments">
+
+                Amendments
+
+            </button>
+
+            <button
+                class="debate-tab"
+                data-workspace="voting">
+
+                Voting
+
+            </button>
+
+            <button
+                class="debate-tab"
+                data-workspace="results">
+
+                Results
+
+            </button>
+            <button
+                class="debate-tab"
+                data-workspace="timeline">
+
+                Timeline
+
+            </button>
+        </div>
+
+        <!-- ========================= -->
+        <!-- MOTIONS -->
+        <!-- ========================= -->
+
+        <div
+
+    id="motionWorkspace"
+    class="workspace active">
+
+    <div class="workspace-header">
+
+        <h3>
+
+            Motion Feed
+
+        </h3>
+
+        <span id="motionCount">
+
+            0 Motions
+
+        </span>
+
+    </div>
+
+    <div id="motionFeed">
+
+    </div>
+
+</div>
+
+        
+
+        <!-- ========================= -->
+        <!-- RESOLUTIONS -->
+        <!-- ========================= -->
+
+        <div
+            id="resolutionWorkspace"
+            class="workspace hidden">
+
+<div id="resolutionDelegateView"
+     class="resolution-layout">
+
+     <!-- LEFT -->
+
+    <div class="resolution-sidebar">
+
+        <div class="workspace-header">
+
+            <h3>Resolutions Center</h3>
+
+            <button
+                id="newResolutionBtn"
+                class="secondary-btn">
+
+                <i class="fa-solid fa-plus"></i>
+
+                New
+
+            </button>
+
+        </div>
+
+        <div id="resolutionList"
+             class="resolution-list">
+
+            <div class="empty-feed">
+
+                No resolutions yet.
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="resolution-details">
+
+        <div class="resolution-editor">
+
+            <div class="form-group">
+
+                <label>Title</label>
+
+                <input
+                    id="resolutionTitle"
+                    type="text">
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Content</label>
+
+                <textarea
+                    id="resolutionContent"
+                    rows="14"></textarea>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    id="saveResolutionBtn"
+                    class="secondary-btn">
+
+                    Save Draft
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div id="resolutionInfo">
+
+            <h3>Sponsors</h3>
+
+            <div id="sponsorList">
+
+                None
+
+            </div>
+
+            <button
+                id="becomeSponsorBtn"
+                class="secondary-btn">
+
+                Become Sponsor
+
+            </button>
+
+            <hr>
+
+            <h3>Signatories</h3>
+
+            <div id="signatoryList">
+
+                None
+
+            </div>
+
+            <button
+                id="becomeSignatoryBtn"
+                class="secondary-btn">
+
+                Become Signatory
+
+            </button>
+
+            <hr>
+
+            <button
+                id="submitResolutionBtn"
+                class="primary-btn">
+
+                Submit Resolution
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="resolutionChairView"
+     class="resolution-chair-view hidden">
+
+    <div class="workspace-header">
+
+        <h3>Resolution Review</h3>
+
+        <span id="pendingResolutionCount">
+
+            0 Pending
+
+        </span>
+
+    </div>
+
+    <div id="pendingResolutionList"
+         class="resolution-review-list">
+
+    </div>
+
+</div>
+
+</div>
+
+<div
+    id="votingWorkspace"
+    class="workspace">
+
+    <div class="workspace-header">
+
+        <h2>Resolution Voting</h2>
+
+        <p>
+            Vote on resolutions that have entered the voting stage.
+        </p>
+
+    </div>
+
+    <div id="votingContainer">
+
+    </div>
+
+</div>       
+
+        <!-- ========================= -->
+        <!-- AMENDMENTS -->
+        <!-- ========================= -->
+
+<div
+    id="amendmentWorkspace"
+    class="workspace hidden">
+
+    <div class="workspace-header">
+
+        <h2>Resolution Amendments</h2>
+
+        <p>
+            Review and propose amendments to approved resolutions.
+        </p>
+
+    </div>
+
+    <div id="amendmentContainer">
+
+    </div>
+
+</div>
+
+
+<!-- ========================= -->
+<!-- RESULTS -->
+<!-- ========================= -->
+
+<div
+    id="resultsWorkspace"
+    class="workspace hidden">
+
+    <div class="workspace-header">
+
+        <h2>
+
+            Resolution Results
+
+        </h2>
+
+        <p>
+
+            Review completed resolutions and their final outcomes.
+
+        </p>
+
+    </div>
+
+    <div id="resultsContainer">
+
+        <div class="empty-feed">
+
+            No completed resolutions yet.
+
+        </div>
+
+    </div>
+
+</div>
+
+<div
+    id="timelineWorkspace"
+    class="workspace hidden">
+
+    <div class="workspace-header">
+
+        <h2>
+
+            Debate Timeline
+
+        </h2>
+
+        <p>
+
+            Chronological history of debate activities.
+
+        </p>
+
+    </div>
+
+    <div id="timelineContainer">
+
+    </div>
+
+</div>
+    </section>
+
+
+
+<section id="rolePanel">
+
+    <div id="delegatePanel" class="role-panel">
+
+        <!-- ========================= -->
+        <!-- Raise Motion -->
+        <!-- ========================= -->
+
+        <section class="delegate-card">
+
+            <div class="panel-header">
+
+                <h2>
+
+                    Raise Motion
+
+                </h2>
+
+            </div>
+
+  <form id="motionForm">
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>Motion Type</label>
+
+                    <select id="motionType">
+
+                        <option value="">
+                            Select Motion
+                        </option>
+
+<option value="MODERATED_CAUCUS">
+    Moderated Caucus
+</option>
+
+<option value="UNMODERATED_CAUCUS">
+    Unmoderated Caucus
+</option>
+
+<option value="EXTENSION_OF_DEBATE">
+    Extension of Debate
+</option>
+
+<option value="CLOSURE_OF_DEBATE">
+    Closure of Debate
+</option>
+
+<option value="INTRODUCE_WORKING_PAPER">
+    Introduce Working Paper
+</option>
+
+<option value="INTRODUCE_DRAFT_RESOLUTION">
+    Introduce Draft Resolution
+</option>
+
+                    </select>
+
+
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Duration</label>
+
+                    <select id="motionDuration">
+
+<option value="5">5 Minutes</option>
+<option value="10">10 Minutes</option>
+<option value="15">15 Minutes</option>
+<option value="20">20 Minutes</option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Priority</label>
+
+                    <select id="motionPriority">
+
+<option value="NORMAL">Normal</option>
+<option value="HIGH">High</option>
+<option value="EMERGENCY">Emergency</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    Purpose
+
+                </label>
+
+                <textarea
+                    id="motionPurpose"
+                    rows="5"
+                    placeholder="Explain why this motion should be considered..."></textarea>
+
+            </div>
+
+            <div class="form-actions">
+
+                <button
+                    type="submit"
+                    class="primary-btn">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Raise Motion
+
+                </button>
+
+            </div>
+
+        </form>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- Speaker Request -->
+        <!-- ========================= -->
+
+        <section class="delegate-card">
+
+            <div class="panel-header">
+
+                <h2>
+
+                    Speaker Request
+
+                </h2>
+
+            </div>
+
+           
+        <section class="speaker-request-card">
+
+   
+
+    <div class="speaker-status">
+
+        <div class="status-row">
+            <span>Status</span>
+            <strong id="speakerRequestStatus">
+                Not in Queue
+            </strong>
+        </div>
+
+        <div class="status-row">
+            <span>Queue Position</span>
+            <strong id="queuePosition">
+                —
+            </strong>
+        </div>
+
+        <div class="status-row">
+            <span>Current Speaker</span>
+            <strong id="currentLiveSpeaker">
+                Waiting...
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="speaker-actions">
+
+        <button id="requestSpeakerBtn"
+                class="primary-btn">
+
+            <i class="fa-solid fa-microphone"></i>
+
+            Request to Speak
+
+        </button>
+
+        <button id="withdrawSpeakerBtn"
+                class="danger-btn">
+
+            <i class="fa-solid fa-user-minus"></i>
+
+            Withdraw Request
+
+        </button>
+
+    </div>
+
+</section>
+
+        </section>
+
+    </div>
+
+</div>
+<section id="chairPanel" class="role-panel hidden">
+
+    <div class="chair-grid">
+
+        <!-- ========================= -->
+        <!-- Session Controls -->
+        <!-- ========================= -->
+
+        <section class="chair-card">
+
+            <div class="panel-header">
+
+                <h2>Session Controls</h2>
+
+            </div>
+
+            <div class="session-status-container">
+
+    <span>
+
+        Status:
+
+    </span>
+
+    <strong id="chairSessionStatus">
+
+        DRAFT
+
+    </strong>
+
+    <span
+        id="sessionBadge"
+        class="session-status waiting">
+
+        DRAFT
+
+    </span>
+
+</div>
+
+<div class="session-actions">
+
+    <button
+        id="startSessionBtn"
+        class="primary-btn">
+
+        Start Session
+
+    </button>
+
+    <button
+        id="stopSessionBtn"
+        class="danger-btn">
+
+        Stop Session
+
+    </button>
+
+</div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- Speaker Controls -->
+        <!-- ========================= -->
+
+        <section class="chair-card">
+
+            <div class="panel-header">
+
+                <h2>Speaker Controls</h2>
+
+            </div>
+
+            <div class="chair-actions">
+
+    <button id="startSpeakerBtn" class="primary-btn">
+        <i class="fa-solid fa-play"></i>
+        Start
+    </button>
+
+    <button id="pauseSpeakerBtn" class="secondary-btn">
+        <i class="fa-solid fa-pause"></i>
+        Pause
+    </button>
+
+    <button id="resumeSpeakerBtn" class="secondary-btn">
+        <i class="fa-solid fa-forward"></i>
+        Resume
+    </button>
+
+    <button id="extendTimeBtn" class="secondary-btn">
+        <i class="fa-solid fa-clock"></i>
+        +30 Seconds
+    </button>
+
+    <button id="skipSpeakerBtn" class="warning-btn">
+        <i class="fa-solid fa-forward-step"></i>
+        Skip
+    </button>
+
+    <button id="completeSpeakerBtn" class="danger-btn">
+        <i class="fa-solid fa-check"></i>
+        Complete
+    </button>
+
+</div>
+
+        </section>
+
+        <!-- ========================= -->
+        <!-- Announcements -->
+        <!-- ========================= -->
+
+        <section class="chair-card">
+
+            <div class="panel-header">
+
+                <h2>Announcements</h2>
+
+            </div>
+
+<div class="form-group">
+
+    <label>Title</label>
+
+    <input
+        id="announcementTitle"
+        type="text"
+        placeholder="Announcement title">
+
+</div>
+
+<div class="form-group">
+
+    <label>Message</label>
+
+    <textarea
+        id="announcementMessage"
+        rows="4"
+        placeholder="Write announcement..."></textarea>
+
+</div>
+
+<div class="form-actions">
+
+    <button
+        id="publishAnnouncementBtn"
+        class="primary-btn">
+
+        <i class="fa-solid fa-bullhorn"></i>
+
+        Publish Announcement
+
+    </button>
+
+</div>
+
+        </section>
+
+    </div>
+
+    <!-- ======================================== -->
+    <!-- Motion Review -->
+    <!-- ======================================== -->
+
+    <section class="chair-card">
+
+        <div class="panel-header">
+
+            <h2>
+
+                Pending Motions
+
+            </h2>
+
+            <span id="pendingCount">
+
+                0 Pending
+
+            </span>
+
+        </div>
+
+        <div id="pendingMotionList">
+
+        </div>
+
+    </section>
+
+
+
+</div>
+</section>
+
+</main>
+<script src="../js/config.js"></script>
+<script src="../js/debate-utils.js"></script>
+
+<script src="../js/debate-api.js"></script>
+<script src="../js/speaker-queue.js"></script>
+<script src="../js/motion-panel.js"></script>
+<script src="../js/resolution-center.js"></script>
+<script src="../js/amendment-center.js"></script>
+<script src="../js/voting-center.js"></script>
+<script src="../js/results-center.js"></script>
+<script src="../js/timeline-center.js"></script>
+<script src="../js/debate-room.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+   

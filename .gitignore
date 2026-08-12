@@ -1,0 +1,66 @@
+# ==========================================================
+# FIC FURY — ROOT GITIGNORE
+# ==========================================================
+
+# Java / Maven
+backend/target/
+**/target/
+*.class
+*.jar
+
+# Maven generated files
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE / Editor
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# Local GitHub tooling/metadata
+.github/modernize/
+.github/
+
+# Java / JVM crash logs
+hs_err_pid*.log
+replay_pid*.log
+*.hprof
+
+# Environment / Secrets
+.env
+.env.*
+!.env.example
+
+application-local.properties
+application-local.yml
+secrets.properties
+secrets.yml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# Backend uploaded/generated files
+backend/uploads/
+backend/certificates/
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Node / frontend generated files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build / distribution
+dist/
+build/
+
+# Local development files
+*.local

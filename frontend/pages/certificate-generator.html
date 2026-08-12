@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Certificate Generator | FIC FURY</title>
+
+    <link rel="stylesheet"
+          href="../css/assets/layout.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/theme.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/components.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/responsive.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/forms.css">
+
+    <link rel="stylesheet"
+          href="../css/assets/sidebar.css">
+
+    <link rel="stylesheet"
+          href="../css/certificate-generator.css">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <div id="sidebar"></div>
+
+    <main class="main-content">
+
+        <div class="page-container">
+
+            <!-- HEADER -->
+            <section class="page-header">
+
+                <div>
+
+                    <span class="page-badge">
+                        <i class="fa-solid fa-certificate"></i>
+                        ADMIN TOOL
+                    </span>
+
+                    <h1>
+                        Certificate Generator
+                    </h1>
+
+                    <p>
+                        Generate certificates for eligible
+                        FIC FURY participants.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- CONFIGURATION -->
+            <section class="certificate-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            <i class="fa-solid fa-sliders"></i>
+                            Certificate Configuration
+                        </h2>
+
+                        <p>
+                            Select the committee, certificate
+                            type and recipients.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <!-- EVENT -->
+                    <div class="form-group">
+
+                        <label for="eventName">
+                            Event
+                        </label>
+
+                        <input
+                            type="text"
+                            id="eventName"
+                            value="FIC FURY 2026"
+                            placeholder="Event name">
+
+                    </div>
+
+
+                    <!-- COMMITTEE -->
+                    <div class="form-group">
+
+                        <label for="committeeSelect">
+                            Committee
+                        </label>
+
+                        <select id="committeeSelect">
+
+                            <option value="">
+                                Select committee
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- CERTIFICATE TYPE -->
+                    <div class="form-group">
+
+                        <label for="certificateType">
+                            Certificate Type
+                        </label>
+
+                        <select id="certificateType">
+
+                            <option value="">
+                                Select certificate type
+                            </option>
+
+                            <option value="DELEGATE">
+                                Delegate
+                            </option>
+
+                            <option value="CHAIRPERSON">
+                                Chairperson
+                            </option>
+
+                            <option value="BEST_DELEGATE">
+                                Best Delegate
+                            </option>
+
+                            <option value="OUTSTANDING_DELEGATE">
+                                Outstanding Delegate
+                            </option>
+
+                            <option value="HONORABLE_MENTION">
+                                Honorable Mention
+                            </option>
+
+                            <option value="PARTICIPATION">
+                                Participation
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECIPIENTS -->
+            <section class="certificate-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            <i class="fa-solid fa-users"></i>
+                            Eligible Recipients
+                        </h2>
+
+                        <p id="recipientSummary">
+                            Select a committee to load recipients.
+                        </p>
+
+                    </div>
+
+                    <div class="recipient-actions">
+
+                        <button
+                            type="button"
+                            id="selectAllBtn"
+                            class="btn btn-outline">
+
+                            <i class="fa-solid fa-check-double"></i>
+                            Select All
+
+                        </button>
+
+                        <button
+                            type="button"
+                            id="clearAllBtn"
+                            class="btn btn-outline">
+
+                            <i class="fa-solid fa-xmark"></i>
+                            Clear
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="recipientList"
+                    class="recipient-list">
+
+                    <div class="empty-state">
+
+                        <i class="fa-solid fa-users"></i>
+
+                        <h3>
+                            No Committee Selected
+                        </h3>
+
+                        <p>
+                            Select a committee above to
+                            view eligible recipients.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+<!-- =========================================================
+     GENERATED CERTIFICATES
+========================================================= -->
+
+<section
+    id="generatedCertificatesSection"
+    class="certificate-panel generated-certificates-panel"
+    hidden>
+
+    <div class="panel-header">
+
+        <div>
+
+            <h2>
+                <i class="fa-solid fa-circle-check"></i>
+                Generated Certificates
+            </h2>
+
+            <p id="generatedCertificatesSummary">
+                Certificates generated successfully.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="generatedCertificatesList"
+        class="generated-certificates-list">
+
+        <!-- Generated certificate rows
+             will be inserted here by JavaScript -->
+
+    </div>
+
+</section>
+            <!-- ACTIONS -->
+            <section class="certificate-actions">
+
+                <button
+                    type="button"
+                    id="previewBtn"
+                    class="btn btn-primary">
+
+                    <i class="fa-solid fa-eye"></i>
+                    Preview Certificate
+
+                </button>
+
+                <button
+                    type="button"
+                    id="generateBtn"
+                    class="btn btn-success"
+                    disabled>
+
+                    <i class="fa-solid fa-certificate"></i>
+                    Generate Certificates
+
+                </button>
+
+            </section>
+
+
+            <!-- MESSAGE -->
+            <div
+                id="certificateMessage"
+                class="certificate-message"
+                hidden>
+            </div>
+
+        </div>
+
+
+        <div id="footer"></div>
+
+    </main>
+
+</div>
+<!-- =========================================================
+     CERTIFICATE PREVIEW MODAL
+========================================================= -->
+
+<div
+    id="certificatePreviewModal"
+    class="certificate-modal"
+    hidden>
+
+    <div class="certificate-modal-backdrop"></div>
+
+    <div class="certificate-modal-content">
+
+        <div class="certificate-modal-header">
+
+            <div>
+
+                <h2>
+                    <i class="fa-solid fa-eye"></i>
+                    Certificate Preview
+                </h2>
+
+                <p>
+                    Review the certificate before generating it.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="closePreviewBtn"
+                class="modal-close-btn"
+                aria-label="Close preview">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- CERTIFICATE -->
+        <div
+            id="certificatePreview"
+            class="certificate-preview">
+
+            <div class="certificate-border">
+
+                <div class="certificate-inner">
+
+                    <div class="certificate-logo">
+                        FIC FURY
+                    </div>
+
+
+                    <div class="certificate-subtitle">
+                        FICTION FURY
+                    </div>
+
+
+                    <div class="certificate-heading">
+                        CERTIFICATE
+                    </div>
+
+
+                    <div class="certificate-of">
+                        OF
+                    </div>
+
+
+                    <div
+                        id="previewCertificateType"
+                        class="certificate-type">
+
+                        PARTICIPATION
+
+                    </div>
+
+
+                    <div class="certificate-presented">
+                        This certificate is proudly presented to
+                    </div>
+
+
+                    <div
+                        id="previewRecipientName"
+                        class="certificate-recipient">
+
+                        Recipient Name
+
+                    </div>
+
+
+                    <div
+                        id="previewCharacter"
+                        class="certificate-character">
+
+                        Character Name
+
+                    </div>
+
+
+                    <div class="certificate-description">
+
+                        for outstanding participation in
+
+                    </div>
+
+
+                    <div
+                        id="previewEventName"
+                        class="certificate-event">
+
+                        FIC FURY 2026
+
+                    </div>
+
+
+                    <div
+                        id="previewCommitteeName"
+                        class="certificate-committee">
+
+                        Galactic Senate
+
+                    </div>
+
+
+                    <div class="certificate-footer">
+
+                        <div class="certificate-signature">
+
+                            <div class="signature-line"></div>
+
+                            <strong>
+                                FIC FURY
+                            </strong>
+
+                            <span>
+                                Organizer
+                            </span>
+
+                        </div>
+
+
+                        <div class="certificate-date">
+
+                            <div class="signature-line"></div>
+
+                            <strong>
+                                <span
+                                    id="previewDate">
+                                    August 9, 2026
+                                </span>
+                            </strong>
+
+                            <span>
+                                Date of Issue
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="previewCertificateNumber"
+                        class="certificate-number">
+
+                        Certificate No. — Preview
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="certificate-modal-actions">
+
+            <button
+                type="button"
+                id="cancelPreviewBtn"
+                class="btn btn-outline">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="button"
+                id="confirmPreviewBtn"
+                class="btn btn-primary">
+
+                <i class="fa-solid fa-check"></i>
+                Use This Design
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- COMPONENTS -->
+<script src="../js/component-loader.js"></script>
+
+<!-- CORE -->
+<script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/sidebar.js"></script>
+
+<!-- CERTIFICATE GENERATOR -->
+<script src="../js/certificate-generator.js"></script>
+
+<script>
+    requireLogin();
+</script>
+
+</body>
+
+</html>

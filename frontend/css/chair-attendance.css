@@ -1,0 +1,28 @@
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+}
+
+.container{
+    padding:30px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th,
+td{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+
+select{
+    padding:8px;
+}
+
+button{
+    padding:8px 12px;
+}

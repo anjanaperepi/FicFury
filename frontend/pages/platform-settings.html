@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Platform Settings | FIC FURY</title>
+
+<link rel="stylesheet" href="../css/platform-settings.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            ⚡ FIC FURY
+        </div>
+
+        <div class="admin-badge">
+            SYSTEM SETTINGS
+        </div>
+
+        <ul>
+
+            <li>📊 Dashboard</li>
+            <li>🏛 Committees</li>
+            <li>🎭 Characters</li>
+            <li>👥 Users</li>
+            <li>📈 Reports</li>
+            <li>🏆 Certificates</li>
+            <li>📚 Resources</li>
+
+            <li class="active">
+                ⚙ Settings
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- MAIN -->
+
+    <main class="main-content">
+
+        <section class="header-panel">
+
+            <div>
+
+                <h1>⚙ PLATFORM SETTINGS</h1>
+
+                <p>
+                    Configure every aspect of the FIC FURY platform.
+                </p>
+
+            </div>
+
+            <button class="save-btn">
+                Save Changes
+            </button>
+
+        </section>
+
+        <!-- BRANDING -->
+
+        <section class="panel">
+
+            <h2>🎨 BRANDING</h2>
+
+            <div class="settings-grid">
+
+                <input
+                type="text"
+                placeholder="Platform Name"
+                value="FIC FURY">
+
+                <input
+                type="text"
+                placeholder="Tagline"
+                value="Choose Your World. Shape Its Destiny.">
+
+                <input type="file">
+
+                <input type="color">
+
+            </div>
+
+        </section>
+
+        <!-- EVENT SETTINGS -->
+
+        <section class="panel">
+
+            <h2>🏛 EVENT SETTINGS</h2>
+
+            <div class="settings-grid">
+
+                <input
+                type="text"
+                placeholder="Current Event Name">
+
+                <input
+                type="date">
+
+                <input
+                type="time">
+
+                <select>
+
+                    <option>Registration Status</option>
+
+                    <option>Open</option>
+
+                    <option>Closed</option>
+
+                    <option>Invite Only</option>
+
+                </select>
+
+            </div>
+
+        </section>
+
+        <!-- EMAIL TEMPLATES -->
+
+        <section class="panel">
+
+            <h2>📧 EMAIL SETTINGS</h2>
+
+            <textarea
+            placeholder="Registration Confirmation Template"></textarea>
+
+            <textarea
+            placeholder="Certificate Delivery Template"></textarea>
+
+        </section>
+
+        <!-- SECURITY -->
+
+        <section class="panel">
+
+            <h2>🔒 SECURITY SETTINGS</h2>
+
+            <div class="toggle-group">
+
+                <label>
+                    <input type="checkbox" checked>
+                    Enable Two-Factor Authentication
+                </label>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Enable Login Notifications
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Allow Public Profiles
+                </label>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Enable Audit Logs
+                </label>
+
+            </div>
+
+        </section>
+
+        <!-- ROLE PERMISSIONS -->
+
+        <section class="panel">
+
+            <h2>👥 ROLE PERMISSIONS</h2>
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Permission</th>
+                        <th>Delegate</th>
+                        <th>Chair</th>
+                        <th>Admin</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Submit Resolutions</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+
+                    <tr>
+                        <td>Create Crisis Events</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+
+                    <tr>
+                        <td>Manage Committees</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+        <!-- NOTIFICATIONS -->
+
+        <section class="panel">
+
+            <h2>🔔 NOTIFICATIONS</h2>
+
+            <div class="toggle-group">
+
+                <label>
+                    <input type="checkbox" checked>
+                    Email Notifications
+                </label>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Committee Alerts
+                </label>
+
+                <label>
+                    <input type="checkbox" checked>
+                    Crisis Notifications
+                </label>
+
+                <label>
+                    <input type="checkbox">
+                    Marketing Updates
+                </label>
+
+            </div>
+
+        </section>
+
+        <!-- INTEGRATIONS -->
+
+        <section class="panel">
+
+            <h2>🔗 INTEGRATIONS</h2>
+
+            <div class="settings-grid">
+
+                <input
+                type="text"
+                placeholder="Google Meet API Key">
+
+                <input
+                type="text"
+                placeholder="Discord Webhook URL">
+
+                <input
+                type="text"
+                placeholder="Email Service API Key">
+
+                <input
+                type="text"
+                placeholder="Cloud Storage Key">
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
