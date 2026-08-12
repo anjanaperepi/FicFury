@@ -1,7 +1,7 @@
 const CONFIG = {
 
 API_BASE_URL:
-"http://localhost:8080/api",
+"https://ficfury.onrender.com/api",
 
 TOKEN_KEY:
 "ficfury_token",
