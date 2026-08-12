@@ -1,116 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FIC FURY</title>
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>FIC FURY | Where Fictional Worlds Collide</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <meta
+        name="description"
+        content="FIC FURY is a fictional debate platform where characters from different universes come together to debate, negotiate and shape the story."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 
 <body>
 
-    <nav>
+<!-- =========================================================
+     NAVBAR
+========================================================= -->
 
-        <div class="logo">
-            ⚡ FIC FURY
-        </div>
+<header class="navbar" id="navbar">
 
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="pages/committees.html">Committees</a></li>
-            <li><a href="pages/rankings.html">Rankings</a></li>
-        </ul>
+<a href="./index.html" class="brand">
+    <img
+        src="./assets/ficfurylogov1.png"
+        alt="FIC FURY"
+        class="site-logo"
+    >
+</a>
 
-        <div class="auth-buttons">
-            <a href="pages/login.html">
-                <button class="login-btn">Login</button>
-            </a>
-
-            <a href="pages/register.html">
-                <button class="register-btn">Join FIC FURY</button>
-            </a>
-        </div>
-
+    <nav class="desktop-nav">
+        <a href="#universes">Universes</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#experience">Experience</a>
+        <a href="#committees">Committees</a>
     </nav>
 
-    <section class="hero">
+    <div class="nav-actions">
+        <a href="./pages/login.html" class="nav-login">Login</a>
+        <a href="./pages/register.html" class="btn btn-small">
+            Join the Fury
+        </a>
+    </div>
 
-        <div class="boom">
-            BOOM!
+    <button
+        class="mobile-menu-button"
+        id="mobileMenuButton"
+        aria-label="Open navigation"
+        aria-expanded="false"
+    >
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+</header>
+
+<!-- =========================================================
+     MOBILE NAVIGATION
+========================================================= -->
+
+<div class="mobile-nav" id="mobileNav">
+
+    <a href="#universes">Universes</a>
+    <a href="#how-it-works">How It Works</a>
+    <a href="#experience">Experience</a>
+    <a href="#committees">Committees</a>
+
+    <div class="mobile-nav-actions">
+        <a href="./pages/login.html">Login</a>
+
+        <a href="./pages/register.html" class="btn">
+            Join the Fury
+        </a>
+    </div>
+
+</div>
+
+
+<main>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-halftone"></div>
+
+    <div class="hero-content">
+
+        <div class="comic-badge">
+            <span class="badge-dot"></span>
+            THE FLOOR IS OPEN
         </div>
 
-        <h1>FIC FURY</h1>
+        <h1>
+            WHERE
+            <span>FICTIONAL</span>
+            WORLDS
+            <strong>COLLIDE.</strong>
+        </h1>
+
+        <p class="hero-description">
+            Choose your universe. Become your character.
+            Debate the impossible. Shape the story.
+        </p>
+
+        <div class="hero-actions">
+
+            <a href="./pages/register.html" class="btn btn-primary">
+                ENTER THE FURY
+                <span>→</span>
+            </a>
+
+            <a href="#committees" class="btn btn-outline">
+                EXPLORE COMMITTEES
+            </a>
+
+        </div>
+
+        <div class="hero-note">
+            <span>✦</span>
+            MUN-STYLE DEBATE. FICTIONAL UNIVERSES.
+        </div>
+
+    </div>
+
+
+    <!-- Decorative comic panel -->
+
+    <div class="hero-art">
+
+        <div class="comic-panel panel-back"></div>
+
+        <div class="comic-panel panel-main">
+
+            <div class="panel-top">
+                FIC FURY
+            </div>
+
+            <div class="speech-bubble">
+                <span>The floor</span>
+                is yours!
+            </div>
+
+            <div class="character-silhouette">
+                <div class="character-head"></div>
+                <div class="character-body"></div>
+            </div>
+
+            <div class="impact-word">
+                DEBATE!
+            </div>
+
+            <div class="panel-caption">
+                MAKE YOUR MOVE.
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="hero-scroll">
+        <span></span>
+        SCROLL TO ENTER
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     UNIVERSES
+========================================================= -->
+
+<section class="section universes" id="universes">
+
+    <div class="section-header">
+
+        <div>
+            <span class="eyebrow">01 / CHOOSE YOUR BATTLEFIELD</span>
+
+            <h2>
+                YOUR UNIVERSE.
+                <span>YOUR RULES.</span>
+            </h2>
+        </div>
+
+        <p>
+            Heroes, villains, wizards, scientists, detectives and
+            everyone in between. Pick a world and step into the debate.
+        </p>
+
+    </div>
+
+
+    <div class="universe-grid">
+
+        <article class="universe-card universe-superhero">
+
+            <div class="card-number">01</div>
+
+            <div class="universe-icon">⚡</div>
+
+            <div class="universe-content">
+                <span>POWER</span>
+                <h3>SUPERHEROES</h3>
+                <p>
+                    Assemble the world's greatest heroes and
+                    decide what happens next.
+                </p>
+            </div>
+
+            <div class="card-arrow">↗</div>
+
+        </article>
+
+
+        <article class="universe-card universe-fantasy">
+
+            <div class="card-number">02</div>
+
+            <div class="universe-icon">✦</div>
+
+            <div class="universe-content">
+                <span>MAGIC</span>
+                <h3>FANTASY</h3>
+                <p>
+                    Councils, kingdoms and impossible choices
+                    await beyond the realm.
+                </p>
+            </div>
+
+            <div class="card-arrow">↗</div>
+
+        </article>
+
+
+        <article class="universe-card universe-sci-fi">
+
+            <div class="card-number">03</div>
+
+            <div class="universe-icon">◈</div>
+
+            <div class="universe-content">
+                <span>FUTURE</span>
+                <h3>SCI-FI</h3>
+                <p>
+                    Explore worlds beyond our own and negotiate
+                    the future of civilization.
+                </p>
+            </div>
+
+            <div class="card-arrow">↗</div>
+
+        </article>
+
+
+        <article class="universe-card universe-sitcom">
+
+            <div class="card-number">04</div>
+
+            <div class="universe-icon">!</div>
+
+            <div class="universe-content">
+                <span>CHAOS</span>
+                <h3>SITCOMS</h3>
+                <p>
+                    Because sometimes the biggest debates
+                    happen around the smallest problems.
+                </p>
+            </div>
+
+            <div class="card-arrow">↗</div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     HOW IT WORKS
+========================================================= -->
+
+<section class="section how-it-works" id="how-it-works">
+
+    <div class="how-background-text">
+        FURY
+    </div>
+
+    <div class="section-header centered">
+
+        <span class="eyebrow">02 / THE RULES OF THE GAME</span>
 
         <h2>
-            ENTER THE WORLD OF
-            FICTIONAL DIPLOMACY
+            FOUR STEPS.
+            <span>ONE STORY.</span>
         </h2>
 
         <p>
-            Choose your committee. Forge alliances.
-            Rewrite history.
+            FIC FURY turns fictional worlds into living debate rooms.
         </p>
 
-        <div class="hero-buttons">
-            <button>JOIN THE FURY</button>
-            <button class="secondary">
-                EXPLORE COMMITTEES
-            </button>
-        </div>
+    </div>
 
-    </section>
 
-    <section class="committees">
+    <div class="steps">
 
-        <h2>FEATURED COMMITTEES</h2>
+        <article class="step">
 
-        <div class="committee-grid">
-
-            <div class="committee-card">
-                <h3>🧙 Wizard Council</h3>
-                <p>Protect magical realms.</p>
+            <div class="step-number">
+                01
             </div>
 
-            <div class="committee-card">
-                <h3>🚀 Galactic Senate</h3>
-                <p>Rule the stars.</p>
+            <div class="step-icon">
+                ◉
             </div>
 
-            <div class="committee-card">
-                <h3>⚔️ Kingdoms At War</h3>
-                <p>Conquer kingdoms.</p>
+            <h3>CHOOSE</h3>
+
+            <p>
+                Pick a committee and enter a universe you know
+                — or one you've never explored.
+            </p>
+
+            <div class="step-word">
+                CHOOSE!
             </div>
+
+        </article>
+
+
+        <article class="step">
+
+            <div class="step-number">
+                02
+            </div>
+
+            <div class="step-icon">
+                ◆
+            </div>
+
+            <h3>BECOME</h3>
+
+            <p>
+                Step into the shoes of a character and represent
+                their interests at the table.
+            </p>
+
+            <div class="step-word">
+                SUIT UP!
+            </div>
+
+        </article>
+
+
+        <article class="step">
+
+            <div class="step-number">
+                03
+            </div>
+
+            <div class="step-icon">
+                ✦
+            </div>
+
+            <h3>DEBATE</h3>
+
+            <p>
+                Make arguments, challenge ideas, negotiate
+                and fight for your position.
+            </p>
+
+            <div class="step-word">
+                OBJECTION!
+            </div>
+
+        </article>
+
+
+        <article class="step">
+
+            <div class="step-number">
+                04
+            </div>
+
+            <div class="step-icon">
+                ★
+            </div>
+
+            <h3>CHANGE</h3>
+
+            <p>
+                Draft resolutions, vote and leave your mark
+                on the fictional world.
+            </p>
+
+            <div class="step-word">
+                BAM!
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     EXPERIENCE
+========================================================= -->
+
+<section class="section experience" id="experience">
+
+    <div class="experience-header">
+
+        <span class="eyebrow">03 / INSIDE THE FURY</span>
+
+        <h2>
+            IT'S NOT JUST
+            <span>A DEBATE.</span>
+        </h2>
+
+        <p>
+            FIC FURY gives every committee the tools to turn
+            a fictional scenario into a full debate experience.
+        </p>
+
+    </div>
+
+
+    <div class="experience-grid">
+
+        <article class="experience-card experience-large">
+
+            <div class="experience-icon">◉</div>
+
+            <div>
+                <span>01</span>
+                <h3>DEBATE ROOMS</h3>
+                <p>
+                    Enter live committee sessions and make your voice heard.
+                </p>
+            </div>
+
+            <div class="experience-decoration">
+                SPEAK!
+            </div>
+
+        </article>
+
+
+        <article class="experience-card">
+
+            <div class="experience-icon">✎</div>
+
+            <span>02</span>
+            <h3>RESOLUTIONS</h3>
+            <p>
+                Turn ideas into formal proposals and put them to the test.
+            </p>
+
+        </article>
+
+
+        <article class="experience-card">
+
+            <div class="experience-icon">⚡</div>
+
+            <span>03</span>
+            <h3>AMENDMENTS</h3>
+            <p>
+                Challenge, modify and improve the ideas on the floor.
+            </p>
+
+        </article>
+
+
+        <article class="experience-card">
+
+            <div class="experience-icon">✓</div>
+
+            <span>04</span>
+            <h3>VOTING</h3>
+            <p>
+                Every decision can change the direction of the story.
+            </p>
+
+        </article>
+
+
+        <article class="experience-card">
+
+            <div class="experience-icon">▣</div>
+
+            <span>05</span>
+            <h3>RESOURCES</h3>
+            <p>
+                Access the information you need before entering the room.
+            </p>
+
+        </article>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FEATURED COMMITTEES
+========================================================= -->
+
+<section class="section committees" id="committees">
+
+    <div class="section-header">
+
+        <div>
+
+            <span class="eyebrow">04 / CURRENT BATTLEGROUNDS</span>
+
+            <h2>
+                CURRENTLY IN
+                <span>THE FURY.</span>
+            </h2>
 
         </div>
 
-    </section>
+        <a href="./pages/login.html" class="text-link">
+            VIEW ALL COMMITTEES →
+        </a>
 
-    <section class="how-it-works">
+    </div>
 
-        <h2>HOW IT WORKS</h2>
 
-        <div class="steps">
+    <div class="committee-grid" id="committeeGrid">
 
-            <div class="step">1️⃣ Register</div>
+        <!-- Loading state -->
 
-            <div class="step">2️⃣ Join Committee</div>
+        <div class="committee-loading">
+            <div class="loading-dot"></div>
+            <span>LOADING THE BATTLEFIELD...</span>
+        </div>
 
-            <div class="step">3️⃣ Debate</div>
+    </div>
 
-            <div class="step">4️⃣ Become Legend</div>
+</section>
+
+
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
+
+<section class="final-cta">
+
+    <div class="cta-halftone"></div>
+
+    <div class="cta-content">
+
+        <span class="eyebrow">
+            THE FLOOR IS YOURS
+        </span>
+
+        <h2>
+            READY TO
+            <span>ENTER THE FURY?</span>
+        </h2>
+
+        <p>
+            Pick a universe. Pick a character.
+            Then change the story.
+        </p>
+
+        <a href="./pages/register.html" class="btn btn-primary btn-large">
+            JOIN FIC FURY
+            <span>→</span>
+        </a>
+
+    </div>
+
+    <div class="cta-burst">
+        <span>FIGHT!</span>
+        <span>DEBATE!</span>
+        <span>DECIDE!</span>
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-main">
+
+        <div class="footer-brand">
+
+<a href="../index.html" class="brand">
+    <img
+        src="../assets/ficfurylogov1.png"
+        alt="FIC FURY"
+        class="site-logo"
+    >
+</a>
+
+            <p>
+                Where fictional worlds collide.
+            </p>
 
         </div>
 
-    </section>
 
-    <footer>
-        © 2026 FIC FURY
-    </footer>
+        <div class="footer-column">
+
+            <h4>EXPLORE</h4>
+
+            <a href="#universes">Universes</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#experience">Experience</a>
+            <a href="#committees">Committees</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>ACCOUNT</h4>
+
+            <a href="./pages/login.html">Login</a>
+            <a href="./pages/register.html">Register</a>
+
+        </div>
+
+
+        <div class="footer-column">
+
+            <h4>FIC FURY</h4>
+
+            <a href="./pages/about.html">About</a>
+            <a href=".//pages/contact.html">Contact</a>
+            <a href="./pages/terms.html">Terms</a>
+            <a href="./pages/privacy.html">Privacy</a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 FIC FURY. ALL RIGHTS RESERVED.
+        </span>
+
+        <span>
+            MADE FOR STORIES THAT FIGHT BACK.
+        </span>
+
+    </div>
+
+</footer>
+
+
+<script src="./js/index.js"></script>
 
 </body>
-
 </html>
