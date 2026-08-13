@@ -64,3 +64,4 @@ build/
 
 # Local development files
 *.local
+database-backup/

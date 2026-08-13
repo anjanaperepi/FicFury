@@ -1,309 +1,605 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+/* =========================================================
+   FIC FURY AUTHENTICATION
+   Shared styling for Login + Register
+   ========================================================= */
+
+:root {
+    --ff-red: #e53935;
+    --ff-red-dark: #c62828;
+    --ff-yellow: #ffd43b;
+    --ff-yellow-light: #ffe878;
+    --ff-black: #111111;
+    --ff-white: #ffffff;
+    --ff-cream: #fff8e7;
+    --ff-gray: #686868;
+    --ff-border: 4px solid var(--ff-black);
+    --ff-shadow: 8px 8px 0 var(--ff-black);
 }
 
-body{
-    min-height:100vh;
-    background:#FFD60A;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.auth-container{
-    min-height:100vh;
-    display:grid;
-    grid-template-columns:1fr 1fr;
+html {
+    min-height: 100%;
 }
 
-/* LEFT PANEL */
-
-.auth-banner{
-
-    background:#111;
-
-    color:white;
-
-    padding:80px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
+body {
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+    background: var(--ff-cream);
+    color: var(--ff-black);
 }
 
-.comic-badge{
+/* =========================================================
+   PAGE
+   ========================================================= */
 
-    display:inline-block;
-
-    width:max-content;
-
-    padding:12px 25px;
-
-    background:#FF3B30;
-
-    border:4px solid white;
-
-    font-weight:bold;
-
-    margin-bottom:30px;
+.auth-container {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(420px, 0.95fr) minmax(500px, 1.05fr);
+    background: var(--ff-cream);
 }
 
-.auth-banner h1{
+/* =========================================================
+   LEFT COMIC PANEL
+   ========================================================= */
 
-    font-family:'Bangers',cursive;
+.auth-banner {
+    position: relative;
+    overflow: hidden;
 
-    font-size:5rem;
+    min-height: 100vh;
+    padding: 60px;
 
-    line-height:1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    margin-bottom:20px;
+    background: var(--ff-red);
+    color: var(--ff-white);
+
+    border-right: var(--ff-border);
 }
 
-.auth-banner p{
-    line-height:1.8;
-    margin-bottom:40px;
+/* Comic rays / decorative shapes */
+
+.auth-banner::before {
+    content: "";
+    position: absolute;
+    width: 520px;
+    height: 520px;
+
+    top: -170px;
+    right: -190px;
+
+    background: var(--ff-yellow);
+
+    border: 8px solid var(--ff-black);
+
+    transform: rotate(12deg);
 }
 
-.banner-features{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+.auth-banner::after {
+    content: "POW!";
+    position: absolute;
+
+    right: 45px;
+    bottom: 55px;
+
+    font-family: "Bangers", cursive;
+    font-size: 7rem;
+    letter-spacing: 3px;
+
+    color: var(--ff-yellow);
+    -webkit-text-stroke: 5px var(--ff-black);
+
+    transform: rotate(-8deg);
 }
 
-.feature{
+/* =========================================================
+   LOGO
+   ========================================================= */
 
-    background:#222;
+.auth-brand {
+    position: relative;
+    z-index: 2;
 
-    padding:15px;
+    display: inline-flex;
+    width: fit-content;
 
-    border:3px solid white;
+    margin-bottom: 35px;
+
+    padding: 14px 18px;
+
+    background: var(--ff-white);
+
+    border: var(--ff-border);
+    box-shadow: 7px 7px 0 var(--ff-black);
 }
 
-/* RIGHT PANEL */
-
-.auth-card{
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    padding:60px;
-
-    background:white;
+.auth-brand img {
+    display: block;
+    width: 210px;
+    height: auto;
 }
 
-.logo{
+/* =========================================================
+   COMIC BADGE
+   ========================================================= */
 
-    font-family:'Bangers',cursive;
+.comic-badge {
+    position: relative;
+    z-index: 2;
 
-    font-size:3rem;
+    width: fit-content;
 
-    margin-bottom:20px;
+    padding: 8px 18px;
+
+    margin-bottom: 22px;
+
+    background: var(--ff-yellow);
+    color: var(--ff-black);
+
+    border: 4px solid var(--ff-black);
+    box-shadow: 5px 5px 0 var(--ff-black);
+
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    transform: rotate(-2deg);
 }
 
-.auth-card h2{
+/* =========================================================
+   HERO TEXT
+   ========================================================= */
 
-    font-family:'Bangers',cursive;
+.auth-banner h1 {
+    position: relative;
+    z-index: 2;
 
-    font-size:3rem;
+    max-width: 600px;
+
+    margin-bottom: 22px;
+
+    font-family: "Bangers", cursive;
+    font-size: clamp(4rem, 7vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: 2px;
+
+    color: var(--ff-yellow);
+
+    -webkit-text-stroke: 3px var(--ff-black);
+
+    text-shadow: 7px 7px 0 var(--ff-black);
 }
 
-.subtitle{
-    margin-bottom:30px;
+.auth-banner p {
+    position: relative;
+    z-index: 2;
+
+    max-width: 560px;
+
+    margin-bottom: 35px;
+
+    font-size: 1rem;
+    line-height: 1.8;
+
+    color: var(--ff-white);
 }
 
-.form-group{
-    margin-bottom:20px;
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.banner-features {
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+
+    gap: 12px;
+
+    max-width: 600px;
 }
 
-.form-group label{
-    display:block;
-    margin-bottom:8px;
-    font-weight:600;
+.feature {
+    padding: 14px 16px;
+
+    background: var(--ff-black);
+
+    border: 3px solid var(--ff-white);
+
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.35);
 }
 
-.form-group input{
+/* =========================================================
+   RIGHT AUTH AREA
+   ========================================================= */
 
-    width:100%;
+.auth-card {
+    min-height: 100vh;
 
-    padding:15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-    border:3px solid black;
+    padding: 55px clamp(35px, 7vw, 100px);
 
-    font-size:1rem;
+    background: var(--ff-cream);
 }
 
-.options{
+/* =========================================================
+   AUTH CARD HEADER
+   ========================================================= */
 
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:25px;
-
-    font-size:0.9rem;
+.auth-card > .logo {
+    margin-bottom: 25px;
 }
 
-.options a{
-    color:#FF3B30;
-    text-decoration:none;
+.auth-card > .logo img {
+    display: block;
+    width: 170px;
+    height: auto;
 }
 
-.login-btn{
+.auth-card h2,
+.auth-card h1 {
+    margin-bottom: 8px;
 
-    width:100%;
+    font-family: "Bangers", cursive;
+    font-size: clamp(3rem, 5vw, 4.8rem);
+    line-height: 0.95;
+    letter-spacing: 1px;
 
-    padding:15px;
-
-    background:#FF3B30;
-
-    color:white;
-
-    border:4px solid black;
-
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:0.3s;
+    color: var(--ff-black);
 }
 
-.login-btn:hover{
+.subtitle,
+.auth-card > p {
+    margin-bottom: 30px;
 
-    transform:translateY(-3px);
-
-    box-shadow:5px 5px black;
+    color: var(--ff-gray);
+    line-height: 1.6;
 }
 
-/* DIVIDER */
+/* =========================================================
+   FORMS
+   ========================================================= */
 
-.divider{
-
-    text-align:center;
-
-    margin:25px 0;
-
-    font-weight:bold;
+form {
+    width: 100%;
+    max-width: 620px;
 }
 
-/* SOCIAL BUTTONS */
-
-.social-buttons{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
+.form-group {
+    margin-bottom: 20px;
 }
 
-.google-btn,
-.discord-btn{
+.form-group label {
+    display: block;
 
-    padding:14px;
+    margin-bottom: 8px;
 
-    border:3px solid black;
-
-    background:white;
-
-    cursor:pointer;
-
-    font-weight:600;
+    font-size: 0.82rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
 }
 
-/* FOOTER */
+.form-group input,
+.auth-card form > input,
+.auth-card form select {
+    width: 100%;
 
-.auth-footer{
+    padding: 15px 16px;
 
-    text-align:center;
+    background: var(--ff-white);
 
-    margin-top:30px;
+    border: 3px solid var(--ff-black);
+
+    outline: none;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    color: var(--ff-black);
+
+    box-shadow: 4px 4px 0 var(--ff-black);
 }
 
-.auth-footer a{
-    color:#FF3B30;
-    text-decoration:none;
-    font-weight:bold;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    .auth-container{
-        grid-template-columns:1fr;
-    }
-
-    .auth-banner{
-        display:none;
-    }
-
-    .auth-card{
-        padding:40px;
-    }
-}
-
-select{
-    width:100%;
-    padding:15px;
-    border:3px solid #111;
-    background:white;
-    font-size:1rem;
-}
-
-.password-wrapper{
-    position:relative;
-}
-
-.password-wrapper input{
-    padding-right:55px;
-}
-
-.toggle-password{
-    position:absolute;
-    right:15px;
-    top:50%;
-    transform:translateY(-50%);
-    background:none;
-    border:none;
-    cursor:pointer;
-    font-size:1rem;
-    color:#555;
-}
-
-.toggle-password:hover{
-    color:#FF3B30;
-}
-
-.strength-text,
-.match-text{
-    margin-top:8px;
-    font-size:.9rem;
-    font-weight:600;
-}
-
-.terms{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin:20px 0;
-    font-size:.95rem;
-}
-
-.terms input{
-    width:18px;
-    height:18px;
+.form-group input::placeholder,
+.auth-card form > input::placeholder {
+    color: #999;
 }
 
 .form-group input:focus,
-.form-group select:focus{
-    outline:none;
-    border-color:#FF3B30;
-    box-shadow:0 0 0 4px rgba(255,59,48,.15);
+.auth-card form > input:focus,
+.auth-card form select:focus {
+    border-color: var(--ff-red);
+
+    box-shadow: 6px 6px 0 var(--ff-yellow);
 }
 
-.login-btn:disabled{
-    opacity:.7;
-    cursor:not-allowed;
+/* =========================================================
+   REGISTER FORM SPACING
+   ========================================================= */
+
+.auth-card form > input,
+.auth-card form > select {
+    margin-bottom: 15px;
+}
+
+/* =========================================================
+   OPTIONS
+   ========================================================= */
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 5px 0 25px;
+
+    font-size: 0.82rem;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    cursor: pointer;
+}
+
+.options input,
+.checkbox input {
+    accent-color: var(--ff-red);
+}
+
+.options a,
+.auth-link a,
+.auth-footer a {
+    color: var(--ff-red);
+
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.options a:hover,
+.auth-link a:hover,
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* =========================================================
+   CHECKBOX
+   ========================================================= */
+
+.checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin: 8px 0 22px;
+
+    font-size: 0.82rem;
+    line-height: 1.5;
+
+    cursor: pointer;
+}
+
+.checkbox input {
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.login-btn,
+.auth-card form button {
+    width: 100%;
+
+    padding: 16px 20px;
+
+    background: var(--ff-red);
+    color: var(--ff-white);
+
+    border: 4px solid var(--ff-black);
+
+    font-family: "Poppins", sans-serif;
+    font-size: 0.9rem;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    box-shadow: 7px 7px 0 var(--ff-black);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.login-btn:hover,
+.auth-card form button:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 4px 4px 0 var(--ff-black);
+}
+
+.login-btn:active,
+.auth-card form button:active {
+    transform: translate(6px, 6px);
+    box-shadow: 1px 1px 0 var(--ff-black);
+}
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin: 28px 0;
+
+    color: #777;
+
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+
+    height: 2px;
+
+    background: #d7d0c2;
+}
+
+/* =========================================================
+   SOCIAL BUTTONS
+   ========================================================= */
+
+.social-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.google-btn,
+.discord-btn {
+    padding: 13px 15px;
+
+    background: var(--ff-white);
+    color: var(--ff-black);
+
+    border: 3px solid var(--ff-black);
+
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 4px 4px 0 var(--ff-black);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.google-btn:hover,
+.discord-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--ff-black);
+}
+
+/* =========================================================
+   AUTH FOOTERS
+   ========================================================= */
+
+.auth-footer,
+.auth-link {
+    margin-top: 25px;
+
+    text-align: center;
+
+    font-size: 0.85rem;
+    color: var(--ff-gray);
+}
+
+/* =========================================================
+   REGISTER-SPECIFIC
+   ========================================================= */
+
+.auth-card .register-intro {
+    max-width: 560px;
+}
+
+.register-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 15px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .auth-container {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-banner {
+        min-height: auto;
+
+        padding: 50px 35px;
+
+        border-right: none;
+        border-bottom: var(--ff-border);
+    }
+
+    .auth-banner::after {
+        display: none;
+    }
+
+    .auth-banner h1 {
+        font-size: clamp(3.5rem, 12vw, 6rem);
+    }
+
+    .auth-card {
+        min-height: auto;
+        padding: 50px 35px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .auth-banner {
+        padding: 35px 25px;
+    }
+
+    .auth-card {
+        padding: 40px 22px;
+    }
+
+    .auth-brand img {
+        width: 160px;
+    }
+
+    .banner-features {
+        grid-template-columns: 1fr;
+    }
+
+    .register-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .social-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

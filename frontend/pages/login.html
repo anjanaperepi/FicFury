@@ -2,216 +2,202 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Login | FIC FURY</title>
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="../css/auth.css">
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
-    <link rel="stylesheet"
-          href="../css/login.css">
-
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
 
-<div class="login-page">
+<div class="auth-container">
 
-    <!-- LEFT PANEL -->
+    <!-- =====================================================
+         LEFT COMIC PANEL
+         ===================================================== -->
 
-    <section class="hero-panel">
+    <section class="auth-banner">
 
-        <div class="hero-overlay"></div>
+        <div class="auth-brand">
+            <img
+                src="../assets/ficfurylogov1.png"
+                alt="FIC FURY">
+        </div>
 
-        <div class="hero-content">
+        <div class="comic-badge">
+            Fiction. Fury. Diplomacy.
+        </div>
 
-<div class="hero-logo">
+        <h1>
+            WELCOME<br>
+            BACK
+        </h1>
 
-    <h2 class="logo-text">FIC FURY</h2>
+        <p>
+            Step back into the worlds you choose.
+            Represent characters, negotiate alliances,
+            challenge opposing factions and shape the story.
+        </p>
 
-</div>
+        <div class="banner-features">
 
-           <div class="hero-quote">
+            <div class="feature">
+                🏛 Join Committees
+            </div>
 
-    <span>MISSION</span>
+            <div class="feature">
+                🎭 Play Characters
+            </div>
 
-    <h1>WHERE FICTION MEETS DEBATE</h1>
+            <div class="feature">
+                ⚖ Debate & Negotiate
+            </div>
 
-    <p>
-        Enter legendary worlds, represent iconic characters,
-        negotiate alliances and shape history.
-    </p>
-
-</div>
+            <div class="feature">
+                🏆 Earn Recognition
+            </div>
 
         </div>
 
     </section>
 
-    <!-- RIGHT PANEL -->
 
-    <section class="login-panel">
+    <!-- =====================================================
+         LOGIN PANEL
+         ===================================================== -->
 
-        <div class="login-card">
+    <main class="auth-card">
 
-            <div class="brand">
-<h1 class="brand-title">
+        <div class="logo">
+            <img
+                src="../assets/ficfurylogov1.png"
+                alt="FIC FURY">
+        </div>
 
-    FIC <span>FURY</span>
+        <h2>LOGIN</h2>
 
-</h1>
+        <p class="subtitle">
+            Enter your credentials and get back into the action.
+        </p>
 
-                <h2>Welcome Back</h2>
 
-                <p>
+        <form id="loginForm">
 
-                    Sign in to continue your conference journey.
+            <div class="form-group">
 
-                </p>
+                <label for="email">
+                    Email Address
+                </label>
 
-            </div>
-
-            <form id="loginForm">
-
-                <div class="input-group">
-
-                    <label>
-
-                        Email Address
-
-                    </label>
-
-                    <div class="input-wrapper">
-
-                        <i class="fa-solid fa-envelope"></i>
-
-                        <input
-                                id="email"
-                                type="email"
-                                placeholder="Enter your email"
-                                required>
-
-                    </div>
-
-                </div>
-
-                <div class="input-group">
-
-                    <label>
-
-                        Password
-
-                    </label>
-
-                    <div class="input-wrapper">
-
-                        <i class="fa-solid fa-lock"></i>
-
-                        <input
-                                id="password"
-                                type="password"
-                                placeholder="Enter your password"
-                                required>
-
-                        <button
-                                type="button"
-                                id="togglePassword"
-                                class="password-toggle">
-
-                            <i class="fa-solid fa-eye"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div class="login-options">
-
-                    <label class="remember-me">
-
-                        <input type="checkbox">
-
-                        Remember Me
-
-                    </label>
-
-                    <a href="forgot-password.html">
-
-                        Forgot Password?
-
-                    </a>
-
-                </div>
-
-                <button
-                        type="submit"
-                        class="login-btn">
-
-                    LOGIN
-
-                </button>
-
-            </form>
-
-            <div class="divider">
-
-                <span>OR</span>
+                <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required>
 
             </div>
 
-            <div class="register-link">
 
-                <p>
+            <div class="form-group">
 
-                    New to FIC FURY?
+                <label for="password">
+                    Password
+                </label>
 
-                </p>
+                <input
+                    id="password"
+                    type="password"
+                    placeholder="Enter your password"
+                    required>
 
-                <a href="register.html">
+            </div>
 
-                    Create an Account
 
+            <div class="options">
+
+                <label>
+                    <input type="checkbox">
+                    Remember Me
+                </label>
+
+                <a href="forgot-password.html">
+                    Forgot Password?
                 </a>
 
             </div>
 
-            <footer>
 
-                © 2026 FIC FURY
+            <button
+                type="submit"
+                class="login-btn">
 
-                <span>
+                LOGIN
 
-                    Fiction • Strategy • Diplomacy
+            </button>
 
-                </span>
+        </form>
 
-            </footer>
+
+        <div class="divider">
+            <span>OR</span>
+        </div>
+
+
+        <div class="social-buttons">
+
+            <button
+                type="button"
+                class="google-btn">
+
+                Continue with Google
+
+            </button>
+
+            <button
+                type="button"
+                class="discord-btn">
+
+                Continue with Discord
+
+            </button>
 
         </div>
 
-    </section>
+
+        <div class="auth-footer">
+
+            Don't have an account?
+
+            <a href="register.html">
+                Create Account
+            </a>
+
+        </div>
+
+    </main>
 
 </div>
 
+
+<!-- =====================================================
+     DO NOT CHANGE SCRIPT ORDER
+     ===================================================== -->
+
 <script src="../js/config.js"></script>
+<script src="../js/utils.js"></script>
 <script src="../js/api.js"></script>
+<script src="../js/auth.js"></script>
 <script src="../js/login.js"></script>
 
 </body>
-
 </html>
