@@ -373,39 +373,7 @@ const Sidebar = {
 
 };
 
-Sidebar.loadUser = function () {
 
-    const user = JSON.parse(
-    localStorage.getItem(CONFIG.USER_KEY)
-);
-    if (!user) {
-
-        console.warn("No logged-in user found.");
-
-        return;
-
-    }
-
-    const nameElement = document.getElementById("sidebarUserName");
-    const roleElement = document.getElementById("sidebarUserRole");
-    const avatarElement = document.getElementById("sidebarAvatar");
-
-    if (!nameElement || !roleElement || !avatarElement) {
-        return;
-    }
-
-    const displayName = user.fullName || user.name || "Delegate";
-
-    nameElement.textContent = displayName;
-    roleElement.textContent = user.role;
-
-    avatarElement.textContent = displayName
-        .split(" ")
-        .map(word => word[0])
-        .join("")
-        .substring(0, 2)
-        .toUpperCase();
-};
 /* ==========================================================
    FIC FURY — EDITORIAL SIDEBAR SECTION LABELS
    ========================================================== */
@@ -437,47 +405,63 @@ const FIC_FURY_SECTION_LABELS = {
 Sidebar.renderMenu = function(){
 
     const user = JSON.parse(
-    localStorage.getItem(CONFIG.USER_KEY)
-);
+        localStorage.getItem(CONFIG.USER_KEY)
+    );
 
-if (!user) return;
+    if (!user) return;
+
     const nav = document.getElementById("sidebarNav");
 
+    if (!nav) {
+        console.error("Sidebar navigation container not found.");
+        return;
+    }
+
     nav.innerHTML = "";
+
     const role = user.role.toUpperCase();
-    const sections = applyFicFurySectionLabels(role, SIDEBAR_MENU[role]);
+
+    const sections = SIDEBAR_MENU[role];
 
     if (!sections) {
 
-    console.error("No sidebar menu configured for role:", role);
+        console.error(
+            "No sidebar menu configured for role:",
+            role
+        );
 
-    return;
+        return;
+    }
 
-}
-    
+    Object.entries(sections).forEach(
+        ([sectionKey, section]) => {
 
-Object.values(sections).forEach(section => {
+            const title = document.createElement("h5");
 
+            title.className = "menu-section";
 
-        const title = document.createElement("h5");
+            /*
+             * Use the new FIC FURY editorial label
+             * when one exists.
+             *
+             * Otherwise use the original title.
+             */
+            title.textContent =
+                FIC_FURY_SECTION_LABELS[role]?.[sectionKey]
+                || section.title;
 
-        title.className = "menu-section";
+            nav.appendChild(title);
 
-        title.textContent = section.title;
+            section.items.forEach(item => {
 
-        nav.appendChild(title);
+                nav.appendChild(
+                    this.createMenuItem(item)
+                );
 
-        section.items.forEach(item=>{
+            });
 
-            nav.appendChild(
-
-                this.createMenuItem(item)
-
-            );
-
-        });
-
-    });
+        }
+    );
 
 };
 Sidebar.createMenuItem = function (item) {
