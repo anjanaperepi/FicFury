@@ -406,7 +406,34 @@ Sidebar.loadUser = function () {
         .substring(0, 2)
         .toUpperCase();
 };
+/* ==========================================================
+   FIC FURY — EDITORIAL SIDEBAR SECTION LABELS
+   ========================================================== */
 
+const FIC_FURY_SECTION_LABELS = {
+
+    ADMIN: {
+        dashboard: "YOUR UNIVERSE",
+        management: "EXPLORE",
+        operations: "THE ACTION",
+        analytics: "INSIGHTS",
+        system: "THE ARCHIVE"
+    },
+
+    CHAIR: {
+        dashboard: "YOUR UNIVERSE",
+        committee: "THE ACTION"
+    },
+
+    DELEGATE: {
+        dashboard: "YOUR UNIVERSE",
+        explore: "EXPLORE",
+        conference: "THE ACTION",
+        achievements: "THE ARCHIVE",
+        account: "ACCOUNT"
+    }
+
+};
 Sidebar.renderMenu = function(){
 
     const user = JSON.parse(
@@ -418,7 +445,7 @@ if (!user) return;
 
     nav.innerHTML = "";
     const role = user.role.toUpperCase();
-    const sections = SIDEBAR_MENU[role];
+    const sections = applyFicFurySectionLabels(role, SIDEBAR_MENU[role]);
 
     if (!sections) {
 
