@@ -359,20 +359,71 @@ const SIDEBAR_MENU = {
 
 const Sidebar = {
 
-    init(){
+    init: function () {
 
-        this.loadUser();
+        Sidebar.loadUser();
 
-        this.renderMenu();
+        Sidebar.renderMenu();
 
-        this.highlightActivePage();
+        Sidebar.highlightActivePage();
 
-        this.attachEvents();
+        Sidebar.attachEvents();
 
     }
 
 };
+/* ==========================================================
+   LOAD CURRENT USER INTO SIDEBAR
+   ========================================================== */
 
+Sidebar.loadUser = function () {
+
+    const user = JSON.parse(
+        localStorage.getItem(CONFIG.USER_KEY)
+    );
+
+    if (!user) {
+
+        console.warn(
+            "No logged-in user found."
+        );
+
+        return;
+    }
+
+    const nameElement =
+        document.getElementById("sidebarUserName");
+
+    const roleElement =
+        document.getElementById("sidebarUserRole");
+
+    const avatarElement =
+        document.getElementById("sidebarAvatar");
+
+    if (!nameElement || !roleElement || !avatarElement) {
+        return;
+    }
+
+    const displayName =
+        user.fullName ||
+        user.name ||
+        "Delegate";
+
+    nameElement.textContent =
+        displayName;
+
+    roleElement.textContent =
+        user.role;
+
+    avatarElement.textContent =
+        displayName
+            .split(" ")
+            .map(word => word[0])
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
+
+};
 
 /* ==========================================================
    FIC FURY — EDITORIAL SIDEBAR SECTION LABELS
@@ -402,7 +453,38 @@ const FIC_FURY_SECTION_LABELS = {
     }
 
 };
-Sidebar.renderMenu = function(){
+
+function createSidebarMenuItem(item) {
+
+    const link = document.createElement("a");
+
+    link.className = "menu-item";
+
+    link.dataset.page = item.page;
+
+    link.dataset.tooltip = item.title;
+
+    if (item.enabled) {
+
+        link.href = item.page;
+
+    } else {
+
+        link.href = "#";
+
+        link.classList.add("disabled");
+
+    }
+
+    link.innerHTML = `
+        <i class="fa-solid fa-${item.icon}"></i>
+        <span>${item.title}</span>
+    `;
+
+    return link;
+};
+
+Sidebar.renderMenu = function () {
 
     const user = JSON.parse(
         localStorage.getItem(CONFIG.USER_KEY)
@@ -413,7 +495,9 @@ Sidebar.renderMenu = function(){
     const nav = document.getElementById("sidebarNav");
 
     if (!nav) {
-        console.error("Sidebar navigation container not found.");
+        console.error(
+            "Sidebar navigation container not found."
+        );
         return;
     }
 
@@ -440,63 +524,24 @@ Sidebar.renderMenu = function(){
 
             title.className = "menu-section";
 
-            /*
-             * Use the new FIC FURY editorial label
-             * when one exists.
-             *
-             * Otherwise use the original title.
-             */
             title.textContent =
                 FIC_FURY_SECTION_LABELS[role]?.[sectionKey]
                 || section.title;
 
             nav.appendChild(title);
 
-            section.items.forEach(item => {
+section.items.forEach(item => {
 
-                nav.appendChild(
-                    this.createMenuItem(item)
-                );
+    nav.appendChild(
+        createSidebarMenuItem(item)
+    );
 
-            });
-
+});
         }
     );
 
 };
-Sidebar.createMenuItem = function (item) {
 
-    const link = document.createElement("a");
-
-    link.className = "menu-item";
-
-    link.dataset.page = item.page;
-
-    link.dataset.tooltip = item.title;
-
-    if (item.enabled) {
-
-        link.href = item.page;
-
-    } else {
-
-        link.href = "#";
-
-        link.classList.add("disabled");
-
-    }
-
-    link.innerHTML = `
-
-        <i class="fa-solid fa-${item.icon}"></i>
-
-        <span>${item.title}</span>
-
-    `;
-
-    return link;
-
-};
 Sidebar.highlightActivePage = function(){
 
     const current =
@@ -589,3 +634,4 @@ if (backdrop) {
     });
 
 };
+
