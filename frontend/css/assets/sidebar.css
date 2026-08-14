@@ -1901,3 +1901,55 @@ body.sidebar-collapsed .logout-btn i {
     }
 
 }
+/* ==========================================================
+   FIC FURY — COLLAPSED CONTENT WIDTH FIX
+   ========================================================== */
+
+@media (min-width: 993px) {
+
+    body.sidebar-collapsed .main-content {
+        margin-left: 78px;
+        width: calc(100% - 78px);
+        max-width: none;
+    }
+
+    body.sidebar-collapsed .page-container {
+        width: 100%;
+        max-width: none;
+    }
+
+    body.sidebar-collapsed .content-wrapper {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* ==========================================================
+   CHAIR DASHBOARD SIDEBAR ALIGNMENT
+   ========================================================== */
+
+@media (min-width: 993px) {
+
+    /* Keep the sidebar identical to the other desktop pages */
+    .sidebar {
+        width: var(--sidebar-width) !important;
+        min-width: var(--sidebar-width) !important;
+        max-width: var(--sidebar-width) !important;
+    }
+
+    /* Keep the main content aligned with the sidebar */
+    .main-content {
+        margin-left: var(--sidebar-width);
+    }
+
+    /* Collapsed state */
+    body.sidebar-collapsed .sidebar {
+        width: 78px !important;
+        min-width: 78px !important;
+        max-width: 78px !important;
+    }
+
+    body.sidebar-collapsed .main-content {
+        margin-left: 78px !important;
+    }
+}

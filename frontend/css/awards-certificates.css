@@ -959,3 +959,26 @@ body {
 
     box-sizing: border-box !important;
 }
+/* ==========================================================
+   AWARDS & CERTIFICATES — SIDEBAR ALIGNMENT
+   ========================================================== */
+
+@media (min-width: 993px) {
+
+    body.sidebar-collapsed .sidebar {
+        width: 78px !important;
+        min-width: 78px !important;
+        max-width: 78px !important;
+    }
+
+    body.sidebar-collapsed .main-content {
+        margin-left: 78px !important;
+        width: calc(100% - 78px) !important;
+        max-width: none !important;
+    }
+
+    body.sidebar-collapsed .app-layout {
+        display: block !important;
+        width: 100% !important;
+    }
+}

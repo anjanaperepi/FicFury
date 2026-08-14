@@ -1,34 +1,19 @@
-/* =========================================================
+/* ==========================================================
    FIC FURY — CHAIR DASHBOARD
-   HARD RESET / CLEAN LAYOUT
-   Consistent with the FIC FURY Delegate Dashboard
-   ========================================================= */
+   CLEAN / COMIC / RESPONSIVE
+   Page-specific styles only
+   ========================================================== */
 
+/* ==========================================================
+   CHAIR DASHBOARD — SIDEBAR WIDTH
+   ========================================================== */
 
-/* =========================================================
-   1. VARIABLES
-   ========================================================= */
-
-:root {
-    --fic-yellow: #ffd400;
-    --fic-red: #ff3b35;
-    --fic-black: #111111;
-    --fic-white: #ffffff;
-    --fic-light: #f7f8fa;
-    --fic-text: #171717;
-    --fic-muted: #666666;
-
-    --comic-border: 3px solid var(--fic-black);
-    --comic-shadow: 7px 7px 0 var(--fic-black);
-
-    --card-gap: 18px;
-    --card-radius: 0px;
+.chair-app-layout {
+    --sidebar-width: 310px;
 }
-
-
-/* =========================================================
-   2. PAGE
-   ========================================================= */
+/* ==========================================================
+   1. PAGE
+   ========================================================== */
 
 html {
     scroll-behavior: smooth;
@@ -36,9 +21,8 @@ html {
 
 body {
     margin: 0;
-    background: var(--fic-yellow);
-    color: var(--fic-text);
-
+    background: var(--fic-yellow, #ffd400);
+    color: #171717;
     font-family:
         Inter,
         Arial,
@@ -46,18 +30,21 @@ body {
         sans-serif;
 }
 
-.main-content.chair-dashboard-page {
-    background: var(--fic-yellow);
 
+/* ==========================================================
+   2. CHAIR DASHBOARD CONTENT
+   ========================================================== */
+
+.main-content.chair-dashboard-page {
     min-height: 100vh;
 
-    padding:
-        18px
-        24px
-        28px
-        24px !important;
-
     box-sizing: border-box;
+
+    background: var(--fic-yellow, #ffd400);
+
+    padding: 24px !important;
+
+    margin-left: var(--sidebar-width) !important;
 }
 
 .chair-dashboard-page .page-container {
@@ -70,262 +57,343 @@ body {
 }
 
 
-/* =========================================================
-   3. COMMON CARD STYLE
-   ========================================================= */
+/* ==========================================================
+   3. COMMON COMIC CARD
+   ========================================================== */
 
 .chair-dashboard-page .dashboard-card,
-.chair-hero,
-.quick-actions-card,
-.chair-stat-card {
-    background: var(--fic-white);
+.chair-dashboard-page .chair-hero,
+.chair-dashboard-page .quick-actions-card,
+.chair-dashboard-page .chair-stat-card,
+.chair-dashboard-page .debate-session-card,
+.chair-dashboard-page .announcements-card {
 
-    border: var(--comic-border);
-    box-shadow: var(--comic-shadow);
+    background: #ffffff;
 
-    border-radius: var(--card-radius);
+    border: 3px solid #111111;
+
+    box-shadow: 7px 7px 0 #111111;
+
+    border-radius: 0;
 
     box-sizing: border-box;
 }
 
 
-/* =========================================================
+/* ==========================================================
    4. HERO
-   ========================================================= */
+   ========================================================== */
 
 .chair-hero {
+
     position: relative;
 
     width: 100%;
-    min-height: 170px;
+    min-height: 180px;
 
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1.5fr)
-        minmax(280px, 0.8fr);
+        minmax(0, 1.55fr)
+        minmax(280px, 0.75fr);
 
     align-items: center;
 
-    gap: 30px;
+    gap: 32px;
 
-    padding: 26px 30px;
+    padding: 30px 32px;
 
-    margin-bottom: var(--card-gap);
+    margin-bottom: 20px;
 
     overflow: hidden;
 }
 
+
+/* Decorative circles */
+
 .chair-hero::before {
+
     content: "";
 
     position: absolute;
 
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
 
-    left: -55px;
-    bottom: -75px;
+    left: -65px;
+    bottom: -90px;
 
     border-radius: 50%;
 
-    background: rgba(255, 59, 53, 0.08);
+    background: rgba(255, 59, 53, 0.09);
 
     pointer-events: none;
 }
 
 .chair-hero::after {
+
     content: "";
 
     position: absolute;
 
-    width: 170px;
-    height: 170px;
+    width: 190px;
+    height: 190px;
 
-    right: -55px;
-    top: -75px;
+    right: -65px;
+    top: -90px;
 
     border-radius: 50%;
 
-    background: rgba(255, 212, 0, 0.12);
+    background: rgba(255, 212, 0, 0.18);
 
     pointer-events: none;
 }
 
+
+/* Hero columns */
+
 .hero-left,
 .hero-right {
-    position: relative;
-    z-index: 2;
-}
 
-.hero-left {
+    position: relative;
+
+    z-index: 2;
+
     min-width: 0;
 }
 
+
+/* Badge */
+
 .hero-badge {
+
     display: inline-flex;
 
     align-items: center;
+
     gap: 8px;
 
     padding: 8px 14px;
 
-    background: var(--fic-white);
+    background: #ffffff;
 
-    border: var(--comic-border);
-    box-shadow: 4px 4px 0 var(--fic-black);
+    border: 3px solid #111111;
+
+    box-shadow: 4px 4px 0 #111111;
+
+    color: #111111;
 
     font-size: 12px;
-    font-weight: 800;
+
+    font-weight: 900;
 
     text-transform: uppercase;
+
     letter-spacing: 1.2px;
 }
 
 .hero-badge i {
-    color: var(--fic-red);
-    font-size: 10px;
+
+    color: var(--fic-red, #ff3b35);
+
+    font-size: 11px;
 }
 
+
+/* Hero title */
+
 .chair-hero h1 {
-    margin: 14px 0 8px;
+
+    margin: 16px 0 9px;
 
     font-size: 48px;
-    line-height: 0.98;
+
+    line-height: 1;
 
     font-weight: 900;
-    letter-spacing: -1.5px;
+
+    letter-spacing: -1.8px;
 }
 
 .chair-hero h1 span {
-    color: var(--fic-red);
+
+    color: var(--fic-red, #ff3b35);
 }
 
+
+/* Hero description */
+
 .chair-hero p {
+
     margin: 0;
 
     max-width: 650px;
 
-    color: var(--fic-muted);
+    color: #666666;
 
     font-size: 15px;
-    line-height: 1.5;
+
+    line-height: 1.55;
 }
 
+
+/* ==========================================================
+   5. COMMITTEE SELECTOR
+   ========================================================== */
+
 .hero-right {
+
     display: flex;
+
     justify-content: flex-end;
 }
 
 .committee-card {
+
     width: 100%;
-    max-width: 310px;
 
-    padding: 16px;
+    max-width: 320px;
 
-    background: rgba(255, 212, 0, 0.08);
+    padding: 18px;
+
+    background: #fff9d8;
+
+    border: 3px solid #111111;
+
+    box-shadow: 5px 5px 0 #111111;
 
     box-sizing: border-box;
 }
 
 .committee-card label {
+
     display: block;
 
-    margin-bottom: 7px;
+    margin-bottom: 8px;
+
+    color: #111111;
 
     font-size: 13px;
-    font-weight: 600;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: .7px;
 }
 
 .committee-selector {
+
     width: 100%;
 
     min-height: 48px;
 
-    padding: 10px 12px;
+    padding: 10px 13px;
 
-    background: var(--fic-white);
+    background: #ffffff;
 
-    border: 2px solid #d7d7d7;
+    border: 2px solid #111111;
 
-    border-radius: 6px;
+    border-radius: 0;
 
-    color: var(--fic-text);
+    color: #171717;
 
     font-family: inherit;
+
     font-size: 14px;
-    font-weight: 500;
+
+    font-weight: 600;
 
     outline: none;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+}
+
+.committee-selector:hover {
+
+    border-color: var(--fic-red, #ff3b35);
 }
 
 .committee-selector:focus {
-    border-color: var(--fic-red);
+
+    border-color: var(--fic-red, #ff3b35);
+
+    box-shadow:
+        3px 3px 0 var(--fic-red, #ff3b35);
 }
 
 .committee-card small {
+
     display: block;
 
-    margin-top: 7px;
+    margin-top: 8px;
 
-    color: var(--fic-muted);
+    color: #666666;
 
     font-size: 12px;
 
+    line-height: 1.4;
+
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 }
 
 
-/* =========================================================
-   5. TOP CONTROL AREA
-   Stats | Quick Actions
-   ========================================================= */
+/* ==========================================================
+   6. TOP CONTROL AREA
+   ========================================================== */
 
 .top-control-grid {
+
     display: grid;
 
     grid-template-columns:
-        minmax(300px, 0.82fr)
+        minmax(280px, 0.8fr)
         minmax(0, 1.5fr);
 
-    gap: var(--card-gap);
+    gap: 20px;
 
     align-items: stretch;
 
-    margin-bottom: var(--card-gap);
+    margin-bottom: 20px;
 }
 
 
-/* =========================================================
-   6. STAT CARDS
-   ========================================================= */
+/* ==========================================================
+   7. STAT AREA
+   ========================================================== */
 
 .chair-stats {
+
     display: grid;
 
-    grid-template-rows:
-        repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
 
-    gap: var(--card-gap);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
 
     min-width: 0;
 }
 
 .chair-stat-card {
+
     position: relative;
 
-    min-height: 125px;
+    min-height: 120px;
 
     padding: 18px 20px;
 
     display: grid;
 
-    grid-template-columns: 54px 1fr;
+    grid-template-columns: 54px minmax(0, 1fr);
 
-    grid-template-rows:
-        auto auto;
+    grid-template-rows: auto auto;
 
     column-gap: 16px;
 
@@ -334,7 +402,11 @@ body {
     overflow: hidden;
 }
 
+
+/* Decorative circle */
+
 .chair-stat-card::after {
+
     content: "";
 
     position: absolute;
@@ -347,21 +419,31 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(255, 212, 0, 0.12);
+    background: rgba(255, 212, 0, 0.14);
 
     pointer-events: none;
 }
 
+
+/* Colored side borders */
+
 .delegates-stat {
+
     border-left: 8px solid #8b00ff;
 }
 
 .debate-stat {
-    border-left: 8px solid var(--fic-red);
+
+    border-left: 8px solid var(--fic-red, #ff3b35);
 }
 
+
+/* Stat icon */
+
 .chair-stat-card .stat-icon {
+
     position: relative;
+
     z-index: 2;
 
     grid-row: 1 / span 2;
@@ -374,55 +456,116 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: var(--fic-yellow);
+    background: var(--fic-yellow, #ffd400);
 
-    border: var(--comic-border);
+    border: 3px solid #111111;
 
-    box-shadow: 4px 4px 0 var(--fic-black);
+    box-shadow: 4px 4px 0 #111111;
 
-    font-size: 21px;
+    font-size: 20px;
 }
 
+
+/* Stat value */
+
 .chair-stat-card .stat-value {
+
     position: relative;
+
     z-index: 2;
 
     align-self: end;
 
+    min-width: 0;
+
     font-size: 28px;
+
     line-height: 1;
 
     font-weight: 900;
 
     text-transform: uppercase;
+
+    overflow-wrap: anywhere;
 }
 
 .debate-stat .stat-value {
-    font-size: 24px;
+
+    font-size: 23px;
+
+    line-height: 1.05;
 }
 
+
+/* Stat label */
+
 .chair-stat-card .stat-label {
+
     position: relative;
+
     z-index: 2;
 
     align-self: start;
 
-    margin-top: 5px;
+    margin-top: 6px;
 
-    color: var(--fic-muted);
+    color: #666666;
 
     font-size: 14px;
+
+    font-weight: 600;
 }
 
 
-/* =========================================================
-   7. QUICK ACTIONS
-   ========================================================= */
+/* Dynamic debate status classes */
+
+.chair-stat-card.status-active {
+    border-left-color: #22c55e;
+}
+
+.chair-stat-card.status-draft {
+    border-left-color: #f59e0b;
+}
+
+.chair-stat-card.status-pending {
+    border-left-color: #f59e0b;
+}
+
+.chair-stat-card.status-stopped {
+    border-left-color: #ef4444;
+}
+
+.chair-stat-card.status-archived {
+    border-left-color: #6b7280;
+}
+
+.chair-stat-card.status-none {
+    border-left-color: #9ca3af;
+}
+
+.debate-status-value {
+
+    text-transform: uppercase;
+
+    font-weight: 900;
+
+    line-height: 1.05;
+
+    white-space: normal;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================
+   8. QUICK ACTIONS
+   ========================================================== */
 
 .quick-actions-card {
-    min-height: 265px;
 
-    padding: 22px;
+    min-height: 260px;
+
+    padding: 24px;
 
     display: flex;
 
@@ -432,20 +575,25 @@ body {
 }
 
 .section-heading {
+
     margin-bottom: 18px;
 }
 
 .section-heading h2,
 .card-heading h2 {
+
     margin: 0;
 
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    gap: 11px;
 
-    font-size: 30px;
+    color: #111111;
+
+    font-size: 29px;
+
     line-height: 1;
 
     font-weight: 900;
@@ -453,18 +601,28 @@ body {
 
 .section-heading h2 i,
 .card-heading h2 i {
-    font-size: 25px;
+
+    font-size: 23px;
+
+    color: var(--fic-red, #ff3b35);
 }
 
 .section-heading p {
+
     margin: 8px 0 0;
 
-    color: var(--fic-muted);
+    color: #666666;
 
     font-size: 13px;
+
+    line-height: 1.4;
 }
 
+
+/* Action grid */
+
 .quick-actions-grid {
+
     display: grid;
 
     grid-template-columns:
@@ -473,10 +631,14 @@ body {
     gap: 10px;
 }
 
+
+/* Action button */
+
 .quick-action {
+
     min-width: 0;
 
-    min-height: 82px;
+    min-height: 84px;
 
     padding: 12px 8px;
 
@@ -485,96 +647,117 @@ body {
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 9px;
 
-    background: var(--fic-white);
+    background: #ffffff;
 
-    border: 3px solid var(--fic-black);
+    border: 3px solid #111111;
 
-    box-shadow: 5px 5px 0 var(--fic-black);
+    box-shadow: 5px 5px 0 #111111;
 
-    color: var(--fic-text);
+    color: #171717;
 
     font-family: inherit;
 
     cursor: pointer;
 
     transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease,
-        background 0.15s ease;
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
 }
 
 .quick-action i {
-    font-size: 17px;
+
+    color: var(--fic-red, #ff3b35);
+
+    font-size: 18px;
 }
 
 .quick-action span {
+
     max-width: 100%;
 
     font-size: 12px;
+
     line-height: 1.15;
 
-    font-weight: 800;
+    font-weight: 900;
 
     text-align: center;
 }
 
 .quick-action:hover {
+
     background: #fff9d8;
 
     transform: translate(-2px, -2px);
 
-    box-shadow: 7px 7px 0 var(--fic-black);
+    box-shadow: 7px 7px 0 #111111;
 }
 
 .quick-action:active {
+
     transform: translate(2px, 2px);
 
-    box-shadow: 3px 3px 0 var(--fic-black);
+    box-shadow: 3px 3px 0 #111111;
 }
 
 
-/* =========================================================
-   8. MAIN TWO-COLUMN AREA
-   Debate Session | Announcements
-   ========================================================= */
+/* ==========================================================
+   9. MAIN DASHBOARD AREA
+   ========================================================== */
 
 .main-dashboard-grid {
+
     display: grid;
 
     grid-template-columns:
         minmax(0, 1fr)
         minmax(0, 1fr);
 
-    gap: var(--card-gap);
+    gap: 20px;
 
     align-items: stretch;
 
-    margin-bottom: var(--card-gap);
+    margin-bottom: 20px;
 }
+
+
+/* ==========================================================
+   10. DEBATE SESSION
+   ========================================================== */
 
 .debate-session-card,
 .announcements-card {
-    min-height: 360px;
+
     height: 360px;
+
+    min-height: 360px;
 
     overflow: hidden;
 }
 
+
+/* Debate card */
+
 .debate-session-card {
+
     display: flex;
 
     flex-direction: column;
 }
 
 .card-heading {
+
     padding: 22px 24px 10px;
 }
 
 .debate-session-content {
+
     flex: 1;
 
     display: flex;
@@ -582,6 +765,7 @@ body {
     flex-direction: column;
 
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
@@ -590,58 +774,80 @@ body {
 }
 
 .content-label {
+
+    color: #666666;
+
     font-size: 13px;
+
     font-weight: 700;
 }
 
 .debate-session-content h3 {
+
     margin: 12px 0 14px;
 
     font-size: 25px;
+
     line-height: 1.15;
 
-    font-weight: 800;
+    font-weight: 900;
 }
 
+.debate-session-content p {
+
+    margin: 16px 0;
+
+    color: #666666;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* Session status */
+
 .session-status {
+
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     min-height: 34px;
 
     padding: 6px 13px;
 
-    border: 2px solid var(--fic-black);
+    border: 2px solid #111111;
 
     font-size: 12px;
+
     font-weight: 900;
 
     text-transform: uppercase;
 }
 
 .session-status.no-session {
+
     background: #e9f1f8;
 }
 
 .session-status.active {
+
     background: #9af0b5;
 }
 
 .session-status.draft {
+
     background: #fff0a8;
 }
 
-.debate-session-content p {
-    margin: 16px 0;
 
-    color: var(--fic-muted);
-
-    font-size: 14px;
-}
+/* Primary action */
 
 .primary-action {
+
     min-height: 48px;
 
     padding: 11px 18px;
@@ -649,82 +855,107 @@ body {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
     gap: 8px;
 
-    background: var(--fic-yellow);
+    background: var(--fic-red, #ff3b35);
 
-    border: var(--comic-border);
+    border: 3px solid #111111;
 
-    box-shadow: 5px 5px 0 var(--fic-black);
+    box-shadow: 5px 5px 0 #111111;
 
-    color: var(--fic-white);
+    color: #ffffff;
 
     font-family: inherit;
 
     font-size: 14px;
-    font-weight: 800;
+
+    font-weight: 900;
 
     cursor: pointer;
 
-    text-shadow:
-        1px 1px 0 rgba(0, 0, 0, 0.35);
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
 }
 
 .primary-action:hover {
-    background: var(--fic-red);
+
+    background: #111111;
+
+    transform: translate(-2px, -2px);
+
+    box-shadow: 7px 7px 0 var(--fic-red, #ff3b35);
+}
+
+.primary-action:active {
+
+    transform: translate(2px, 2px);
+
+    box-shadow: 3px 3px 0 #111111;
 }
 
 
-/* =========================================================
-   9. ANNOUNCEMENTS
-   ========================================================= */
+/* ==========================================================
+   11. ANNOUNCEMENTS
+   ========================================================== */
 
 .announcements-card {
+
     display: flex;
 
     flex-direction: column;
 }
 
 .announcements-list {
+
     flex: 1;
 
     min-height: 0;
 
-    margin:
-        0
-        20px
-        20px;
+    margin: 0 20px 20px;
 
-    padding-right: 5px;
+    padding-right: 6px;
 
     overflow-y: auto;
 }
 
 .announcements-list::-webkit-scrollbar {
+
     width: 7px;
 }
 
 .announcements-list::-webkit-scrollbar-track {
+
     background: #eeeeee;
 }
 
 .announcements-list::-webkit-scrollbar-thumb {
-    background: var(--fic-red);
 
-    border-radius: 4px;
+    background: var(--fic-red, #ff3b35);
+
+    border-radius: 0;
 }
 
+
+/* Empty state */
+
 .announcement-empty {
+
     min-height: 150px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    color: var(--fic-muted);
+    padding: 20px;
+
+    color: #666666;
 
     font-size: 14px;
 
@@ -733,10 +964,12 @@ body {
 
 
 /* Existing JS announcement markup */
+
 .announcements-list .activity-item {
+
     display: grid;
 
-    grid-template-columns: 42px 1fr;
+    grid-template-columns: 42px minmax(0, 1fr);
 
     gap: 12px;
 
@@ -746,18 +979,19 @@ body {
 
     margin-bottom: 10px;
 
-    background: var(--fic-light);
+    background: #f7f8fa;
 
-    border: 2px solid var(--fic-black);
+    border: 2px solid #111111;
 
-    border-radius: 12px;
+    border-radius: 0;
 
-    box-shadow: 4px 4px 0 var(--fic-black);
+    box-shadow: 4px 4px 0 #111111;
 
     box-sizing: border-box;
 }
 
 .announcements-list .activity-icon {
+
     width: 34px;
     height: 34px;
 
@@ -766,36 +1000,45 @@ body {
     align-items: center;
     justify-content: center;
 
-    background: var(--fic-yellow);
+    background: var(--fic-yellow, #ffd400);
 
-    border: 2px solid var(--fic-black);
+    border: 2px solid #111111;
 
-    border-radius: 10px;
+    border-radius: 0;
 }
 
 .announcements-list .activity-content,
 .announcements-list .activity-item > div:last-child {
+
     min-width: 0;
 }
 
 .announcements-list strong {
+
     display: block;
 
     margin-bottom: 4px;
 
+    color: #111111;
+
     font-size: 13px;
-    font-weight: 800;
+
+    font-weight: 900;
 }
 
 .announcements-list p {
+
     margin: 0;
 
-    color: var(--fic-muted);
+    color: #666666;
 
     font-size: 12px;
+
+    line-height: 1.4;
 }
 
 .announcements-list small {
+
     display: block;
 
     margin-top: 5px;
@@ -806,74 +1049,73 @@ body {
 }
 
 
-/* =========================================================
-   10. FOOTER
-   ========================================================= */
+/* ==========================================================
+   12. FOOTER
+   ========================================================== */
 
 .chair-footer {
-    min-height: 76px;
 
-    padding:
-        18px
-        20px;
+    min-height: 70px;
+
+    padding: 18px 20px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
 
     gap: 18px;
 
-    background: var(--fic-white);
+    background: #ffffff;
 
-    border-top: var(--comic-border);
+    border: 3px solid #111111;
+
+    box-shadow: 5px 5px 0 #111111;
 
     box-sizing: border-box;
 
-    font-size: 13px;
+    color: #666666;
 
-    color: var(--fic-muted);
+    font-size: 13px;
 }
 
 .chair-footer nav {
+
     display: flex;
 
     align-items: center;
 
-    gap: 12px;
+    justify-content: flex-end;
 
     flex-wrap: wrap;
 
-    justify-content: flex-end;
+    gap: 12px;
 }
 
 .chair-footer a {
-    color: var(--fic-text);
 
-    font-weight: 700;
+    color: #171717;
+
+    font-weight: 800;
 
     text-decoration: none;
 }
 
 .chair-footer a:hover {
-    color: var(--fic-red);
+
+    color: var(--fic-red, #ff3b35);
+
+    text-decoration: underline;
 }
 
 
-/* =========================================================
-   11. HIDDEN JS COMPATIBILITY
-   ========================================================= */
-
-.js-compatibility {
-    display: none !important;
-}
-
-
-/* =========================================================
-   12. LOADING
-   ========================================================= */
+/* ==========================================================
+   13. LOADING
+   ========================================================== */
 
 .loading-overlay {
+
     position: fixed;
 
     inset: 0;
@@ -883,79 +1125,107 @@ body {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    background: rgba(17, 17, 17, 0.45);
+    background: rgba(17, 17, 17, .45);
 }
 
 .loading-overlay.hidden {
+
     display: none !important;
 }
 
 .loader {
+
     min-width: 180px;
 
     padding: 25px;
 
-    background: var(--fic-white);
+    background: #ffffff;
 
-    border: var(--comic-border);
-    box-shadow: var(--comic-shadow);
+    border: 3px solid #111111;
+
+    box-shadow: 7px 7px 0 #111111;
 
     text-align: center;
 }
 
 .loader p {
+
     margin: 12px 0 0;
 
     font-size: 13px;
-    font-weight: 700;
+
+    font-weight: 800;
 }
 
 .spinner {
+
     width: 32px;
     height: 32px;
 
     margin: 0 auto;
 
     border: 4px solid #dddddd;
-    border-top-color: var(--fic-red);
+
+    border-top-color: var(--fic-red, #ff3b35);
 
     border-radius: 50%;
 
-    animation: chairSpin 0.8s linear infinite;
+    animation: chairSpin .8s linear infinite;
 }
 
 @keyframes chairSpin {
+
     to {
         transform: rotate(360deg);
     }
 }
 
 
-/* =========================================================
-   13. TABLET
-   ========================================================= */
+/* ==========================================================
+   14. JS COMPATIBILITY
+   ========================================================== */
+
+.js-compatibility {
+
+    display: none !important;
+}
+
+
+/* ==========================================================
+   15. TABLET
+   ========================================================== */
 
 @media (max-width: 1050px) {
 
     .chair-hero {
+
         grid-template-columns: 1fr;
+
+        gap: 22px;
+
+        padding: 26px;
     }
 
     .hero-right {
+
         justify-content: flex-start;
     }
 
     .committee-card {
+
         max-width: 100%;
     }
 
     .top-control-grid {
+
         grid-template-columns: 1fr;
     }
 
     .chair-stats {
+
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
 
@@ -963,52 +1233,68 @@ body {
     }
 
     .main-dashboard-grid {
+
         grid-template-columns: 1fr;
     }
 
     .debate-session-card,
     .announcements-card {
+
         height: 340px;
+
         min-height: 340px;
     }
 }
 
 
-/* =========================================================
-   14. MOBILE
-   ========================================================= */
+/* ==========================================================
+   16. MOBILE
+   ========================================================== */
 
 @media (max-width: 700px) {
 
     .main-content.chair-dashboard-page {
-        padding: 12px !important;
+
+        padding: 14px !important;
     }
 
     .chair-hero {
+
         min-height: auto;
 
         padding: 22px 20px;
 
-        gap: 18px;
+        gap: 20px;
     }
 
     .chair-hero h1 {
+
         font-size: 36px;
+
+        letter-spacing: -1px;
     }
 
     .chair-hero p {
+
         font-size: 13px;
     }
 
     .chair-stats {
+
         grid-template-columns: 1fr;
+
+        grid-template-rows: none;
+
+        gap: 14px;
     }
 
     .chair-stat-card {
-        min-height: 115px;
+
+        min-height: 110px;
     }
 
     .quick-actions-card {
+
         min-height: auto;
 
         padding: 18px;
@@ -1016,56 +1302,82 @@ body {
 
     .section-heading h2,
     .card-heading h2 {
+
         font-size: 25px;
     }
 
     .quick-actions-grid {
-        grid-template-columns: 1fr 1fr;
 
-        gap: 9px;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
     }
 
     .quick-action {
+
         min-height: 72px;
     }
 
     .main-dashboard-grid {
+
         grid-template-columns: 1fr;
+
+        gap: 14px;
     }
 
     .debate-session-card,
     .announcements-card {
+
         height: 330px;
+
         min-height: 330px;
     }
 
     .chair-footer {
+
         flex-direction: column;
 
         align-items: flex-start;
     }
 
     .chair-footer nav {
+
         justify-content: flex-start;
     }
 }
 
 
-/* =========================================================
-   15. VERY SMALL SCREENS
-   ========================================================= */
+/* ==========================================================
+   17. VERY SMALL SCREENS
+   ========================================================== */
 
 @media (max-width: 450px) {
 
+    .chair-hero {
+
+        padding: 20px 16px;
+    }
+
     .chair-hero h1 {
+
         font-size: 31px;
     }
 
+    .hero-badge {
+
+        font-size: 10px;
+
+        padding: 7px 11px;
+    }
+
     .quick-actions-grid {
+
         grid-template-columns: 1fr;
     }
 
     .quick-action {
+
         min-height: 60px;
 
         flex-direction: row;
@@ -1075,46 +1387,57 @@ body {
         padding: 12px 15px;
     }
 
+    .quick-action span {
+
+        text-align: left;
+    }
+
+    .debate-session-content {
+
+        padding-left: 18px;
+
+        padding-right: 18px;
+    }
+
     .debate-session-content h3 {
+
         font-size: 21px;
     }
 
     .chair-footer nav {
+
         gap: 8px;
     }
 }
-/* ==========================================
-   DEBATE STATUS STAT CARD
-========================================== */
 
-.stat-card.status-active {
-    border-left-color: #22c55e;
-}
+/* ==========================================================
+   SIDEBAR / CONTENT ALIGNMENT
+   ========================================================== */
 
-.stat-card.status-draft {
-    border-left-color: #f59e0b;
-}
-
-.stat-card.status-pending {
-    border-left-color: #f59e0b;
-}
-
-.stat-card.status-stopped {
-    border-left-color: #ef4444;
-}
-
-.stat-card.status-archived {
-    border-left-color: #6b7280;
-}
-
-.stat-card.status-none {
-    border-left-color: #9ca3af;
+/* Expanded sidebar */
+.main-content.chair-dashboard-page {
+    margin-left: var(--sidebar-width) !important;
 }
 
 
-.debate-status-value {
-    text-transform: uppercase;
-    font-weight: 800;
-    line-height: 1.1;
-    white-space: normal;
+/* Collapsed sidebar */
+body.sidebar-collapsed .main-content.chair-dashboard-page {
+    margin-left: 78px !important;
+}
+
+
+/* Mobile */
+@media (max-width: 992px) {
+
+    .main-content.chair-dashboard-page {
+        margin-left: 0 !important;
+    }
+
+    body.sidebar-mobile-open .main-content.chair-dashboard-page {
+        margin-left: 0 !important;
+    }
+
+    body.sidebar-collapsed .main-content.chair-dashboard-page {
+        margin-left: 0 !important;
+    }
 }

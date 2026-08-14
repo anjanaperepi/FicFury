@@ -239,7 +239,25 @@ const SIDEBAR_MENU = {
 
             ]
 
-        }
+        },
+
+            account: {
+
+        title: "Account",
+
+        items: [
+
+            {
+                id: "profile",
+                title: "Profile",
+                icon: "user",
+                page: "chair-profile.html",
+                enabled: true
+            }
+
+        ]
+
+    }
 
     },
     DELEGATE: {
