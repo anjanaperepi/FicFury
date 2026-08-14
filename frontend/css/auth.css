@@ -614,38 +614,45 @@ form {
 }
 
 .password-wrapper input {
+    width: 100%;
     padding-right: 52px;
 }
 
-.toggle-password {
+.auth-card form .toggle-password {
     position: absolute;
 
-    right: 12px;
+    right: 10px;
     top: 50%;
 
-    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
 
-    width: 34px;
-    height: 34px;
+    margin: 0;
+    padding: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 0;
+    transform: translateY(-50%);
 
     background: transparent;
     color: var(--ff-black);
 
     border: none;
-
     box-shadow: none;
+
+    font-size: 0.9rem;
 
     cursor: pointer;
 }
 
-.toggle-password:hover {
+.auth-card form .toggle-password:hover {
+    background: transparent;
     color: var(--ff-red);
+
+    transform: translateY(-50%);
+    box-shadow: none;
 }
 
 .password-feedback {
