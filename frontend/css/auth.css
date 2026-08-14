@@ -603,3 +603,56 @@ form {
         align-items: flex-start;
     }
 }
+/* =========================================================
+   PASSWORD CONTROLS
+   ========================================================= */
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    padding-right: 52px;
+}
+
+.toggle-password {
+    position: absolute;
+
+    right: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: transparent;
+    color: var(--ff-black);
+
+    border: none;
+
+    box-shadow: none;
+
+    cursor: pointer;
+}
+
+.toggle-password:hover {
+    color: var(--ff-red);
+}
+
+.password-feedback {
+    min-height: 20px;
+
+    margin-top: 7px;
+
+    font-size: 0.75rem;
+    font-weight: 800;
+}
