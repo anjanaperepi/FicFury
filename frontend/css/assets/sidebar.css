@@ -1,944 +1,1903 @@
-/*==========================================================
-    SIDEBAR CONTAINER
-==========================================================*/
+/* ==========================================================
+   FIC FURY — SIDEBAR V2
+   COMIC / EDITORIAL UI
+   ========================================================== */
 
-.sidebar{
+:root {
+    --ff-black: #111111;
+    --ff-deep-black: #080808;
+    --ff-yellow: #ffd21c;
+    --ff-red: #ff3f3f;
+    --ff-cream: #fff8df;
+    --ff-white: #fffdf7;
+    --ff-grey: #a7a39a;
 
-    position:fixed;
+    --sidebar-width: 310px;
+    --sidebar-collapsed-width: 78px;
 
-    inset:0 auto 0 0;
+    --comic-border: 2px solid #080808;
+    --comic-shadow: 4px 4px 0 #080808;
+}
 
-    width:var(--sidebar-width);
 
-    height:100vh;
+/* ==========================================================
+   SIDEBAR
+   ========================================================== */
 
-    display:flex;
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-    flex-direction:column;
+    width: var(--sidebar-width);
+    height: 100vh;
 
-    background:black;
+    display: flex;
+    flex-direction: column;
 
-    border-right:4px solid #000;
+    background: var(--ff-deep-black);
 
-    box-shadow:
-        6px 0 0 #000,
-        12px 0 28px rgba(0,0,0,.18);
+    border-right: 3px solid #000;
 
-    overflow:hidden;
+    overflow: visible;
+
+    z-index: 1000;
 
     transition:
-        width .35s ease,
-        transform .35s ease;
-
-    z-index:var(--z-sidebar);
-
-}
-/*==========================================================
-    SIDEBAR HEADER
-==========================================================*/
-
-.sidebar-header{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:18px 18px;
-
-    border-bottom:2px solid rgba(255,255,255,.08);
-
-    flex-shrink:0;
-
-}
-.logo{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-.logo-icon{
-
-    width:52px;
-
-    height:52px;
-
-    border-radius:18px;
-
-    background:var(--primary);
-
-    border:3px solid #000;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#000;
-
-    font-size:26px;
-
-    box-shadow:var(--shadow-comic);
-
-    transition:.3s;
-
-}
-
-.logo-icon:hover{
-
-    transform:rotate(-6deg) scale(1.05);
-
-    box-shadow:
-
-        var(--shadow-comic),
-
-        var(--gold-glow);
-
-}
-.logo-text{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.logo-text h2{
-
-    margin:0;
-
-    color:#FFF;
-    font-size:1.2rem;
-
-    line-height:1.1;
-
-    font-family:var(--font-display);
-
-    letter-spacing:2px;
-
-}
-
-.logo-text span{
-
-    margin-top:2px;
-
-    color:var(--text-muted);
-
-    font-size:.62rem;
-
-    letter-spacing:1.5px;
-
-    text-transform:uppercase;
-
+        width 0.28s ease,
+        transform 0.28s ease;
 }
 
 
+/* Comic halftone texture */
 
+.sidebar::before {
+    content: "";
 
+    position: absolute;
+    inset: 0;
 
-.sidebar-toggle{
+    pointer-events: none;
 
-    width:44px;
+    opacity: 0.045;
 
-    height:44px;
+    background-image:
+        radial-gradient(
+            #ffffff 1px,
+            transparent 1px
+        );
 
-    border:none;
-
-    border-radius:14px;
-
-    background:#1F1F1F;
-
-    color:#FFF;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.sidebar-toggle:hover{
-
-    background:var(--primary);
-
-    color:#000;
-
-    transform:rotate(90deg);
-
-}
-/*==========================================================
-    PROFILE CARD
-==========================================================*/
-
-.sidebar-profile{
-
-    margin:16px;
-
-    padding:16px;
-
-    background:#1B1B1B;
-
-    border:3px solid #000;
-
-    border-radius:16px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow-sm);
-
-    transition:.3s;
-
-}
-
-.sidebar-profile:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:
-
-        var(--shadow-comic),
-
-        var(--gold-glow);
-
-}
-.avatar{
-
-    width:58px;
-
-    height:58px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    background:var(--primary);
-
-    border:3px solid #000;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#000;
-
-    font-size:26px;
-
-    font-weight:700;
-
-}
-
-.profile-info{
-
-    margin-top:10px;
-
-}
-
-.profile-info h3{
-
-    margin:0;
-
-    color:#FFF;
-
-    font-size:.95rem;
-
-}
-
-.profile-info p{
-
-    margin-top:4px;
-
-    color:var(--text-muted);
-
-    font-size:.75rem;
-
-}
-.status{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-top:12px;
-
-    padding:6px 12px;
-
-    border-radius:999px;
-
-    background:#15331E;
-
-    color:#8FFFB3;
-
-    font-size:.72rem;
-
-    font-weight:600;
-
+    background-size: 8px 8px;
 }
 
 
-/*==========================================================
-    NAVIGATION
-==========================================================*/
+/* Keep sidebar content above texture */
 
-.sidebar-nav{
-
-    flex:1;
-
-    overflow-y:auto;
-
-    overflow-x:hidden;
-
-    padding:12px;
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.sidebar-nav::-webkit-scrollbar{
-
-    width:6px;
-
-}
-
-.sidebar-nav::-webkit-scrollbar-track{
-
-    background:transparent;
-
-}
-
-.sidebar-nav::-webkit-scrollbar-thumb{
-
-    background:#3D3D3D;
-
-    border-radius:20px;
-
-}
-
-.sidebar-nav::-webkit-scrollbar-thumb:hover{
-
-    background:var(--primary);
-
-}
-/*==========================================================
-    NAVIGATION HEADINGS
-==========================================================*/
-
-.nav-heading{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin:28px 0 16px;
-
-    color:#777;
-
-    font-size:.72rem;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-}
-.nav-heading,
-.menu-section{
-
-    margin:16px 0 10px;
-
-    font-size:.68rem;
-
-    letter-spacing:2px;
-
-}
-
-.nav-heading::before,
-
-.nav-heading::after{
-
-    content:"";
-
-    flex:1;
-
-    height:2px;
-
-    background:#2F2F2F;
-
-}
-
-/*==========================================================
-    MENU SECTION
-==========================================================*/
-
-.menu-section{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin:28px 0 14px;
-
-    color:#777;
-
-    font-size:.72rem;
-
-    font-weight:700;
-
-    letter-spacing:2px;
-
-    text-transform:uppercase;
-
-}
-
-.menu-section::before,
-
-.menu-section::after{
-
-    content:"";
-
-    flex:1;
-
-    height:2px;
-
-    background:#2D2D2D;
-
+.sidebar > * {
+    position: relative;
+    z-index: 2;
 }
 
 
-/*==========================================================
-    MENU ITEM
-==========================================================*/
+/* ==========================================================
+   HEADER
+   ========================================================== */
 
-.menu-item{
+.sidebar-header {
 
-    position:relative;
+    height: 92px;
+    min-height: 92px;
 
-    display:flex;
+    padding: 12px 12px 12px 14px;
 
-    align-items:center;
+    display: flex;
+    align-items: center;
 
-    gap:14px;
+    gap: 10px;
 
-    padding:12px 16px;
+    border-bottom: 2px solid #303030;
 
-    margin-bottom:6px;
+    flex-shrink: 0;
+}
 
-    border:2px solid transparent;
 
-    border-radius:18px;
+/* ----------------------------------------------------------
+   LOGO
+   ---------------------------------------------------------- */
 
-    color:#E6E6E6;
+.logo {
 
-    text-decoration:none;
+    display: flex;
+    align-items: center;
 
-    cursor:pointer;
+    gap: 9px;
 
-    overflow:hidden;
+    min-width: 0;
+
+    flex: 1;
+}
+
+
+.logo-icon {
+
+    width: 44px;
+    height: 44px;
+
+    min-width: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--ff-yellow);
+
+    color: #000;
+
+    border: 2px solid #000;
+
+    border-radius: 9px;
+
+    box-shadow: 3px 3px 0 var(--ff-red);
+
+    font-size: 20px;
 
     transition:
-
-        background .25s ease,
-
-        border-color .25s ease,
-
-        transform .25s ease,
-
-        box-shadow .25s ease;
-
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
 }
-/*==========================================================
-    MENU HOVER
-==========================================================*/
 
-.menu-item:hover{
 
-    background:#242424;
+.logo-icon:hover {
 
-    border-color:#333;
-
-    transform:translateX(6px);
+    transform:
+        translate(-1px, -2px)
+        rotate(-4deg);
 
     box-shadow:
-
-        0 10px 18px rgba(0,0,0,.15);
-
+        5px 5px 0 var(--ff-red);
 }
 
 
-.menu-item:hover span{
+.logo-text {
 
-    color:#FFFFFF;
+    display: flex;
+    flex-direction: column;
 
+    min-width: 0;
 }
-/*==========================================================
-    ACTIVE ITEM
-==========================================================*/
 
-.menu-item.active{
 
-    background:linear-gradient(
-        90deg,
-        rgba(255,213,79,.22),
-        rgba(255,213,79,.08)
-    );
+.logo-text h2 {
 
-    border:3px solid var(--primary);
+    margin: 0;
 
-    transform:translateX(8px);
+    color: #fff;
+
+    font-family: var(--font-display);
+
+    font-size: 1.15rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: 1.5px;
+
+    white-space: nowrap;
+}
+
+
+.logo-text span {
+
+    margin-top: 5px;
+
+    color: #8e8b84;
+
+    font-size: 0.54rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1.45px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
+.sidebar-profile {
+
+    position: relative;
+
+    top: auto;
+    right: auto;
+
+    width: 39px;
+    height: 39px;
+
+    margin: 0;
+
+    padding: 0;
+
+    flex: 0 0 39px;
+
+    background: transparent;
+
+    border: 0;
+
+    box-shadow: none;
+
+    z-index: 20;
+}
+
+
+/* Avatar itself */
+
+.sidebar-profile .avatar {
+
+    width: 38px;
+    height: 38px;
+
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--ff-yellow);
+
+    border: 2px solid #000;
+
+    color: #000;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    box-shadow: 3px 3px 0 var(--ff-red);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+.sidebar-profile:hover .avatar {
+
+    transform:
+        translateY(-2px)
+        rotate(-5deg);
 
     box-shadow:
-        6px 6px 0 #000,
-        0 0 18px rgba(255,213,79,.35);
-
+        4px 4px 0 var(--ff-red);
 }
 
 
+/* ----------------------------------------------------------
+   FLOATING PROFILE CARD
+   ---------------------------------------------------------- */
 
-/*==========================================================
-    ACTIVE STRIP
-==========================================================*/
+.sidebar-profile .profile-info {
 
-.menu-item::before{
+    position: absolute;
 
-    content:"";
+    top: 48px;
+    right: -8px;
 
-    position:absolute;
+    width: 210px;
 
-    left:0;
+    padding: 15px;
 
-    top:10%;
+    background: var(--ff-cream);
 
-    width:5px;
+    border: 2px solid #000;
 
-    height:80%;
+    border-radius: 4px;
 
-    border-radius:20px;
+    box-shadow:
+        5px 5px 0 #000;
 
-    background:var(--primary);
+    text-align: left;
 
-    transform:scaleY(0);
+    opacity: 0;
 
-    transition:.25s;
+    visibility: hidden;
 
-}
+    transform:
+        translateY(-5px)
+        scale(0.97);
 
-.menu-item:hover::before,
+    transform-origin: top right;
 
-.menu-item.active::before{
-
-    transform:scaleY(1);
-
-}
-/*==========================================================
-    MENU ICONS
-==========================================================*/
-
-.menu-item i{
-
-    width:24px;
-
-    min-width:24px;
-
-    text-align:center;
-
-    font-size:16px;
-
-    color:#D0D0D0;
+    pointer-events: none;
 
     transition:
-
-        transform .25s,
-
-        color .25s;
-
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        visibility 0.15s ease;
 }
 
-.menu-item:hover i{
 
-    color:var(--primary);
+.sidebar-profile:hover .profile-info,
+.sidebar-profile:focus-within .profile-info {
 
-    transform:scale(1.15);
+    opacity: 1;
 
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
 }
 
-.menu-item.active i{
 
-    color:var(--primary);
+/* Little comic speech bubble pointer */
 
+.sidebar-profile .profile-info::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: -8px;
+    right: 18px;
+
+    width: 13px;
+    height: 13px;
+
+    background: var(--ff-cream);
+
+    border-left: 2px solid #000;
+    border-top: 2px solid #000;
+
+    transform: rotate(45deg);
 }
 
-.menu-item span{
 
-    flex:1;
+.sidebar-profile .profile-info h3 {
 
-    font-size:.95rem;
+    margin: 0;
 
-    font-weight:600;
+    color: #111;
 
-    transition:color .25s;
+    font-size: 0.9rem;
 
+    font-weight: 900;
+
+    text-transform: uppercase;
 }
 
-.menu-item:hover span{
 
-    color:#FFF;
+.sidebar-profile .profile-info p {
 
-}
-/*==========================================================
-    NAV BADGE
-==========================================================*/
+    margin: 4px 0 0;
 
-.menu-badge{
+    color: #68645b;
 
-    min-width:24px;
+    font-size: 0.65rem;
 
-    height:24px;
+    font-weight: 800;
 
-    padding:0 8px;
+    text-transform: uppercase;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:var(--secondary);
-
-    color:#FFF;
-
-    border-radius:999px;
-
-    border:2px solid #000;
-
-    font-size:.75rem;
-
-    font-weight:700;
-
-}
-.menu-item.disabled{
-
-    opacity:.45;
-
-    pointer-events:none;
-
-    filter:grayscale(100%);
-
+    letter-spacing: 0.8px;
 }
 
-.menu-item.disabled i{
 
-    color:#777;
+.sidebar-profile .profile-info .status {
 
-}
-/*==========================================================
-    SIDEBAR FOOTER
-==========================================================*/
+    display: inline-flex;
 
-.sidebar-footer{
+    margin-top: 10px;
 
-    padding:16px;
+    padding: 4px 8px;
 
-    border-top:3px solid rgba(255,255,255,.08);
+    background: var(--ff-yellow);
 
-    background:#151515;
+    border: 2px solid #000;
 
-}
-/*==========================================================
-    LOGOUT BUTTON
-==========================================================*/
+    color: #000;
 
-.logout-btn{
+    font-size: 0.6rem;
 
-    width:100%;
+    font-weight: 900;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:12px;
-
-    padding:12px;
-
-    border:none;
-
-    border-radius:18px;
-
-    background:var(--secondary);
-
-    color:#FFF;
-
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.25s;
-
+    text-transform: uppercase;
 }
 
-.logout-btn:hover{
 
-    background:var(--secondary-hover);
+/* ==========================================================
+   TOGGLE
+   ========================================================== */
 
-    transform:translateY(-3px);
+.sidebar-toggle {
 
-    box-shadow:var(--red-glow);
+    width: 38px;
+    height: 38px;
 
-}
+    min-width: 38px;
 
-.logout-btn i{
+    display: grid;
+    place-items: center;
 
-    transition:.25s;
+    background: #1d1d1d;
 
-}
+    color: #fff;
 
-.logout-btn:hover i{
+    border: 2px solid #353535;
 
-    transform:translateX(4px);
+    border-radius: 9px;
 
-
-
-}
-
-/*==========================================================
-    COLLAPSED SIDEBAR
-==========================================================*/
-
-body.sidebar-collapsed .sidebar{
-
-    width:var(--sidebar-collapsed);
-
-}
-
-body.sidebar-collapsed .main-content{
-
-    margin-left:var(--sidebar-collapsed);
-
-}
-/*==========================================================
-    COLLAPSED HEADER
-==========================================================*/
-
-body.sidebar-collapsed .logo{
-
-    justify-content:center;
-
-}
-
-body.sidebar-collapsed .logo-text{
-
-    opacity:0;
-
-    width:0;
-
-    overflow:hidden;
-
-    visibility:hidden;
-
-}
-
-body.sidebar-collapsed .sidebar-header{
-
-    justify-content:center;
-
-    padding:28px 16px;
-
-}
-body.sidebar-collapsed .sidebar-toggle{
-
-    position:absolute;
-
-    right:-14px;
-
-    top:32px;
-
-    width:30px;
-
-    height:30px;
-
-    border-radius:50%;
-
-    border:3px solid #000;
-
-    background:var(--primary);
-
-    color:#000;
-
-}
-/*==========================================================
-    COLLAPSED PROFILE
-==========================================================*/
-
-body.sidebar-collapsed .sidebar-profile{
-
-    padding:16px;
-
-}
-
-body.sidebar-collapsed .profile-info{
-
-    display:none;
-
-}
-
-body.sidebar-collapsed .avatar{
-
-    margin:auto;
-
-}
-body.sidebar-collapsed .menu-section{
-
-    display:none;
-
-}
-/*==========================================================
-    COLLAPSED MENU
-==========================================================*/
-
-body.sidebar-collapsed .menu-item{
-
-    justify-content:center;
-
-    padding:16px;
-
-}
-
-body.sidebar-collapsed .menu-item span{
-
-    display:none;
-
-}
-
-body.sidebar-collapsed .menu-item{
-
-    gap:0;
-
-}
-body.sidebar-collapsed .menu-item i{
-
-    width:auto;
-
-    font-size:20px;
-
-}
-body.sidebar-collapsed .logout-btn{
-
-    padding:15px;
-
-}
-
-body.sidebar-collapsed .logout-btn span{
-
-    display:none;
-
-}
-
-body.sidebar-collapsed .logout-btn{
-
-    justify-content:center;
-
-}
-/*==========================================================
-    TOOLTIP
-==========================================================*/
-
-body.sidebar-collapsed .menu-item::after{
-
-    left:78px;
-
-    background:#111;
-
-    border:2px solid var(--primary);
-
-    border-radius:12px;
-
-    color:#FFF;
-
-    padding:10px 16px;
-
-    font-weight:600;
-
-    box-shadow:var(--shadow-comic);
-
-}
-.sidebar,
-.main-content,
-.logo-text,
-.profile-info,
-.menu-item span,
-.logout-btn span{
+    cursor: pointer;
 
     transition:
-
-        all .35s ease;
-
+        background 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease,
+        border-color 0.18s ease;
 }
+
+
+.sidebar-toggle:hover {
+
+    background: var(--ff-yellow);
+
+    color: #000;
+
+    border-color: #000;
+
+    transform: rotate(-4deg);
+
+    box-shadow: 3px 3px 0 var(--ff-red);
+}
+
+
+/* ==========================================================
+   NAVIGATION AREA
+   ========================================================== */
+
+.sidebar-nav {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+    overflow-x: visible;
+
+    padding:
+        14px
+        12px
+        22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+}
+
+
+/* scrollbar */
+
+.sidebar-nav::-webkit-scrollbar {
+
+    width: 5px;
+}
+
+
+.sidebar-nav::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+
+    background: #393939;
+
+    border-radius: 0;
+}
+
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+
+    background: var(--ff-yellow);
+}
+
+
+/* ==========================================================
+   SECTION HEADINGS
+   ========================================================== */
+
+.menu-section {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin:
+        20px
+        5px
+        7px;
+
+    padding: 0;
+
+    color: #89857c;
+
+    font-size: 0.68rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: 1.8px;
+
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+
+/* Star */
+
+.menu-section::before {
+
+    content: "★";
+
+    color: var(--ff-yellow);
+
+    font-size: 0.58rem;
+
+    flex-shrink: 0;
+}
+
+
+/* Divider */
+
+.menu-section::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background: #353535;
+}
+
+
+/* First section sits closer to header */
+
+.menu-section:first-child {
+
+    margin-top: 5px;
+}
+
+
+/* ==========================================================
+   MENU ITEMS
+   ========================================================== */
+
+.menu-item {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    min-height: 47px;
+
+    padding:
+        9px
+        10px;
+
+    margin:
+        2px
+        0;
+
+    color: #e8e4d9;
+
+    background: transparent;
+
+    border: 2px solid transparent;
+
+    border-radius: 4px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.17s ease,
+        color 0.17s ease,
+        border-color 0.17s ease,
+        transform 0.17s ease,
+        box-shadow 0.17s ease;
+}
+
+
+/* Yellow editorial strip */
+
+.menu-item::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: -2px;
+
+    top: 6px;
+
+    width: 4px;
+
+    height: calc(100% - 12px);
+
+    background: var(--ff-yellow);
+
+    transform: scaleY(0);
+
+    transform-origin: center;
+
+    transition:
+        transform 0.17s ease;
+}
+
+
+/* Hover */
+
+.menu-item:hover {
+
+    background: #1d1d1d;
+
+    border-color: #363636;
+
+    color: #fff;
+
+    transform: translateX(3px);
+}
+
+
+.menu-item:hover::before {
+
+    transform: scaleY(1);
+}
+
+
+/* Icons */
+
+.menu-item i {
+
+    width: 23px;
+
+    min-width: 23px;
+
+    text-align: center;
+
+    color: #aaa69b;
+
+    font-size: 15px;
+
+    transition:
+        color 0.17s ease,
+        transform 0.17s ease;
+}
+
+
+.menu-item:hover i {
+
+    color: var(--ff-yellow);
+
+    transform: scale(1.1);
+}
+
+
+/* Text */
+
+.menu-item span {
+
+    flex: 1;
+
+    color: inherit;
+
+    font-size: 0.88rem;
+
+    font-weight: 800;
+
+    letter-spacing: 0.25px;
+}
+
+
+/* ==========================================================
+   ACTIVE MENU ITEM
+   ========================================================== */
+
+.menu-item.active {
+
+    background: var(--ff-yellow);
+
+    color: #000;
+
+    border:
+        2px solid #000;
+
+    transform: translateX(2px);
+
+    box-shadow:
+        4px 4px 0 var(--ff-red);
+}
+
+
+.menu-item.active::before {
+
+    display: none;
+}
+
+
+.menu-item.active i,
+.menu-item.active span {
+
+    color: #000;
+}
+
+
+.menu-item.active:hover {
+
+    background: var(--ff-yellow);
+
+    color: #000;
+
+    transform:
+        translate(3px, -1px);
+
+    box-shadow:
+        5px 5px 0 var(--ff-red);
+}
+
+
+/* ==========================================================
+   DISABLED ITEMS
+   ========================================================== */
+
+.menu-item.disabled {
+
+    opacity: 0.38;
+
+    filter: grayscale(100%);
+
+    cursor: not-allowed;
+
+    pointer-events: none;
+}
+
+
+/* ==========================================================
+   EDITORIAL NUMBERING
+   ========================================================== */
+
+/*
+   We don't alter the DOM or JS.
+   Numbers are decorative and tied to menu position.
+*/
+
+.menu-section:nth-of-type(2) ~ .menu-item:nth-of-type(1)::after {
+
+    content: "#01";
+}
+
+
+/* Keep badges compatible if another module adds them */
+
+.menu-badge {
+
+    min-width: 20px;
+    height: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 5px;
+
+    background: var(--ff-red);
+
+    color: #fff;
+
+    border: 2px solid #000;
+
+    border-radius: 3px;
+
+    font-size: 0.6rem;
+
+    font-weight: 900;
+}
+
+
+/* ==========================================================
+   FOOTER
+   ========================================================== */
+
+.sidebar-footer {
+
+    flex-shrink: 0;
+
+    padding:
+        10px
+        12px
+        13px;
+
+    background: #0b0b0b;
+
+    border-top:
+        2px solid #303030;
+}
+
+
+.logout-btn {
+
+    width: 100%;
+
+    min-height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 10px;
+
+    padding:
+        8px
+        11px;
+
+    background: transparent;
+
+    color: #e8e4d9;
+
+    border:
+        2px solid #3a3a3a;
+
+    border-radius: 4px;
+
+    font-size: 0.72rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.8px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.17s ease,
+        color 0.17s ease,
+        border-color 0.17s ease,
+        transform 0.17s ease,
+        box-shadow 0.17s ease;
+}
+
+
+.logout-btn:hover {
+
+    background: var(--ff-red);
+
+    color: #fff;
+
+    border-color: #000;
+
+    transform:
+        translate(2px, -2px);
+
+    box-shadow:
+        4px 4px 0 var(--ff-yellow);
+}
+
+
+.logout-btn i {
+
+    font-size: 13px;
+
+    transition:
+        transform 0.17s ease;
+}
+
+
+.logout-btn:hover i {
+
+    transform: translateX(3px);
+}
+
+
+/* ==========================================================
+   COLLAPSED DESKTOP STATE
+   ========================================================== */
+
+body.sidebar-collapsed .sidebar {
+
+    width:
+        var(--sidebar-collapsed-width);
+}
+
+
+/* Main content */
+
+body.sidebar-collapsed .main-content {
+
+    margin-left:
+        var(--sidebar-collapsed-width);
+}
+
+
+/* Header */
+
+body.sidebar-collapsed .sidebar-header {
+
+    height: 72px;
+
+    min-height: 72px;
+
+    padding:
+        12px 9px;
+
+    justify-content: center;
+}
+
+
+/* Hide brand text */
+
+body.sidebar-collapsed .logo-text {
+
+    display: none;
+}
+
+
+body.sidebar-collapsed .logo {
+
+    flex: 0;
+
+    justify-content: center;
+}
+
+
+/* Hide avatar in collapsed state */
+
+body.sidebar-collapsed .sidebar-profile {
+
+    display: none;
+}
+
+
+/* Toggle becomes floating button */
+
+body.sidebar-collapsed .sidebar-toggle {
+
+    position: absolute;
+
+    right: -12px;
+
+    top: 37px;
+
+    width: 25px;
+
+    height: 25px;
+
+    min-width: 25px;
+
+    border-radius: 50%;
+
+    background: var(--ff-yellow);
+
+    color: #000;
+
+    border: 2px solid #000;
+
+    box-shadow:
+        2px 2px 0 var(--ff-red);
+
+    font-size: 10px;
+
+    z-index: 50;
+}
+
+
+/* Navigation */
+
+body.sidebar-collapsed .sidebar-nav {
+
+    padding:
+        14px
+        9px;
+}
+
+
+/* Hide headings */
+
+body.sidebar-collapsed .menu-section {
+
+    display: none;
+}
+
+
+/* Center menu items */
+
+body.sidebar-collapsed .menu-item {
+
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 9px;
+
+    gap: 0;
+
+    margin:
+        3px
+        0;
+}
+
+
+body.sidebar-collapsed .menu-item span {
+
+    display: none;
+}
+
+
+body.sidebar-collapsed .menu-item i {
+
+    width: auto;
+
+    min-width: 0;
+
+    font-size: 16px;
+}
+
+
+/* Active */
+
+body.sidebar-collapsed .menu-item.active {
+
+    transform: none;
+
+    box-shadow:
+        3px 3px 0 var(--ff-red);
+}
+
+
+/* ==========================================================
+   COLLAPSED TOOLTIPS
+   ========================================================== */
+
+body.sidebar-collapsed .menu-item::after {
+
+    content: attr(data-tooltip);
+
+    position: absolute;
+
+    left: 59px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%)
+        translateX(-4px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    white-space: nowrap;
+
+    padding:
+        8px
+        11px;
+
+    background: var(--ff-cream);
+
+    color: #000;
+
+    border:
+        2px solid #000;
+
+    border-radius: 3px;
+
+    box-shadow:
+        4px 4px 0 var(--ff-red);
+
+    font-size: 0.68rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    pointer-events: none;
+
+    z-index: 200;
+
+    transition:
+        opacity 0.13s ease,
+        transform 0.13s ease,
+        visibility 0.13s ease;
+}
+
+
+body.sidebar-collapsed .menu-item:hover::after {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(-50%)
+        translateX(0);
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
 @media (max-width: 992px) {
 
     .sidebar {
-        transform: translateX(-100%);
-        width: var(--sidebar-width);
+
+        width:
+            var(--sidebar-width);
+
+        transform:
+            translateX(-100%);
+
+        box-shadow:
+            7px 0 0 #000;
     }
 
 
     body.sidebar-mobile-open .sidebar {
-        transform: translateX(0);
+
+        transform:
+            translateX(0);
     }
 
 
     body.sidebar-mobile-open .main-content {
+
         margin-left: 0;
     }
 
 
+    /* Mobile always uses expanded layout */
+
     body.sidebar-collapsed .sidebar {
-        width: var(--sidebar-width);
+
+        width:
+            var(--sidebar-width);
     }
 
 
     body.sidebar-collapsed .main-content {
+
         margin-left: 0;
     }
 
+
+    body.sidebar-collapsed .sidebar-header {
+
+        height: 82px;
+
+        min-height: 82px;
+
+        padding:
+            12px
+            12px
+            12px
+            14px;
+
+        justify-content:
+            space-between;
+    }
+
+
+    body.sidebar-collapsed .logo {
+
+        flex: 1;
+
+        justify-content:
+            flex-start;
+    }
+
+
+    body.sidebar-collapsed .logo-text {
+
+        display: flex;
+    }
+
+
+    body.sidebar-collapsed .sidebar-profile {
+
+        display: block;
+    }
+
+
+    body.sidebar-collapsed .sidebar-nav {
+
+        padding:
+            14px
+            12px
+            22px;
+    }
+
+
+    body.sidebar-collapsed .menu-section {
+
+        display: flex;
+    }
+
+
+    body.sidebar-collapsed .menu-item {
+
+        justify-content:
+            flex-start;
+
+        min-height: 43px;
+
+        padding:
+            8px
+            10px;
+
+        gap: 11px;
+    }
+
+
+    body.sidebar-collapsed .menu-item span {
+
+        display: block;
+    }
+
+
+    body.sidebar-collapsed .menu-item i {
+
+        width: 22px;
+
+        min-width: 22px;
+
+        font-size: 14px;
+    }
+
+
+    body.sidebar-collapsed .menu-item::after {
+
+        display: none;
+    }
+
+
+    body.sidebar-collapsed .logout-btn {
+
+        justify-content:
+            flex-start;
+    }
+
+
+    body.sidebar-collapsed .logout-btn span {
+
+        display: inline;
+    }
 }
 
+
+/* ==========================================================
+   MOBILE BACKDROP
+   ========================================================== */
+
 .sidebar-backdrop {
+
     display: none;
 
     position: fixed;
 
     inset: 0;
 
-    background: rgba(0, 0, 0, 0.55);
+    background:
+        rgba(0, 0, 0, 0.58);
 
-    z-index: calc(var(--z-sidebar) - 1);
+    z-index: 999;
 }
 
 
 .sidebar-backdrop.active {
+
     display: block;
 }
 
+/* ==========================================================
+   FIC FURY — AVATAR HEADER POSITIONING FIX
+   Avatar does NOT occupy navigation space.
+   ========================================================== */
+
+/* Remove profile section from normal document flow */
+.sidebar-profile {
+    position: absolute !important;
+
+    top: 21px;
+    right: 58px;
+
+    width: 40px;
+    height: 40px;
+
+    margin: 0;
+    padding: 0;
+
+    z-index: 100;
+}
+
+
+/* Avatar */
+.sidebar-profile .avatar {
+    width: 38px;
+    height: 38px;
+
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--ff-yellow);
+
+    border: 2px solid #000;
+
+    border-radius: 50%;
+
+    color: #000;
+
+    box-shadow: 3px 3px 0 var(--ff-red);
+
+    cursor: pointer;
+}
+
+
+/* Profile card */
+.sidebar-profile .profile-info {
+
+    top: 48px;
+    right: -8px;
+
+    width: 210px;
+
+    z-index: 300;
+}
+
+
+/* ==========================================================
+   COLLAPSED
+   ========================================================== */
+
+body.sidebar-collapsed .sidebar-profile {
+    display: none;
+}
+
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
 
 @media (max-width: 992px) {
 
-    body.sidebar-mobile-open .sidebar {
-        transform: translateX(0);
+    body.sidebar-collapsed .sidebar-profile {
+        display: block;
+
+        position: absolute !important;
+
+        top: 21px;
+        right: 58px;
+    }
+}
+/* ==========================================================
+   LARGER FIC FURY LOGO
+   ========================================================== */
+
+.logo-icon {
+    width: 56px;
+    height: 56px;
+
+    min-width: 56px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    border: 0;
+    box-shadow: none;
+
+    overflow: visible;
+}
+
+.fic-fury-logo {
+    width: 56px;
+    height: 56px;
+
+    min-width: 56px;
+
+    display: block;
+
+    object-fit: contain;
+
+    border: 0;
+    border-radius: 9px;
+}
+
+/* ==========================================================
+   COLLAPSED SIDEBAR — HIDE LOGOUT TEXT
+   ========================================================== */
+
+body.sidebar-collapsed .sidebar-footer {
+    padding: 10px 9px 13px;
+}
+
+body.sidebar-collapsed .logout-btn {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0;
+}
+
+body.sidebar-collapsed .logout-btn span {
+    display: none !important;
+}
+
+body.sidebar-collapsed .logout-btn i {
+    margin: 0;
+
+    font-size: 15px;
+}
+/* ==========================================================
+   FIC FURY — COLLAPSED ICON RAIL
+   ========================================================== */
+
+@media (min-width: 993px) {
+
+    /* ------------------------------------------------------
+       SIDEBAR WIDTH
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .sidebar {
+        width: 78px;
+        min-width: 78px;
+    }
+
+    body.sidebar-collapsed .main-content {
+        margin-left: 78px;
+    }
+
+
+    /* ------------------------------------------------------
+       HEADER
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .sidebar-header {
+        position: relative;
+
+        width: 78px;
+        height: 88px;
+        min-height: 88px;
+
+        padding: 12px 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Hide the text portion */
+
+    body.sidebar-collapsed .logo-text {
+        display: none;
+    }
+
+    /* Center logo */
+
+    body.sidebar-collapsed .logo {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex: none;
+    }
+
+    body.sidebar-collapsed .logo-icon {
+        width: 48px;
+        height: 48px;
+
+        min-width: 48px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    body.sidebar-collapsed .fic-fury-logo {
+        width: 48px;
+        height: 48px;
+
+        min-width: 48px;
+    }
+
+
+    /* ------------------------------------------------------
+       TOGGLE BUTTON
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .sidebar-toggle {
+
+        position: absolute;
+
+        top: 50%;
+        right: -13px;
+
+        transform: translateY(-50%);
+
+        width: 30px;
+        height: 30px;
+
+        min-width: 30px;
+
+        padding: 0;
+
+        display: grid;
+        place-items: center;
+
+        background: var(--ff-yellow);
+
+        color: #000;
+
+        border: 2px solid #000;
+
+        border-radius: 50%;
+
+        box-shadow: 3px 3px 0 var(--ff-red);
+
+        font-size: 11px;
+
+        z-index: 100;
+    }
+
+    body.sidebar-collapsed .sidebar-toggle:hover {
+
+        transform:
+            translateY(-50%)
+            rotate(-8deg);
+
+        background: var(--ff-yellow);
+
+        box-shadow: 4px 4px 0 var(--ff-red);
+    }
+
+
+    /* ------------------------------------------------------
+       HIDE PROFILE
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .sidebar-profile {
+        display: none;
+    }
+
+
+    /* ------------------------------------------------------
+       NAVIGATION
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .sidebar-nav {
+
+        width: 78px;
+
+        padding:
+            12px
+            9px
+            18px;
+
+        overflow-x: visible;
+    }
+
+
+    /* Hide section headings */
+
+    body.sidebar-collapsed .menu-section {
+        display: none;
+    }
+
+
+    /* ------------------------------------------------------
+       MENU ITEMS
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .menu-item {
+
+        width: 48px;
+        min-width: 48px;
+
+        height: 48px;
+        min-height: 48px;
+
+        margin:
+            4px auto;
+
+        padding: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 0;
+
+        border:
+            2px solid transparent;
+
+        border-radius: 4px;
+
+        transform: none;
+    }
+
+
+    /* Hide labels */
+
+    body.sidebar-collapsed .menu-item span {
+        display: none !important;
+    }
+
+
+    /* Center icons */
+
+    body.sidebar-collapsed .menu-item i {
+
+        width: auto;
+        min-width: 0;
+
+        margin: 0;
+
+        font-size: 17px;
+
+        color: #aaa69b;
+    }
+
+
+    /* ------------------------------------------------------
+       HOVER
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .menu-item:hover {
+
+        background: #1d1d1d;
+
+        border-color: #3a3a3a;
+
+        transform:
+            translateX(2px);
+    }
+
+    body.sidebar-collapsed .menu-item:hover i {
+
+        color: var(--ff-yellow);
+
+        transform: scale(1.12);
+    }
+
+
+    /* ------------------------------------------------------
+       ACTIVE ITEM
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .menu-item.active {
+
+        width: 48px;
+        height: 48px;
+
+        margin:
+            4px auto;
+
+        background: var(--ff-yellow);
+
+        color: #000;
+
+        border:
+            2px solid #000;
+
+        transform: none;
+
+        box-shadow:
+            4px 4px 0 var(--ff-red);
+    }
+
+    body.sidebar-collapsed .menu-item.active i {
+
+        color: #000;
+
+        transform: none;
+    }
+
+    body.sidebar-collapsed .menu-item.active:hover {
+
+        transform:
+            translateY(-1px);
+
+        box-shadow:
+            5px 5px 0 var(--ff-red);
+    }
+
+
+    /* ------------------------------------------------------
+       TOOLTIP
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .menu-item::after {
+
+        content: attr(data-tooltip);
+
+        position: absolute;
+
+        left: 58px;
+        top: 50%;
+
+        width: max-content;
+
+        padding:
+            8px
+            11px;
+
+        background: var(--ff-cream);
+
+        color: #000;
+
+        border:
+            2px solid #000;
+
+        border-radius: 3px;
+
+        box-shadow:
+            4px 4px 0 var(--ff-red);
+
+        font-size: 0.68rem;
+
+        font-weight: 900;
+
+        letter-spacing: 0.5px;
+
+        text-transform: uppercase;
+
+        white-space: nowrap;
+
+        opacity: 0;
+
+        visibility: hidden;
+
+        pointer-events: none;
+
+        transform:
+            translateY(-50%)
+            translateX(-5px);
+
+        z-index: 500;
+
+        transition:
+            opacity 0.13s ease,
+            transform 0.13s ease,
+            visibility 0.13s ease;
+    }
+
+    body.sidebar-collapsed .menu-item:hover::after {
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform:
+            translateY(-50%)
+            translateX(0);
+    }
+
+
+    /* ------------------------------------------------------
+       FOOTER / LOGOUT
+       ------------------------------------------------------ */
+
+    body.sidebar-collapsed .sidebar-footer {
+
+        width: 78px;
+
+        padding:
+            10px
+            9px
+            13px;
+
+        display: flex;
+
+        justify-content: center;
+    }
+
+    body.sidebar-collapsed .logout-btn {
+
+        width: 48px;
+        min-width: 48px;
+
+        height: 48px;
+        min-height: 48px;
+
+        padding: 0;
+
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+
+        gap: 0;
+
+        background: transparent;
+
+        border:
+            2px solid #3a3a3a;
+
+        border-radius: 4px;
+
+        color: #e8e4d9;
+    }
+
+    body.sidebar-collapsed .logout-btn span {
+
+        display: none !important;
+    }
+
+    body.sidebar-collapsed .logout-btn i {
+
+        margin: 0;
+
+        font-size: 16px;
+    }
+
+    body.sidebar-collapsed .logout-btn:hover {
+
+        background: var(--ff-red);
+
+        color: #fff;
+
+        border-color: #000;
+
+        transform:
+            translate(2px, -2px);
+
+        box-shadow:
+            4px 4px 0 var(--ff-yellow);
     }
 
 }
