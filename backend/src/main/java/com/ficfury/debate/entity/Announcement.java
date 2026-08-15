@@ -30,8 +30,7 @@ public class Announcement {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false, length = 2000)
-    private String message;
+
 
 @Column(nullable = false)
 private Boolean pinned = false;

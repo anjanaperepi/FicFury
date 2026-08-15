@@ -930,8 +930,7 @@ card.innerHTML = `
         <h3>${resolution.title}</h3>
 
         <small>
-
-            ${resolution.authorName}
+${resolution.authorName ?? "Unknown"}
 
         </small>
 

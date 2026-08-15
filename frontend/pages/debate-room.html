@@ -15,7 +15,7 @@
   <link href="../css/assets/components.css" rel="stylesheet"/>
   <link href="../css/result-center.css" rel="stylesheet"/>
   <link href="../css/timeline-center.css" rel="stylesheet"/>
-  <link href="../css/debate-room.css" rel="stylesheet"/>
+  <link href="../css/debate-room-cleaned.css" rel="stylesheet"/>
  </head>
  <body>
   <div class="debate-layout">
@@ -25,14 +25,27 @@
      </i>
      Exit Debate
     </button>
-    <div class="header-center">
-     <h1>
-      Debate Room
-     </h1>
-     <span class="session-status waiting" id="sessionBadge">
-      WAITING
-     </span>
+<div class="header-center">
+
+    <div class="debate-title-group">
+
+        <span class="debate-brand">
+            FIC FURY
+        </span>
+
+        <h1 id="debateRoomTitle">
+            Debate Room
+        </h1>
+
     </div>
+
+    <span
+        class="session-status waiting"
+        id="sessionBadge">
+        WAITING
+    </span>
+
+</div>
     <div class="session-timer" id="sessionTimer">
      00:00:00
     </div>
@@ -207,21 +220,7 @@
      </div>
     </section>
    </div>
-   <!-- ======================================== -->
-   <!-- Motion Review -->
-   <!-- ======================================== -->
-   <section class="chair-card">
-    <div class="panel-header">
-     <h2>
-      Pending Motions
-     </h2>
-     <span id="pendingCount">
-      0 Pending
-     </span>
-    </div>
-    <div id="pendingMotionList">
-    </div>
-   </section>
+
   </section>
      <div class="role-panel delegate-sidebar-actions" id="delegatePanel">
       <!-- ========================= -->
@@ -423,6 +422,22 @@
       </div>
       <div id="motionFeed">
       </div>
+
+         <!-- ======================================== -->
+   <!-- Motion Review -->
+   <!-- ======================================== -->
+   <section class="chair-card">
+    <div class="panel-header">
+     <h2>
+      Pending Motions
+     </h2>
+     <span id="pendingCount">
+      0 Pending
+     </span>
+    </div>
+    <div id="pendingMotionList">
+    </div>
+   </section>
      </div>
      <!-- ========================= -->
      <!-- RESOLUTIONS -->
@@ -496,18 +511,18 @@
         </div>
        </div>
       </div>
-      <div class="resolution-chair-view hidden" id="resolutionChairView">
-       <div class="workspace-header">
-        <h3>
-         Resolution Review
-        </h3>
+<div class="resolution-chair-view hidden" id="resolutionChairView">
+
+    <div class="resolution-review-meta">
         <span id="pendingResolutionCount">
-         0 Pending
+            0 Pending
         </span>
-       </div>
-       <div class="resolution-review-list" id="pendingResolutionList">
-       </div>
-      </div>
+    </div>
+
+    <div class="resolution-review-list" id="pendingResolutionList">
+    </div>
+
+</div>
      </div>
      <div class="workspace" id="votingWorkspace">
       <div class="workspace-header">

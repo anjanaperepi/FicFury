@@ -7889,9 +7889,22 @@ body:has(#delegatePanel:not(.hidden))
 }
 
 /* =========================================================
-   WORKSPACE HEADING CLEANUP
-   Keep one primary heading per workspace.
-   ========================================================= */
+
+/* ==========================================================
+   FIC FURY DEBATE ROOM — FINAL CONSOLIDATED OVERRIDES
+   ==========================================================
+   This section contains the final, authoritative layout rules
+   that were previously scattered across multiple patch blocks.
+
+   JavaScript compatibility:
+   - Existing IDs/classes are preserved.
+   - No JS behavior is changed.
+   ========================================================== */
+
+
+/* ==========================================================
+   1. WORKSPACE HEADING CLEANUP
+   ========================================================== */
 
 .resolution-review-meta {
     display: flex;
@@ -7908,34 +7921,41 @@ body:has(#delegatePanel:not(.hidden))
     text-transform: uppercase;
     letter-spacing: 0.8px;
 }
-/* ==========================================================
-   WORKSPACE HEADER CLEANUP
-   Module-specific section headers are the primary headings.
-   ========================================================== */
 
-/* Voting already has its own .voting-section-header */
-#votingWorkspace > .workspace-header {
-    display: none !important;
-}
 
-/* Amendments already has its own .amendment-section-header */
-#amendmentWorkspace > .workspace-header {
-    display: none !important;
-}
-
-/* Results already has its own .results-section-header */
-#resultsWorkspace > .workspace-header {
-    display: none !important;
-}
-
-/* Timeline already has its own .timeline-section-header */
+/* Module-specific section headers are the primary headings. */
+#votingWorkspace > .workspace-header,
+#amendmentWorkspace > .workspace-header,
+#resultsWorkspace > .workspace-header,
 #timelineWorkspace > .workspace-header {
     display: none !important;
 }
+
+
+/* Delegate workspace keeps the module content as the primary
+   visual heading rather than duplicating the generic heading. */
+body:has(#delegatePanel:not(.hidden))
+#motionWorkspace,
+body:has(#delegatePanel:not(.hidden))
+#resolutionWorkspace,
+body:has(#delegatePanel:not(.hidden))
+#amendmentWorkspace,
+body:has(#delegatePanel:not(.hidden))
+#votingWorkspace,
+body:has(#delegatePanel:not(.hidden))
+#resultsWorkspace,
+body:has(#delegatePanel:not(.hidden))
+#timelineWorkspace {
+    padding-top: 0;
+}
+
+
 /* ==========================================================
-   DEBATE WORKSPACE SCROLL
-   Keeps the debate header + tabs fixed while the
-   workspace content scrolls independently.
+   2. GLOBAL WORKSPACE SCROLLING
+   ==========================================================
+   The right panel does NOT scroll.
+   The active workspace does.
+   Header + tabs remain fixed.
    ========================================================== */
 
 .debate-content {
@@ -7944,110 +7964,50 @@ body:has(#delegatePanel:not(.hidden))
     overflow: hidden;
 }
 
-/* Main workspace column */
 .right-panel {
     min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 10px;
+    height: 100%;
+    overflow: hidden !important;
 }
-
-/* Custom scrollbar */
-.right-panel::-webkit-scrollbar {
-    width: 10px;
-}
-
-.right-panel::-webkit-scrollbar-track {
-    background: #F8F5EB;
-    border-left: 2px solid #000;
-}
-
-.right-panel::-webkit-scrollbar-thumb {
-    background: #111;
-    border: 2px solid #F8F5EB;
-}
-
-.right-panel::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-
-/* Firefox */
-.right-panel {
-    scrollbar-width: thin;
-    scrollbar-color: #111 #F8F5EB;
-}
-/* ==========================================================
-   FIC FURY — DEBATE WORKSPACE SCROLL
-   ========================================================== */
-
-/*
- * The overall page stays fixed.
- * Only the Debate Workspace content scrolls.
- */
-
-.debate-content {
-    min-height: 0;
-    overflow: hidden;
-}
-
-
-/* ==========================================================
-   DEBATE WORKSPACE
-   ========================================================== */
 
 #debateWorkspace {
     min-height: 0;
     height: 100%;
-
     display: flex;
     flex-direction: column;
-
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
-
-/* ==========================================================
-   TABS — STAY FIXED
-   ========================================================== */
-
-#debateWorkspace .debate-tabs {
+#debateWorkspace > .panel-header,
+#debateWorkspace > .debate-tabs {
     flex-shrink: 0;
 }
 
-
-/* ==========================================================
-   WORKSPACE CONTENT — SCROLLS
-   ========================================================== */
-
 #debateWorkspace > .workspace {
     flex: 1 1 auto;
-
     min-height: 0;
-
-    overflow-y: auto;
-    overflow-x: hidden;
+    height: 100%;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box;
 
     scrollbar-width: thin;
     scrollbar-color: #111 #f8f5eb;
 }
 
-
-/* Chrome / Edge / Safari */
-
 #debateWorkspace > .workspace::-webkit-scrollbar {
-    width: 9px;
+    width: 10px;
 }
 
 #debateWorkspace > .workspace::-webkit-scrollbar-track {
     background: #f8f5eb;
-
     border-left: 2px solid #000;
 }
 
 #debateWorkspace > .workspace::-webkit-scrollbar-thumb {
     background: #111;
-
     border: 2px solid #f8f5eb;
+    min-height: 40px;
 }
 
 #debateWorkspace > .workspace::-webkit-scrollbar-thumb:hover {
@@ -8055,134 +8015,28 @@ body:has(#delegatePanel:not(.hidden))
 }
 
 
-/* ==========================================================
-   KEEP WORKSPACE HEADERS VISIBLE WHILE CONTENT SCROLLS
-   ========================================================== */
-
-#debateWorkspace > .workspace > .workspace-header {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 10;
-
-    flex-shrink: 0;
-}
-
-
-/* ==========================================================
-   MOTION WORKSPACE
-   ========================================================== */
-
-#motionWorkspace {
-    min-height: 0;
-}
-
-
-/* ==========================================================
-   RESOLUTION WORKSPACE
-   ========================================================== */
-
-#resolutionWorkspace {
-    min-height: 0;
-}
-
-
-/* ==========================================================
-   VOTING / AMENDMENTS / RESULTS / TIMELINE
-   ========================================================== */
-
-#votingWorkspace,
+/* All six workspaces inherit the same scroll behavior. */
+#motionWorkspace,
+#resolutionWorkspace,
 #amendmentWorkspace,
+#votingWorkspace,
 #resultsWorkspace,
 #timelineWorkspace {
     min-height: 0;
+    box-sizing: border-box;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
 }
 
 
 /* ==========================================================
-   MOBILE
-   ========================================================== */
-
-@media (max-width: 800px) {
-
-    #debateWorkspace {
-        height: 100%;
-    }
-
-    #debateWorkspace > .workspace {
-        overflow-y: auto;
-    }
-}
-/* ==========================================================
-   FIC FURY — DEBATE WORKSPACE SCROLL
-   ONLY THE ACTIVE WORKSPACE CONTENT SCROLLS
-   ========================================================== */
-
-#debateWorkspace {
-    min-height: 0;
-    height: 100%;
-    overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-}
-
-
-/* Keep Debate Workspace header and tabs fixed */
-
-#debateWorkspace > .panel-header,
-#debateWorkspace > .debate-tabs {
-    flex-shrink: 0;
-}
-
-
-/* ==========================================================
-   WORKSPACE CONTENT
-   ========================================================== */
-
-#debateWorkspace > .workspace {
-    flex: 1 1 auto;
-    min-height: 0;
-
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    scrollbar-width: thin;
-    scrollbar-color: #111 #F8F5EB;
-}
-
-
-/* Chrome / Edge */
-
-#debateWorkspace > .workspace::-webkit-scrollbar {
-    width: 9px;
-}
-
-#debateWorkspace > .workspace::-webkit-scrollbar-track {
-    background: #F8F5EB;
-}
-
-#debateWorkspace > .workspace::-webkit-scrollbar-thumb {
-    background: #111;
-    border: 2px solid #F8F5EB;
-}
-
-#debateWorkspace > .workspace::-webkit-scrollbar-thumb:hover {
-    background: var(--primary);
-}
-/* ==========================================================
-   FIC FURY — DELEGATE RESOLUTION CENTER
-   FULL CONTENT VISIBILITY
+   3. DELEGATE RESOLUTION CENTER
    ========================================================== */
 
 #resolutionWorkspace {
-    overflow: hidden !important;
+    padding: 0 !important;
+    background: #fff;
 }
-
-
-/* The Delegate resolution center fills the available
-   workspace instead of extending outside it. */
 
 #resolutionDelegateView {
     height: 100%;
@@ -8191,36 +8045,62 @@ body:has(#delegatePanel:not(.hidden))
     display: grid;
     grid-template-columns: 330px minmax(0, 1fr);
 
+    width: 100%;
     overflow: hidden;
+    box-sizing: border-box;
 }
 
-
-/* ==========================================================
-   RESOLUTION LIST
-   ========================================================== */
-
 #resolutionDelegateView .resolution-sidebar {
+    min-width: 0;
     min-height: 0;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 !important;
+
     overflow: hidden;
+
+    border-right: 4px solid #000;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+#resolutionDelegateView .resolution-sidebar > .workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding: 20px 18px;
+
+    background: var(--primary);
+    border-bottom: 4px solid #000;
+    box-sizing: border-box;
+}
+
+#resolutionDelegateView .resolution-sidebar .workspace-header h3 {
+    margin: 0;
+    font-size: 1.45rem;
+    font-weight: 900;
+    line-height: 1.05;
 }
 
 #resolutionList {
     flex: 1 1 auto;
-
     min-height: 0;
 
     max-height: none !important;
 
     overflow-y: auto !important;
     overflow-x: hidden;
+
+    box-sizing: border-box;
 }
 
-
-/* ==========================================================
-   RESOLUTION DETAILS / EDITOR
-   ========================================================== */
-
 #resolutionDelegateView .resolution-details {
+    min-width: 0;
     min-height: 0;
 
     height: 100%;
@@ -8231,76 +8111,41 @@ body:has(#delegatePanel:not(.hidden))
     box-sizing: border-box;
 
     scrollbar-width: thin;
-    scrollbar-color: #111 #F8F5EB;
+    scrollbar-color: #111 #f8f5eb;
 }
-
-
-/* Chrome / Edge */
 
 #resolutionDelegateView .resolution-details::-webkit-scrollbar {
     width: 9px;
 }
 
 #resolutionDelegateView .resolution-details::-webkit-scrollbar-track {
-    background: #F8F5EB;
+    background: #f8f5eb;
 }
 
 #resolutionDelegateView .resolution-details::-webkit-scrollbar-thumb {
     background: #111;
-    border: 2px solid #F8F5EB;
+    border: 2px solid #f8f5eb;
 }
 
 #resolutionDelegateView .resolution-details::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
 }
 
-
-/* ==========================================================
-   EDITOR CONTENT
-   ========================================================== */
-
 #resolutionDelegateView .resolution-editor {
     min-height: 0;
     height: auto;
 }
 
-
-/* Make sure the lower controls remain part of the
-   scrollable details area. */
-
 #resolutionInfo {
     padding-bottom: 30px;
 }
-
-
-/* ==========================================================
-   SPONSORS / SIGNATORIES
-   ========================================================== */
 
 #sponsorList,
 #signatoryList {
     min-height: 38px;
     max-height: none;
-
     overflow: visible;
 }
-
-
-/* ==========================================================
-   ACTION BUTTONS
-   ========================================================== */
-
-#becomeSponsorBtn,
-#becomeSignatoryBtn,
-#submitResolutionBtn,
-#saveResolutionBtn {
-    position: relative;
-    z-index: 2;
-}
-
-
-/* Submit button should remain clearly visible at
-   the bottom of the resolution details. */
 
 #submitResolutionBtn {
     margin-bottom: 20px;
@@ -8308,34 +8153,303 @@ body:has(#delegatePanel:not(.hidden))
 
 
 /* ==========================================================
-   DESKTOP
+   4. CHAIR RESOLUTION CENTER — CARD GRID
    ========================================================== */
 
-@media (min-width: 801px) {
+#resolutionChairView {
+    width: 100%;
+    min-width: 0;
+}
 
-    #resolutionDelegateView .resolution-details {
-        overflow-y: auto;
-    }
+#resolutionChairView.hidden {
+    display: none !important;
+}
 
+#resolutionChairView .workspace-header {
+    background: var(--primary);
+    border-bottom: 4px solid #000;
+}
+
+#pendingResolutionList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 14px 16px 24px;
+
+    align-items: start;
+}
+
+#pendingResolutionList .pending-resolution-card {
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+
+    box-sizing: border-box;
+
+    padding: 14px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background: #fff;
+
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+
+    border-radius: 0;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+#pendingResolutionList .pending-resolution-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 #000;
+}
+
+#pendingResolutionList .pending-resolution-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 10px;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+}
+
+#pendingResolutionList .pending-resolution-header > div {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+#pendingResolutionList .pending-resolution-header h3 {
+    margin: 0;
+
+    font-size: 0.95rem;
+    font-weight: 900;
+    line-height: 1.15;
+
+    color: #111;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#pendingResolutionList .pending-resolution-header small {
+    margin: 0;
+
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+#pendingResolutionList .status-badge {
+    flex-shrink: 0;
+
+    padding: 4px 7px;
+
+    border: 1.5px solid #000;
+
+    font-size: 0.55rem;
+    font-weight: 900;
+    line-height: 1;
+
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+#pendingResolutionList .resolution-progress {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 7px;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    background: transparent;
+}
+
+#pendingResolutionList .progress-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 5px;
+
+    margin: 0;
+    padding: 7px 8px;
+
+    background: #f7f7f7;
+    border: 1.5px solid #000;
+
+    font-size: 0.57rem;
+}
+
+#pendingResolutionList .progress-item span {
+    font-size: 0.57rem;
+    font-weight: 700;
+    color: #555;
+    white-space: nowrap;
+}
+
+#pendingResolutionList .progress-item strong {
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: #111;
+}
+
+#pendingResolutionList .resolution-review-status {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    min-height: 0;
+
+    border: none;
+    background: transparent;
+}
+
+#pendingResolutionList .ready-badge,
+#pendingResolutionList .waiting-badge {
+    display: inline-flex;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 4px 7px;
+
+    border: 1.5px solid #000;
+
+    font-size: 0.55rem;
+    font-weight: 900;
+    line-height: 1.1;
+
+    text-transform: uppercase;
+}
+
+#pendingResolutionList .ready-badge {
+    background: #9be89b;
+}
+
+#pendingResolutionList .waiting-badge {
+    background: #eeeeee;
+}
+
+#pendingResolutionList .resolution-review-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    width: 100%;
+
+    margin: 0;
+    padding-top: 8px;
+
+    border-top: 1.5px dashed #cfcfcf;
+    background: transparent;
+}
+
+#pendingResolutionList .resolution-review-actions button {
+    flex: 1;
+
+    min-height: 30px;
+
+    padding: 6px 8px;
+
+    border: 2px solid #000;
+    border-radius: 0;
+
+    font-size: 0.56rem;
+    font-weight: 900;
+    line-height: 1;
+
+    white-space: nowrap;
+
+    box-shadow: 2px 2px 0 #000;
+
+    cursor: pointer;
+}
+
+#pendingResolutionList .resolution-review-actions button:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 #000;
+}
+
+#pendingResolutionList .resolution-review-actions button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 
 /* ==========================================================
-   MOBILE
+   5. RESPONSIVE FINAL OVERRIDES
    ========================================================== */
 
-@media (max-width: 800px) {
+@media (min-width: 1200px) {
+
+    #pendingResolutionList .pending-resolution-card {
+        padding: 14px;
+    }
+
+}
+
+@media (max-width: 1000px) {
 
     #resolutionDelegateView {
+        grid-template-columns: 290px minmax(0, 1fr);
+    }
+
+    #pendingResolutionList {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    #debateWorkspace {
+        height: 100%;
+    }
+
+    #debateWorkspace > .workspace {
+        overflow-y: auto !important;
+    }
+
+    #resolutionDelegateView {
+        grid-template-columns: 1fr;
         height: auto;
         min-height: 0 !important;
-
-        grid-template-columns: 1fr;
-
         overflow: visible;
     }
 
     #resolutionDelegateView .resolution-sidebar {
+        border-right: none;
+        border-bottom: 4px solid #000;
         overflow: visible;
     }
 
@@ -8347,1569 +8461,41 @@ body:has(#delegatePanel:not(.hidden))
     #resolutionDelegateView .resolution-details {
         height: auto;
         max-height: none;
-
         overflow: visible;
     }
-}
-/* ==========================================================
-   CHAIR — COMPACT RESOLUTION REVIEW
-   ========================================================== */
-
-/* Review area */
-
-#resolutionChairView {
-    width: 100%;
-    min-width: 0;
-}
-
-
-/* Pending resolution list */
-
-#pendingResolutionList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    padding: 12px 16px;
-
-    max-height: none;
-    overflow: visible;
-}
-
-
-/* ==========================================================
-   COMPACT RESOLUTION CARD
-   ========================================================== */
-
-#pendingResolutionList .resolution-review-card,
-#pendingResolutionList .resolution-card,
-#pendingResolutionList article {
-    display: grid;
-
-    grid-template-columns: minmax(0, 1fr) auto;
-
-    align-items: center;
-
-    gap: 12px;
-
-    width: 100%;
-    box-sizing: border-box;
-
-    padding: 10px 12px;
-
-    background: #fff;
-
-    border: 2px solid #000;
-
-    box-shadow: 3px 3px 0 #000;
-
-    min-height: 0;
-}
-
-
-/* ==========================================================
-   COMPACT TYPOGRAPHY
-   ========================================================== */
-
-#pendingResolutionList h3 {
-    margin: 0 0 4px;
-
-    font-size: 0.82rem;
-
-    font-weight: 900;
-
-    line-height: 1.15;
-
-    text-transform: uppercase;
-}
-
-
-#pendingResolutionList p {
-    margin: 2px 0;
-
-    color: #555;
-
-    font-size: 0.66rem;
-
-    line-height: 1.3;
-}
-
-
-/* Don't let long resolution content make the
-   review card enormous */
-
-#pendingResolutionList .resolution-content,
-#pendingResolutionList .resolution-description,
-#pendingResolutionList .resolution-body {
-    max-height: 38px;
-
-    overflow: hidden;
-
-    line-height: 1.3;
-}
-
-
-/* ==========================================================
-   META INFORMATION
-   ========================================================== */
-
-#pendingResolutionList .resolution-meta {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    align-items: center;
-
-    gap: 8px;
-
-    margin-top: 4px;
-}
-
-
-#pendingResolutionList .resolution-meta span {
-    font-size: 0.58rem;
-
-    font-weight: 800;
-
-    color: #666;
-}
-
-
-/* ==========================================================
-   ACTION AREA
-   ========================================================== */
-
-#pendingResolutionList .resolution-actions {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: flex-end;
-
-    gap: 6px;
-
-    flex-shrink: 0;
-}
-
-
-#pendingResolutionList .resolution-actions button {
-    min-height: 30px;
-
-    padding: 5px 9px;
-
-    border: 2px solid #000;
-
-    border-radius: 0;
-
-    font-size: 0.58rem;
-
-    font-weight: 900;
-
-    text-transform: uppercase;
-
-    cursor: pointer;
-
-    box-shadow: 2px 2px 0 #000;
-
-    transition:
-        transform 0.1s ease,
-        box-shadow 0.1s ease;
-}
-
-
-#pendingResolutionList .resolution-actions button:hover {
-    transform: translate(-1px, -1px);
-
-    box-shadow: 3px 3px 0 #000;
-}
-
-
-/* ==========================================================
-   APPROVE / REJECT
-   ========================================================== */
-
-#pendingResolutionList .approve-btn {
-    background: #ffd400;
-
-    color: #111;
-}
-
-
-#pendingResolutionList .reject-btn,
-#pendingResolutionList .dismiss-btn {
-    background: #ff3b30;
-
-    color: #fff;
-}
-
-
-/* ==========================================================
-   PENDING BADGE
-   ========================================================== */
-
-#pendingResolutionList .status-badge,
-#pendingResolutionList .pending-badge {
-    display: inline-flex;
-
-    align-items: center;
-
-    width: fit-content;
-
-    padding: 3px 6px;
-
-    background: #ffd400;
-
-    color: #111;
-
-    border: 1px solid #000;
-
-    font-size: 0.52rem;
-
-    font-weight: 900;
-
-    text-transform: uppercase;
-}
-
-
-/* ==========================================================
-   RESOLUTION REVIEW HEADER
-   ========================================================== */
-
-#resolutionChairView .resolution-review-meta {
-    padding: 8px 16px;
-
-    min-height: 0;
-
-    background: #f5f5f5;
-
-    border-bottom: 2px solid #000;
-}
-
-
-#resolutionChairView #pendingResolutionCount {
-    padding: 3px 7px;
-
-    background: #ffd400;
-
-    color: #111;
-
-    border: 2px solid #000;
-
-    font-size: 0.55rem;
-
-    font-weight: 900;
-
-    text-transform: uppercase;
-
-    box-shadow: 2px 2px 0 #000;
-}
-
-
-/* ==========================================================
-   DESKTOP — MORE DENSITY
-   ========================================================== */
-
-@media (min-width: 1100px) {
-
-    #pendingResolutionList {
-        gap: 7px;
-
-        padding: 10px 14px;
-    }
-
-    #pendingResolutionList .resolution-review-card,
-    #pendingResolutionList .resolution-card,
-    #pendingResolutionList article {
-        padding: 8px 11px;
-    }
-
-    #pendingResolutionList h3 {
-        font-size: 0.78rem;
-    }
-
-    #pendingResolutionList p {
-        font-size: 0.62rem;
-    }
-}
-
-
-/* ==========================================================
-   MOBILE
-   ========================================================== */
-
-@media (max-width: 700px) {
-
-    #pendingResolutionList .resolution-review-card,
-    #pendingResolutionList .resolution-card,
-    #pendingResolutionList article {
-        grid-template-columns: 1fr;
-    }
-
-    #pendingResolutionList .resolution-actions {
-        justify-content: flex-start;
-    }
-}
-
-/* ==========================================================
-   FIC FURY — CHAIR RESOLUTION REVIEW
-   COMPACT CARDS
-   ========================================================== */
-
-#pendingResolutionList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-
-    padding: 10px 14px;
-}
-
-
-/* ==========================================================
-   COMPACT RESOLUTION CARD
-   ========================================================== */
-
-#pendingResolutionList .pending-resolution-card {
-    width: 100%;
-    box-sizing: border-box;
-
-    padding: 10px 12px;
-
-    background: #fff;
-
-    border: 2px solid #000;
-
-    box-shadow: 3px 3px 0 #000;
-
-    display: grid;
-
-    grid-template-columns: minmax(0, 1fr) auto;
-
-    grid-template-areas:
-        "header actions"
-        "progress actions"
-        "status actions";
-
-    column-gap: 16px;
-    row-gap: 5px;
-
-    align-items: center;
-
-    min-height: 0;
-}
-
-
-/* ==========================================================
-   TITLE + AUTHOR
-   ========================================================== */
-
-#pendingResolutionList .pending-resolution-header {
-    grid-area: header;
-
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    min-width: 0;
-
-    margin: 0;
-    padding: 0;
-
-    background: transparent;
-
-    border: 0;
-}
-
-
-#pendingResolutionList .pending-resolution-header > div {
-    min-width: 0;
-
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
-
-
-#pendingResolutionList .pending-resolution-header h3 {
-    margin: 0;
-
-    font-size: 0.82rem;
-    font-weight: 900;
-
-    line-height: 1.15;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-#pendingResolutionList .pending-resolution-header small {
-    flex-shrink: 0;
-
-    font-size: 0.62rem;
-    font-weight: 700;
-
-    color: #666;
-}
-
-
-/* ==========================================================
-   STATUS BADGE
-   ========================================================== */
-
-#pendingResolutionList .pending-resolution-header .status-badge {
-    flex-shrink: 0;
-
-    padding: 3px 6px;
-
-    border: 1px solid #000;
-
-    font-size: 0.55rem;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    text-transform: uppercase;
-}
-
-
-/* ==========================================================
-   PROGRESS
-   ========================================================== */
-
-#pendingResolutionList .resolution-progress {
-    grid-area: progress;
-
-    display: flex;
-    align-items: center;
-
-    gap: 16px;
-
-    margin: 0;
-    padding: 0;
-
-    border: 0;
-}
-
-
-#pendingResolutionList .progress-item {
-    display: flex;
-    align-items: center;
-
-    gap: 5px;
-
-    font-size: 0.6rem;
-
-    white-space: nowrap;
-}
-
-
-#pendingResolutionList .progress-item span {
-    color: #666;
-
-    font-weight: 700;
-}
-
-
-#pendingResolutionList .progress-item strong {
-    font-size: 0.62rem;
-
-    font-weight: 900;
-}
-
-
-/* ==========================================================
-   READY / WAITING STATUS
-   ========================================================== */
-
-#pendingResolutionList .resolution-review-status {
-    grid-area: status;
-
-    margin: 0;
-    padding: 0;
-
-    min-height: 0;
-
-    border: 0;
-}
-
-
-#pendingResolutionList .ready-badge,
-#pendingResolutionList .waiting-badge {
-    display: inline-flex;
-
-    align-items: center;
-
-    padding: 2px 6px;
-
-    font-size: 0.54rem;
-
-    font-weight: 900;
-
-    line-height: 1.2;
-
-    border: 1px solid #000;
-}
-
-
-#pendingResolutionList .ready-badge {
-    background: #a8e6a3;
-}
-
-
-#pendingResolutionList .waiting-badge {
-    background: #eee;
-}
-
-
-/* ==========================================================
-   ACTIONS
-   ========================================================== */
-
-#pendingResolutionList .resolution-review-actions {
-    grid-area: actions;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: 5px;
-
-    margin: 0;
-    padding: 0;
-
-    border: 0;
-}
-
-
-#pendingResolutionList .resolution-review-actions button {
-    min-height: 29px;
-
-    padding: 5px 8px;
-
-    border-width: 2px;
-
-    border-radius: 0;
-
-    font-size: 0.56rem;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    white-space: nowrap;
-
-    box-shadow: 2px 2px 0 #000;
-}
-
-
-#pendingResolutionList .resolution-review-actions button:hover:not(:disabled) {
-    transform: translate(-1px, -1px);
-
-    box-shadow: 3px 3px 0 #000;
-}
-
-
-/* ==========================================================
-   DISABLED APPROVE BUTTON
-   ========================================================== */
-
-#pendingResolutionList .resolution-review-actions button:disabled {
-    opacity: 0.45;
-
-    cursor: not-allowed;
-
-    box-shadow: none;
-}
-
-
-/* ==========================================================
-   DESKTOP — EXTRA DENSITY
-   ========================================================== */
-
-@media (min-width: 1200px) {
-
-    #pendingResolutionList .pending-resolution-card {
-        padding: 8px 11px;
-
-        grid-template-columns: minmax(0, 1fr) auto;
-
-        column-gap: 20px;
-    }
-
-    #pendingResolutionList .pending-resolution-header h3 {
-        font-size: 0.78rem;
-    }
-
-    #pendingResolutionList .pending-resolution-header small {
-        font-size: 0.58rem;
-    }
-
-    #pendingResolutionList .resolution-progress {
-        gap: 20px;
-    }
-}
-
-
-/* ==========================================================
-   MOBILE
-   ========================================================== */
-
-@media (max-width: 750px) {
-
-    #pendingResolutionList .pending-resolution-card {
-        grid-template-columns: 1fr;
-
-        grid-template-areas:
-            "header"
-            "progress"
-            "status"
-            "actions";
-
-        gap: 7px;
-    }
-
-    #pendingResolutionList .resolution-review-actions {
-        justify-content: flex-start;
-    }
-}
-
-/* ==========================================================
-   CHAIR — COMPACT RESOLUTION REVIEW
-   ========================================================== */
-
-#pendingResolutionList {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px 14px;
-}
-
-
-/* ==========================================================
-   CARD
-   ========================================================== */
-
-#pendingResolutionList .pending-resolution-card {
-    width: 100%;
-    box-sizing: border-box;
-
-    min-height: 0;
-
-    padding: 10px 12px;
-
-    background: #ffffff;
-
-    border: 2px solid #000000;
-    box-shadow: 3px 3px 0 #000000;
-
-    display: grid;
-
-    grid-template-columns: minmax(180px, 1.5fr)
-                           minmax(180px, 1fr)
-                           auto;
-
-    grid-template-areas:
-        "header progress actions"
-        "status progress actions";
-
-    column-gap: 16px;
-    row-gap: 4px;
-
-    align-items: center;
-}
-
-
-/* ==========================================================
-   HEADER
-   ========================================================== */
-
-#pendingResolutionList .pending-resolution-header {
-    grid-area: header;
-
-    display: flex;
-    align-items: center;
-
-    gap: 8px;
-
-    min-width: 0;
-
-    margin: 0;
-    padding: 0;
-
-    background: transparent;
-    border: none;
-}
-
-
-#pendingResolutionList .pending-resolution-header > div {
-    display: flex;
-    align-items: baseline;
-
-    gap: 7px;
-
-    min-width: 0;
-}
-
-
-#pendingResolutionList .pending-resolution-header h3 {
-    margin: 0;
-
-    font-size: 0.82rem;
-    line-height: 1.1;
-
-    font-weight: 900;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-#pendingResolutionList .pending-resolution-header small {
-    margin: 0;
-
-    font-size: 0.58rem;
-
-    color: #666;
-
-    white-space: nowrap;
-}
-
-
-/* ==========================================================
-   STATUS BADGE
-   ========================================================== */
-
-#pendingResolutionList .pending-resolution-header .status-badge {
-    flex-shrink: 0;
-
-    padding: 3px 6px;
-
-    border: 1px solid #000;
-
-    font-size: 0.52rem;
-    font-weight: 900;
-
-    line-height: 1;
-
-    text-transform: uppercase;
-}
-
-
-/* ==========================================================
-   PROGRESS
-   ========================================================== */
-
-#pendingResolutionList .resolution-progress {
-    grid-area: progress;
-
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-}
-
-
-#pendingResolutionList .progress-item {
-    display: flex;
-    align-items: center;
-
-    gap: 5px;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-    background: transparent;
-
-    font-size: 0.62rem;
-
-    white-space: nowrap;
-}
 
-
-#pendingResolutionList .progress-item span {
-    font-size: 0.58rem;
-
-    color: #666;
-
-    font-weight: 700;
-}
-
-
-#pendingResolutionList .progress-item strong {
-    font-size: 0.68rem;
-
-    font-weight: 900;
-}
-
-
-/* ==========================================================
-   READY / WAITING STATUS
-   ========================================================== */
-
-#pendingResolutionList .resolution-review-status {
-    grid-area: status;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    min-height: 0;
-}
-
-
-#pendingResolutionList .ready-badge,
-#pendingResolutionList .waiting-badge {
-    display: inline-flex;
-
-    align-items: center;
-
-    width: fit-content;
-
-    padding: 3px 6px;
-
-    border: 1px solid #000;
-
-    font-size: 0.52rem;
-
-    font-weight: 900;
-
-    line-height: 1.1;
-}
-
-
-#pendingResolutionList .ready-badge {
-    background: #a8e6a3;
-}
-
-
-#pendingResolutionList .waiting-badge {
-    background: #f1f1f1;
-}
-
-
-/* ==========================================================
-   ACTION BUTTONS
-   ========================================================== */
-
-#pendingResolutionList .resolution-review-actions {
-    grid-area: actions;
-
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    gap: 5px;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-    background: transparent;
-}
-
-
-#pendingResolutionList .resolution-review-actions button {
-    min-height: 28px;
-
-    padding: 5px 8px;
-
-    border: 2px solid #000;
-
-    border-radius: 0;
-
-    font-size: 0.55rem;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    white-space: nowrap;
-
-    box-shadow: 2px 2px 0 #000;
-}
-
-
-#pendingResolutionList .resolution-review-actions button:hover:not(:disabled) {
-    transform: translate(-1px, -1px);
-
-    box-shadow: 3px 3px 0 #000;
-}
-
-
-#pendingResolutionList .resolution-review-actions button:disabled {
-    opacity: 0.45;
-
-    cursor: not-allowed;
-
-    box-shadow: none;
-}
-
-
-/* ==========================================================
-   LARGE DESKTOP
-   ========================================================== */
-
-@media (min-width: 1200px) {
-
-    #pendingResolutionList .pending-resolution-card {
-        grid-template-columns:
-            minmax(220px, 1.4fr)
-            minmax(220px, 1fr)
-            auto;
-
-        padding: 9px 12px;
-    }
-
-}
-
-
-/* ==========================================================
-   MOBILE / NARROW WORKSPACE
-   ========================================================== */
-
-@media (max-width: 800px) {
-
-    #pendingResolutionList .pending-resolution-card {
-        grid-template-columns: 1fr;
-
-        grid-template-areas:
-            "header"
-            "progress"
-            "status"
-            "actions";
-
-        gap: 7px;
-    }
-
-    #pendingResolutionList .resolution-review-actions {
-        justify-content: flex-start;
-    }
-
-}
-/* ============================================================
-   CHAIR RESOLUTION CENTER
-   GRID CARD LAYOUT
-   ============================================================ */
-
-/* Resolution list becomes a card grid */
-#pendingResolutionList {
-    display: grid;
-
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 14px;
-
-    padding: 14px;
-
-    width: 100%;
-    box-sizing: border-box;
-
-    align-items: start;
-}
-
-
-/* ============================================================
-   RESOLUTION CARD
-   ============================================================ */
-
-#pendingResolutionList .pending-resolution-card {
-    width: 100%;
-    min-width: 0;
-
-    box-sizing: border-box;
-
-    padding: 14px;
-
-    background: #ffffff;
-
-    border: 2px solid #000000;
-
-    box-shadow: 4px 4px 0 #000000;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 10px;
-
-    border-radius: 0;
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
-}
-
-
-/* Slight comic-style lift */
-#pendingResolutionList .pending-resolution-card:hover {
-    transform: translate(-2px, -2px);
-
-    box-shadow: 6px 6px 0 #000000;
-}
-
-
-/* ============================================================
-   CARD HEADER
-   ============================================================ */
-
-#pendingResolutionList .pending-resolution-header {
-    display: flex;
-
-    align-items: flex-start;
-    justify-content: space-between;
-
-    gap: 10px;
-
-    width: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    background: transparent;
-
-    border: none;
-}
-
-
-/* Title + author */
-#pendingResolutionList .pending-resolution-header > div {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 3px;
-}
-
-
-#pendingResolutionList .pending-resolution-header h3 {
-    margin: 0;
-
-    font-size: 0.95rem;
-
-    font-weight: 900;
-
-    line-height: 1.15;
-
-    color: #111;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-}
-
-
-#pendingResolutionList .pending-resolution-header small {
-    margin: 0;
-
-    font-size: 0.62rem;
-
-    font-weight: 600;
-
-    color: #6b7280;
-}
-
-
-/* ============================================================
-   STATUS BADGE
-   ============================================================ */
-
-#pendingResolutionList .status-badge {
-    flex-shrink: 0;
-
-    padding: 4px 7px;
-
-    border: 1.5px solid #000;
-
-    font-size: 0.55rem;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    text-transform: uppercase;
-
-    white-space: nowrap;
-}
-
-
-/* ============================================================
-   PROGRESS INFORMATION
-   ============================================================ */
-
-#pendingResolutionList .resolution-progress {
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 7px;
-
-    width: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-}
-
-
-#pendingResolutionList .progress-item {
-    display: flex;
-
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 5px;
-
-    padding: 7px 8px;
-
-    background: #f7f7f7;
-
-    border: 1.5px solid #000;
-
-    margin: 0;
-}
-
-
-#pendingResolutionList .progress-item span {
-    font-size: 0.57rem;
-
-    font-weight: 700;
-
-    color: #555;
-
-    white-space: nowrap;
-}
-
-
-#pendingResolutionList .progress-item strong {
-    font-size: 0.65rem;
-
-    font-weight: 900;
-
-    color: #111;
-}
-
-
-/* ============================================================
-   READY / WAITING STATUS
-   ============================================================ */
-
-#pendingResolutionList .resolution-review-status {
-    width: 100%;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    min-height: 0;
-}
-
-
-#pendingResolutionList .ready-badge,
-#pendingResolutionList .waiting-badge {
-    display: inline-flex;
-
-    align-items: center;
-
-    width: fit-content;
-
-    padding: 4px 7px;
-
-    border: 1.5px solid #000;
-
-    font-size: 0.55rem;
-
-    font-weight: 900;
-
-    line-height: 1.1;
-
-    text-transform: uppercase;
-}
-
-
-#pendingResolutionList .ready-badge {
-    background: #9be89b;
-}
-
-
-#pendingResolutionList .waiting-badge {
-    background: #eeeeee;
-}
-
-
-/* ============================================================
-   ACTION BUTTONS
-   ============================================================ */
-
-#pendingResolutionList .resolution-review-actions {
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-
-    width: 100%;
-
-    margin: 0;
-    padding-top: 8px;
-
-    border-top: 1.5px dashed #cfcfcf;
-
-    background: transparent;
-}
-
-
-#pendingResolutionList .resolution-review-actions button {
-    flex: 1;
-
-    min-height: 30px;
-
-    padding: 6px 8px;
-
-    border: 2px solid #000;
-
-    border-radius: 0;
-
-    font-size: 0.56rem;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    white-space: nowrap;
-
-    box-shadow: 2px 2px 0 #000;
-
-    cursor: pointer;
-}
-
-
-#pendingResolutionList .resolution-review-actions button:hover:not(:disabled) {
-    transform: translate(-1px, -1px);
-
-    box-shadow: 3px 3px 0 #000;
-}
-
-
-#pendingResolutionList .resolution-review-actions button:disabled {
-    opacity: 0.45;
-
-    cursor: not-allowed;
-
-    box-shadow: none;
-}
-
-
-/* ============================================================
-   RESOLUTION WORKSPACE SCROLL
-   ============================================================ */
-
-/*
-   Keep the workspace header + tabs fixed.
-   Only the resolution content gets the scrollbar.
-*/
-
-#pendingResolutionList {
-    max-height: calc(100vh - 300px);
-
-    overflow-y: auto;
-
-    overflow-x: hidden;
-}
-
-
-/* Custom scrollbar */
-#pendingResolutionList::-webkit-scrollbar {
-    width: 8px;
-}
-
-
-#pendingResolutionList::-webkit-scrollbar-track {
-    background: #f1f1f1;
-
-    border-left: 1px solid #000;
-}
-
-
-#pendingResolutionList::-webkit-scrollbar-thumb {
-    background: #ff3b30;
-
-    border: 2px solid #000;
-}
-
-
-#pendingResolutionList::-webkit-scrollbar-thumb:hover {
-    background: #ffcc00;
-}
-
-
-/* ============================================================
-   TABLET / NARROW WORKSPACE
-   ============================================================ */
-
-@media (max-width: 1000px) {
-
-    #pendingResolutionList {
-        grid-template-columns: 1fr;
-    }
-
 }
-
-
-/* ============================================================
-   MOBILE
-   ============================================================ */
 
 @media (max-width: 650px) {
 
     #pendingResolutionList {
         grid-template-columns: 1fr;
-
         gap: 10px;
-
         padding: 10px;
     }
-
 
     #pendingResolutionList .pending-resolution-card {
         padding: 12px;
     }
 
-
     #pendingResolutionList .resolution-progress {
         grid-template-columns: 1fr;
     }
 
-
     #pendingResolutionList .resolution-review-actions {
         flex-wrap: wrap;
     }
-
 
     #pendingResolutionList .resolution-review-actions button {
         flex: 1 1 30%;
     }
 
 }
-/* ==========================================================
-   RESOLUTION WORKSPACE — INDEPENDENT SCROLL
-   ========================================================== */
 
-#debateWorkspace > #resolutionWorkspace {
-    flex: 1 1 auto;
+@media (max-width: 600px) {
 
-    min-height: 0;
-    height: 100%;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    padding: 0 !important;
-
-    box-sizing: border-box;
-
-    scrollbar-width: thin;
-    scrollbar-color: #111 #f8f5eb;
-}
-
-
-/* Chrome / Edge / Safari */
-
-#debateWorkspace > #resolutionWorkspace::-webkit-scrollbar {
-    width: 10px;
-}
-
-#debateWorkspace > #resolutionWorkspace::-webkit-scrollbar-track {
-    background: #f8f5eb;
-
-    border-left: 2px solid #000;
-}
-
-#debateWorkspace > #resolutionWorkspace::-webkit-scrollbar-thumb {
-    background: #111;
-
-    border: 2px solid #f8f5eb;
-
-    min-height: 40px;
-}
-
-#debateWorkspace > #resolutionWorkspace::-webkit-scrollbar-thumb:hover {
-    background: #ffd400;
-}
-
-
-/* ==========================================================
-   RESOLUTION CARD GRID
-   ========================================================== */
-
-#resolutionWorkspace .resolution-review-list {
-    display: grid;
-
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap: 14px;
-
-    padding: 14px 16px 24px;
-
-    box-sizing: border-box;
-
-    width: 100%;
-}
-
-
-/* ==========================================================
-   MOBILE
-   ========================================================== */
-
-@media (max-width: 900px) {
-
-    #resolutionWorkspace .resolution-review-list {
-        grid-template-columns: 1fr;
+    #resolutionDelegateView .resolution-details {
+        padding: 16px;
     }
 
-}
-/* ==========================================================
-   FIC FURY — DEBATE WORKSPACE GLOBAL SCROLL
-   Applies to ALL workspace tabs
-   ========================================================== */
-
-
-/* ----------------------------------------------------------
-   THE RIGHT PANEL ITSELF MUST NOT SCROLL
-   ---------------------------------------------------------- */
-
-.right-panel {
-    min-height: 0;
-    height: 100%;
-    overflow: hidden !important;
-}
-
-
-/* ----------------------------------------------------------
-   MAIN DEBATE WORKSPACE
-   ---------------------------------------------------------- */
-
-#debateWorkspace {
-    min-height: 0;
-    height: 100%;
-
-    display: flex;
-    flex-direction: column;
-
-    overflow: hidden !important;
-}
-
-
-/* ----------------------------------------------------------
-   ACTIVE WORKSPACE CONTENT
-   ---------------------------------------------------------- */
-
-#debateWorkspace > .workspace {
-    flex: 1 1 auto;
-
-    min-height: 0;
-    height: 100%;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    box-sizing: border-box;
-
-    scrollbar-width: thin;
-    scrollbar-color: #111 #f8f5eb;
-}
-
-
-/* ----------------------------------------------------------
-   WORKSPACE SCROLLBAR
-   Chrome / Edge / Safari
-   ---------------------------------------------------------- */
-
-#debateWorkspace > .workspace::-webkit-scrollbar {
-    width: 10px;
-}
-
-#debateWorkspace > .workspace::-webkit-scrollbar-track {
-    background: #f8f5eb;
-    border-left: 2px solid #000;
-}
-
-#debateWorkspace > .workspace::-webkit-scrollbar-thumb {
-    background: #111;
-
-    border: 2px solid #f8f5eb;
-
-    min-height: 40px;
-}
-
-#debateWorkspace > .workspace::-webkit-scrollbar-thumb:hover {
-    background: #ffd400;
-}
-
-
-/* ----------------------------------------------------------
-   ALL WORKSPACES
-   Make sure no individual workspace disables scrolling
-   ---------------------------------------------------------- */
-
-#motionWorkspace,
-#resolutionWorkspace,
-#amendmentWorkspace,
-#votingWorkspace,
-#resultsWorkspace,
-#timelineWorkspace {
-
-    min-height: 0;
-
-    box-sizing: border-box;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
-
-
-/* ----------------------------------------------------------
-   RESOLUTION WORKSPACE OVERRIDE
-   The old CSS had overflow: visible !important.
-   This restores the global workspace behavior.
-   ---------------------------------------------------------- */
-
-#resolutionWorkspace {
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-}
-
-
-/* ----------------------------------------------------------
-   KEEP THE TOP WORKSPACE UI FIXED
-   ---------------------------------------------------------- */
-
-#debateWorkspace > .panel-header {
-    flex-shrink: 0;
-}
-
-#debateWorkspace > .debate-tabs {
-    flex-shrink: 0;
 }
