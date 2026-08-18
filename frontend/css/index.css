@@ -1554,3 +1554,1120 @@ section {
         width: 120px;
     }
 }
+
+/* ==========================================================
+   FIC FURY REGISTRATION MODAL
+========================================================== */
+
+body.fury-modal-open {
+    overflow: hidden;
+}
+
+.fury-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: grid;
+    place-items: center;
+    padding: 25px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.fury-modal.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.fury-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.78);
+    backdrop-filter: blur(5px);
+}
+
+.fury-modal-card {
+    position: relative;
+    z-index: 1;
+    width: min(900px, 100%);
+    max-height: min(900px, calc(100vh - 50px));
+    overflow-y: auto;
+    padding: 42px;
+    background: var(--cream);
+    color: var(--black);
+    border: 4px solid var(--black);
+    box-shadow: 12px 12px 0 var(--black);
+    transform: translateY(25px) rotate(-0.5deg);
+    transition: transform 0.25s ease;
+}
+
+.fury-modal.active .fury-modal-card {
+    transform: translateY(0) rotate(-0.5deg);
+}
+
+.fury-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 3px solid var(--black);
+    background: var(--yellow);
+    color: var(--black);
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fury-modal-close:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 1px 1px 0 var(--black);
+}
+
+.fury-modal-header {
+    max-width: 700px;
+    margin-bottom: 32px;
+    padding-right: 55px;
+}
+
+.fury-modal-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(54px, 7vw, 88px);
+    line-height: 0.9;
+    margin-bottom: 18px;
+}
+
+.fury-modal-header h2 span {
+    color: var(--red);
+}
+
+.fury-modal-header p {
+    max-width: 650px;
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.fury-form {
+    position: relative;
+}
+
+.fury-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.fury-field {
+    min-width: 0;
+}
+
+.fury-field-full {
+    grid-column: 1 / -1;
+}
+
+.fury-field label:not(.fury-checkbox-label) {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+}
+
+.fury-field input:not([type="checkbox"]),
+.fury-field select,
+.fury-field textarea {
+    width: 100%;
+    border: 3px solid var(--black);
+    border-radius: 0;
+    outline: none;
+    padding: 14px 15px;
+    background: white;
+    color: var(--black);
+    font-family: var(--font-body);
+    font-size: 13px;
+    box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.18);
+    transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fury-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.fury-field input:not([type="checkbox"]):focus,
+.fury-field select:focus,
+.fury-field textarea:focus {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--black);
+}
+
+.fury-field input::placeholder,
+.fury-field textarea::placeholder {
+    color: #999;
+}
+
+.fury-field select {
+    appearance: auto;
+    cursor: pointer;
+}
+
+.fury-field.invalid input:not([type="checkbox"]),
+.fury-field.invalid select,
+.fury-field.invalid textarea {
+    border-color: var(--red);
+}
+
+.fury-field-error {
+    display: block;
+    min-height: 15px;
+    margin-top: 6px;
+    color: var(--red);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.fury-consent {
+    margin-top: 2px;
+}
+
+.fury-checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    cursor: pointer;
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.fury-checkbox-label input {
+    flex: 0 0 auto;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    accent-color: var(--red);
+    cursor: pointer;
+}
+
+.fury-form-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-top: 10px;
+    padding-top: 25px;
+    border-top: 2px dashed #c8c0ad;
+}
+
+.fury-form-note {
+    max-width: 400px;
+    color: var(--gray);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+
+.fury-form-status {
+    min-height: 20px;
+    margin-top: 15px;
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.5;
+}
+
+.fury-form-status.error {
+    color: var(--red);
+}
+
+.fury-form-status.success {
+    color: #247a39;
+}
+
+.fury-success {
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 10px;
+}
+
+.fury-success-burst {
+    width: 82px;
+    height: 82px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 25px;
+    border: 4px solid var(--black);
+    background: var(--yellow);
+    box-shadow: 7px 7px 0 var(--black);
+    font-family: var(--font-display);
+    font-size: 55px;
+    transform: rotate(-5deg);
+}
+
+.fury-success h3 {
+    margin: 8px 0 15px;
+    font-family: var(--font-display);
+    font-size: clamp(60px, 8vw, 100px);
+    line-height: 0.9;
+}
+
+.fury-success h3 span {
+    color: var(--red);
+}
+
+.fury-success p {
+    max-width: 500px;
+    margin-bottom: 28px;
+    color: var(--gray);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.fury-modal-card::-webkit-scrollbar {
+    width: 9px;
+}
+
+.fury-modal-card::-webkit-scrollbar-track {
+    background: #e9e0cc;
+}
+
+.fury-modal-card::-webkit-scrollbar-thumb {
+    background: var(--black);
+}
+
+@media (max-width: 700px) {
+    .fury-modal {
+        padding: 12px;
+    }
+
+    .fury-modal-card {
+        max-height: calc(100vh - 24px);
+        padding: 30px 20px;
+        box-shadow: 7px 7px 0 var(--black);
+    }
+
+    .fury-modal-header {
+        padding-right: 45px;
+    }
+
+    .fury-modal-header h2 {
+        font-size: 56px;
+    }
+
+    .fury-form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .fury-field-full {
+        grid-column: auto;
+    }
+
+    .fury-form-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fury-form-footer .btn {
+        width: 100%;
+    }
+
+    .fury-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+}
+/* ==========================================================
+   FIC FURY — CINEMATIC VIDEO SHOWCASE
+========================================================== */
+
+.fury-showcase {
+
+    position: relative;
+
+    padding: 120px 7vw;
+
+    background: var(--cream);
+
+    overflow: hidden;
+
+}
+
+
+/* ----------------------------------------------------------
+   HALFTONE BACKGROUND
+---------------------------------------------------------- */
+
+.fury-showcase-halftone {
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    width: 45%;
+    height: 100%;
+
+    pointer-events: none;
+
+    opacity: 0.08;
+
+    background-image:
+        radial-gradient(
+            var(--black) 1px,
+            transparent 1px
+        );
+
+    background-size: 9px 9px;
+
+    mask-image:
+        linear-gradient(
+            90deg,
+            transparent,
+            black
+        );
+
+}
+
+
+/* ----------------------------------------------------------
+   HEADER
+---------------------------------------------------------- */
+
+.fury-showcase-header {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-end;
+
+    gap: 50px;
+
+    margin-bottom: 55px;
+
+}
+
+
+.fury-showcase-header h2 {
+
+    margin: 0;
+
+    font-family: var(--font-display);
+
+    font-size: clamp(
+        55px,
+        7vw,
+        105px
+    );
+
+    line-height: 0.85;
+
+    letter-spacing: 1px;
+
+}
+
+
+.fury-showcase-header h2 span {
+
+    display: block;
+
+    color: var(--red);
+
+}
+
+
+.fury-showcase-header p {
+
+    max-width: 420px;
+
+    margin-bottom: 5px;
+
+    color: var(--gray);
+
+    font-size: 15px;
+
+    line-height: 1.8;
+
+}
+
+
+/* ----------------------------------------------------------
+   VIDEO CONTAINER
+---------------------------------------------------------- */
+
+.fury-video-container {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+
+    overflow: hidden;
+
+    background: var(--black);
+
+    border: 5px solid var(--black);
+
+    box-shadow:
+        14px 14px 0 var(--red);
+
+    transform:
+        rotate(-0.5deg)
+        scale(0.97);
+
+    opacity: 0.72;
+
+    transition:
+        transform 1s cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        ),
+        opacity 0.8s ease,
+        box-shadow 0.5s ease;
+
+}
+
+
+/* ----------------------------------------------------------
+   ACTIVE VIDEO STATE
+---------------------------------------------------------- */
+
+.fury-video-container.is-visible {
+
+    opacity: 1;
+
+    transform:
+        rotate(0deg)
+        scale(1);
+
+    box-shadow:
+        14px 14px 0 var(--black);
+
+}
+
+
+.fury-video-container.is-playing {
+
+    box-shadow:
+        14px 14px 0 var(--red);
+
+}
+
+
+/* ----------------------------------------------------------
+   VIDEO
+---------------------------------------------------------- */
+
+.fury-video {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    background: var(--black);
+
+    cursor: pointer;
+
+    transition:
+        transform 1.2s ease;
+
+}
+
+
+/* subtle cinematic zoom */
+
+.fury-video-container.is-playing
+.fury-video {
+
+    transform: scale(1.025);
+
+}
+
+
+/* ----------------------------------------------------------
+   CINEMATIC GRADIENT
+---------------------------------------------------------- */
+
+.fury-video-gradient {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,0.55),
+            transparent 25%,
+            transparent 50%,
+            rgba(0,0,0,0.9)
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,0.35),
+            transparent 45%
+        );
+
+}
+
+
+/* ----------------------------------------------------------
+   VIDEO LABEL
+---------------------------------------------------------- */
+
+.fury-video-label {
+
+    position: absolute;
+
+    top: 25px;
+
+    left: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px 12px;
+
+    background: var(--cream);
+
+    color: var(--black);
+
+    border: 3px solid var(--black);
+
+    box-shadow:
+        4px 4px 0 var(--black);
+
+    font-size: 10px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+
+.fury-video-dot {
+
+    width: 8px;
+
+    height: 8px;
+
+    background: var(--red);
+
+    border-radius: 50%;
+
+    animation:
+        furyVideoPulse 1.2s infinite;
+
+}
+
+
+@keyframes furyVideoPulse {
+
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.35;
+        transform: scale(0.7);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* ----------------------------------------------------------
+   VIDEO INFORMATION
+---------------------------------------------------------- */
+
+.fury-video-info {
+
+    position: absolute;
+
+    z-index: 3;
+
+    left: 40px;
+
+    bottom: 50px;
+
+    max-width: 600px;
+
+    color: white;
+
+}
+
+
+.fury-video-category {
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+    padding: 5px 9px;
+
+    background: var(--red);
+
+    border: 2px solid var(--black);
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+}
+
+
+.fury-video-info h3 {
+
+    margin-bottom: 10px;
+
+    font-family: var(--font-display);
+
+    font-size: clamp(
+        45px,
+        6vw,
+        85px
+    );
+
+    line-height: 0.85;
+
+    -webkit-text-stroke:
+        2px var(--black);
+
+}
+
+
+.fury-video-info h3 span {
+
+    color: var(--yellow);
+
+}
+
+
+.fury-video-info p {
+
+    max-width: 450px;
+
+    color: rgba(
+        255,
+        255,
+        255,
+        0.85
+    );
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
+
+/* ----------------------------------------------------------
+   CENTER PLAY BUTTON
+---------------------------------------------------------- */
+
+.fury-video-play {
+
+    position: absolute;
+
+    z-index: 5;
+
+    top: 50%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-3deg);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px 20px;
+
+    background: var(--yellow);
+
+    border: 3px solid var(--black);
+
+    box-shadow:
+        6px 6px 0 var(--black);
+
+    cursor: pointer;
+
+    font-family: var(--font-body);
+
+    font-size: 11px;
+
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+}
+
+
+.fury-video-play:hover {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg)
+        translate(3px, 3px);
+
+    box-shadow:
+        2px 2px 0 var(--black);
+
+}
+
+
+.play-icon {
+
+    font-size: 16px;
+
+}
+
+
+.fury-video-container.is-playing
+.fury-video-play {
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+
+/* ----------------------------------------------------------
+   SOUND BUTTON
+---------------------------------------------------------- */
+
+.fury-video-sound {
+
+    position: absolute;
+
+    z-index: 6;
+
+    right: 25px;
+
+    bottom: 35px;
+
+    width: 45px;
+
+    height: 45px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: rgba(
+        17,
+        17,
+        17,
+        0.85
+    );
+
+    color: white;
+
+    border: 2px solid white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.fury-video-sound:hover {
+
+    background: var(--red);
+
+    transform: scale(1.08);
+
+}
+
+
+/* ----------------------------------------------------------
+   PROGRESS BAR
+---------------------------------------------------------- */
+
+.fury-video-progress {
+
+    position: absolute;
+
+    z-index: 6;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 5px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
+
+}
+
+
+.fury-video-progress-bar {
+
+    width: 0%;
+
+    height: 100%;
+
+    background: var(--yellow);
+
+    transition:
+        width 0.15s linear;
+
+}
+
+
+/* ----------------------------------------------------------
+   CAPTION
+---------------------------------------------------------- */
+
+.fury-showcase-caption {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 35px;
+
+    padding-top: 20px;
+
+    border-top:
+        2px solid var(--black);
+
+}
+
+
+.fury-showcase-caption span {
+
+    font-family: var(--font-display);
+
+    font-size: 25px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.fury-showcase-caption span:nth-child(2) {
+
+    color: var(--red);
+
+}
+
+
+.fury-showcase-caption span:nth-child(3) {
+
+    color: var(--gray);
+
+}
+
+
+/* ==========================================================
+   VIDEO RESPONSIVE
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .fury-showcase {
+
+        padding:
+            80px 5vw;
+
+    }
+
+
+    .fury-showcase-header {
+
+        display: block;
+
+    }
+
+
+    .fury-showcase-header p {
+
+        margin-top: 25px;
+
+    }
+
+
+    .fury-video-container {
+
+        border-width: 3px;
+
+        box-shadow:
+            8px 8px 0 var(--red);
+
+    }
+
+
+    .fury-video-container.is-visible {
+
+        box-shadow:
+            8px 8px 0 var(--black);
+
+    }
+
+
+    .fury-video-info {
+
+        left: 20px;
+
+        bottom: 30px;
+
+        max-width: 75%;
+
+    }
+
+
+    .fury-video-info h3 {
+
+        font-size: 42px;
+
+    }
+
+
+    .fury-video-info p {
+
+        display: none;
+
+    }
+
+
+    .fury-video-label {
+
+        top: 15px;
+
+        left: 15px;
+
+    }
+
+
+    .fury-video-sound {
+
+        right: 15px;
+
+        bottom: 20px;
+
+        width: 40px;
+
+        height: 40px;
+
+    }
+
+
+    .fury-showcase-caption {
+
+        flex-direction: column;
+
+        gap: 5px;
+
+    }
+
+
+    .fury-showcase-caption span {
+
+        font-size: 22px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .fury-video-container {
+
+        transition: none;
+
+        transform: none;
+
+    }
+
+
+    .fury-video {
+
+        transition: none;
+
+    }
+
+
+    .fury-video-dot {
+
+        animation: none;
+
+    }
+
+}

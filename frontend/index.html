@@ -47,7 +47,7 @@
 
     <div class="nav-actions">
         <a href="./pages/login.html" class="nav-login">Login</a>
-        <a href="./pages/register.html" class="btn btn-small">
+        <a href="#fury-registration" class="btn btn-small fury-register-trigger">
             Join the Fury
         </a>
     </div>
@@ -79,7 +79,7 @@
     <div class="mobile-nav-actions">
         <a href="./pages/login.html">Login</a>
 
-        <a href="./pages/register.html" class="btn">
+        <a href="#fury-registration" class="btn fury-register-trigger">
             Join the Fury
         </a>
     </div>
@@ -118,7 +118,7 @@
 
         <div class="hero-actions">
 
-            <a href="./pages/register.html" class="btn btn-primary">
+            <a href="#fury-registration" class="btn btn-primary fury-register-trigger">
                 ENTER THE FURY
                 <span>→</span>
             </a>
@@ -174,6 +174,158 @@
     <div class="hero-scroll">
         <span></span>
         SCROLL TO ENTER
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FIC FURY VIDEO EXPERIENCE
+========================================================= -->
+
+<section class="fury-showcase" id="fury-showcase">
+
+    <div class="fury-showcase-halftone"></div>
+
+    <div class="fury-showcase-header">
+
+        <div>
+            <span class="eyebrow">
+                01 / GET THE IDEA
+            </span>
+
+            <h2>
+                SEE THE
+                <span>FURY.</span>
+            </h2>
+        </div>
+
+        <p>
+            Step inside FIC FURY and see how fictional
+            worlds become living debate rooms.
+        </p>
+
+    </div>
+
+
+    <!-- CINEMATIC VIDEO -->
+
+    <div
+        class="fury-video-container"
+        id="furyVideoContainer"
+    >
+
+        <video
+            id="furyHowToVideo"
+            class="fury-video"
+            src="./assets/ficfury-how-to.mp4"
+            muted
+            playsinline
+            preload="metadata"
+            tabindex="0"
+            aria-label="FIC FURY platform walkthrough"
+        ></video>
+
+
+        <!-- DARK CINEMATIC GRADIENT -->
+
+        <div class="fury-video-gradient"></div>
+
+
+        <!-- TOP LEFT LABEL -->
+
+        <div class="fury-video-label">
+
+            <span class="fury-video-dot"></span>
+
+            FIC FURY
+
+        </div>
+
+
+        <!-- BOTTOM INFORMATION -->
+
+        <div class="fury-video-info">
+
+            <span class="fury-video-category">
+                FICTIONAL DEBATE
+            </span>
+
+            <h3>
+                WHERE WORLDS
+                <span>COLLIDE.</span>
+            </h3>
+
+            <p>
+                Choose your universe. Become your character.
+                Debate the impossible.
+            </p>
+
+        </div>
+
+
+        <!-- CENTER PLAY BUTTON -->
+
+        <button
+            type="button"
+            class="fury-video-play"
+            id="furyVideoPlay"
+            aria-label="Play FIC FURY video"
+        >
+
+            <span class="play-icon">
+                ▶
+            </span>
+
+            <span class="play-text">
+                WATCH
+            </span>
+
+        </button>
+
+
+        <!-- SOUND BUTTON -->
+
+        <button
+            type="button"
+            class="fury-video-sound"
+            id="furyVideoSound"
+            aria-label="Turn sound on"
+        >
+            🔇
+        </button>
+
+
+        <!-- PROGRESS BAR -->
+
+        <div class="fury-video-progress">
+
+            <div
+                class="fury-video-progress-bar"
+                id="furyVideoProgressBar"
+            ></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CAPTION BELOW VIDEO -->
+
+    <div class="fury-showcase-caption">
+
+        <span>
+            MUN-STYLE DEBATE.
+        </span>
+
+        <span>
+            FICTIONAL UNIVERSES.
+        </span>
+
+        <span>
+            ONE LIVING STORY.
+        </span>
+
     </div>
 
 </section>
@@ -582,7 +734,7 @@
             Then change the story.
         </p>
 
-        <a href="./pages/register.html" class="btn btn-primary btn-large">
+        <a href="#fury-registration" class="btn btn-primary btn-large fury-register-trigger">
             JOIN FIC FURY
             <span>→</span>
         </a>
@@ -642,7 +794,7 @@
             <h4>ACCOUNT</h4>
 
             <a href="./pages/login.html">Login</a>
-            <a href="./pages/register.html">Register</a>
+            <a href="#fury-registration" class="fury-register-trigger">Register</a>
 
         </div>
 
@@ -677,6 +829,170 @@
 
 
 <script src="./js/index.js"></script>
+
+
+<!-- =========================================================
+     FIC FURY REGISTRATION / INTEREST FORM
+========================================================= -->
+
+<div class="fury-modal" id="furyRegistrationModal" aria-hidden="true">
+    <div class="fury-modal-backdrop" data-fury-close></div>
+
+    <section
+        class="fury-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="furyFormTitle"
+    >
+        <button
+            type="button"
+            class="fury-modal-close"
+            id="furyModalClose"
+            aria-label="Close registration form"
+        >
+            ×
+        </button>
+
+        <div class="fury-modal-header">
+            <span class="eyebrow">JOIN THE BATTLEFIELD</span>
+            <h2 id="furyFormTitle">
+                ENTER THE <span>FURY.</span>
+            </h2>
+            <p>
+                Tell us who you are and what kind of fictional chaos
+                you want to step into.
+            </p>
+        </div>
+
+        <form id="furyRegistrationForm" class="fury-form" novalidate>
+            <div class="fury-form-grid">
+                <div class="fury-field fury-field-full">
+                    <label for="furyName">FULL NAME *</label>
+                    <input
+                        type="text"
+                        id="furyName"
+                        name="name"
+                        placeholder="Tony Stark"
+                        autocomplete="name"
+                        required
+                    >
+                    <small class="fury-field-error" data-error-for="name"></small>
+                </div>
+
+                <div class="fury-field">
+                    <label for="furyEmail">EMAIL ADDRESS *</label>
+                    <input
+                        type="email"
+                        id="furyEmail"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+                    <small class="fury-field-error" data-error-for="email"></small>
+                </div>
+
+                <div class="fury-field">
+                    <label for="furyPhone">PHONE NUMBER</label>
+                    <input
+                        type="tel"
+                        id="furyPhone"
+                        name="phone"
+                        placeholder="+91 98765 43210"
+                        autocomplete="tel"
+                    >
+                    <small class="fury-field-error" data-error-for="phone"></small>
+                </div>
+
+                <div class="fury-field">
+                    <label for="furyInstitution">INSTITUTION / COLLEGE *</label>
+                    <input
+                        type="text"
+                        id="furyInstitution"
+                        name="institution"
+                        placeholder="Your college or institution"
+                        autocomplete="organization"
+                        required
+                    >
+                    <small class="fury-field-error" data-error-for="institution"></small>
+                </div>
+
+                <div class="fury-field">
+                    <label for="furyExperience">DEBATE EXPERIENCE *</label>
+                    <select id="furyExperience" name="experience" required>
+                        <option value="">SELECT ONE</option>
+                        <option value="First Timer">FIRST TIMER</option>
+                        <option value="Some Experience">SOME EXPERIENCE</option>
+                        <option value="Experienced">EXPERIENCED</option>
+                        <option value="Veteran">VETERAN</option>
+                    </select>
+                    <small class="fury-field-error" data-error-for="experience"></small>
+                </div>
+
+                <div class="fury-field">
+                    <label for="furyUniverse">PREFERRED UNIVERSE *</label>
+                    <select id="furyUniverse" name="universe" required>
+                        <option value="">SELECT ONE</option>
+                        <option value="Superheroes">SUPERHEROES</option>
+                        <option value="Fantasy">FANTASY</option>
+                        <option value="Sci-Fi">SCI-FI</option>
+                        <option value="Sitcoms">SITCOMS</option>
+                        <option value="Open to anything">OPEN TO ANYTHING</option>
+                    </select>
+                    <small class="fury-field-error" data-error-for="universe"></small>
+                </div>
+
+                <div class="fury-field fury-field-full">
+                    <label for="furyMessage">ANYTHING ELSE WE SHOULD KNOW?</label>
+                    <textarea
+                        id="furyMessage"
+                        name="message"
+                        rows="4"
+                        maxlength="1000"
+                        placeholder="Tell us about your favourite universe, character, MUN experience, or anything else..."
+                    ></textarea>
+                </div>
+
+                <div class="fury-field fury-field-full fury-consent">
+                    <label class="fury-checkbox-label">
+                        <input type="checkbox" id="furyConsent" name="consent" required>
+                        <span>
+                            I agree to be contacted by FIC FURY regarding upcoming
+                            events and participation.
+                        </span>
+                    </label>
+                    <small class="fury-field-error" data-error-for="consent"></small>
+                </div>
+            </div>
+
+            <div class="fury-form-footer">
+                <p class="fury-form-note">
+                    ✦ Your response will be securely collected for FIC FURY.
+                </p>
+
+                <button type="submit" class="btn btn-primary btn-large" id="furySubmitButton">
+                    ENTER THE FURY
+                    <span>→</span>
+                </button>
+            </div>
+
+            <div class="fury-form-status" id="furyFormStatus" role="status" aria-live="polite"></div>
+        </form>
+
+        <div class="fury-success" id="furySuccess" hidden>
+            <div class="fury-success-burst">✓</div>
+            <span class="eyebrow">TRANSMISSION RECEIVED</span>
+            <h3>YOU'RE <span>IN.</span></h3>
+            <p>
+                Thanks for stepping into the Fury. We'll be in touch with
+                the next steps.
+            </p>
+            <button type="button" class="btn" data-fury-close>
+                BACK TO THE BATTLEFIELD
+            </button>
+        </div>
+    </section>
+</div>
 
 </body>
 </html>
