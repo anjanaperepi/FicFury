@@ -92,7 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(password.value !== confirmPassword.value){
 
-            Utils.showToast("Passwords do not match","error");
+           FuryToast.error(
+    "Passwords do not match."
+);
             return;
 
         }
@@ -117,11 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 data
             );
 
-            Utils.showToast(
-                result?.message || "Registration Successful",
-                "success"
-            );
-
+FuryToast.success(
+    result?.message || "Registration successful!"
+);
             setTimeout(() => {
 
                 window.location.href = "login.html";
@@ -129,11 +129,16 @@ document.addEventListener("DOMContentLoaded", () => {
             },1500);
 
         }
-        catch(error){
+catch(error){
 
-            console.error(error);
+    console.error(error);
 
-        }
+    FuryToast.error(
+        error?.message ||
+        "Registration failed. Please try again."
+    );
+
+}
         finally{
 
             button.disabled = false;

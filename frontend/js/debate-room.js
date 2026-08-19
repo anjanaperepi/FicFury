@@ -386,15 +386,30 @@ return true;
         this.state.session = null;
         this.state.sessionId = null;
 
-        DebateUtils.showToast(
-            "No debate session found."
-        );
+if (!session || !session.id) {
+
+    console.log(
+        "No active debate session yet."
+    );
+
+    this.state.session = null;
+    this.state.sessionId = null;
+
+    return false;
+}
 
         return false;
     }
 },
 
+isSessionActive() {
 
+    return (
+        this.state.session &&
+        this.state.session.status === "ACTIVE"
+    );
+
+},
 
 renderCommittee() {
 

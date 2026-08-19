@@ -11,6 +11,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadCertificateEligibility();
 
+    initializeDebateRoomButton();
+
 });
 
 
@@ -330,9 +332,109 @@ console.log("Dashboard:", data);
 console.log("Registration:", data.registration);
     renderCommitteeCard(data);
 
+    updateDebateRoomAccess(data);
+
 }
 
+async function updateDebateRoomAccess(data) {
 
+    const button =
+        document.querySelector(
+            '.quick-action[href="debate-room.html"]'
+        );
+
+    if (!button) {
+        return;
+    }
+
+    let activeSession = false;
+
+    const committeeId =
+        data.committee?.id;
+
+    if (
+        data.registration?.workflowStatus === "ACTIVE" &&
+        committeeId
+    ) {
+
+        try {
+
+            const session =
+                await apiRequest(
+                    `/debate/sessions/active/${committeeId}`
+                );
+
+            activeSession =
+                !!session?.id &&
+                String(session.status).toUpperCase() === "ACTIVE";
+
+        } catch (error) {
+
+            console.log(
+                "No active debate session."
+            );
+
+        }
+    }
+
+    if (activeSession) {
+
+        button.classList.remove(
+            "debate-room-disabled"
+        );
+
+        button.dataset.sessionActive =
+            "true";
+
+        button.href =
+            "debate-room.html";
+
+    } else {
+
+        button.classList.add(
+            "debate-room-disabled"
+        );
+
+        button.dataset.sessionActive =
+            "false";
+
+        button.href = "#";
+
+    }
+
+}
+function initializeDebateRoomButton() {
+
+    const button =
+        document.querySelector(
+            '.quick-action[href="debate-room.html"]'
+        );
+
+    if (!button) {
+        return;
+    }
+
+    button.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                button.dataset.sessionActive !==
+                "true"
+            ) {
+
+                event.preventDefault();
+
+                FuryToast.warning(
+                    "No active debate session yet. Please wait for the Chair to start the session."
+                );
+
+            }
+
+        }
+    );
+
+}
 
 function escapeHTML(value) {
 

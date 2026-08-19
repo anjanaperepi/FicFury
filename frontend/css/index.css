@@ -2671,3 +2671,296 @@ body.fury-modal-open {
     }
 
 }
+
+/* ==========================================================
+   FIC FURY — TOAST NOTIFICATIONS
+========================================================== */
+
+.fury-toast-container {
+
+    position: fixed;
+
+    z-index: 10000;
+
+    top: 25px;
+
+    right: 25px;
+
+    width: min(
+        380px,
+        calc(100vw - 30px)
+    );
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    pointer-events: none;
+
+}
+
+
+/* ==========================================================
+   TOAST
+========================================================== */
+
+.fury-toast {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 62px;
+
+    padding: 12px 14px;
+
+    background: var(--cream);
+
+    color: var(--black);
+
+    border: 3px solid var(--black);
+
+    box-shadow:
+        6px 6px 0 var(--black);
+
+    opacity: 0;
+
+    transform:
+        translateX(40px)
+        rotate(1deg);
+
+    pointer-events: auto;
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
+
+}
+
+
+.fury-toast.show {
+
+    opacity: 1;
+
+    transform:
+        translateX(0)
+        rotate(0deg);
+
+}
+
+
+.fury-toast.hide {
+
+    opacity: 0;
+
+    transform:
+        translateX(40px)
+        rotate(1deg);
+
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.fury-toast-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    background: var(--black);
+
+    color: var(--white);
+
+    border: 2px solid var(--black);
+
+    font-family: var(--font-display);
+
+    font-size: 20px;
+
+}
+
+
+/* ==========================================================
+   MESSAGE
+========================================================== */
+
+.fury-toast-message {
+
+    flex: 1;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+
+}
+
+
+/* ==========================================================
+   CLOSE
+========================================================== */
+
+.fury-toast-close {
+
+    width: 25px;
+
+    height: 25px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    color: var(--black);
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+}
+
+
+.fury-toast-close:hover {
+
+    color: var(--red);
+
+}
+
+
+/* ==========================================================
+   SUCCESS
+========================================================== */
+
+.fury-toast-success {
+
+    border-left:
+        7px solid #1c9c52;
+
+}
+
+
+.fury-toast-success
+.fury-toast-icon {
+
+    background: #1c9c52;
+
+}
+
+
+/* ==========================================================
+   ERROR
+========================================================== */
+
+.fury-toast-error {
+
+    border-left:
+        7px solid var(--red);
+
+}
+
+
+.fury-toast-error
+.fury-toast-icon {
+
+    background: var(--red);
+
+}
+
+
+/* ==========================================================
+   WARNING
+========================================================== */
+
+.fury-toast-warning {
+
+    border-left:
+        7px solid var(--yellow);
+
+}
+
+
+.fury-toast-warning
+.fury-toast-icon {
+
+    background: var(--yellow);
+
+    color: var(--black);
+
+}
+
+
+/* ==========================================================
+   INFO
+========================================================== */
+
+.fury-toast-info {
+
+    border-left:
+        7px solid var(--black);
+
+}
+
+
+.fury-toast-info
+.fury-toast-icon {
+
+    background: var(--black);
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .fury-toast-container {
+
+        top: 15px;
+
+        right: 15px;
+
+        left: 15px;
+
+        width: auto;
+
+    }
+
+
+    .fury-toast {
+
+        min-height: 58px;
+
+    }
+
+}

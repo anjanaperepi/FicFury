@@ -387,6 +387,8 @@ const Sidebar = {
 
         Sidebar.attachEvents();
 
+        Sidebar.updateDebateRoomState();
+
     }
 
 };
@@ -560,6 +562,113 @@ section.items.forEach(item => {
 
 };
 
+Sidebar.updateDebateRoomState = async function () {
+
+    const user =
+        JSON.parse(
+            localStorage.getItem(
+                CONFIG.USER_KEY
+            )
+        );
+
+    if (!user) {
+        return;
+    }
+
+
+    const debateLink =
+        document.querySelector(
+            '.menu-item[data-page="debate-room.html"]'
+        );
+
+    if (!debateLink) {
+        return;
+    }
+
+
+    let activeSession = false;
+
+
+    try {
+
+        if (
+            user.role.toUpperCase() ===
+            "DELEGATE"
+        ) {
+
+            const dashboard =
+                await apiRequest(
+                    "/dashboard/delegate"
+                );
+
+            const committeeId =
+                dashboard.committee?.id;
+
+            if (
+                dashboard.registration?.workflowStatus ===
+                    "ACTIVE" &&
+                committeeId
+            ) {
+
+                const session =
+                    await apiRequest(
+                        `/debate/sessions/active/${committeeId}`
+                    );
+
+                activeSession =
+                    !!session?.id &&
+                    String(session.status).toUpperCase() ===
+                        "ACTIVE";
+            }
+
+        } else if (
+            user.role.toUpperCase() ===
+            "CHAIR"
+        ) {
+
+            const sessions =
+                await apiRequest(
+                    `/debate/sessions/chair/${user.id}`
+                );
+
+            const sessionList =
+                Array.isArray(sessions)
+                    ? sessions
+                    : [sessions];
+
+
+            activeSession =
+                sessionList.some(
+                    session =>
+                        String(
+                            session?.status
+                        ).toUpperCase() ===
+                        "ACTIVE"
+                );
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "No active debate session."
+        );
+
+    }
+
+
+    debateLink.classList.toggle(
+        "debate-room-disabled",
+        !activeSession
+    );
+
+    debateLink.dataset.sessionActive =
+        activeSession
+            ? "true"
+            : "false";
+
+};
+
 Sidebar.highlightActivePage = function(){
 
     const current =
@@ -648,6 +757,40 @@ if (backdrop) {
             );
 
         }
+
+    });
+
+    document
+    .querySelectorAll(
+        '.menu-item[data-page="debate-room.html"]'
+    )
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function (event) {
+
+                if (
+                    link.dataset.sessionActive !==
+                    "true"
+                ) {
+
+                    event.preventDefault();
+
+                    if (
+                        window.FuryToast
+                    ) {
+
+                        FuryToast.warning(
+                            "No active debate session yet. Please wait for the Chair to start the session."
+                        );
+
+                    }
+
+                }
+
+            }
+        );
 
     });
 

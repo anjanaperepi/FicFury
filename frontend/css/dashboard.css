@@ -1320,3 +1320,23 @@
 #certificateStatus.checking {
     color: #92400e;
 }
+
+/* ==========================================================
+   DEBATE ROOM — SESSION INACTIVE
+========================================================== */
+
+.quick-action.debate-room-disabled {
+
+    opacity: 0.45;
+
+    filter: grayscale(1);
+
+    cursor: not-allowed;
+
+}
+
+.quick-action.debate-room-disabled:hover {
+
+    transform: none;
+
+}

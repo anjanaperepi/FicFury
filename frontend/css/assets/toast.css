@@ -1,115 +1,306 @@
-/* ===========================================
-   GLOBAL TOASTS
-=========================================== */
+/* ==========================================================
+   FIC FURY — GLOBAL TOAST NOTIFICATIONS
+========================================================== */
 
-.toast-container{
+.fury-toast-container {
 
-    position:fixed;
+    position: fixed;
 
-    top:25px;
+    z-index: 10000;
 
-    right:25px;
+    top: 25px;
 
-    display:flex;
+    right: 25px;
 
-    flex-direction:column;
+    width: min(
+        380px,
+        calc(100vw - 30px)
+    );
 
-    gap:15px;
+    display: flex;
 
-    z-index:9999;
+    flex-direction: column;
 
-}
+    gap: 12px;
 
-.toast{
-
-    min-width:280px;
-
-    max-width:420px;
-
-    padding:16px 20px;
-
-    border-radius:14px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    color:white;
-
-    opacity:0;
-
-    transform:translateX(100%);
-
-    transition:.35s ease;
-
-    box-shadow:0 20px 50px rgba(0,0,0,.18);
+    pointer-events: none;
 
 }
 
-.toast.show{
 
-    opacity:1;
+/* ==========================================================
+   TOAST
+========================================================== */
 
-    transform:translateX(0);
+.fury-toast {
 
-}
+    display: flex;
 
-.toast.success{
+    align-items: center;
 
-    background:#22c55e;
+    gap: 12px;
 
-}
+    min-height: 62px;
 
-.toast.error{
+    padding: 12px 14px;
 
-    background:#ef4444;
+    background: #f6f0df;
 
-}
+    color: #111111;
 
-.toast.warning{
+    border: 3px solid #111111;
 
-    background:#f59e0b;
+    box-shadow:
+        6px 6px 0 #111111;
 
-}
+    opacity: 0;
 
-.toast.info{
+    transform:
+        translateX(40px)
+        rotate(1deg);
 
-    background:#0ea5e9;
+    pointer-events: auto;
 
-}
-
-.toast i{
-
-    font-size:1.2rem;
-
-}
-
-.toast span{
-
-    flex:1;
-
-}
-
-@media(max-width:768px){
-
-.toast-container{
-
-left:20px;
-
-right:20px;
-
-top:20px;
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s
+        cubic-bezier(
+            0.22,
+            1,
+            0.36,
+            1
+        );
 
 }
 
-.toast{
 
-min-width:auto;
+/* ==========================================================
+   SHOW
+========================================================== */
 
-width:100%;
+.fury-toast.show {
+
+    opacity: 1;
+
+    transform:
+        translateX(0)
+        rotate(0deg);
 
 }
+
+
+/* ==========================================================
+   HIDE
+========================================================== */
+
+.fury-toast.hide {
+
+    opacity: 0;
+
+    transform:
+        translateX(40px)
+        rotate(1deg);
+
+}
+
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.fury-toast-icon {
+
+    width: 34px;
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    border: 2px solid #111111;
+
+    font-family:
+        "Bangers",
+        cursive;
+
+    font-size: 20px;
+
+}
+
+
+/* ==========================================================
+   MESSAGE
+========================================================== */
+
+.fury-toast-message {
+
+    flex: 1;
+
+    font-family:
+        "Inter",
+        sans-serif;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    font-weight: 700;
+
+}
+
+
+/* ==========================================================
+   CLOSE
+========================================================== */
+
+.fury-toast-close {
+
+    width: 25px;
+
+    height: 25px;
+
+    flex-shrink: 0;
+
+    display: grid;
+
+    place-items: center;
+
+    padding: 0;
+
+    background: transparent;
+
+    border: none;
+
+    color: #111111;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    line-height: 1;
+
+}
+
+
+.fury-toast-close:hover {
+
+    color: #e52521;
+
+}
+
+
+/* ==========================================================
+   SUCCESS
+========================================================== */
+
+.fury-toast-success {
+
+    border-left:
+        7px solid #1c9c52;
+
+}
+
+
+.fury-toast-success
+.fury-toast-icon {
+
+    background: #1c9c52;
+
+}
+
+
+/* ==========================================================
+   ERROR
+========================================================== */
+
+.fury-toast-error {
+
+    border-left:
+        7px solid #e52521;
+
+}
+
+
+.fury-toast-error
+.fury-toast-icon {
+
+    background: #e52521;
+
+}
+
+
+/* ==========================================================
+   WARNING
+========================================================== */
+
+.fury-toast-warning {
+
+    border-left:
+        7px solid #ffd21f;
+
+}
+
+
+.fury-toast-warning
+.fury-toast-icon {
+
+    background: #ffd21f;
+
+    color: #111111;
+
+}
+
+
+/* ==========================================================
+   INFO
+========================================================== */
+
+.fury-toast-info {
+
+    border-left:
+        7px solid #111111;
+
+}
+
+
+.fury-toast-info
+.fury-toast-icon {
+
+    background: #111111;
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .fury-toast-container {
+
+        top: 15px;
+
+        right: 15px;
+
+        left: 15px;
+
+        width: auto;
+
+    }
+
+
+    .fury-toast {
+
+        min-height: 58px;
+
+    }
 
 }

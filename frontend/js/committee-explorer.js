@@ -211,13 +211,17 @@ async function loadCommittees() {
 
         return await response.json();
 
-    } catch (error) {
+} catch (error) {
 
-        console.error(error);
+    console.error(error);
 
-        return [];
+    FuryToast.error(
+        "Couldn't load committees. Please try again."
+    );
 
-    } finally {
+    return [];
+
+} finally {
 
         hideLoading();
 
@@ -636,11 +640,15 @@ document.addEventListener("click", async (event) => {
 
         openModal();
 
-    } catch (error) {
+} catch (error) {
 
-        console.error(error);
+    console.error(error);
 
-    } finally {
+    FuryToast.error(
+        "Couldn't load committee details. Please try again."
+    );
+
+} finally {
 
         hideLoading();
 
@@ -833,7 +841,9 @@ document.addEventListener("click",async(event)=>{
 
         console.error(error);
 
-        alert("Unable to load characters.");
+FuryToast.error(
+    "Unable to load characters. Please try again."
+);
 
     }
 
@@ -888,17 +898,23 @@ document.addEventListener("click", async (event) => {
     if(event.target.id !== "confirmRegistrationBtn")
         return;
 
-    if(!selectedCharacterId){
+if(!selectedCharacterId){
 
-        alert("Please select a character.");
+    FuryToast.warning(
+        "Please select a character first."
+    );
 
-        return;
+    return;
 
-    }
+}
 
     try{
 
         await registerDelegate();
+
+        FuryToast.success(
+    `You're registered for ${selectedCommitteeName}!`
+);
 
 document.getElementById("committeeDetails").innerHTML = `
 
@@ -959,7 +975,12 @@ document.getElementById("committeeDetails").innerHTML = `
 
     }
 
-    catch (error) {
+catch (error) {
+
+    FuryToast.error(
+        error?.message ||
+        "Registration failed. Please try again."
+    );
 
     // Remove any previous error banner
     const existingError = document.querySelector(".error-banner");

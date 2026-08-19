@@ -1953,3 +1953,23 @@ body.sidebar-collapsed .logout-btn i {
         margin-left: 78px !important;
     }
 }
+
+/* ==========================================================
+   DEBATE ROOM — SESSION INACTIVE
+========================================================== */
+
+.menu-item.debate-room-disabled {
+
+    opacity: 0.4;
+
+    filter: grayscale(1);
+
+    cursor: not-allowed;
+
+}
+
+.menu-item.debate-room-disabled:hover {
+
+    transform: none;
+
+}

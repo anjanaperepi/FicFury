@@ -530,6 +530,8 @@ async function refreshSelectedCommittee() {
 
     updateDebateStatus();
 
+    updateChairDebateRoomAccess();
+
     populateCommittee();
 }
 
@@ -1081,10 +1083,43 @@ function updateDebateStatus() {
             "26px";
     }
 }
-/* ==========================================================
-   COMMITTEE SESSION CARD
-========================================================== */
+function updateChairDebateRoomAccess() {
 
+    const button =
+        document.querySelector(
+            '.quick-action[data-page="debate-room.html"]'
+        );
+
+    if (!button) {
+        return;
+    }
+
+    const active =
+        ChairDashboard.currentSession?.status ===
+        "ACTIVE";
+
+
+    if (active) {
+
+        button.classList.remove(
+            "debate-room-disabled"
+        );
+
+        button.dataset.sessionActive =
+            "true";
+
+    } else {
+
+        button.classList.add(
+            "debate-room-disabled"
+        );
+
+        button.dataset.sessionActive =
+            "false";
+
+    }
+
+}
 /* ==========================================================
    COMMITTEE SESSION CARD
 ========================================================== */

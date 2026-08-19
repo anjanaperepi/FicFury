@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../css/assets/components.css">
     <link rel="stylesheet" href="../css/assets/theme.css">
     <link rel="stylesheet" href="../css/assets/forms.css">
+     <link rel="stylesheet" href="../css/assets/toast.css">
     <link rel="stylesheet" href="../css/assets/responsive.css">
 
     <!-- Chair dashboard styles -->
@@ -350,6 +351,7 @@
 <script src="../js/component-loader.js"></script>
 <script src="../js/app.js"></script>
 <script src="../js/sidebar.js"></script>
+<script src="../js/toast.js"></script>
 <script src="../js/chair-dashboard.js"></script>
 
 <script>
@@ -362,16 +364,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelectorAll(".quick-action").forEach(button => {
 
-        button.addEventListener("click", () => {
+button.addEventListener("click", (event) => {
 
-            const page = button.dataset.page;
+    const page =
+        button.dataset.page;
 
-            if (page) {
-                window.location.href = page;
-            }
+    if (
+        page === "debate-room.html" &&
+        button.dataset.sessionActive !== "true"
+    ) {
 
-        });
+        event.preventDefault();
 
+        FuryToast.warning(
+            "No active debate session yet. Please start the session first."
+        );
+
+        return;
+
+    }
+
+    if (page) {
+
+        window.location.href =
+            page;
+
+    }
+
+});
     });
 
 });
