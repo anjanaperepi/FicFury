@@ -50,8 +50,8 @@ async function apiRequest(
         } catch {
             responseData = null;
         }
+if (!response.ok) {
 
-        if (!response.ok) {
 
             const message =
                 responseData?.message ||

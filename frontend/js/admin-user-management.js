@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", init);
 async function init() {
     registerEvents();
     await loadUsers();
+    await updateRequestCount();
 }
 
 function registerEvents() {
@@ -42,6 +43,64 @@ document.getElementById("cancelDelete")
             .classList.add("hidden");
 
         userToDelete = null;
+
+    });
+
+    document
+    .getElementById("usersTab")
+    .addEventListener(
+        "click",
+        () => switchManagementTab("users")
+    );
+
+
+document
+    .getElementById("requestsTab")
+    .addEventListener(
+        "click",
+        () => switchManagementTab("requests")
+    );
+
+
+document
+    .querySelectorAll(".request-filter")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                document
+                    .querySelectorAll(".request-filter")
+                    .forEach(btn =>
+                        btn.classList.remove("active")
+                    );
+
+                button.classList.add("active");
+
+const type =
+    button.dataset.requestType;
+
+
+if (type === "chair") {
+
+    loadChairProposals();
+
+} else if (type === "character") {
+
+    loadCharacterChangeRequests();
+
+} else if (type === "withdrawal") {
+
+    loadWithdrawalRequests();
+
+} else {
+
+    loadAllRequests();
+
+}
+            }
+        );
 
     });
 }
@@ -611,5 +670,1266 @@ function changePage(page) {
 function showError(message) {
 
     alert(message);
+
+}
+function switchManagementTab(tab) {
+
+    const usersPanel =
+        document.getElementById(
+            "usersManagementPanel"
+        );
+
+    const requestsPanel =
+        document.getElementById(
+            "requestsManagementPanel"
+        );
+
+    const usersTab =
+        document.getElementById(
+            "usersTab"
+        );
+
+    const requestsTab =
+        document.getElementById(
+            "requestsTab"
+        );
+
+
+    if (tab === "requests") {
+
+        usersPanel.classList.add(
+            "hidden"
+        );
+
+        requestsPanel.classList.remove(
+            "hidden"
+        );
+
+        usersTab.classList.remove(
+            "active"
+        );
+
+        requestsTab.classList.add(
+            "active"
+        );
+
+        loadChairProposals();
+
+    } else {
+
+        usersPanel.classList.remove(
+            "hidden"
+        );
+
+        requestsPanel.classList.add(
+            "hidden"
+        );
+
+        usersTab.classList.add(
+            "active"
+        );
+
+        requestsTab.classList.remove(
+            "active"
+        );
+
+    }
+
+}
+async function loadChairProposals() {
+
+    const container =
+        document.getElementById(
+            "requestsContainer"
+        );
+
+    container.innerHTML = `
+        <div class="request-loading">
+            Loading chair proposals...
+        </div>
+    `;
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/chair-promotion-requests/pending"
+            );
+
+
+        if (
+            !Array.isArray(requests) ||
+            requests.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-inbox"></i>
+                    <h3>No pending chair proposals</h3>
+                    <p>
+                        There are currently no committee
+                        proposals awaiting review.
+                    </p>
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            requests
+                .map(request =>
+                    renderChairProposal(request)
+                )
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load chair proposals:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Unable to load requests</h3>
+                <p>
+                    Please try again.
+                </p>
+            </div>
+        `;
+
+    }
+
+}
+function renderChairProposal(request) {
+
+    const user =
+        request.user || {};
+
+    return `
+        <div
+            class="request-card chair-proposal-card"
+            data-request-id="${request.id}"
+        >
+
+            <div class="request-card-header">
+
+                <div>
+
+                    <span class="request-type-badge chair">
+                        <i class="fa-solid fa-landmark"></i>
+                        CHAIR PROPOSAL
+                    </span>
+
+                    <h3>
+                        ${request.committeeName}
+                    </h3>
+
+                </div>
+
+                <span class="request-status pending">
+                    PENDING
+                </span>
+
+            </div>
+
+
+            <div class="request-user">
+
+                <strong>
+                    ${user.fullName || "Unknown User"}
+                </strong>
+
+                <span>
+                    ${user.email || ""}
+                </span>
+
+            </div>
+
+
+            <div class="request-details">
+
+                <div>
+                    <strong>Category</strong>
+                    <span>
+                        ${request.category || "—"}
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Date</strong>
+                    <span>
+                        ${request.date || "—"}
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Time</strong>
+                    <span>
+                        ${request.time || "—"}
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Mode</strong>
+                    <span>
+                        ${request.mode || "—"}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Committee Description
+                </strong>
+
+                <p>
+                    ${request.description || "No description provided."}
+                </p>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Why should they chair it?
+                </strong>
+
+                <p>
+                    ${request.proposalReason || "No reason provided."}
+                </p>
+
+            </div>
+
+
+            <div class="request-actions">
+
+                <button
+                    class="btn-danger"
+                    onclick="rejectChairProposal(${request.id})"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                    Reject
+                </button>
+
+
+                <button
+                    class="btn-primary"
+                    onclick="approveChairProposal(${request.id})"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Approve & Create Committee
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+async function approveChairProposal(id) {
+
+    openRequestConfirm(
+        "Approve Chair Proposal",
+        "Approve this proposal and create the committee?",
+        "Approve & Create",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/chair-promotion-requests/${id}/approve?comment=Approved%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+
+                    FuryToast.success(
+                        "Chair proposal approved and committee created."
+                    );
+
+
+
+                await loadChairProposals();
+                await updateRequestCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to approve chair proposal:",
+                    error
+                );
+
+
+
+                    FuryToast.error(
+                        error?.message ||
+                        "Unable to approve chair proposal."
+                    );
+
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function rejectChairProposal(id) {
+
+    openRequestConfirm(
+        "Reject Chair Proposal",
+        "Are you sure you want to reject this committee proposal?",
+        "Reject",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/chair-promotion-requests/${id}/reject?comment=Rejected%20by%20administrator.`,
+                    "PUT"
+                );
+
+  
+                    FuryToast.success(
+                        "Chair proposal rejected."
+                    );
+
+
+
+                await loadChairProposals();
+                await updateRequestCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to reject chair proposal:",
+                    error
+                );
+
+
+
+                    FuryToast.error(
+                        error?.message ||
+                        "Unable to reject chair proposal."
+                    );
+
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function loadCharacterChangeRequests() {
+
+    const container =
+        document.getElementById(
+            "requestsContainer"
+        );
+
+    container.innerHTML = `
+        <div class="request-loading">
+            Loading character change requests...
+        </div>
+    `;
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/character-change-requests/pending"
+            );
+
+
+        if (
+            !Array.isArray(requests) ||
+            requests.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-inbox"></i>
+                    <h3>No pending character changes</h3>
+                    <p>
+                        There are currently no character
+                        change requests awaiting review.
+                    </p>
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            requests
+                .map(request =>
+                    renderCharacterChangeRequest(
+                        request
+                    )
+                )
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load character change requests:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Unable to load requests</h3>
+                <p>Please try again.</p>
+            </div>
+        `;
+
+    }
+
+}
+function renderCharacterChangeRequest(request) {
+
+    const user =
+        request.user || {};
+
+    const committee =
+        request.committee || {};
+
+    return `
+        <div
+            class="request-card character-change-card"
+            data-request-id="${request.id}"
+        >
+
+            <div class="request-card-header">
+
+                <div>
+
+                    <span class="request-type-badge character">
+                        <i class="fa-solid fa-user-pen"></i>
+                        CHARACTER CHANGE
+                    </span>
+
+                    <h3>
+                        ${user.fullName || "Unknown User"}
+                    </h3>
+
+                </div>
+
+                <span class="request-status pending">
+                    PENDING
+                </span>
+
+            </div>
+
+
+            <div class="request-user">
+
+                <strong>
+                    ${user.email || ""}
+                </strong>
+
+            </div>
+
+
+            <div class="request-details">
+
+                <div>
+                    <strong>Committee</strong>
+                    <span>
+                        ${committee.name || "—"}
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Current Character</strong>
+                    <span>
+                       ${request.currentCharacter?.name || request.currentCharacter?.characterName || "—"}
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Requested Character</strong>
+                    <span>
+                        ${request.requestedCharacter?.name || request.requestedCharacter?.characterName || "—"}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Reason
+                </strong>
+
+                <p>
+                    ${request.reason || "No reason provided."}
+                </p>
+
+            </div>
+
+
+            <div class="request-actions">
+
+                <button
+                    class="btn-danger"
+                    onclick="rejectCharacterChange(${request.id})"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                    Reject
+                </button>
+
+
+                <button
+                    class="btn-primary"
+                    onclick="approveCharacterChange(${request.id})"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Approve
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+async function approveCharacterChange(id) {
+
+    openRequestConfirm(
+        "Approve Character Change",
+        "Approve this character change request?",
+        "Approve",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/character-change-requests/${id}/approve?comment=Approved%20by%20administrator.`,
+                    "PUT"
+                );
+
+                
+                    FuryToast.success(
+                        "Character change approved."
+                    );
+
+            
+
+                await loadCharacterChangeRequests();
+                await updateRequestCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to approve character change:",
+                    error
+                );
+
+
+
+                    FuryToast.error(
+                        error?.message ||
+                        "Unable to approve character change."
+                    );
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function rejectCharacterChange(id) {
+
+    openRequestConfirm(
+        "Reject Character Change",
+        "Are you sure you want to reject this character change?",
+        "Reject",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/character-change-requests/${id}/reject?comment=Rejected%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+                    FuryToast.success(
+                        "Character change rejected."
+                    );
+
+
+
+                await loadCharacterChangeRequests();
+                await updateRequestCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to reject character change:",
+                    error
+                );
+
+
+                    FuryToast.error(
+                        error?.message ||
+                        "Unable to reject character change."
+                    );
+
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function loadWithdrawalRequests() {
+
+    const container =
+        document.getElementById(
+            "requestsContainer"
+        );
+
+    container.innerHTML = `
+        <div class="request-loading">
+            Loading withdrawal requests...
+        </div>
+    `;
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/committee-withdrawal-requests/pending"
+            );
+
+
+        if (
+            !Array.isArray(requests) ||
+            requests.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fa-solid fa-inbox"></i>
+                    <h3>No pending withdrawal requests</h3>
+                    <p>
+                        There are currently no committee
+                        withdrawal requests awaiting review.
+                    </p>
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            requests
+                .map(request =>
+                    renderWithdrawalRequest(request)
+                )
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load withdrawal requests:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>Unable to load requests</h3>
+                <p>Please try again.</p>
+            </div>
+        `;
+
+    }
+
+}
+function renderWithdrawalRequest(request) {
+
+    const user =
+        request.user || {};
+
+    const committee =
+        request.committee || {};
+
+    return `
+        <div
+            class="request-card withdrawal-card"
+            data-request-id="${request.id}"
+        >
+
+            <div class="request-card-header">
+
+                <div>
+
+                    <span class="request-type-badge withdrawal">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        LEAVE COMMITTEE
+                    </span>
+
+                    <h3>
+                        ${user.fullName || "Unknown User"}
+                    </h3>
+
+                </div>
+
+                <span class="request-status pending">
+                    PENDING
+                </span>
+
+            </div>
+
+
+            <div class="request-user">
+
+                <strong>
+                    ${user.email || ""}
+                </strong>
+
+            </div>
+
+
+            <div class="request-details">
+
+                <div>
+                    <strong>Committee</strong>
+                    <span>
+                        ${committee.name || "—"}
+                    </span>
+                </div>
+
+                <div>
+                    <strong>Submitted</strong>
+                    <span>
+                        ${request.createdAt
+                            ? new Date(
+                                request.createdAt
+                              ).toLocaleDateString()
+                            : "—"}
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Reason
+                </strong>
+
+                <p>
+                    ${request.reason ||
+                      "No reason provided."}
+                </p>
+
+            </div>
+
+
+            <div class="request-actions">
+
+                <button
+                    class="btn-danger"
+                    onclick="rejectWithdrawalRequest(${request.id})"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                    Reject
+                </button>
+
+
+                <button
+                    class="btn-primary"
+                    onclick="approveWithdrawalRequest(${request.id})"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Approve
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+}
+async function approveWithdrawalRequest(id) {
+
+    openRequestConfirm(
+        "Approve Withdrawal",
+        "Approve this committee withdrawal request?",
+        "Approve",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/committee-withdrawal-requests/${id}/approve?comment=Approved%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+
+                    FuryToast.success(
+                        "Committee withdrawal approved."
+                    );
+
+
+
+                await loadWithdrawalRequests();
+                await updateRequestCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to approve withdrawal:",
+                    error
+                );
+
+
+
+                    FuryToast.error(
+                        error?.message ||
+                        "Unable to approve withdrawal request."
+                    );
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+
+async function rejectWithdrawalRequest(id) {
+
+    openRequestConfirm(
+        "Reject Withdrawal",
+        "Are you sure you want to reject this committee withdrawal request?",
+        "Reject",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/committee-withdrawal-requests/${id}/reject?comment=Rejected%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+
+                    FuryToast.success(
+                        "Committee withdrawal rejected."
+                    );
+
+
+                await loadWithdrawalRequests();
+                await updateRequestCount();
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to reject withdrawal:",
+                    error
+                );
+
+
+
+                    FuryToast.error(
+                        error?.message ||
+                        "Unable to reject withdrawal request."
+                    );
+
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function loadAllRequests() {
+
+    const container =
+        document.getElementById(
+            "requestsContainer"
+        );
+
+    container.innerHTML = `
+        <div class="request-loading">
+            Loading requests...
+        </div>
+    `;
+
+
+    try {
+
+        const [
+            characterRequests,
+            withdrawalRequests,
+            chairRequests
+        ] = await Promise.all([
+
+            apiRequest(
+                "/character-change-requests/pending"
+            ),
+
+            apiRequest(
+                "/committee-withdrawal-requests/pending"
+            ),
+
+            apiRequest(
+                "/chair-promotion-requests/pending"
+            )
+
+        ]);
+
+
+        const requests = [
+
+            ...(Array.isArray(characterRequests)
+                ? characterRequests.map(
+                    request => ({
+                        ...request,
+                        requestType: "character"
+                    })
+                )
+                : []),
+
+            ...(Array.isArray(withdrawalRequests)
+                ? withdrawalRequests.map(
+                    request => ({
+                        ...request,
+                        requestType: "withdrawal"
+                    })
+                )
+                : []),
+
+            ...(Array.isArray(chairRequests)
+                ? chairRequests.map(
+                    request => ({
+                        ...request,
+                        requestType: "chair"
+                    })
+                )
+                : [])
+
+        ];
+
+
+        if (!requests.length) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-inbox"></i>
+
+                    <h3>
+                        No pending requests
+                    </h3>
+
+                    <p>
+                        There are currently no requests
+                        awaiting review.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            requests
+                .map(request => {
+
+                    if (
+                        request.requestType ===
+                        "character"
+                    ) {
+
+                        return renderCharacterChangeRequest(
+                            request
+                        );
+
+                    }
+
+
+                    if (
+                        request.requestType ===
+                        "withdrawal"
+                    ) {
+
+                        return renderWithdrawalRequest(
+                            request
+                        );
+
+                    }
+
+
+                    return renderChairProposal(
+                        request
+                    );
+
+                })
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load all requests:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>
+                    Unable to load requests
+                </h3>
+
+                <p>
+                    Please try again.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+async function updateRequestCount() {
+
+    const badge =
+        document.getElementById(
+            "requestCountBadge"
+        );
+
+    if (!badge) {
+        return;
+    }
+
+
+    try {
+
+        const [
+            characterRequests,
+            withdrawalRequests,
+            chairRequests
+        ] = await Promise.all([
+
+            apiRequest(
+                "/character-change-requests/pending"
+            ),
+
+            apiRequest(
+                "/committee-withdrawal-requests/pending"
+            ),
+
+            apiRequest(
+                "/chair-promotion-requests/pending"
+            )
+
+        ]);
+
+
+        const characterCount =
+            Array.isArray(characterRequests)
+                ? characterRequests.length
+                : 0;
+
+
+        const withdrawalCount =
+            Array.isArray(withdrawalRequests)
+                ? withdrawalRequests.length
+                : 0;
+
+
+        const chairCount =
+            Array.isArray(chairRequests)
+                ? chairRequests.length
+                : 0;
+
+
+        const total =
+            characterCount +
+            withdrawalCount +
+            chairCount;
+
+
+        badge.textContent =
+            total;
+
+
+        if (total > 0) {
+
+            badge.classList.remove(
+                "hidden"
+            );
+
+        } else {
+
+            badge.classList.add(
+                "hidden"
+            );
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to update request count:",
+            error
+        );
+
+        badge.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+function openRequestConfirm(title, message, confirmText, onConfirm) {
+
+    const modal =
+        document.getElementById(
+            "requestConfirmModal"
+        );
+
+    document.getElementById(
+        "requestConfirmTitle"
+    ).textContent = title;
+
+    document.getElementById(
+        "requestConfirmMessage"
+    ).textContent = message;
+
+    const confirmButton =
+        document.getElementById(
+            "confirmRequestAction"
+        );
+
+    confirmButton.textContent =
+        confirmText;
+
+    confirmButton.classList.remove(
+    "btn-danger",
+    "btn-primary"
+);
+
+if (
+    confirmText.toLowerCase().includes("reject")
+) {
+
+    confirmButton.classList.add(
+        "btn-danger"
+    );
+
+} else {
+
+    confirmButton.classList.add(
+        "btn-primary"
+    );
+
+}
+
+    modal.classList.remove("hidden");
+
+
+    const closeModal = () => {
+
+        modal.classList.add("hidden");
+
+    };
+
+
+    document.getElementById(
+        "cancelRequestConfirm"
+    ).onclick = closeModal;
+
+    document.getElementById(
+        "closeRequestConfirm"
+    ).onclick = closeModal;
+
+
+    confirmButton.onclick = async () => {
+
+        closeModal();
+
+        await onConfirm();
+
+    };
 
 }

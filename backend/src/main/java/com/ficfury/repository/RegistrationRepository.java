@@ -63,6 +63,12 @@ boolean existsByCharacter_IdAndWorkflowStatusIn(
             Long userId,
             Long committeeId
     );
+
+    Optional<Registration>
+findByUser_IdAndWorkflowStatus(
+        Long userId,
+        RegistrationStatus workflowStatus
+);
 long countByCommittee_IdAndWorkflowStatus(
         Long committeeId,
         RegistrationStatus workflowStatus

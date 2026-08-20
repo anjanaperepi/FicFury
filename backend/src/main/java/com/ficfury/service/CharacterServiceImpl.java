@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.ficfury.model.Character;
+import com.ficfury.model.RegistrationStatus;
 import com.ficfury.repository.CharacterRepository;
 import com.ficfury.service.CharacterService     ;
 import org.springframework.security.core.Authentication;
@@ -131,7 +132,30 @@ validateChairOwnsCommittee(
         return characterRepository.findByCommitteeId(committeeId);
 
     }
+@Override
+public List<Character> getAvailableCharactersByCommittee(
+        Long committeeId) {
 
+    List<Character> characters =
+            characterRepository.findByCommitteeId(
+                    committeeId
+            );
+
+    return characters.stream()
+            .filter(character ->
+                    !registrationRepository
+                            .existsByCharacter_IdAndWorkflowStatusIn(
+                                    character.getId(),
+                                    List.of(
+                                            RegistrationStatus.PENDING_ADMIN,
+                                            RegistrationStatus.PENDING_CHAIR,
+                                            RegistrationStatus.ACTIVE
+                                    )
+                            )
+            )
+            .toList();
+
+}
 private User getLoggedInUser() {
 
     Authentication authentication =

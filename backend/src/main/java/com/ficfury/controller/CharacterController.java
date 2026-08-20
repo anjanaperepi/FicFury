@@ -42,6 +42,17 @@ public class CharacterController {
         return characterService.getCharactersByCommittee(committeeId);
 
     }
+
+    @GetMapping("/committee/{committeeId}/available")
+public List<Character> getAvailableCharactersByCommittee(
+        @PathVariable Long committeeId) {
+
+    return characterService
+            .getAvailableCharactersByCommittee(
+                    committeeId
+            );
+
+}
     @PreAuthorize("hasAnyRole('ADMIN','CHAIR')")
 
     @PostMapping

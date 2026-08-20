@@ -33,9 +33,12 @@
 
     <link rel="stylesheet"
           href="../css/assets/sidebar.css">
+    
+
 
     <link rel="stylesheet"
           href="../css/admin-user-management.css">
+
 
 </head>
 
@@ -68,15 +71,7 @@
 
                 </div>
 
-                <button
-                        id="addUserBtn"
-                        class="btn-primary">
 
-                    <i class="fa-solid fa-user-plus"></i>
-
-                    Add User
-
-                </button>
 
             </section>
 
@@ -137,7 +132,38 @@
                 </div>
 
             </section>
+<!-- ===========================
+     MANAGEMENT TABS
+============================ -->
 
+<div class="management-tabs">
+
+    <button
+        id="usersTab"
+        class="management-tab active"
+        type="button"
+    >
+        <i class="fa-solid fa-users"></i>
+        Users
+    </button>
+
+    <button
+        id="requestsTab"
+        class="management-tab"
+        type="button"
+    >
+        <i class="fa-solid fa-inbox"></i>
+        Requests
+        <span
+            id="requestCountBadge"
+            class="request-count-badge hidden"
+        >
+            0
+        </span>
+    </button>
+
+</div>
+<div id="usersManagementPanel">
             <!-- ===========================
                  FILTERS
             ============================ -->
@@ -226,6 +252,67 @@
 
             </section>
 
+            </div>
+
+            <!-- ===========================
+     REQUEST MANAGEMENT
+============================ -->
+
+<div
+    id="requestsManagementPanel"
+    class="hidden"
+>
+
+    <div class="request-filters">
+
+        <button
+            class="request-filter active"
+            data-request-type="all"
+            type="button"
+        >
+            All
+        </button>
+
+        <button
+            class="request-filter"
+            data-request-type="character"
+            type="button"
+        >
+            Character Change
+        </button>
+
+        <button
+            class="request-filter"
+            data-request-type="withdrawal"
+            type="button"
+        >
+            Leave Committee
+        </button>
+
+        <button
+            class="request-filter"
+            data-request-type="chair"
+            type="button"
+        >
+            Chair Proposals
+        </button>
+
+    </div>
+
+
+    <div
+        id="requestsContainer"
+        class="requests-container"
+    >
+
+        <div class="request-loading">
+            Loading requests...
+        </div>
+
+    </div>
+
+</div>
+
         </div>
 
     </main>
@@ -301,6 +388,57 @@
     </div>
 
 </div>
+
+<!-- ===========================
+     REQUEST CONFIRMATION MODAL
+============================ -->
+
+<div
+    id="requestConfirmModal"
+    class="modal hidden"
+>
+
+    <div class="modal-content small-modal">
+
+        <button
+            id="closeRequestConfirm"
+            class="modal-close"
+            type="button"
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <h2 id="requestConfirmTitle">
+            Confirm Action
+        </h2>
+
+        <p id="requestConfirmMessage">
+            Are you sure you want to continue?
+        </p>
+
+        <div class="modal-actions">
+
+            <button
+                id="cancelRequestConfirm"
+                class="btn-secondary"
+                type="button"
+            >
+                Cancel
+            </button>
+
+            <button
+                id="confirmRequestAction"
+                class="btn-primary"
+                type="button"
+            >
+                Confirm
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 <div
         id="loadingOverlay"
         class="loading-overlay hidden">
@@ -321,6 +459,8 @@
 <script src="../js/api.js"></script>
 
 <script src="../js/sidebar.js"></script>
+
+<script src="../js/toast.js"></script>
 
 <script src="../js/admin-user-management.js"></script>
 

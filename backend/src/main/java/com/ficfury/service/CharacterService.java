@@ -19,4 +19,6 @@ public interface CharacterService {
 
     List<Character> getCharactersByCommittee(Long committeeId);
 
+    List<Character> getAvailableCharactersByCommittee(Long committeeId);
+
 }

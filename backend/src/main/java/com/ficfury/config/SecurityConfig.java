@@ -69,7 +69,8 @@ public class SecurityConfig {
                         .hasRole("DELEGATE")
 
  .requestMatchers("/api/attendance/**").hasRole("CHAIR")
-
+.requestMatchers("/api/chair-promotion-requests/**")
+.authenticated()
     .anyRequest().authenticated()
                 )
 

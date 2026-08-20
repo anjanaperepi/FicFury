@@ -175,6 +175,14 @@ this.certificateEligible =
 
         this.renderRegistrations();
 
+        this.initCharacterChange();
+
+        this.loadCharacterChangeStatus();
+
+        this.initCommitteeWithdrawal();
+
+        this.initChairProposal();
+
     },
 
 
@@ -435,6 +443,978 @@ renderCertificate() {
                 .join("");
 
     },
+
+    initCharacterChange() {
+
+    const button =
+        document.getElementById(
+            "requestCharacterChangeBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+
+button.addEventListener(
+    "click",
+    () => {
+
+        if (
+            button.disabled
+        ) {
+
+            FuryToast.info(
+                "Your character change request is already awaiting review."
+            );
+
+            return;
+
+        }
+
+        this.openCharacterChangeModal();
+
+    }
+);
+
+    document
+        .getElementById(
+            "closeCharacterChangeModal"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.closeCharacterChangeModal()
+        );
+
+
+    document
+        .getElementById(
+            "cancelCharacterChange"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.closeCharacterChangeModal()
+        );
+
+
+    document
+        .getElementById(
+            "submitCharacterChange"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.submitCharacterChange()
+        );
+
+},
+
+async loadCharacterChangeStatus() {
+
+    const button =
+        document.getElementById(
+            "requestCharacterChangeBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/character-change-requests/my"
+            );
+
+
+        const pendingRequest =
+            Array.isArray(requests)
+                ? requests.find(
+                    request =>
+                        String(
+                            request.status
+                        ).toUpperCase() ===
+                        "PENDING"
+                )
+                : null;
+
+
+        if (pendingRequest) {
+
+            button.disabled = true;
+
+            button.innerHTML = `
+                <i class="fa-solid fa-clock"></i>
+                CHARACTER CHANGE REQUEST PENDING
+            `;
+
+            button.classList.add(
+                "request-pending"
+            );
+
+            button.title =
+                "Your character change request is awaiting review.";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load character change status:",
+            error
+        );
+
+    }
+
+},
+initCommitteeWithdrawal() {
+
+    const button =
+        document.getElementById(
+            "leaveCommitteeBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            if (button.disabled) {
+
+                FuryToast.info(
+                    "Your committee withdrawal request is already awaiting review."
+                );
+
+                return;
+
+            }
+
+            this.openCommitteeWithdrawalModal();
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "closeLeaveCommitteeModal"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.closeCommitteeWithdrawalModal()
+        );
+
+
+    document
+        .getElementById(
+            "cancelLeaveCommittee"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.closeCommitteeWithdrawalModal()
+        );
+
+
+    document
+        .getElementById(
+            "submitLeaveCommittee"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.submitCommitteeWithdrawal()
+        );
+
+
+    this.loadCommitteeWithdrawalStatus();
+
+},
+openCommitteeWithdrawalModal() {
+
+    const registration =
+        this.registrations.find(
+            item =>
+                this.getRegistrationStatus(item) ===
+                "ACTIVE"
+        );
+
+
+    if (!registration) {
+
+        FuryToast.warning(
+            "You don't have an active committee registration."
+        );
+
+        return;
+
+    }
+
+
+    const modal =
+        document.getElementById(
+            "leaveCommitteeModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.remove(
+            "hidden"
+        );
+
+    }
+
+},
+closeCommitteeWithdrawalModal() {
+
+    const modal =
+        document.getElementById(
+            "leaveCommitteeModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.add(
+            "hidden"
+        );
+
+    }
+
+},
+async submitCommitteeWithdrawal() {
+
+    const reason =
+        document.getElementById(
+            "withdrawalReason"
+        );
+
+
+    const submitButton =
+        document.getElementById(
+            "submitLeaveCommittee"
+        );
+
+
+    try {
+
+        if (submitButton) {
+
+            submitButton.disabled =
+                true;
+
+        }
+
+
+        await apiRequest(
+            "/committee-withdrawal-requests",
+            "POST",
+            {
+                reason:
+                    reason?.value.trim() || ""
+            }
+        );
+
+
+        this.closeCommitteeWithdrawalModal();
+
+
+        if (reason) {
+
+            reason.value = "";
+
+        }
+
+
+        FuryToast.success(
+            "Committee withdrawal request submitted successfully."
+        );
+
+
+        this.loadCommitteeWithdrawalStatus();
+
+
+    } catch (error) {
+
+        console.error(
+            "Committee withdrawal request failed:",
+            error
+        );
+
+
+        FuryToast.error(
+            error?.message ||
+            "Unable to submit withdrawal request."
+        );
+
+
+    } finally {
+
+        if (submitButton) {
+
+            submitButton.disabled =
+                false;
+
+        }
+
+    }
+
+},
+async loadCommitteeWithdrawalStatus() {
+
+    const button =
+        document.getElementById(
+            "leaveCommitteeBtn"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/committee-withdrawal-requests/my"
+            );
+
+
+        const pendingRequest =
+            Array.isArray(requests)
+                ? requests.find(
+                    request =>
+                        String(
+                            request.status
+                        ).toUpperCase() ===
+                        "PENDING"
+                )
+                : null;
+
+
+        if (pendingRequest) {
+
+            button.disabled =
+                true;
+
+            button.innerHTML = `
+                <i class="fa-solid fa-clock"></i>
+                WITHDRAWAL REQUEST PENDING
+            `;
+
+            button.classList.add(
+                "request-pending"
+            );
+
+            button.title =
+                "Your committee withdrawal request is awaiting review.";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load withdrawal status:",
+            error
+        );
+
+    }
+
+},
+initChairProposal() {
+
+    const button =
+        document.getElementById(
+            "proposeCommitteeBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            if (button.disabled) {
+
+                FuryToast.info(
+                    "Your committee proposal is already awaiting review."
+                );
+
+                return;
+
+            }
+
+            this.openChairProposalModal();
+
+        }
+    );
+
+
+    document
+        .getElementById(
+            "closeChairProposalModal"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.closeChairProposalModal()
+        );
+
+
+    document
+        .getElementById(
+            "cancelChairProposal"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.closeChairProposalModal()
+        );
+
+
+    document
+        .getElementById(
+            "submitChairProposal"
+        )
+        ?.addEventListener(
+            "click",
+            () => this.submitChairProposal()
+        );
+
+
+    this.loadChairProposalStatus();
+
+},
+async loadChairProposalStatus() {
+
+    const button =
+        document.getElementById(
+            "proposeCommitteeBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/chair-promotion-requests/my"
+            );
+
+
+        const pendingRequest =
+            Array.isArray(requests)
+                ? requests.find(
+                    request =>
+                        String(
+                            request.status
+                        ).toUpperCase() ===
+                        "PENDING"
+                )
+                : null;
+
+
+        if (pendingRequest) {
+
+            button.disabled = true;
+
+            button.innerHTML = `
+                <i class="fa-solid fa-clock"></i>
+                COMMITTEE PROPOSAL PENDING
+            `;
+
+            button.classList.add(
+                "request-pending"
+            );
+
+            button.title =
+                "Your committee proposal is awaiting administrator review.";
+
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load chair proposal status:",
+            error
+        );
+
+    }
+
+},
+openChairProposalModal() {
+
+    const modal =
+        document.getElementById(
+            "chairProposalModal"
+        );
+
+    if (modal) {
+
+        modal.classList.remove(
+            "hidden"
+        );
+
+    }
+
+},
+closeChairProposalModal() {
+
+    const modal =
+        document.getElementById(
+            "chairProposalModal"
+        );
+
+    if (modal) {
+
+        modal.classList.add(
+            "hidden"
+        );
+
+    }
+
+},
+async submitChairProposal() {
+
+    const submitButton =
+        document.getElementById(
+            "submitChairProposal"
+        );
+
+
+    const data = {
+
+        committeeName:
+            document.getElementById(
+                "proposalCommitteeName"
+            )?.value.trim(),
+
+        category:
+            document.getElementById(
+                "proposalCategory"
+            )?.value.trim(),
+
+        description:
+            document.getElementById(
+                "proposalDescription"
+            )?.value.trim(),
+
+        date:
+            document.getElementById(
+                "proposalDate"
+            )?.value,
+
+        time:
+            document.getElementById(
+                "proposalTime"
+            )?.value,
+
+        mode:
+            document.getElementById(
+                "proposalMode"
+            )?.value,
+
+        venue:
+            document.getElementById(
+                "proposalVenue"
+            )?.value.trim(),
+
+        meetingLink:
+            document.getElementById(
+                "proposalMeetingLink"
+            )?.value.trim(),
+
+        proposalReason:
+            document.getElementById(
+                "proposalReason"
+            )?.value.trim()
+
+    };
+
+
+    if (!data.committeeName) {
+
+        FuryToast.warning(
+            "Please enter a committee name."
+        );
+
+        return;
+
+    }
+
+
+    if (!data.date) {
+
+        FuryToast.warning(
+            "Please select a committee date."
+        );
+
+        return;
+
+    }
+
+
+    if (!data.time) {
+
+        FuryToast.warning(
+            "Please select a committee time."
+        );
+
+        return;
+
+    }
+
+
+    if (!data.proposalReason) {
+
+        FuryToast.warning(
+            "Please explain why you want to chair this committee."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        if (submitButton) {
+
+            submitButton.disabled = true;
+
+        }
+
+
+        await apiRequest(
+            "/chair-promotion-requests",
+            "POST",
+            data
+        );
+
+
+        this.closeChairProposalModal();
+
+
+        this.clearChairProposalForm();
+
+
+        FuryToast.success(
+            "Committee proposal submitted successfully."
+        );
+
+
+        this.loadChairProposalStatus();
+
+
+    } catch (error) {
+
+        console.error(
+            "Chair proposal submission failed:",
+            error
+        );
+
+
+        FuryToast.error(
+            error?.message ||
+            "Unable to submit committee proposal."
+        );
+
+
+    } finally {
+
+        if (submitButton) {
+
+            submitButton.disabled = false;
+
+        }
+
+    }
+
+},
+clearChairProposalForm() {
+
+    const fields = [
+        "proposalCommitteeName",
+        "proposalCategory",
+        "proposalDescription",
+        "proposalDate",
+        "proposalTime",
+        "proposalMode",
+        "proposalVenue",
+        "proposalMeetingLink",
+        "proposalReason"
+    ];
+
+
+    fields.forEach(
+        id => {
+
+            const element =
+                document.getElementById(id);
+
+            if (element) {
+
+                element.value = "";
+
+            }
+
+        }
+    );
+
+},
+async openCharacterChangeModal() {
+
+    const registration =
+        this.registrations.find(
+            item =>
+                this.getRegistrationStatus(item) ===
+                "ACTIVE"
+        );
+
+
+    if (!registration) {
+
+        FuryToast.warning(
+            "You need an active committee registration to request a character change."
+        );
+
+        return;
+
+    }
+
+
+    const modal =
+        document.getElementById(
+            "characterChangeModal"
+        );
+
+
+    const select =
+        document.getElementById(
+            "requestedCharacter"
+        );
+
+
+    if (!modal || !select) {
+        return;
+    }
+
+
+    select.innerHTML = `
+        <option value="">
+            Loading characters...
+        </option>
+    `;
+
+
+    modal.classList.remove("hidden");
+
+
+    try {
+
+        const committeeId =
+            registration.committee?.id;
+
+
+        if (!committeeId) {
+            throw new Error(
+                "Committee information is unavailable."
+            );
+        }
+
+
+const characters =
+    await apiRequest(
+        `/characters/committee/${committeeId}/available`
+    );
+
+const currentCharacterId =
+    registration.character?.id;
+
+
+const availableCharacters =
+    Array.isArray(characters)
+        ? characters.filter(
+            character =>
+                character.id !==
+                currentCharacterId
+        )
+        : [];
+
+
+        if (
+            availableCharacters.length === 0
+        ) {
+
+            select.innerHTML = `
+                <option value="">
+                    No other characters available
+                </option>
+            `;
+
+            return;
+
+        }
+
+
+        select.innerHTML = `
+            <option value="">
+                Select a character
+            </option>
+        `;
+
+
+        availableCharacters.forEach(
+            character => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+                option.value =
+                    character.id;
+
+                option.textContent =
+                    character.name;
+
+                select.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load characters:",
+            error
+        );
+
+
+        select.innerHTML = `
+            <option value="">
+                Unable to load characters
+            </option>
+        `;
+
+
+        FuryToast.error(
+            "Unable to load characters. Please try again."
+        );
+
+    }
+
+},
+closeCharacterChangeModal() {
+
+    const modal =
+        document.getElementById(
+            "characterChangeModal"
+        );
+
+
+    if (modal) {
+
+        modal.classList.add(
+            "hidden"
+        );
+
+    }
+
+},
+async submitCharacterChange() {
+
+    const select =
+        document.getElementById(
+            "requestedCharacter"
+        );
+
+    const reason =
+        document.getElementById(
+            "characterChangeReason"
+        );
+
+
+    const requestedCharacterId =
+        select?.value;
+
+
+    if (!requestedCharacterId) {
+
+        FuryToast.warning(
+            "Please select a character."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+await apiRequest(
+    "/character-change-requests",
+    "POST",
+    {
+        requestedCharacterId:
+            Number(requestedCharacterId),
+
+        reason:
+            reason?.value.trim() || ""
+    }
+);
+
+        this.closeCharacterChangeModal();
+
+        FuryToast.success(
+            "Character change request submitted successfully."
+        );
+
+
+
+
+        if (select) {
+            select.value = "";
+        }
+
+
+        if (reason) {
+            reason.value = "";
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Character change request failed:",
+            error
+        );
+
+
+FuryToast.error(
+    error?.message === "HTTP 403"
+        ? "This character is already assigned."
+        : (
+            error?.message ||
+            "Unable to submit character change request."
+        )
+);
+
+    }
+
+},
 
 
     /* ======================================================
