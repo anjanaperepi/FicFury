@@ -338,7 +338,61 @@ private User getLoggedInUser() {
             .toList();
 }
    
-    
+public String leaveCommittee(Long committeeId) {
+
+    User chair = getLoggedInUser();
+
+
+    Committee committee =
+            committeeRepository.findById(committeeId)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Committee not found"
+                            )
+                    );
+
+
+    if (
+            committee.getChairpersonEmail() == null ||
+            !committee.getChairpersonEmail()
+                    .equalsIgnoreCase(chair.getEmail())
+    ) {
+
+        throw new RuntimeException(
+                "You are not assigned to this committee."
+        );
+    }
+
+
+    committee.setChairpersonName(null);
+    committee.setChairpersonEmail(null);
+
+    committeeRepository.save(committee);
+
+
+    List<Committee> remainingCommittees =
+            committeeRepository
+                    .findByChairpersonEmail(
+                            chair.getEmail()
+                    );
+
+
+    if (remainingCommittees.isEmpty()) {
+
+        chair.setRole(
+                com.ficfury.model.Role.DELEGATE
+        );
+
+        userRepository.save(chair);
+
+        return
+                "You have left the committee and "
+                + "are now a delegate.";
+    }
+
+
+    return "You have left the committee successfully.";
+}
 }
 
 

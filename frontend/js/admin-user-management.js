@@ -94,6 +94,14 @@ if (type === "chair") {
 
     loadWithdrawalRequests();
 
+} else if (type === "committee-change") {
+
+    loadCommitteeChangeRequests();
+
+} else if (type === "chair-committee") {
+
+    loadChairCommitteeProposals();
+
 } else {
 
     loadAllRequests();
@@ -1630,25 +1638,28 @@ async function loadAllRequests() {
 
     try {
 
-        const [
-            characterRequests,
-            withdrawalRequests,
-            chairRequests
-        ] = await Promise.all([
+const [
+    characterRequests,
+    withdrawalRequests,
+    chairRequests,
+    committeeChangeRequests
+] = await Promise.all([
+    apiRequest(
+        "/character-change-requests/pending"
+    ),
 
-            apiRequest(
-                "/character-change-requests/pending"
-            ),
+    apiRequest(
+        "/committee-withdrawal-requests/pending"
+    ),
 
-            apiRequest(
-                "/committee-withdrawal-requests/pending"
-            ),
+    apiRequest(
+        "/chair-promotion-requests/pending"
+    ),
 
-            apiRequest(
-                "/chair-promotion-requests/pending"
-            )
-
-        ]);
+    apiRequest(
+        "/committee-change-requests/pending"
+    )
+]);
 
 
         const requests = [
@@ -1678,7 +1689,16 @@ async function loadAllRequests() {
                         requestType: "chair"
                     })
                 )
-                : [])
+                : []),
+
+            ...(Array.isArray(committeeChangeRequests)
+    ? committeeChangeRequests.map(
+        request => ({
+            ...request,
+            requestType: "committee-change"
+        })
+    )
+    : [])
 
         ];
 
@@ -1733,6 +1753,17 @@ async function loadAllRequests() {
                         );
 
                     }
+
+
+                    if (
+    request.requestType ===
+    "committee-change"
+) {
+
+    return renderCommitteeChangeRequest(
+        request
+    );
+}
 
 
                     return renderChairProposal(
@@ -1931,5 +1962,830 @@ if (
         await onConfirm();
 
     };
+
+}
+
+async function loadCommitteeChangeRequests() {
+
+    const container =
+        document.getElementById(
+            "requestsContainer"
+        );
+
+
+    container.innerHTML = `
+        <div class="request-loading">
+            Loading committee change requests...
+        </div>
+    `;
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/committee-change-requests/pending"
+            );
+
+
+        if (
+            !Array.isArray(requests) ||
+            requests.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-inbox"></i>
+
+                    <h3>
+                        No pending committee changes
+                    </h3>
+
+                    <p>
+                        There are currently no committee
+                        change requests awaiting review.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        container.innerHTML =
+            requests
+                .map(request =>
+                    renderCommitteeChangeRequest(
+                        request
+                    )
+                )
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load committee change requests:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>
+                    Unable to load requests
+                </h3>
+
+                <p>
+                    Please try again.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+function renderCommitteeChangeRequest(request) {
+
+    const user =
+        request.user || {};
+
+    const committee =
+        request.committee || {};
+
+    return `
+        <div
+            class="request-card committee-change-card"
+            data-request-id="${request.id}"
+        >
+
+            <div class="request-card-header">
+
+                <div>
+
+                    <span class="request-type-badge committee-change">
+
+                        <i class="fa-solid fa-arrows-rotate"></i>
+
+                        COMMITTEE CHANGE
+
+                    </span>
+
+                    <h3>
+                        ${committee.name || request.committeeName || "Committee Change Request"}
+                    </h3>
+
+                </div>
+
+
+                <span class="request-status pending">
+                    PENDING
+                </span>
+
+            </div>
+
+
+            <div class="request-user">
+
+                <strong>
+                    ${user.fullName || "Unknown User"}
+                </strong>
+
+                <span>
+                    ${user.email || ""}
+                </span>
+
+            </div>
+
+
+            <div class="request-details">
+
+                <div>
+
+                    <strong>
+                        Committee
+                    </strong>
+
+                    <span>
+                        ${committee.name || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Proposed Name
+                    </strong>
+
+                    <span>
+                        ${request.committeeName || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Category
+                    </strong>
+
+                    <span>
+                        ${request.category || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Date
+                    </strong>
+
+                    <span>
+                        ${request.date || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Time
+                    </strong>
+
+                    <span>
+                        ${request.time || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Mode
+                    </strong>
+
+                    <span>
+                        ${request.mode || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Venue
+                    </strong>
+
+                    <span>
+                        ${request.venue || "—"}
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Meeting Link
+                    </strong>
+
+                    <span>
+                        ${
+                            request.meetingLink
+                                ? `<a
+                                    href="${request.meetingLink}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View Link
+                                </a>`
+                                : "—"
+                        }
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Proposed Description
+                </strong>
+
+                <p>
+                    ${
+                        request.description ||
+                        "No description provided."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Reason for Change
+                </strong>
+
+                <p>
+                    ${
+                        request.changeReason ||
+                        "No reason provided."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Submitted
+                </strong>
+
+                <p>
+                    ${
+                        request.createdAt
+                            ? new Date(
+                                request.createdAt
+                            ).toLocaleString()
+                            : "—"
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="request-actions">
+
+                <button
+                    class="btn-danger"
+                    onclick="rejectCommitteeChange(${request.id})"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                    Reject
+                </button>
+
+
+                <button
+                    class="btn-primary"
+                    onclick="approveCommitteeChange(${request.id})"
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Approve
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+async function approveCommitteeChange(id) {
+
+    openRequestConfirm(
+        "Approve Committee Change",
+        "Approve this committee change request?",
+        "Approve",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/committee-change-requests/${id}/approve?comment=Approved%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+                FuryToast.success(
+                    "Committee change approved."
+                );
+
+
+                await loadCommitteeChangeRequests();
+
+                await updateRequestCount();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to approve committee change:",
+                    error
+                );
+
+
+                FuryToast.error(
+                    error?.message ||
+                    "Unable to approve committee change."
+                );
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function rejectCommitteeChange(id) {
+
+    openRequestConfirm(
+        "Reject Committee Change",
+        "Are you sure you want to reject this committee change request?",
+        "Reject",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/committee-change-requests/${id}/reject?comment=Rejected%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+                FuryToast.success(
+                    "Committee change rejected."
+                );
+
+
+                await loadCommitteeChangeRequests();
+
+                await updateRequestCount();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to reject committee change:",
+                    error
+                );
+
+
+                FuryToast.error(
+                    error?.message ||
+                    "Unable to reject committee change."
+                );
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+
+async function loadChairCommitteeProposals() {
+
+    const container =
+        document.getElementById(
+            "requestsContainer"
+        );
+
+
+    container.innerHTML = `
+        <div class="request-loading">
+            Loading Chair committee proposals...
+        </div>
+    `;
+
+
+    try {
+
+        const requests =
+            await apiRequest(
+                "/chair-committee-proposals/pending"
+            );
+
+
+        if (
+            !Array.isArray(requests) ||
+            requests.length === 0
+        ) {
+
+            container.innerHTML = `
+                <div class="empty-state">
+
+                    <i class="fa-solid fa-inbox"></i>
+
+                    <h3>
+                        No pending Chair committee proposals
+                    </h3>
+
+                    <p>
+                        There are currently no proposals
+                        awaiting review.
+                    </p>
+
+                </div>
+            `;
+
+            return;
+        }
+
+
+        container.innerHTML =
+            requests
+                .map(request =>
+                    renderChairCommitteeProposal(
+                        request
+                    )
+                )
+                .join("");
+
+
+    } catch (error) {
+
+        console.error(
+            "Unable to load Chair committee proposals:",
+            error
+        );
+
+
+        container.innerHTML = `
+            <div class="empty-state">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <h3>
+                    Unable to load proposals
+                </h3>
+
+                <p>
+                    Please try again.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+function renderChairCommitteeProposal(request) {
+
+    const user =
+        request.user || {};
+
+
+    return `
+        <div
+            class="request-card chair-committee-card"
+            data-request-id="${request.id}"
+        >
+
+            <div class="request-card-header">
+
+                <div>
+
+                    <span
+                        class="request-type-badge chair-committee"
+                    >
+                        <i class="fa-solid fa-building-columns"></i>
+                        CHAIR COMMITTEE PROPOSAL
+                    </span>
+
+                    <h3>
+                        ${request.committeeName || "Unnamed Committee"}
+                    </h3>
+
+                </div>
+
+
+                <span class="request-status pending">
+                    PENDING
+                </span>
+
+            </div>
+
+
+            <div class="request-user">
+
+                <strong>
+                    ${user.fullName || user.username || "Unknown Chair"}
+                </strong>
+
+                <span>
+                    ${user.email || ""}
+                </span>
+
+            </div>
+
+
+            <div class="request-details">
+
+                <div>
+                    <strong>
+                        Category
+                    </strong>
+
+                    <span>
+                        ${request.category || "—"}
+                    </span>
+                </div>
+
+
+                <div>
+                    <strong>
+                        Date
+                    </strong>
+
+                    <span>
+                        ${request.date || "—"}
+                    </span>
+                </div>
+
+
+                <div>
+                    <strong>
+                        Time
+                    </strong>
+
+                    <span>
+                        ${request.time || "—"}
+                    </span>
+                </div>
+
+
+                <div>
+                    <strong>
+                        Mode
+                    </strong>
+
+                    <span>
+                        ${request.mode || "—"}
+                    </span>
+                </div>
+
+
+                <div>
+                    <strong>
+                        Venue
+                    </strong>
+
+                    <span>
+                        ${request.venue || "—"}
+                    </span>
+                </div>
+
+
+                <div>
+                    <strong>
+                        Meeting Link
+                    </strong>
+
+                    <span>
+                        ${
+                            request.meetingLink
+                                ? `
+                                    <a
+                                        href="${request.meetingLink}"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        View Link
+                                    </a>
+                                  `
+                                : "—"
+                        }
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Description
+                </strong>
+
+                <p>
+                    ${
+                        request.description ||
+                        "No description provided."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="request-description">
+
+                <strong>
+                    Proposal Reason
+                </strong>
+
+                <p>
+                    ${
+                        request.proposalReason ||
+                        "No reason provided."
+                    }
+                </p>
+
+            </div>
+
+
+            <div class="request-actions">
+
+                <button
+                    class="btn-danger"
+                    onclick="
+                        rejectChairCommitteeProposal(
+                            ${request.id}
+                        )
+                    "
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                    Reject
+                </button>
+
+
+                <button
+                    class="btn-primary"
+                    onclick="
+                        approveChairCommitteeProposal(
+                            ${request.id}
+                        )
+                    "
+                >
+                    <i class="fa-solid fa-check"></i>
+                    Approve
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+async function approveChairCommitteeProposal(id) {
+
+    openRequestConfirm(
+        "Approve Chair Committee Proposal",
+        "Approve this proposal and create the new committee?",
+        "Approve",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/chair-committee-proposals/${id}/approve?comment=Approved%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+                FuryToast.success(
+                    "Chair committee proposal approved."
+                );
+
+
+                await loadChairCommitteeProposals();
+
+                await updateRequestCount();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to approve Chair committee proposal:",
+                    error
+                );
+
+
+                FuryToast.error(
+                    error?.message ||
+                    "Unable to approve proposal."
+                );
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
+
+}
+async function rejectChairCommitteeProposal(id) {
+
+    openRequestConfirm(
+        "Reject Chair Committee Proposal",
+        "Are you sure you want to reject this proposal?",
+        "Reject",
+        async () => {
+
+            showLoader();
+
+            try {
+
+                await apiRequest(
+                    `/chair-committee-proposals/${id}/reject?comment=Rejected%20by%20administrator.`,
+                    "PUT"
+                );
+
+
+                FuryToast.success(
+                    "Chair committee proposal rejected."
+                );
+
+
+                await loadChairCommitteeProposals();
+
+                await updateRequestCount();
+
+
+            } catch (error) {
+
+                console.error(
+                    "Failed to reject Chair committee proposal:",
+                    error
+                );
+
+
+                FuryToast.error(
+                    error?.message ||
+                    "Unable to reject proposal."
+                );
+
+
+            } finally {
+
+                hideLoader();
+
+            }
+
+        }
+    );
 
 }

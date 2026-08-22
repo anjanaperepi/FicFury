@@ -1,0 +1,1957 @@
+/* ==========================================================
+   FIC FURY — CHAIR PROFILE
+   Complete page-specific stylesheet
+   Does NOT depend on profile.css
+========================================================== */
+
+
+/* ==========================================================
+   PAGE FOUNDATION
+========================================================== */
+
+.profile-page-container {
+    width: min(1400px, 94%);
+    margin: 0 auto;
+    padding: 32px 0 70px;
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.profile-hero {
+    position: relative;
+    overflow: hidden;
+
+    margin-bottom: 28px;
+    padding: 34px 38px;
+
+    background: var(--primary);
+
+    border: 4px solid var(--border-heavy);
+    box-shadow: 10px 10px 0 var(--border-heavy);
+}
+
+
+.profile-hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: -60px;
+    top: -70px;
+
+    border: 4px solid var(--border-heavy);
+
+    transform: rotate(25deg);
+
+    opacity: .15;
+}
+
+
+.profile-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    left: -45px;
+    bottom: -55px;
+
+    border: 4px solid var(--border-heavy);
+
+    transform: rotate(25deg);
+
+    opacity: .12;
+}
+
+
+.profile-hero-content {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+
+    margin-bottom: 12px;
+    padding: 7px 13px;
+
+    background: var(--secondary);
+    color: #ffffff;
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 4px 4px 0 var(--border-heavy);
+
+    font-size: .7rem;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.profile-hero h1 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: clamp(2rem, 4vw, 3.3rem);
+    font-weight: 900;
+
+    line-height: 1.05;
+}
+
+
+.profile-hero h1 span {
+    color: var(--text);
+}
+
+
+.profile-hero p {
+    max-width: 680px;
+
+    margin: 14px 0 0;
+
+    color: var(--text);
+
+    font-size: .95rem;
+    font-weight: 600;
+
+    line-height: 1.6;
+}
+
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+    box-shadow: 8px 8px 0 var(--border-heavy);
+
+    font-size: 2.6rem;
+    color: var(--text);
+}
+
+
+/* ==========================================================
+   PROFILE SUMMARY
+========================================================== */
+
+.profile-summary {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 28px;
+}
+
+
+.identity-card {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    min-height: 105px;
+
+    padding: 20px 22px;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+    box-shadow: 7px 7px 0 var(--border-heavy);
+}
+
+
+.identity-icon {
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 3px 3px 0 var(--border-heavy);
+
+    font-size: 1.25rem;
+}
+
+
+.identity-card > div:last-child {
+    min-width: 0;
+}
+
+
+.identity-card span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--text-light);
+
+    font-size: .68rem;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+
+.identity-card h3 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 1.05rem;
+    font-weight: 900;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* ==========================================================
+   STATISTICS
+========================================================== */
+
+.profile-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+    margin-bottom: 38px;
+}
+
+
+.stat-card {
+    padding: 24px;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+    box-shadow: 7px 7px 0 var(--border-heavy);
+}
+
+
+.stat-header {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+}
+
+
+.stat-header i {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    border: 2px solid var(--border-heavy);
+
+    font-size: .9rem;
+}
+
+
+.stat-header h4 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: .78rem;
+    font-weight: 900;
+
+    letter-spacing: .8px;
+    text-transform: uppercase;
+}
+
+
+.stat-card h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 2.2rem;
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+
+.stat-card p {
+    margin: 9px 0 0;
+
+    color: var(--text-light);
+
+    font-size: .78rem;
+    font-weight: 600;
+}
+
+
+/* ==========================================================
+   SECTIONS
+========================================================== */
+
+.registrations-section,
+.committee-actions-section {
+    margin-bottom: 42px;
+}
+
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+
+.section-label {
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color: var(--secondary);
+
+    font-size: .72rem;
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: clamp(1.5rem, 3vw, 2.15rem);
+    font-weight: 900;
+
+    line-height: 1.1;
+}
+
+
+.section-heading p {
+    max-width: 700px;
+
+    margin: 8px 0 0;
+
+    color: var(--text-light);
+
+    font-size: .85rem;
+    font-weight: 500;
+
+    line-height: 1.55;
+}
+
+
+/* ==========================================================
+   TABLE CARD
+========================================================== */
+
+.registration-table-card {
+    width: 100%;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+    box-shadow: 8px 8px 0 var(--border-heavy);
+
+    overflow: hidden;
+}
+
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.registration-table-card table {
+    width: 100%;
+
+    min-width: 700px;
+
+    border-collapse: collapse;
+
+    table-layout: fixed;
+}
+
+
+.registration-table-card th {
+    padding: 16px 20px;
+
+    background: var(--primary);
+    color: var(--text);
+
+    border-bottom: 4px solid var(--border-heavy);
+
+    text-align: left;
+
+    font-size: .72rem;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.registration-table-card td {
+    padding: 17px 20px;
+
+    background: var(--surface);
+
+    border-bottom: 2px solid var(--border-heavy);
+
+    color: var(--text);
+
+    font-size: .85rem;
+    font-weight: 600;
+
+    vertical-align: middle;
+}
+
+
+.registration-table-card tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+.registration-table-card tbody tr:hover td {
+    background: #fffbea;
+}
+
+
+/* ==========================================================
+   COMMITTEE TABLE — 4 COLUMNS
+========================================================== */
+
+.registration-table-card th:nth-child(1) {
+    width: 35%;
+}
+
+
+.registration-table-card th:nth-child(2) {
+    width: 25%;
+}
+
+
+.registration-table-card th:nth-child(3) {
+    width: 20%;
+}
+
+
+.registration-table-card th:nth-child(4) {
+    width: 20%;
+}
+
+
+/* ==========================================================
+   EMPTY / LOADING STATE
+========================================================== */
+
+.profile-empty-state {
+    padding: 55px 20px !important;
+
+    color: var(--text-light) !important;
+
+    text-align: center;
+}
+
+
+.profile-empty-state i {
+    margin-right: 7px;
+
+    color: var(--secondary);
+}
+
+
+.profile-empty-state strong {
+    display: block;
+
+    margin-top: 8px;
+
+    color: var(--text);
+
+    font-size: .9rem;
+    font-weight: 900;
+}
+
+
+/* ==========================================================
+   STATUS BADGE
+========================================================== */
+
+.registration-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 78px;
+
+    padding: 6px 11px;
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 3px 3px 0 var(--border-heavy);
+
+    font-size: .65rem;
+    font-weight: 900;
+
+    letter-spacing: .6px;
+
+    text-transform: uppercase;
+}
+
+
+.registration-status.active {
+    background: #10B981;
+    color: #000000;
+}
+
+
+/* ==========================================================
+   PROFILE ACTION BUTTON
+========================================================== */
+
+.profile-action-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 42px;
+    min-width: 110px;
+
+    padding: 10px 16px;
+
+    background: var(--primary);
+    color: var(--text);
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 4px 4px 0 var(--border-heavy);
+
+    font-family: inherit;
+
+    font-size: .7rem;
+    font-weight: 900;
+
+    letter-spacing: .5px;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+}
+
+
+.profile-action-btn:hover {
+    transform: translate(-2px, -2px);
+
+    box-shadow: 6px 6px 0 var(--border-heavy);
+}
+
+
+.profile-action-btn:active {
+    transform: translate(2px, 2px);
+
+    box-shadow: 2px 2px 0 var(--border-heavy);
+}
+
+
+.profile-action-btn:disabled {
+    opacity: .55;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: 3px 3px 0 var(--border-heavy);
+}
+
+
+.committee-manage-btn {
+    min-width: 110px;
+}
+
+
+/* ==========================================================
+   CHAIR ACTION CARDS
+========================================================== */
+
+.committee-actions-section {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.committee-action-card {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding: 22px;
+
+    margin-bottom: 16px;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+    box-shadow: 7px 7px 0 var(--border-heavy);
+}
+
+
+.committee-action-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    min-width: 0;
+}
+
+
+.committee-action-icon {
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 3px 3px 0 var(--border-heavy);
+
+    font-size: 1.1rem;
+}
+
+
+.committee-action-info h3 {
+    margin: 0 0 5px;
+
+    color: var(--text);
+
+    font-size: .95rem;
+    font-weight: 900;
+}
+
+
+.committee-action-info p {
+    max-width: 700px;
+
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: .78rem;
+    line-height: 1.5;
+}
+
+
+.leave-committee-btn {
+    background: #ffdddd;
+}
+
+
+/* ==========================================================
+   MODAL FOUNDATION
+========================================================== */
+
+.modal-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(0, 0, 0, .65);
+
+    overflow-y: auto;
+}
+
+
+.modal-overlay.active {
+    display: flex;
+}
+
+
+.modal-container {
+    position: relative;
+
+    width: min(720px, 94vw);
+
+    max-height: 90vh;
+
+    margin: auto;
+
+    background: var(--surface);
+
+    border: 4px solid var(--border-heavy);
+
+    box-shadow: 10px 10px 0 var(--border-heavy);
+
+    overflow: hidden;
+}
+
+
+.modal-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 24px;
+
+    background: var(--primary);
+
+    border-bottom: 4px solid var(--border-heavy);
+}
+
+
+.modal-header h2 {
+    margin: 0;
+
+    color: var(--text);
+
+    font-size: 1.45rem;
+    font-weight: 900;
+
+    line-height: 1.15;
+}
+
+
+.modal-header p {
+    margin: 8px 0 0;
+
+    color: var(--text-light);
+
+    font-size: .78rem;
+    line-height: 1.5;
+}
+
+
+.modal-close {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 3px 3px 0 var(--border-heavy);
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+
+.modal-close:hover {
+    transform: translate(-2px, -2px);
+
+    box-shadow: 5px 5px 0 var(--border-heavy);
+}
+
+
+.modal-close:active {
+    transform: translate(2px, 2px);
+
+    box-shadow: 1px 1px 0 var(--border-heavy);
+}
+
+
+/* ==========================================================
+   COMMITTEE CHANGE MODAL
+========================================================== */
+
+.committee-change-modal {
+    width: min(720px, 94vw);
+
+    max-height: 90vh;
+
+    overflow: hidden;
+}
+
+
+.committee-change-modal .modal-body {
+    max-height: calc(90vh - 145px);
+
+    overflow-y: auto;
+
+    padding: 24px;
+}
+
+
+/* Custom scrollbar */
+
+.committee-change-modal .modal-body::-webkit-scrollbar {
+    width: 9px;
+}
+
+
+.committee-change-modal .modal-body::-webkit-scrollbar-track {
+    background: #eeeeee;
+
+    border-left: 2px solid var(--border-heavy);
+}
+
+
+.committee-change-modal .modal-body::-webkit-scrollbar-thumb {
+    background: var(--border-heavy);
+
+    border: 2px solid #eeeeee;
+}
+
+
+.committee-change-modal .modal-body {
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        var(--border-heavy)
+        #eeeeee;
+}
+
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+.committee-change-modal .form-group {
+    margin-bottom: 18px;
+}
+
+
+.committee-change-modal label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--text);
+
+    font-size: .72rem;
+    font-weight: 900;
+
+    letter-spacing: .4px;
+}
+
+
+.committee-change-modal input,
+.committee-change-modal textarea,
+.committee-change-modal select {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 14px;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    border: 3px solid var(--border-heavy);
+
+    border-radius: 0;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: .82rem;
+    font-weight: 600;
+
+    transition:
+        box-shadow .15s ease,
+        background .15s ease;
+}
+
+
+.committee-change-modal textarea {
+    resize: vertical;
+
+    min-height: 100px;
+
+    line-height: 1.5;
+}
+
+
+.committee-change-modal input:focus,
+.committee-change-modal textarea:focus,
+.committee-change-modal select:focus {
+    background: #fffbea;
+
+    box-shadow: 4px 4px 0 var(--border-heavy);
+}
+
+
+.committee-change-modal input[readonly] {
+    background: #eeeeee;
+
+    color: #555555;
+
+    cursor: not-allowed;
+}
+
+
+.committee-change-modal .form-row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* ==========================================================
+   MODAL ACTIONS
+========================================================== */
+
+.modal-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 8px;
+}
+
+
+.btn-secondary,
+.btn-primary {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 44px;
+
+    padding: 11px 18px;
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 4px 4px 0 var(--border-heavy);
+
+    font-family: inherit;
+
+    font-size: .7rem;
+    font-weight: 900;
+
+    letter-spacing: .5px;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+}
+
+
+.btn-primary {
+    background: var(--primary);
+
+    color: var(--text);
+}
+
+
+.btn-secondary {
+    background: #eeeeee;
+
+    color: var(--text);
+}
+
+
+.btn-primary:hover,
+.btn-secondary:hover {
+    transform: translate(-2px, -2px);
+
+    box-shadow: 6px 6px 0 var(--border-heavy);
+}
+
+
+.btn-primary:active,
+.btn-secondary:active {
+    transform: translate(2px, 2px);
+
+    box-shadow: 2px 2px 0 var(--border-heavy);
+}
+
+
+.btn-primary:disabled,
+.btn-secondary:disabled {
+    opacity: .55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* ==========================================================
+   COMMITTEE ACTION MODAL
+========================================================== */
+
+.committee-action-modal {
+    width: min(620px, 94vw);
+
+    max-height: 90vh;
+
+    overflow: hidden;
+}
+
+
+.committee-action-options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+
+    padding: 24px;
+
+    max-height: calc(90vh - 145px);
+
+    overflow-y: auto;
+}
+
+
+.committee-action-option {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    padding: 18px;
+
+    background: var(--surface);
+
+    color: var(--text);
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 4px 4px 0 var(--border-heavy);
+
+    text-align: left;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+    transition:
+        transform .15s ease,
+        box-shadow .15s ease,
+        background .15s ease;
+}
+
+
+.committee-action-option:hover {
+    background: var(--primary);
+
+    transform: translate(-2px, -2px);
+
+    box-shadow: 6px 6px 0 var(--border-heavy);
+}
+
+
+.committee-action-option:active {
+    transform: translate(2px, 2px);
+
+    box-shadow: 2px 2px 0 var(--border-heavy);
+}
+
+
+.committee-action-option-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--primary);
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 3px 3px 0 var(--border-heavy);
+
+    font-size: 1rem;
+}
+
+
+.committee-action-option-content {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    min-width: 0;
+}
+
+
+.committee-action-option-content strong {
+    color: var(--text);
+
+    font-size: .88rem;
+    font-weight: 900;
+}
+
+
+.committee-action-option-content small {
+    color: var(--text-light);
+
+    font-size: .76rem;
+
+    line-height: 1.5;
+}
+
+
+.committee-action-option > i {
+    flex-shrink: 0;
+
+    color: var(--text);
+
+    font-size: .8rem;
+}
+
+
+/* ==========================================================
+   ACTION MODAL SCROLLBAR
+========================================================== */
+
+.committee-action-options::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+.committee-action-options::-webkit-scrollbar-track {
+    background: #eeeeee;
+}
+
+
+.committee-action-options::-webkit-scrollbar-thumb {
+    background: var(--border-heavy);
+}
+
+
+.committee-action-options {
+    scrollbar-width: thin;
+
+    scrollbar-color:
+        var(--border-heavy)
+        #eeeeee;
+}
+
+
+/* ==========================================================
+   FOCUS ACCESSIBILITY
+========================================================== */
+
+.profile-action-btn:focus-visible,
+.committee-action-option:focus-visible,
+.modal-close:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible {
+    outline: 3px solid var(--secondary);
+
+    outline-offset: 3px;
+}
+
+
+/* ==========================================================
+   RESPONSIVE — TABLETS
+========================================================== */
+
+@media (max-width: 900px) {
+
+    .profile-page-container {
+        width: min(94%, 760px);
+    }
+
+
+    .profile-hero {
+        padding: 28px;
+    }
+
+
+    .profile-summary {
+        grid-template-columns: 1fr;
+    }
+
+
+    .profile-stats {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .committee-action-card {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .committee-action-card .profile-action-btn {
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE — MOBILE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .profile-page-container {
+        width: 92%;
+
+        padding-top: 20px;
+    }
+
+
+    .profile-hero {
+        padding: 24px 20px;
+
+        box-shadow: 7px 7px 0 var(--border-heavy);
+    }
+
+
+    .profile-hero-content {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .profile-avatar {
+        width: 76px;
+        height: 76px;
+
+        font-size: 2rem;
+    }
+
+
+    .profile-hero h1 {
+        font-size: 2rem;
+    }
+
+
+    .profile-summary {
+        gap: 14px;
+    }
+
+
+    .identity-card {
+        padding: 17px;
+
+        box-shadow: 5px 5px 0 var(--border-heavy);
+    }
+
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+
+        gap: 14px;
+    }
+
+
+    .stat-card {
+        padding: 20px;
+    }
+
+
+    .section-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .registration-table-card {
+        box-shadow: 5px 5px 0 var(--border-heavy);
+    }
+
+
+    .registration-table-card table {
+        min-width: 700px;
+    }
+
+
+    .committee-action-card {
+        padding: 18px;
+
+        box-shadow: 5px 5px 0 var(--border-heavy);
+    }
+
+
+    .committee-action-info {
+        align-items: flex-start;
+    }
+
+
+    .modal-overlay {
+        align-items: flex-start;
+
+        padding: 15px;
+
+        overflow-y: auto;
+    }
+
+
+    .modal-container {
+        width: 100%;
+
+        max-height: calc(100vh - 30px);
+
+        box-shadow: 6px 6px 0 var(--border-heavy);
+    }
+
+
+    .modal-header {
+        padding: 18px;
+    }
+
+
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+
+
+    .committee-change-modal .modal-body {
+        max-height: calc(100vh - 125px);
+
+        padding: 18px;
+    }
+
+
+    .committee-change-modal .form-row {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+
+    .modal-actions {
+        align-items: stretch;
+
+        flex-direction: column-reverse;
+    }
+
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+
+
+    .committee-action-options {
+        padding: 18px;
+
+        max-height: calc(100vh - 125px);
+    }
+
+
+    .committee-action-option {
+        padding: 15px;
+    }
+
+
+    .committee-action-option-icon {
+        width: 42px;
+        height: 42px;
+    }
+
+}
+
+
+/* ==========================================================
+   VERY SMALL SCREENS
+========================================================== */
+
+@media (max-width: 400px) {
+
+    .profile-hero h1 {
+        font-size: 1.7rem;
+    }
+
+
+    .hero-badge {
+        font-size: .62rem;
+    }
+
+
+    .identity-card {
+        gap: 12px;
+    }
+
+
+    .identity-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+
+    .committee-action-info {
+        gap: 12px;
+    }
+
+
+    .committee-action-icon {
+        width: 46px;
+        height: 46px;
+    }
+
+}
+.committee-leave-option {
+    background: #fff1f1;
+}
+
+.committee-leave-option:hover {
+    background: #ffd6d6;
+}
+
+.committee-leave-option .committee-action-option-icon {
+    background: #ffb3b3;
+}
+/* ==========================================================
+   LEAVE COMMITTEE MODAL
+========================================================== */
+
+.leave-committee-modal {
+    width: min(600px, 94vw);
+}
+
+
+.leave-committee-body {
+    padding: 24px;
+}
+
+
+.leave-committee-warning {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 16px;
+
+    padding: 18px;
+
+    background: #fff1f1;
+
+    border: 3px solid var(--border-heavy);
+    box-shadow: 4px 4px 0 var(--border-heavy);
+}
+
+
+.leave-committee-warning > i {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffb3b3;
+
+    border: 3px solid var(--border-heavy);
+
+    font-size: 1rem;
+}
+
+
+.leave-committee-warning strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: var(--text);
+
+    font-size: .95rem;
+    font-weight: 900;
+}
+
+
+.leave-committee-warning p {
+    margin: 0;
+
+    color: var(--text-light);
+
+    font-size: .78rem;
+
+    line-height: 1.5;
+}
+
+
+.leave-committee-note {
+    margin: 20px 0;
+
+    color: var(--text-light);
+
+    font-size: .78rem;
+
+    line-height: 1.6;
+}
+
+
+.leave-confirm-btn {
+    background: #ffb3b3;
+}
+
+
+@media (max-width: 600px) {
+
+    .leave-committee-body {
+        padding: 18px;
+    }
+
+
+    .leave-committee-warning {
+        padding: 15px;
+    }
+
+}
+
+/* ==========================================================
+   PROPOSE ANOTHER COMMITTEE MODAL
+========================================================== */
+
+.propose-committee-modal {
+    width: min(820px, 94vw);
+    max-height: 90vh;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ==========================================================
+   MODAL HEADER
+========================================================== */
+
+.propose-committee-modal .modal-header {
+    flex-shrink: 0;
+}
+
+
+/* ==========================================================
+   PROPOSAL FORM
+========================================================== */
+
+.proposal-form {
+    padding: 24px 28px 28px;
+
+    overflow-y: auto;
+
+    max-height: calc(90vh - 150px);
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   FORM GRID
+========================================================== */
+
+.proposal-form .form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px 20px;
+}
+
+
+/* ==========================================================
+   FORM GROUP
+========================================================== */
+
+.proposal-form .form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    min-width: 0;
+}
+
+
+.proposal-form .form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+
+/* ==========================================================
+   LABELS
+========================================================== */
+
+.proposal-form .form-group label {
+    display: block;
+
+    margin: 0;
+
+    font-size: 0.74rem;
+
+    font-weight: 900;
+
+    line-height: 1.2;
+
+    letter-spacing: 0.05em;
+
+    text-transform: uppercase;
+}
+
+
+.proposal-form .form-group label span {
+    color: #c62828;
+
+    margin-left: 2px;
+}
+
+
+/* ==========================================================
+   INPUTS
+========================================================== */
+
+.proposal-form .form-group input,
+.proposal-form .form-group select,
+.proposal-form .form-group textarea {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 3px solid var(--border-heavy);
+
+    border-radius: 0;
+
+    background: #ffffff;
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: 0.82rem;
+
+    line-height: 1.4;
+
+    outline: none;
+
+    transition:
+        box-shadow 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.proposal-form .form-group input,
+.proposal-form .form-group select {
+    min-height: 44px;
+
+    padding: 10px 12px;
+}
+
+
+.proposal-form .form-group textarea {
+    min-height: 105px;
+
+    padding: 11px 12px;
+
+    resize: vertical;
+}
+
+
+/* ==========================================================
+   INPUT FOCUS
+========================================================== */
+
+.proposal-form .form-group input:focus,
+.proposal-form .form-group select:focus,
+.proposal-form .form-group textarea:focus {
+
+    box-shadow:
+        4px 4px 0 var(--border-heavy);
+
+    transform: translate(
+        -1px,
+        -1px
+    );
+}
+
+
+/* ==========================================================
+   PLACEHOLDERS
+========================================================== */
+
+.proposal-form .form-group input::placeholder,
+.proposal-form .form-group textarea::placeholder {
+
+    color: #8b8b8b;
+
+    opacity: 1;
+}
+
+
+/* ==========================================================
+   SELECT
+========================================================== */
+
+.proposal-form .form-group select {
+
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+/* ==========================================================
+   INFORMATION NOTE
+========================================================== */
+
+.proposal-form-note {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 22px;
+
+    padding: 14px 16px;
+
+    border: 3px solid var(--border-heavy);
+
+    background: #f1f5ff;
+
+    box-sizing: border-box;
+}
+
+
+.proposal-form-note i {
+
+    flex-shrink: 0;
+
+    margin-top: 2px;
+
+    font-size: 0.9rem;
+}
+
+
+.proposal-form-note p {
+
+    margin: 0;
+
+    font-size: 0.75rem;
+
+    line-height: 1.55;
+
+    color: var(--text);
+}
+
+
+/* ==========================================================
+   FORM ACTIONS
+========================================================== */
+
+.proposal-form .modal-actions {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 24px;
+
+    padding-top: 20px;
+
+    border-top: 3px solid var(--border-heavy);
+}
+
+
+.proposal-form .modal-actions button {
+
+    min-height: 42px;
+
+    padding: 10px 18px;
+
+    font-family: inherit;
+
+    font-size: 0.75rem;
+
+    font-weight: 900;
+
+    letter-spacing: 0.04em;
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 700px) {
+
+    .propose-committee-modal {
+        width: 94vw;
+
+        max-height: 92vh;
+    }
+
+
+    .proposal-form {
+        padding: 20px;
+
+        max-height: calc(92vh - 145px);
+    }
+
+
+    .proposal-form .form-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    .proposal-form .form-group.full-width {
+        grid-column: auto;
+    }
+
+
+    .proposal-form .modal-actions {
+
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+
+    .proposal-form .modal-actions button {
+
+        width: 100%;
+    }
+
+}
+
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 430px) {
+
+    .propose-committee-modal {
+        width: 96vw;
+    }
+
+
+    .proposal-form {
+        padding: 16px;
+    }
+
+
+    .proposal-form .form-group input,
+    .proposal-form .form-group select,
+    .proposal-form .form-group textarea {
+
+        font-size: 0.78rem;
+    }
+
+
+    .proposal-form-note {
+
+        padding: 12px;
+
+        gap: 9px;
+    }
+
+}

@@ -57,5 +57,16 @@ public ResponseEntity<List<CommitteeDelegateDTO>> getCommitteeDelegates(
             dashboardService.getCommitteeDelegates(committeeId)
     );
 }
+@PreAuthorize("hasRole('CHAIR')")
+@PostMapping("/chair/committee/{committeeId}/leave")
+public ResponseEntity<String> leaveCommittee(
+        @PathVariable Long committeeId) {
+
+    return ResponseEntity.ok(
+            dashboardService.leaveCommittee(
+                    committeeId
+            )
+    );
+}
 
 }

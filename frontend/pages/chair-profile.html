@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Chair Profile | FIC FURY</title>
+
+
+    <!-- ==================================================
+         FONT
+    ================================================== -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ==================================================
+         FONT AWESOME
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+
+    <!-- ==================================================
+         GLOBAL CSS
+    ================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/layout.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/components.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/responsive.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/forms.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/tables.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/animations.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/theme.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/toast.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/utilities.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/sidebar.css">
+
+    <link
+        rel="stylesheet"
+        href="../css/chair-profile.css">
+
+</head>
+
+
+<body>
+
+
+<div class="app-layout">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    ================================================== -->
+
+    <div id="sidebar"></div>
+
+
+    <!-- ==================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <main class="main-content">
+
+        <div class="page-container profile-page-container">
+
+
+            <!-- ==================================================
+                 HERO
+            ================================================== -->
+
+            <section class="profile-hero">
+
+                <div class="profile-hero-content">
+
+
+                    <div>
+
+                        <span class="hero-badge">
+                            Chair Profile
+                        </span>
+
+
+                        <h1>
+
+                            Hello,
+
+                            <span id="profileName">
+                                Chair
+                            </span>
+
+                            👋
+
+                        </h1>
+
+
+                        <p>
+                            Manage your committee,
+                            chair responsibilities and
+                            FIC FURY participation.
+                        </p>
+
+                    </div>
+
+
+                    <div class="profile-avatar">
+
+                        <i class="fa-solid fa-user-tie"></i>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 PROFILE SUMMARY
+            ================================================== -->
+
+            <section class="profile-summary">
+
+
+                <!-- CURRENT ROLE -->
+
+                <div class="identity-card">
+
+                    <div class="identity-icon">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            CURRENT ROLE
+                        </span>
+
+                        <h3 id="profileRole">
+                            Chair
+                        </h3>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- CURRENT COMMITTEE -->
+
+                <div class="identity-card">
+
+                    <div class="identity-icon">
+
+                        <i class="fa-solid fa-landmark"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            MY COMMITTEES
+                        </span>
+
+                        <h3 id="committeeName">
+                            Loading...
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+<!-- ==================================================
+     CHAIR STATISTICS
+================================================== -->
+
+<section class="stats-grid profile-stats">
+
+    <!-- CURRENT COMMITTEE -->
+
+    <div class="stat-card">
+
+        <div class="stat-header">
+
+            <i class="fa-solid fa-landmark"></i>
+
+            <h4>
+                Your Committees
+            </h4>
+
+        </div>
+
+
+        <h2 id="committeeCount">
+            0
+        </h2>
+
+
+        <p>
+             Committees currently assigned to you.
+        </p>
+
+    </div>
+
+
+
+    <!-- DELEGATES -->
+
+    <div class="stat-card">
+
+        <div class="stat-header">
+
+            <i class="fa-solid fa-users"></i>
+
+            <h4>
+                Delegates
+            </h4>
+
+        </div>
+
+
+        <h2 id="delegateCount">
+            0
+        </h2>
+
+
+        <p>
+          
+    Delegates in the selected committee
+        </p>
+
+    </div>
+
+</section>
+
+
+
+            <!-- ==================================================
+                 CURRENT COMMITTEE
+            ================================================== -->
+
+           <section
+    class="registrations-section"
+    id="delegatesSection"
+>
+
+
+                <div class="section-heading">
+
+                    <div>
+
+<span class="section-label">
+    YOUR COMMITTEES
+</span>
+
+<h2>
+    Committees You Chair
+</h2>
+
+<p>
+    View and manage all committees
+    currently assigned to you.
+</p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="registration-table-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+
+                                        <i class="fa-solid fa-landmark"></i>
+
+                                        Committee
+
+                                    </th>
+
+
+                                    <th>
+
+                                        <i class="fa-solid fa-layer-group"></i>
+
+                                        Category
+
+                                    </th>
+
+
+                                    <th>
+
+                                        <i class="fa-solid fa-user-tie"></i>
+
+                                        Role
+
+                                    </th>
+
+                                             <th>
+                <i class="fa-solid fa-gear"></i>
+                Actions
+            </th>
+
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="committeeBody">
+
+                                <tr>
+
+                                    <td
+                                        colspan="4"
+                                        class="profile-empty-state"
+                                    >
+
+                                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                        Loading committee...
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 DELEGATES
+            ================================================== -->
+
+            <section class="registrations-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            COMMITTEE MEMBERS
+                        </span>
+
+
+                        <h2>
+                            My Delegates
+                        </h2>
+<p id="delegatesCommitteeLabel">
+    Select a committee to view its delegates.
+</p>
+
+<p>
+    Delegates assigned to the selected committee.
+</p>
+                    </div>
+
+                </div>
+
+
+
+                <div class="registration-table-card">
+
+                    <div class="table-wrapper">
+
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+
+                                        <i class="fa-solid fa-user"></i>
+
+                                        Delegate
+
+                                    </th>
+
+
+                                    <th>
+
+                                        <i class="fa-solid fa-envelope"></i>
+
+                                        Email
+
+                                    </th>
+
+
+                                    <th>
+
+                                        <i class="fa-solid fa-user-secret"></i>
+
+                                        Character
+
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody id="delegatesBody">
+
+                                <tr>
+
+                                    <td
+                                        colspan="3"
+                                        class="profile-empty-state"
+                                    >
+
+                                        <i class="fa-solid fa-spinner fa-spin"></i>
+
+                                        Loading delegates...
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 CHAIR ACTIONS
+            ================================================== -->
+
+            <section class="committee-actions-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+<span class="section-label">
+    CHAIR ACTIONS
+</span>
+
+<h2>
+    Chair Actions
+</h2>
+
+<p>
+    Propose a new committee that you would
+    like to chair.
+</p>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+                <!-- ==================================================
+                     PROPOSE ANOTHER COMMITTEE
+                ================================================== -->
+
+                <div class="committee-action-card">
+
+
+                    <div class="committee-action-info">
+
+
+                        <div class="committee-action-icon">
+
+                            <i class="fa-solid fa-landmark"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Propose Another Committee
+                            </h3>
+
+
+                            <p>
+                                Propose a new committee and
+                                apply to chair it. Your proposal
+                                will be reviewed by an
+                                administrator.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="profile-action-btn"
+                        id="proposeAnotherCommitteeBtn"
+                    >
+
+                        <i class="fa-solid fa-landmark"></i>
+
+                        PROPOSE COMMITTEE
+
+                    </button>
+
+                </div>
+
+
+
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 FOOTER
+            ================================================== -->
+
+            <div id="footer"></div>
+
+
+        </div>
+
+    </main>
+
+</div>
+<!-- ==================================================
+     REQUEST COMMITTEE CHANGES MODAL
+================================================== -->
+
+<div
+    class="modal-overlay"
+    id="committeeChangeModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-container committee-change-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="committeeChangeModalTitle"
+    >
+
+        <!-- HEADER -->
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="section-label">
+                    CHAIR REQUEST
+                </span>
+
+                <h2 id="committeeChangeModalTitle">
+                    Request Committee Changes
+                </h2>
+
+                <p>
+                    Submit proposed changes to your
+                    current committee for administrator review.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeCommitteeChangeModal"
+                aria-label="Close"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- BODY -->
+
+        <div class="modal-body">
+
+            <form
+                id="committeeChangeForm"
+                novalidate
+            >
+
+                <!-- COMMITTEE -->
+
+                <div class="form-group">
+
+                    <label>
+                        Current Committee
+                    </label>
+
+                    <input
+                        type="text"
+                        id="changeCommitteeDisplay"
+                        readonly
+                    >
+
+                    <input
+                        type="hidden"
+                        id="changeCommitteeId"
+                    >
+
+                </div>
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="changeCommitteeName">
+                        Committee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="changeCommitteeName"
+                        name="committeeName"
+                        required
+                        maxlength="255"
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="changeCommitteeCategory">
+                        Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="changeCommitteeCategory"
+                        name="category"
+                        maxlength="255"
+                    >
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="changeCommitteeDescription">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="changeCommitteeDescription"
+                        name="description"
+                        rows="4"
+                        maxlength="2000"
+                    ></textarea>
+
+                </div>
+
+
+                <!-- DATE / TIME -->
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="changeCommitteeDate">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="changeCommitteeDate"
+                            name="date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="changeCommitteeTime">
+                            Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="changeCommitteeTime"
+                            name="time"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- MODE -->
+
+                <div class="form-group">
+
+                    <label for="changeCommitteeMode">
+                        Mode
+                    </label>
+
+                    <select
+                        id="changeCommitteeMode"
+                        name="mode"
+                    >
+
+                        <option value="">
+                            Select mode
+                        </option>
+
+                        <option value="IN_PERSON">
+                            In Person
+                        </option>
+
+                        <option value="ONLINE">
+                            Online
+                        </option>
+
+                        <option value="HYBRID">
+                            Hybrid
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- VENUE -->
+
+                <div class="form-group">
+
+                    <label for="changeCommitteeVenue">
+                        Venue
+                    </label>
+
+                    <input
+                        type="text"
+                        id="changeCommitteeVenue"
+                        name="venue"
+                        maxlength="255"
+                    >
+
+                </div>
+
+
+                <!-- MEETING LINK -->
+
+                <div class="form-group">
+
+                    <label for="changeCommitteeMeetingLink">
+                        Meeting Link
+                    </label>
+
+                    <input
+                        type="url"
+                        id="changeCommitteeMeetingLink"
+                        name="meetingLink"
+                        maxlength="500"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <!-- REASON -->
+
+                <div class="form-group">
+
+                    <label for="committeeChangeReason">
+                        Reason for Change
+                    </label>
+
+                    <textarea
+                        id="committeeChangeReason"
+                        name="changeReason"
+                        rows="4"
+                        required
+                        maxlength="2000"
+                        placeholder="Explain why these changes are needed..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="btn-secondary"
+                        id="cancelCommitteeChange"
+                    >
+                        CANCEL
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="btn-primary"
+                        id="submitCommitteeChange"
+                    >
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                        SUBMIT REQUEST
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- ==================================================
+     COMMITTEE ACTION MODAL
+================================================== -->
+
+<div
+    class="modal-overlay"
+    id="committeeActionModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-container committee-action-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="committeeActionTitle"
+    >
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="section-label">
+                    COMMITTEE MANAGEMENT
+                </span>
+
+                <h2 id="committeeActionTitle">
+                    Manage Committee
+                </h2>
+
+                <p id="committeeActionDescription">
+                    Choose an action for this committee.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeCommitteeActionModal"
+                aria-label="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <div class="committee-action-options">
+
+            <!-- REQUEST CHANGES -->
+
+            <button
+                type="button"
+                class="committee-action-option"
+                id="openCommitteeChangeFromAction"
+            >
+
+                <span class="committee-action-option-icon">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </span>
+
+                <span class="committee-action-option-content">
+
+                    <strong>
+                        Request Committee Changes
+                    </strong>
+
+                    <small>
+                        Submit changes to this committee
+                        for administrator approval.
+                    </small>
+
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+
+
+            <!-- VIEW DELEGATES -->
+
+            <button
+                type="button"
+                class="committee-action-option"
+                id="viewCommitteeDelegates"
+            >
+
+                <span class="committee-action-option-icon">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+
+                <span class="committee-action-option-content">
+
+                    <strong>
+                        View Delegates
+                    </strong>
+
+                    <small>
+                        View delegates assigned to this committee.
+                    </small>
+
+                </span>
+
+                <i class="fa-solid fa-chevron-right"></i>
+
+            </button>
+<button
+    type="button"
+    class="committee-action-option committee-leave-option"
+    id="leaveCommitteeFromAction"
+>
+
+    <span class="committee-action-option-icon">
+        <i class="fa-solid fa-right-from-bracket"></i>
+    </span>
+
+    <span class="committee-action-option-content">
+
+        <strong>
+            Leave Committee
+        </strong>
+
+        <small>
+            End your Chair assignment for this committee.
+        </small>
+
+    </span>
+
+    <i class="fa-solid fa-chevron-right"></i>
+
+</button>
+        </div>
+
+    </div>
+
+</div>
+<!-- ==================================================
+     LEAVE COMMITTEE CONFIRMATION MODAL
+================================================== -->
+
+<div
+    class="modal-overlay"
+    id="leaveCommitteeModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-container leave-committee-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="leaveCommitteeTitle"
+    >
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="section-label">
+                    CONFIRM ACTION
+                </span>
+
+                <h2 id="leaveCommitteeTitle">
+                    Leave Committee
+                </h2>
+
+                <p id="leaveCommitteeDescription">
+                    Please confirm that you want to leave this committee.
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeLeaveCommitteeModal"
+                aria-label="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <div class="leave-committee-body">
+
+            <div class="leave-committee-warning">
+
+                <i class="fa-solid fa-triangle-exclamation"></i>
+
+                <div>
+
+                    <strong id="leaveCommitteeName">
+                        Selected Committee
+                    </strong>
+
+                    <p>
+                        You will no longer serve as Chair
+                        for this committee.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <p class="leave-committee-note">
+                If this is your last committee, your account
+                will become a Delegate.
+            </p>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelLeaveCommittee"
+                >
+                    CANCEL
+                </button>
+
+                <button
+                    type="button"
+                    class="btn-primary leave-confirm-btn"
+                    id="confirmLeaveCommittee"
+                >
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    LEAVE COMMITTEE
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     PROPOSE ANOTHER COMMITTEE MODAL
+================================================== -->
+
+<div
+    class="modal-overlay"
+    id="proposeCommitteeModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-container propose-committee-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="proposeCommitteeTitle"
+    >
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="section-label">
+                    NEW COMMITTEE
+                </span>
+
+                <h2 id="proposeCommitteeTitle">
+                    Propose Another Committee
+                </h2>
+
+                <p>
+                    Submit a proposal for an additional
+                    committee that you would like to chair.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-close"
+                id="closeProposeCommitteeModal"
+                aria-label="Close"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+        </div>
+
+
+        <form
+            id="proposeCommitteeForm"
+            class="proposal-form"
+        >
+
+            <div class="form-grid">
+
+
+                <!-- Committee Name -->
+
+                <div class="form-group full-width">
+
+                    <label for="proposalCommitteeName">
+                        Committee Name
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        id="proposalCommitteeName"
+                        name="committeeName"
+                        placeholder="Enter committee name"
+                        maxlength="255"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Category -->
+
+                <div class="form-group">
+
+                    <label for="proposalCategory">
+                        Category
+                    </label>
+
+                    <input
+                        type="text"
+                        id="proposalCategory"
+                        name="category"
+                        placeholder="e.g. Political, Scientific"
+                    >
+
+                </div>
+
+
+                <!-- Mode -->
+
+                <div class="form-group">
+
+                    <label for="proposalMode">
+                        Mode
+                    </label>
+
+                    <select
+                        id="proposalMode"
+                        name="mode"
+                    >
+
+                        <option value="">
+                            Select mode
+                        </option>
+
+                        <option value="OFFLINE">
+                            Offline
+                        </option>
+
+                        <option value="ONLINE">
+                            Online
+                        </option>
+
+                        <option value="HYBRID">
+                            Hybrid
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- Date -->
+
+                <div class="form-group">
+
+                    <label for="proposalDate">
+                        Date
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="date"
+                        id="proposalDate"
+                        name="date"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Time -->
+
+                <div class="form-group">
+
+                    <label for="proposalTime">
+                        Time
+                        <span>*</span>
+                    </label>
+
+                    <input
+                        type="time"
+                        id="proposalTime"
+                        name="time"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- Venue -->
+
+                <div class="form-group">
+
+                    <label for="proposalVenue">
+                        Venue
+                    </label>
+
+                    <input
+                        type="text"
+                        id="proposalVenue"
+                        name="venue"
+                        placeholder="Enter venue"
+                    >
+
+                </div>
+
+
+                <!-- Meeting Link -->
+
+                <div class="form-group">
+
+                    <label for="proposalMeetingLink">
+                        Meeting Link
+                    </label>
+
+                    <input
+                        type="url"
+                        id="proposalMeetingLink"
+                        name="meetingLink"
+                        placeholder="https://..."
+                    >
+
+                </div>
+
+
+                <!-- Description -->
+
+                <div class="form-group full-width">
+
+                    <label for="proposalDescription">
+                        Committee Description
+                    </label>
+
+                    <textarea
+                        id="proposalDescription"
+                        name="description"
+                        rows="4"
+                        maxlength="2000"
+                        placeholder="Describe the proposed committee..."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- Proposal Reason -->
+
+                <div class="form-group full-width">
+
+                    <label for="proposalReason">
+                        Reason for Proposal
+                        <span>*</span>
+                    </label>
+
+                    <textarea
+                        id="proposalReason"
+                        name="proposalReason"
+                        rows="4"
+                        maxlength="2000"
+                        placeholder="Explain why this committee should be introduced..."
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="proposal-form-note">
+
+                <i class="fa-solid fa-circle-info"></i>
+
+                <p>
+                    Your proposal will be reviewed by an
+                    administrator. If approved, the new
+                    committee will be assigned to you.
+                </p>
+
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn-secondary"
+                    id="cancelProposeCommittee"
+                >
+                    CANCEL
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-primary"
+                    id="submitProposeCommittee"
+                >
+                    <i class="fa-solid fa-paper-plane"></i>
+                    SUBMIT PROPOSAL
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- ==================================================
+     COMPONENT LOADER
+================================================== -->
+
+<script src="../js/component-loader.js"></script>
+
+
+<!-- ==================================================
+     CORE
+================================================== -->
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script src="../js/toast.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+
+
+<!-- ==================================================
+     CHAIR PROFILE
+================================================== -->
+
+<script src="../js/chair-profile.js"></script>
+
+
+
+<!-- ==================================================
+     AUTHENTICATION
+================================================== -->
+
+<script>
+
+    requireLogin();
+
+</script>
+
+
+</body>
+
+</html>

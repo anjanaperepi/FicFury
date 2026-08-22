@@ -1038,3 +1038,160 @@
 .fury-toast-info {
     border-left: 4px solid #4c8bf5;
 }
+
+.request-type-badge.committee-change {
+    background: #e8f0ff;
+    color: #3157a6;
+}
+
+.request-type-badge.chair-committee {
+    background: #efe6ff;
+    color: #6336a8;
+}
+
+/* ==========================================================
+   PROPOSE COMMITTEE MODAL
+========================================================== */
+
+.propose-committee-modal {
+    width: min(760px, 94vw);
+}
+
+
+.proposal-form {
+    padding: 24px;
+}
+
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+
+.form-group label {
+    font-size: .78rem;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: .04em;
+}
+
+
+.form-group label span {
+    color: #d33;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 11px 12px;
+
+    border: 3px solid var(--border-heavy);
+
+    background: #fff;
+
+    color: var(--text);
+
+    font-family: inherit;
+
+    font-size: .82rem;
+
+    outline: none;
+
+    box-sizing: border-box;
+}
+
+
+.form-group textarea {
+    resize: vertical;
+
+    min-height: 100px;
+}
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    box-shadow:
+        4px 4px 0 var(--border-heavy);
+}
+
+
+.proposal-form-note {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    margin-top: 22px;
+
+    padding: 14px;
+
+    border: 3px solid var(--border-heavy);
+
+    background: #eef5ff;
+}
+
+
+.proposal-form-note i {
+    margin-top: 2px;
+
+    flex-shrink: 0;
+}
+
+
+.proposal-form-note p {
+    margin: 0;
+
+    font-size: .76rem;
+
+    line-height: 1.5;
+}
+
+
+.proposal-form .modal-actions {
+    margin-top: 24px;
+}
+
+
+@media (max-width: 650px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .form-group.full-width {
+        grid-column: auto;
+    }
+
+
+    .proposal-form {
+        padding: 18px;
+    }
+
+}
