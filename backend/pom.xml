@@ -28,7 +28,6 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<maven.compiler.release>${java.version}</maven.compiler.release>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -79,36 +78,6 @@
     <artifactId>itextpdf</artifactId>
     <version>5.5.13.3</version>
 </dependency>
-
-<!-- JWT API -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-api</artifactId>
-    <version>0.12.7</version>
-</dependency>
-
-<!-- JWT Implementation -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-impl</artifactId>
-    <version>0.12.7</version>
-    <scope>runtime</scope>
-</dependency>
-
-<!-- Jackson Integration -->
-<dependency>
-    <groupId>io.jsonwebtoken</groupId>
-    <artifactId>jjwt-jackson</artifactId>
-    <version>0.12.7</version>
-    <scope>runtime</scope>
-</dependency>
-
-
-<dependency>
-    <groupId>com.github.librepdf</groupId>
-    <artifactId>openpdf</artifactId>
-    <version>2.0.3</version>
-</dependency>
 	</dependencies>
 
 	<build>
@@ -128,9 +97,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<release>${maven.compiler.release}</release>
-				</configuration>
 				<executions>
 					<execution>
 						<id>default-compile</id>
