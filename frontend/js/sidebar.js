@@ -695,19 +695,20 @@ Sidebar.highlightActivePage = function(){
 
 };
 
-Sidebar.toggleMobile = function(){
+Sidebar.toggleMobile = function () {
 
     document.body.classList.toggle(
-
         "sidebar-mobile-open"
-
     );
 
-    document
+    const backdrop =
+        document.getElementById("sidebarBackdrop");
 
-        .getElementById("sidebarBackdrop")
+    if (backdrop) {
 
-        .classList.toggle("active");
+        backdrop.classList.toggle("active");
+
+    }
 
 };
 function initializeSidebar() {
@@ -716,83 +717,75 @@ function initializeSidebar() {
 
 }
 Sidebar.attachEvents = function () {
+
+    /* =====================================================
+       MOBILE SIDEBAR BUTTON
+       ===================================================== */
+
+    const mobileButton =
+        document.getElementById("mobileSidebarButton");
+
+    if (mobileButton) {
+
+        mobileButton.addEventListener("click", () => {
+
+            Sidebar.toggleMobile();
+
+        });
+
+    }
+
+
+    /* =====================================================
+       SIDEBAR BACKDROP
+       ===================================================== */
+
     const backdrop =
-    document.getElementById("sidebarBackdrop");
+        document.getElementById("sidebarBackdrop");
 
-if (backdrop) {
+    if (backdrop) {
 
-    backdrop.addEventListener("click", () => {
+        backdrop.addEventListener("click", () => {
 
-        document.body.classList.remove(
-            "sidebar-mobile-open"
-        );
+            document.body.classList.remove(
+                "sidebar-mobile-open"
+            );
 
-        backdrop.classList.remove("active");
+            backdrop.classList.remove("active");
 
-    });
+        });
 
-}
+    }
+
+
+    /* =====================================================
+       ORIGINAL SIDEBAR TOGGLE
+       ===================================================== */
+
     const toggle =
         document.getElementById("sidebarToggle");
 
-    if (!toggle) {
-        return;
-    }
+    if (toggle) {
 
-    toggle.addEventListener("click", () => {
+        toggle.addEventListener("click", () => {
 
-        const isMobile =
-            window.innerWidth <= 992;
+            const isMobile =
+                window.innerWidth <= 992;
 
-        if (isMobile) {
+            if (isMobile) {
 
-            // Mobile/tablet drawer
-            Sidebar.toggleMobile();
+                Sidebar.toggleMobile();
 
-        } else {
+            } else {
 
-            // Desktop collapsed sidebar
-            document.body.classList.toggle(
-                "sidebar-collapsed"
-            );
-
-        }
-
-    });
-
-    document
-    .querySelectorAll(
-        '.menu-item[data-page="debate-room.html"]'
-    )
-    .forEach(link => {
-
-        link.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    link.dataset.sessionActive !==
-                    "true"
-                ) {
-
-                    event.preventDefault();
-
-                    if (
-                        window.FuryToast
-                    ) {
-
-                        FuryToast.warning(
-                            "No active debate session yet. Please wait for the Chair to start the session."
-                        );
-
-                    }
-
-                }
+                document.body.classList.toggle(
+                    "sidebar-collapsed"
+                );
 
             }
-        );
 
-    });
+        });
+
+    }
 
 };
-

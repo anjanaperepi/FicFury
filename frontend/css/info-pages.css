@@ -1214,3 +1214,154 @@ select {
         height: auto;
     }
 }
+/* =========================================================
+   MOBILE RESPONSIVE — INFO PAGES
+   Privacy / Terms
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .info-navbar {
+        padding: 14px 5vw;
+    }
+
+    .desktop-nav,
+    .nav-actions {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        display: flex;
+    }
+
+    .mobile-nav {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .page-hero-content {
+        max-width: 100%;
+    }
+
+    .policy-section {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .policy-sidebar {
+        position: static;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .info-navbar {
+        padding: 12px 18px;
+    }
+
+    .brand {
+        max-width: 180px;
+    }
+
+    .site-logo {
+        max-width: 120px;
+        height: auto;
+    }
+
+    .page-hero {
+        min-height: 360px;
+    }
+
+    .page-hero-content {
+        padding: 40px 20px;
+    }
+
+    .page-hero h1 {
+        font-size: clamp(38px, 10vw, 58px);
+        line-height: .95;
+    }
+
+    .page-hero p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .policy-section {
+        padding: 40px 20px;
+    }
+
+    .policy-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .policy-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .policy-block h2 {
+        font-size: 24px;
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+    }
+
+    .policy-block p,
+    .policy-block li {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .footer-main {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .info-navbar {
+        padding: 10px 14px;
+    }
+
+    .brand-text {
+        font-size: 18px;
+    }
+
+    .page-hero-content {
+        padding: 32px 16px;
+    }
+
+    .page-hero h1 {
+        font-size: 36px;
+    }
+
+    .policy-section {
+        padding: 32px 16px;
+    }
+
+    .policy-block h2 {
+        font-size: 21px;
+    }
+
+    .policy-block p,
+    .policy-block li {
+        font-size: 13px;
+    }
+
+    .footer {
+        padding: 40px 16px 20px;
+    }
+}

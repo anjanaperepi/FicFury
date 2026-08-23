@@ -650,3 +650,140 @@ form {
     font-weight: 800;
 }
 
+/* =========================================================
+   MOBILE RESPONSIVE — LOGIN / REGISTER
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .auth-container {
+        min-height: 100vh;
+        height: auto;
+
+        grid-template-columns: 1fr;
+
+        overflow: visible;
+    }
+
+    .auth-banner {
+        min-height: 320px;
+
+        padding: 50px 35px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .auth-banner h1 {
+        font-size: clamp(48px, 10vw, 76px);
+    }
+
+    .auth-card {
+        height: auto;
+        min-height: auto;
+
+        padding: 40px 35px;
+
+        overflow: visible;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .auth-banner {
+        min-height: 280px;
+        padding: 40px 24px;
+    }
+
+    .auth-banner h1 {
+        font-size: 48px;
+        line-height: .9;
+    }
+
+    .auth-banner p {
+        max-width: 600px;
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    .banner-features {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .feature {
+        font-size: 12px;
+    }
+
+    .auth-card {
+        padding: 32px 24px;
+    }
+
+    .auth-card > .logo img {
+        width: 100px;
+    }
+
+    .auth-card h1,
+    .auth-card h2 {
+        font-size: 42px;
+    }
+
+    .register-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .options {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .login-btn,
+    #registerBtn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .auth-banner {
+        min-height: 240px;
+        padding: 32px 18px;
+    }
+
+    .comic-badge {
+        font-size: 11px;
+    }
+
+    .auth-banner h1 {
+        font-size: 40px;
+    }
+
+    .banner-features {
+        grid-template-columns: 1fr;
+    }
+
+    .auth-card {
+        padding: 28px 18px;
+    }
+
+    .auth-card h1,
+    .auth-card h2 {
+        font-size: 36px;
+    }
+
+    .auth-card input,
+    .auth-card select {
+        min-height: 48px;
+    }
+
+    .checkbox {
+        align-items: flex-start;
+    }
+
+    .auth-footer,
+    .auth-link {
+        text-align: center;
+    }
+}

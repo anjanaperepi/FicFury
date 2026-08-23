@@ -1380,3 +1380,187 @@ main > section:last-child {
     color: white;
 
 }
+
+/* =========================================================
+   MOBILE RESPONSIVE — PROFILE
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .profile-hero-content {
+        gap: 24px;
+    }
+
+    .profile-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .profile-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .committee-actions-section {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+
+    .profile-hero {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .profile-hero-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-hero h1 {
+        font-size: clamp(30px, 8vw, 42px);
+        line-height: 1.05;
+        overflow-wrap: anywhere;
+    }
+
+    .profile-avatar {
+        align-self: center;
+    }
+
+    .profile-summary {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .identity-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .profile-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .committee-actions-section {
+        grid-template-columns: 1fr;
+    }
+
+    .committee-action-card {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .registrations-section {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .table-wrapper table {
+        min-width: 650px;
+    }
+
+    /* Modals */
+
+    .fury-modal {
+        padding: 16px;
+    }
+
+    .fury-modal-content {
+        width: min(100%, 520px);
+        max-height: calc(100vh - 32px);
+        overflow-y: auto;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .profile-hero {
+        padding: 20px 16px;
+    }
+
+    .profile-hero h1 {
+        font-size: 30px;
+    }
+
+    .identity-card,
+    .stat-card,
+    .committee-action-card {
+        padding: 16px;
+    }
+
+    .profile-action-btn,
+    .leave-committee-btn {
+        width: 100%;
+    }
+
+    .fury-modal {
+        padding: 10px;
+    }
+
+    .fury-modal-content {
+        max-height: calc(100vh - 20px);
+    }
+}
+/* =========================================================
+   MOBILE SIDEBAR TRIGGER
+   ========================================================= */
+
+.mobile-sidebar-button {
+    display: none;
+}
+
+@media (max-width: 992px) {
+
+    .mobile-sidebar-button {
+        display: flex;
+
+        position: fixed;
+
+        top: 14px;
+        left: 14px;
+
+        width: 44px;
+        height: 44px;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #ffd21c;
+        color: #111111;
+
+        border: 3px solid #111111;
+
+        box-shadow: 4px 4px 0 #111111;
+
+        cursor: pointer;
+
+        z-index: 9997;
+
+        font-size: 18px;
+    }
+
+    .mobile-sidebar-button:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #111111;
+    }
+
+    body.sidebar-mobile-open .mobile-sidebar-button {
+        opacity: 0;
+        pointer-events: none;
+    }
+}

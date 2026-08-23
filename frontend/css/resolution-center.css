@@ -242,3 +242,123 @@ form button:hover{
         box-shadow:6px 6px black;
     }
 }
+
+/* =========================================================
+   MOBILE RESPONSIVE — RESOLUTION CENTER
+   ========================================================= */
+
+@media (max-width: 992px) {
+
+    .resolution-workspace {
+        grid-template-columns: 1fr;
+    }
+
+    .resolution-list-panel {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .resolution-editor-panel {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .resolution-participants {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .resolution-section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .resolution-section-header > div {
+        width: 100%;
+    }
+
+    .resolution-new-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .resolution-workspace {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .resolution-list-panel,
+    .resolution-editor-panel {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .resolution-list {
+        max-height: 320px;
+        overflow-y: auto;
+    }
+
+    .resolution-editor-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .resolution-form-group input,
+    .resolution-form-group textarea {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .resolution-form-group textarea {
+        min-height: 280px;
+    }
+
+    .participant-section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .participant-action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .resolution-editor-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .resolution-editor-actions button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .resolution-section-header h2 {
+        font-size: 26px;
+    }
+
+    .resolution-editor-panel,
+    .resolution-list-panel {
+        padding: 14px;
+    }
+
+    .resolution-form-group textarea {
+        min-height: 240px;
+    }
+
+    .resolution-new-btn,
+    .participant-action-btn,
+    .resolution-editor-actions button {
+        min-height: 48px;
+    }
+}

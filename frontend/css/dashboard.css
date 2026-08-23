@@ -1119,224 +1119,236 @@
 }
 
 
-/* ==========================================================
-   RESPONSIVE — TABLET
-========================================================== */
+/* =========================================================
+   MOBILE RESPONSIVE — DELEGATE DASHBOARD
+   ========================================================= */
 
-@media (max-width: 1100px) {
+@media (max-width: 992px) {
 
     .page-container {
-        padding: 28px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 
+    .hero-content {
+        gap: 24px;
+    }
 
     .stats-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-
 
     .dashboard-grid {
         grid-template-columns: 1fr;
     }
 
-
-    .hero-content {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-
     .hero-buttons {
-        width: 100%;
+        flex-wrap: wrap;
     }
 
+    .quick-actions {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
+@media (max-width: 768px) {
 
-/* ==========================================================
-   RESPONSIVE — MOBILE
-========================================================== */
-
-@media (max-width: 700px) {
+    .main-content {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
 
     .page-container {
-        padding: 18px;
-
-        gap: 24px;
+        padding-left: 0;
+        padding-right: 0;
     }
 
+    /* Hero */
 
     .hero-section {
-        padding: 28px 22px;
-
-        min-height: auto;
+        width: 100%;
+        box-sizing: border-box;
     }
 
-
-    .hero-content h1 {
-        font-size: 2.1rem;
-    }
-
-
-    .hero-buttons {
+    .hero-content {
         flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
 
+    .hero-text {
         width: 100%;
     }
 
+    .hero-section h1 {
+        font-size: clamp(30px, 8vw, 42px);
+        line-height: 1.05;
+        overflow-wrap: anywhere;
+    }
+
+    .hero-section p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .hero-buttons {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
 
     .hero-buttons .btn {
         width: 100%;
+        box-sizing: border-box;
     }
 
+    /* Stats */
 
     .stats-grid {
         grid-template-columns: 1fr;
-
-        gap: 18px;
+        gap: 12px;
     }
-
 
     .stat-card {
-        min-height: 160px;
-    }
-
-
-    .dashboard-card,
-    .dashboard-section {
-        padding: 20px;
-    }
-
-
-    .dashboard-card-header {
-        align-items: center;
-    }
-
-
-    .detail-row {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 5px;
-    }
-
-
-    .detail-row strong {
-        text-align: left;
-    }
-
-
-    .section-header {
-        align-items: flex-start;
-
-        flex-direction: column;
-    }
-
-
-    .section-action {
         width: 100%;
-
-        justify-content: center;
+        min-width: 0;
+        box-sizing: border-box;
     }
 
-
-    .achievement-banner {
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        padding: 22px;
+    .stat-header {
+        min-width: 0;
     }
 
+    .stat-header > div:last-child {
+        min-width: 0;
+    }
 
-    .achievement-banner .btn {
+    .stat-card h2 {
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* Dashboard sections */
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .dashboard-section,
+    .dashboard-card {
         width: 100%;
-
-        text-align: center;
-
-        justify-content: center;
+        min-width: 0;
+        box-sizing: border-box;
     }
 
-}
+    /* Quick actions */
 
-
-/* ==========================================================
-   VERY SMALL SCREENS
-========================================================== */
-
-@media (max-width: 420px) {
-
-    .page-container {
-        padding: 14px;
+    .quick-actions {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
     }
 
-
-    .hero-section {
-        padding: 22px 18px;
+    .quick-action {
+        min-width: 0;
+        box-sizing: border-box;
     }
 
-
-    .hero-content h1 {
-        font-size: 1.8rem;
-    }
-
-
-    .stat-card {
-        padding: 20px;
-    }
-
+    /* Activity */
 
     .activity-item {
-        grid-template-columns: 42px minmax(0, 1fr);
-
-        gap: 11px;
-
-        padding: 13px;
+        align-items: flex-start;
     }
 
-
-    .activity-icon {
-        width: 40px;
-        height: 40px;
+    .activity-content {
+        min-width: 0;
     }
 
-}
-#certificateStatus {
-    font-size: 1.35rem;
-    letter-spacing: 0.5px;
-}
+    /* Announcement / achievement */
 
-#certificateStatus.eligible {
-    color: #15803d;
-}
-
-#certificateStatus.not-eligible {
-    color: #dc2626;
+    .achievement-banner,
+    .announcements-section {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }
 
-#certificateStatus.checking {
-    color: #92400e;
+@media (max-width: 480px) {
+
+    .hero-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-section h1 {
+        font-size: 30px;
+    }
+
+    .hero-section p {
+        font-size: 13px;
+    }
+
+    .stat-card,
+    .dashboard-card {
+        padding: 16px;
+    }
+
+    .quick-action {
+        min-height: 58px;
+    }
 }
 
-/* ==========================================================
-   DEBATE ROOM — SESSION INACTIVE
-========================================================== */
+/* =========================================================
+   MOBILE SIDEBAR TRIGGER
+   ========================================================= */
 
-.quick-action.debate-room-disabled {
-
-    opacity: 0.45;
-
-    filter: grayscale(1);
-
-    cursor: not-allowed;
-
+.mobile-sidebar-button {
+    display: none;
 }
 
-.quick-action.debate-room-disabled:hover {
+@media (max-width: 992px) {
 
-    transform: none;
+    .mobile-sidebar-button {
+        display: flex;
 
+        position: fixed;
+
+        top: 14px;
+        left: 14px;
+
+        width: 44px;
+        height: 44px;
+
+        align-items: center;
+        justify-content: center;
+
+        background: #ffd21c;
+        color: #111111;
+
+        border: 3px solid #111111;
+
+        box-shadow: 4px 4px 0 #111111;
+
+        cursor: pointer;
+
+        z-index: 9997;
+
+        font-size: 18px;
+    }
+
+    .mobile-sidebar-button:active {
+        transform: translate(2px, 2px);
+        box-shadow: 2px 2px 0 #111111;
+    }
+
+    body.sidebar-mobile-open .mobile-sidebar-button {
+        opacity: 0;
+        pointer-events: none;
+    }
 }
