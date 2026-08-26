@@ -20,11 +20,25 @@
  <body>
   <div class="debate-layout">
    <header class="debate-header">
+    <div class="header-left-controls">
+
     <button class="secondary-btn" id="exitDebateBtn">
-     <i class="fa-solid fa-right-from-bracket">
-     </i>
-     Exit Debate
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Exit Debate
     </button>
+
+    <button
+        id="openDiplomacyBtn"
+        class="secondary-btn"
+        type="button"
+    >
+        <i class="fa-solid fa-comments"></i>
+        Diplomacy
+    </button>
+
+</div>
+
+<div class="header-center">
 <div class="header-center">
 
     <div class="debate-title-group">
@@ -605,6 +619,9 @@
   </script>
   <script src="../js/timeline-center.js">
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+<script src="../js/websocket.js"></script>
   <script src="../js/debate-room.js">
   </script>
  </body>
