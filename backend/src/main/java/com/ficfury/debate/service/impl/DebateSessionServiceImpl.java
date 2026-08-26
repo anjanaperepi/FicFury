@@ -9,6 +9,7 @@ import com.ficfury.debate.dto.request.CreateDebateSessionRequest;
 import com.ficfury.debate.dto.response.DebateSessionResponse;
 import com.ficfury.debate.mapper.DebateMapper;
 import com.ficfury.debate.dto.request.ActiveSessionResponse;
+import com.ficfury.websocket.CommitteeEventPublisher;
 
 import com.ficfury.repository.CommitteeRepository;
 import com.ficfury.repository.UserRepository;
@@ -28,18 +29,21 @@ public class DebateSessionServiceImpl implements DebateSessionService {
     private final CommitteeRepository committeeRepository;
     private final UserRepository userRepository;
     private final DebateMapper debateMapper;
+    private final CommitteeEventPublisher committeeEventPublisher;
 
-    public DebateSessionServiceImpl(
-            DebateSessionRepository sessionRepository,
-            CommitteeRepository committeeRepository,
-            UserRepository userRepository,
-            DebateMapper debateMapper) {
+public DebateSessionServiceImpl(
+        DebateSessionRepository sessionRepository,
+        CommitteeRepository committeeRepository,
+        UserRepository userRepository,
+        DebateMapper debateMapper,
+        CommitteeEventPublisher committeeEventPublisher) {
 
-        this.sessionRepository = sessionRepository;
-        this.committeeRepository = committeeRepository;
-        this.userRepository = userRepository;
-        this.debateMapper = debateMapper;
-    }
+    this.sessionRepository = sessionRepository;
+    this.committeeRepository = committeeRepository;
+    this.userRepository = userRepository;
+    this.debateMapper = debateMapper;
+    this.committeeEventPublisher = committeeEventPublisher;
+}
 
 
 
@@ -112,9 +116,21 @@ public DebateSessionResponse initiateSession(Long sessionId) {
 
     session.setInitiatedAt(LocalDateTime.now());
 
-DebateSession savedSession = sessionRepository.save(session);
+DebateSession savedSession =
+        sessionRepository.save(session);
 
-return debateMapper.toDebateSessionResponse(savedSession);
+DebateSessionResponse response =
+        debateMapper.toDebateSessionResponse(
+                savedSession);
+
+committeeEventPublisher.publish(
+        savedSession.getId(),
+        "SESSION_ARCHIVED",
+        savedSession.getChair().getId(),
+        response
+);
+
+return response;
 }
 
 
@@ -159,7 +175,15 @@ if (currentActiveSession.isPresent()
 
     activeSession.setEndedAt(LocalDateTime.now());
 
-    sessionRepository.save(activeSession);
+    DebateSession stoppedSession =
+        sessionRepository.save(activeSession);
+
+committeeEventPublisher.publish(
+        stoppedSession.getId(),
+        "SESSION_STOPPED",
+        stoppedSession.getChair().getId(),
+        debateMapper.toDebateSessionResponse(stoppedSession)
+);
 }
 
 session.setStatus(SessionStatus.ACTIVE);
@@ -168,9 +192,21 @@ session.setActive(true);
 
 session.setActivatedAt(LocalDateTime.now());
 
-DebateSession savedSession = sessionRepository.save(session);
+DebateSession savedSession =
+        sessionRepository.save(session);
 
-return debateMapper.toDebateSessionResponse(savedSession);
+DebateSessionResponse response =
+        debateMapper.toDebateSessionResponse(
+                savedSession);
+
+committeeEventPublisher.publish(
+        savedSession.getId(),
+        "SESSION_ACTIVATED",
+        savedSession.getChair().getId(),
+        response
+);
+
+return response;
 }
 
 @Override
@@ -192,9 +228,21 @@ public DebateSessionResponse stopSession(Long sessionId) {
 
     session.setEndedAt(LocalDateTime.now());
 
-DebateSession savedSession = sessionRepository.save(session);
+DebateSession savedSession =
+        sessionRepository.save(session);
 
-return debateMapper.toDebateSessionResponse(savedSession);
+DebateSessionResponse response =
+        debateMapper.toDebateSessionResponse(
+                savedSession);
+
+committeeEventPublisher.publish(
+        savedSession.getId(),
+        "SESSION_STOPPED",
+        savedSession.getChair().getId(),
+        response
+);
+
+return response;
 }
 
 @Override
@@ -214,9 +262,21 @@ public DebateSessionResponse archiveSession(Long sessionId) {
 
     session.setArchivedAt(LocalDateTime.now());
 
-DebateSession savedSession = sessionRepository.save(session);
+DebateSession savedSession =
+        sessionRepository.save(session);
 
-return debateMapper.toDebateSessionResponse(savedSession);
+DebateSessionResponse response =
+        debateMapper.toDebateSessionResponse(
+                savedSession);
+
+committeeEventPublisher.publish(
+        savedSession.getId(),
+        "SESSION_ARCHIVED",
+        savedSession.getChair().getId(),
+        response
+);
+
+return response;
 }
 
 @Override

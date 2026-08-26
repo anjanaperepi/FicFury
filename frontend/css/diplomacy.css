@@ -1,0 +1,2124 @@
+/* =========================================================
+   FIC FURY — DIPLOMACY
+   Live Committee Communication Workspace
+   ========================================================= */
+
+
+/* =========================================================
+   RESET / PAGE FOUNDATION
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background: #111111;
+    color: #111111;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PAGE SHELL
+   ========================================================= */
+
+.diplomacy-page {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #111111;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.diplomacy-header {
+    height: 76px;
+    min-height: 76px;
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    padding: 0 24px;
+
+    background: #111111;
+    color: #ffffff;
+
+    border-bottom: 3px solid #111111;
+
+    position: relative;
+    z-index: 20;
+}
+
+
+/* ---------------------------------------------------------
+   Header left
+   --------------------------------------------------------- */
+
+.diplomacy-header-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+/* ---------------------------------------------------------
+   Back button
+   --------------------------------------------------------- */
+
+.diplomacy-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 44px;
+    padding: 10px 18px;
+
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+
+    background: #ffffff;
+    color: #374151;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.diplomacy-back-btn:hover {
+    background: #f3f4f6;
+    transform: translateY(-1px);
+}
+
+.diplomacy-back-btn:active {
+    transform: translateY(0);
+}
+
+.diplomacy-back-btn i {
+    font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   Header center
+   --------------------------------------------------------- */
+
+.diplomacy-header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.diplomacy-header-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+}
+
+.diplomacy-header-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffd21c;
+    color: #111111;
+
+    border: 2px solid #111111;
+    border-radius: 8px;
+
+    font-size: 19px;
+}
+
+.diplomacy-header-kicker {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color: #ffd21c;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+}
+
+.diplomacy-header-title h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   Header right
+   --------------------------------------------------------- */
+
+.diplomacy-header-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.diplomacy-live-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 9px 13px;
+
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.live-indicator {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+
+    background: #ef4444;
+
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.diplomacy-main {
+    flex: 1;
+    min-height: 0;
+
+    padding: 18px;
+
+    background: #ffd21c;
+
+    overflow: hidden;
+}
+
+.diplomacy-container {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   COMMUNICATION WORKSPACE
+   ========================================================= */
+
+.diplomacy-workspace {
+    flex: 1;
+    min-height: 0;
+
+    display: grid;
+    grid-template-columns: 310px minmax(0, 1fr);
+
+    border: 3px solid #111111;
+    box-shadow: 5px 5px 0 #111111;
+
+    background: #111111;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CONVERSATIONS PANEL
+   ========================================================= */
+
+.diplomacy-conversations {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #111111;
+    color: #ffffff;
+
+    border-right: 3px solid #111111;
+
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   Panel heading
+   --------------------------------------------------------- */
+
+.panel-heading {
+    min-height: 86px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px;
+
+    background: #111111;
+
+    border-bottom: 1px solid #333333;
+}
+
+.panel-kicker {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #ffd21c;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+.panel-heading h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 22px;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   Plus / icon buttons
+   --------------------------------------------------------- */
+
+.icon-button {
+    width: 40px;
+    height: 40px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #111111;
+    border-radius: 0;
+
+    background: #ffd21c;
+    color: #111111;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.icon-button:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 #ffffff;
+}
+
+.icon-button:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   CONVERSATION SECTIONS
+   ========================================================= */
+
+.conversation-section {
+    padding: 12px 10px 0;
+}
+
+.conversation-section-label {
+    padding: 18px 18px 8px;
+
+    color: #ffd21c;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------
+   Conversation item
+   --------------------------------------------------------- */
+
+.conversation-item {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 12px;
+
+    border: 0;
+    border-radius: 0;
+
+    background: transparent;
+    color: #ffffff;
+
+    font-family: inherit;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.conversation-item:hover {
+    background: #222222;
+}
+
+.conversation-item.active {
+    background: #ffd21c;
+    color: #111111;
+}
+
+.conversation-item.active .conversation-details strong,
+.conversation-item.active .conversation-details small {
+    color: #111111;
+}
+
+
+/* ---------------------------------------------------------
+   Conversation icon
+   --------------------------------------------------------- */
+
+.conversation-icon {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f7f3e8;
+    color: #111111;
+
+    border: 2px solid #111111;
+
+    font-size: 15px;
+}
+
+.conversation-icon.public {
+    background: #f7f3e8;
+}
+
+
+/* ---------------------------------------------------------
+   Conversation details
+   --------------------------------------------------------- */
+
+.conversation-details {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.conversation-details strong {
+    overflow: hidden;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.conversation-details small {
+    overflow: hidden;
+
+    color: #a7a7a7;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PRIVATE CONVERSATION LIST
+   ========================================================= */
+
+.private-conversations {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: hidden;
+}
+
+.conversation-list {
+    flex: 1;
+    min-height: 0;
+
+    padding: 0 10px 16px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.conversation-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.conversation-list::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+.conversation-list::-webkit-scrollbar-thumb {
+    background: #444444;
+}
+
+.conversation-list::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+}
+
+
+/* =========================================================
+   EMPTY STATES
+   ========================================================= */
+
+.empty-conversations {
+    min-height: 130px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 20px;
+
+    color: #888888;
+
+    font-size: 12px;
+    text-align: center;
+}
+
+.empty-conversations i {
+    color: #ffd21c;
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   CHAT PANEL
+   ========================================================= */
+
+.diplomacy-chat {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f7f3e8;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CHAT HEADER
+   ========================================================= */
+
+.chat-header {
+    min-height: 86px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 15px 22px;
+
+    background: #f7f3e8;
+
+    border-bottom: 3px solid #111111;
+}
+
+.chat-title {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+.chat-title-icon {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffd21c;
+
+    border: 2px solid #111111;
+
+    color: #111111;
+
+    font-size: 17px;
+}
+
+.chat-kicker {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #555555;
+
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+}
+
+.chat-title h2 {
+    margin: 0;
+
+    max-width: 600px;
+
+    overflow: hidden;
+
+    color: #111111;
+
+    font-size: 23px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chat-participant-info {
+    flex: 0 0 auto;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #555555;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.chat-participant-info i {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MESSAGE LIST
+   ========================================================= */
+
+.message-list {
+    flex: 1;
+    min-height: 0;
+
+    padding: 25px 26px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    background: #f7f3e8;
+}
+
+.message-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.message-list::-webkit-scrollbar-track {
+    background: #e7e1d5;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+    background: #999999;
+}
+
+.message-list::-webkit-scrollbar-thumb:hover {
+    background: #777777;
+}
+
+
+/* =========================================================
+   EMPTY CHAT
+   ========================================================= */
+
+.chat-empty-state {
+    width: 100%;
+    height: 100%;
+    min-height: 250px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.chat-empty-icon {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    background: #ffd21c;
+
+    border: 3px solid #111111;
+
+    box-shadow: 4px 4px 0 #111111;
+
+    color: #111111;
+
+    font-size: 25px;
+}
+
+.chat-empty-state h3 {
+    margin: 0 0 7px;
+
+    color: #111111;
+
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.chat-empty-state p {
+    margin: 0;
+
+    color: #777777;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MESSAGES
+========================================================= */
+
+.message {
+    display: flex;
+    flex-direction: column;
+
+    margin-bottom: 20px;
+
+    max-width: 78%;
+}
+
+.message-own {
+    margin-left: auto;
+
+    align-items: flex-end;
+}
+
+.message-other {
+    margin-right: auto;
+
+    align-items: flex-start;
+}
+
+.message-author {
+    margin-bottom: 5px;
+
+    color: #111111;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.message-time {
+    margin-left: 7px;
+
+    color: #888888;
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.message-content {
+    padding: 11px 14px;
+
+    background: #ffffff;
+
+    border: 2px solid #111111;
+
+    color: #111111;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message-own .message-content {
+    background: #ffd21c;
+}
+
+
+/* =========================================================
+   MESSAGE COMPOSER
+   ========================================================= */
+
+.message-composer {
+    flex: 0 0 auto;
+
+    padding: 14px 18px 16px;
+
+    background: #111111;
+
+    border-top: 3px solid #111111;
+}
+
+.message-composer textarea {
+    width: 100%;
+    min-height: 74px;
+    max-height: 150px;
+
+    display: block;
+
+    resize: vertical;
+
+    padding: 13px 14px;
+
+    border: 2px solid #111111;
+    border-radius: 10px;
+
+    background: #f7f3e8;
+    color: #111111;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.message-composer textarea:focus {
+    border-color: #ffd21c;
+
+    box-shadow: 0 0 0 2px #ffd21c;
+}
+
+.message-composer textarea::placeholder {
+    color: #777777;
+}
+
+
+/* ---------------------------------------------------------
+   Composer footer
+   --------------------------------------------------------- */
+
+.composer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 9px;
+}
+
+#messageCounter {
+    color: #999999;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.send-message-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    min-width: 100px;
+
+    padding: 10px 17px;
+
+    border: 2px solid #111111;
+
+    background: #ffd21c;
+    color: #111111;
+
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.send-message-btn:hover {
+    transform: translate(2px, 2px);
+
+    box-shadow: 2px 2px 0 #ffffff;
+}
+
+.send-message-btn:active {
+    transform: translate(3px, 3px);
+
+    box-shadow: none;
+}
+
+.send-message-btn:disabled {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   CHAIR OVERSIGHT
+   ========================================================= */
+
+.chair-oversight-panel {
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 0;
+
+    background: #111111;
+    color: #ffffff;
+
+    border: 3px solid #111111;
+}
+
+
+/*
+   If JavaScript removes the hidden attribute for a Chair,
+   the panel becomes visible.
+*/
+
+.chair-oversight-panel:not([hidden]) {
+    display: block;
+}
+
+.chair-oversight-panel .panel-heading {
+    background: #111111;
+}
+
+.oversight-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 11px;
+
+    background: #ffd21c;
+    color: #111111;
+
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.oversight-description {
+    margin: 0;
+
+    padding: 0 18px 15px;
+
+    color: #b7b7b7;
+
+    font-size: 12px;
+}
+
+.oversight-conversation-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding: 0 10px 12px;
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.diplomacy-modal {
+    position: fixed;
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+.diplomacy-modal[hidden] {
+    display: none;
+}
+
+.diplomacy-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.72);
+}
+
+.diplomacy-modal-dialog {
+    position: relative;
+    z-index: 1;
+
+    width: min(620px, 100%);
+    max-height: min(760px, 90vh);
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f7f3e8;
+
+    border: 3px solid #111111;
+
+    box-shadow: 7px 7px 0 #111111;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   MODAL HEADER
+   ========================================================= */
+
+.diplomacy-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 20px;
+
+    background: #111111;
+
+    border-bottom: 3px solid #111111;
+}
+
+.diplomacy-modal-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 22px;
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   CONVERSATION TYPE SELECTOR
+   ========================================================= */
+
+.conversation-type-selector {
+    padding: 18px 20px 8px;
+}
+
+.form-label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #111111;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.conversation-type-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.conversation-type-option {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    border: 2px solid #111111;
+
+    background: #ffffff;
+    color: #111111;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.conversation-type-option:hover {
+    transform: translateY(-1px);
+}
+
+.conversation-type-option.active {
+    background: #ffd21c;
+}
+
+.conversation-type-icon {
+    width: 36px;
+    height: 36px;
+
+    flex: 0 0 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #111111;
+
+    background: #f7f3e8;
+}
+
+.conversation-type-option strong,
+.conversation-type-option small {
+    display: block;
+}
+
+.conversation-type-option strong {
+    margin-bottom: 3px;
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.conversation-type-option small {
+    color: #666666;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   PARTICIPANT PICKER
+   ========================================================= */
+
+.participant-picker {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px 20px 15px;
+
+    overflow: hidden;
+}
+
+.participant-picker-header {
+    flex: 0 0 auto;
+}
+
+
+/* ---------------------------------------------------------
+   Search
+   --------------------------------------------------------- */
+
+.participant-search {
+    position: relative;
+
+    flex: 0 0 auto;
+
+    margin-bottom: 10px;
+}
+
+.participant-search i {
+    position: absolute;
+
+    left: 12px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #777777;
+
+    font-size: 12px;
+}
+
+.participant-search input {
+    width: 100%;
+
+    padding: 11px 12px 11px 34px;
+
+    border: 2px solid #111111;
+
+    background: #ffffff;
+    color: #111111;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    outline: none;
+}
+
+.participant-search input:focus {
+    box-shadow: 0 0 0 2px #ffd21c;
+}
+
+
+/* ---------------------------------------------------------
+   Participant list
+   --------------------------------------------------------- */
+
+.participant-list {
+    flex: 1;
+    min-height: 0;
+
+    overflow-y: auto;
+
+    border: 2px solid #111111;
+
+    background: #ffffff;
+}
+
+.participant-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.participant-list::-webkit-scrollbar-thumb {
+    background: #999999;
+}
+
+.participant-list::-webkit-scrollbar-track {
+    background: #e7e1d5;
+}
+
+
+/* =========================================================
+   MODAL FOOTER
+   ========================================================= */
+
+.diplomacy-modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    padding: 14px 20px;
+
+    background: #111111;
+}
+
+.secondary-button,
+.primary-button {
+    min-height: 40px;
+
+    padding: 9px 16px;
+
+    border: 2px solid #111111;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+.secondary-button {
+    background: #ffffff;
+    color: #111111;
+}
+
+.primary-button {
+    background: #ffd21c;
+    color: #111111;
+}
+
+.secondary-button:hover,
+.primary-button:hover {
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .diplomacy-header {
+        grid-template-columns: auto 1fr auto;
+
+        padding: 0 16px;
+    }
+
+    .diplomacy-header-title h1 {
+        font-size: 19px;
+    }
+
+    .diplomacy-header-icon {
+        width: 38px;
+        height: 38px;
+
+        font-size: 16px;
+    }
+
+    .diplomacy-main {
+        padding: 12px;
+    }
+
+    .diplomacy-workspace {
+        grid-template-columns: 250px minmax(0, 1fr);
+    }
+
+    .panel-heading {
+        padding: 14px;
+    }
+
+    .chat-header {
+        padding: 13px 16px;
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .diplomacy-page {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .diplomacy-header {
+        height: auto;
+        min-height: 70px;
+
+        grid-template-columns: auto 1fr auto;
+
+        padding: 10px 12px;
+
+        gap: 10px;
+    }
+
+    .diplomacy-header-title {
+        gap: 7px;
+    }
+
+    .diplomacy-header-icon {
+        display: none;
+    }
+
+    .diplomacy-header-kicker {
+        font-size: 8px;
+    }
+
+    .diplomacy-header-title h1 {
+        font-size: 16px;
+    }
+
+    .diplomacy-back-btn {
+        min-height: 38px;
+
+        padding: 8px 11px;
+
+        font-size: 11px;
+    }
+
+    .diplomacy-back-btn span {
+        display: none;
+    }
+
+    .diplomacy-live-status {
+        padding: 7px 9px;
+
+        font-size: 9px;
+    }
+
+    .diplomacy-main {
+        min-height: calc(100vh - 70px);
+
+        padding: 8px;
+
+        overflow: visible;
+    }
+
+    .diplomacy-workspace {
+        height: auto;
+        min-height: calc(100vh - 86px);
+
+        display: flex;
+        flex-direction: column;
+
+        box-shadow: 3px 3px 0 #111111;
+    }
+
+    .diplomacy-conversations {
+        flex: 0 0 auto;
+
+        max-height: 260px;
+
+        border-right: 0;
+        border-bottom: 3px solid #111111;
+    }
+
+    .private-conversations {
+        min-height: 0;
+    }
+
+    .conversation-list {
+        max-height: 130px;
+    }
+
+    .diplomacy-chat {
+        min-height: 600px;
+    }
+
+    .chat-header {
+        min-height: 70px;
+
+        padding: 10px 13px;
+    }
+
+    .chat-title-icon {
+        width: 38px;
+        height: 38px;
+
+        flex-basis: 38px;
+    }
+
+    .chat-title h2 {
+        font-size: 17px;
+    }
+
+    .chat-participant-info {
+        font-size: 10px;
+    }
+
+    .chat-participant-info span {
+        display: none;
+    }
+
+    .message-list {
+        padding: 18px 14px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .message-composer {
+        padding: 10px;
+    }
+
+    .message-composer textarea {
+        min-height: 65px;
+    }
+
+    .conversation-type-options {
+        grid-template-columns: 1fr;
+    }
+
+    .diplomacy-modal {
+        padding: 10px;
+    }
+
+    .diplomacy-modal-dialog {
+        max-height: 95vh;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+
+}
+
+/* =========================================================
+   CHAIR OVERSIGHT MODE
+   ========================================================= */
+
+/*
+   Normal delegate mode:
+       .diplomacy-workspace
+           ├── .diplomacy-conversations
+           └── .diplomacy-chat
+
+   Chair mode:
+       .diplomacy-workspace
+           ├── .chair-oversight-panel
+           └── .diplomacy-chat
+
+   IMPORTANT:
+   The Chair panel is intentionally NOT position: fixed.
+   It remains inside the workspace grid so it cannot cover
+   the chat or escape the yellow page frame.
+*/
+
+.chair-oversight-panel {
+    display: none;
+}
+
+.chair-oversight-panel:not([hidden]) {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #111111;
+    color: #ffffff;
+
+    border-right: 3px solid #111111;
+
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   Chair workspace layout
+   --------------------------------------------------------- */
+
+.diplomacy-page:has(
+    .chair-oversight-panel:not([hidden])
+)
+.diplomacy-workspace {
+    grid-template-columns: 310px minmax(0, 1fr);
+}
+
+
+/* Hide the normal delegate conversation navigator in Chair mode */
+
+.diplomacy-page:has(
+    .chair-oversight-panel:not([hidden])
+)
+.diplomacy-conversations {
+    display: none;
+}
+
+
+/* ---------------------------------------------------------
+   Chair panel heading
+   --------------------------------------------------------- */
+
+.chair-panel-heading {
+    min-height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 18px;
+
+    background: #111111;
+
+    border-bottom: 1px solid #333333;
+}
+
+.chair-panel-heading .panel-kicker {
+    margin-bottom: 0;
+}
+
+.chair-panel-heading h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+
+/* ---------------------------------------------------------
+   View-only badge
+   --------------------------------------------------------- */
+
+.oversight-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    width: fit-content;
+
+    padding: 6px 9px;
+
+    background: #ffd21c;
+    color: #111111;
+
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 0.06em;
+
+    text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------
+   Chair description
+   --------------------------------------------------------- */
+
+.chair-panel-description {
+    display: flex;
+
+    gap: 10px;
+
+    padding: 15px 16px;
+
+    background: #181818;
+
+    border-bottom: 1px solid #333333;
+}
+
+.chair-panel-description > i {
+    flex: 0 0 auto;
+
+    color: #ffd21c;
+
+    font-size: 17px;
+
+    margin-top: 2px;
+}
+
+.chair-panel-description div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.chair-panel-description strong {
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.chair-panel-description span {
+    color: #999999;
+
+    font-size: 10px;
+    line-height: 1.45;
+}
+
+
+/* ---------------------------------------------------------
+   Oversight conversation list
+   --------------------------------------------------------- */
+
+.oversight-conversation-list {
+    flex: 1;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    padding: 12px 10px;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.oversight-conversation-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+.oversight-conversation-list::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+.oversight-conversation-list::-webkit-scrollbar-thumb {
+    background: #444444;
+}
+
+.oversight-conversation-list::-webkit-scrollbar-thumb:hover {
+    background: #666666;
+}
+
+
+/* ---------------------------------------------------------
+   Oversight conversation item
+   --------------------------------------------------------- */
+
+.oversight-conversation-item {
+    width: 100%;
+
+    min-height: 64px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 10px;
+
+    border: 0;
+
+    background: #1b1b1b;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.oversight-conversation-item:hover {
+    background: #272727;
+
+    transform: translateX(2px);
+}
+
+.oversight-conversation-item.active {
+    background: #ffd21c;
+
+    color: #111111;
+}
+
+
+/* ---------------------------------------------------------
+   Oversight icon
+   --------------------------------------------------------- */
+
+.oversight-conversation-icon {
+    width: 38px;
+    height: 38px;
+
+    flex: 0 0 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f7f3e8;
+
+    border: 2px solid #111111;
+
+    color: #111111;
+
+    font-size: 13px;
+}
+
+
+/* ---------------------------------------------------------
+   Oversight text
+   --------------------------------------------------------- */
+
+.oversight-conversation-info {
+    min-width: 0;
+
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.oversight-conversation-info strong {
+    overflow: hidden;
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.oversight-conversation-info small {
+    color: #999999;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 0.03em;
+}
+
+.oversight-conversation-item.active
+.oversight-conversation-info strong {
+    color: #111111;
+}
+
+.oversight-conversation-item.active
+.oversight-conversation-info small {
+    color: #333333;
+}
+
+
+/* ---------------------------------------------------------
+   Eye icon
+   --------------------------------------------------------- */
+
+.oversight-view-icon {
+    flex: 0 0 auto;
+
+    color: #777777;
+
+    font-size: 12px;
+}
+
+.oversight-conversation-item.active
+.oversight-view-icon {
+    color: #111111;
+}
+
+
+/* =========================================================
+   CHAIR MESSAGE FOOTER
+   ========================================================= */
+
+.chair-view-only-footer {
+    display: none;
+
+    min-height: 82px;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 20px;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    border-top: 3px solid #111111;
+}
+
+.chair-view-only-footer > i {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex: 0 0 38px;
+
+    background: #ffd21c;
+
+    color: #111111;
+
+    font-size: 15px;
+}
+
+.chair-view-only-footer div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.chair-view-only-footer strong {
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.chair-view-only-footer span {
+    color: #999999;
+
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   CHAIR MODE — COMPOSER → VIEW ONLY
+   ========================================================= */
+
+.diplomacy-page:has(
+    .chair-oversight-panel:not([hidden])
+)
+.message-composer {
+    display: none;
+}
+
+.diplomacy-page:has(
+    .chair-oversight-panel:not([hidden])
+)
+.chair-view-only-footer {
+    display: flex;
+}
+
+
+/* =========================================================
+   CHAIR MODE — CHAT
+   ========================================================= */
+
+.diplomacy-page:has(
+    .chair-oversight-panel:not([hidden])
+)
+.diplomacy-chat {
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f7f3e8;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVE — CHAIR MODE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .diplomacy-page:has(
+        .chair-oversight-panel:not([hidden])
+    )
+    .diplomacy-workspace {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chair-oversight-panel:not([hidden]) {
+        flex: 0 0 auto;
+
+        min-height: 0;
+        max-height: 310px;
+
+        border-right: 0;
+        border-bottom: 3px solid #111111;
+    }
+
+    .diplomacy-page:has(
+        .chair-oversight-panel:not([hidden])
+    )
+    .diplomacy-chat {
+        min-height: 600px;
+    }
+
+    .oversight-conversation-list {
+        max-height: 150px;
+    }
+}
+
+
+/* =========================================================
+   END — CHAIR OVERSIGHT
+   ========================================================= */
+/* =========================================================
+   DIPLOMACY — UNREAD MESSAGE BADGE
+   ========================================================= */
+
+.conversation-item {
+    position: relative;
+}
+
+
+/*
+ * Unread count badge
+ */
+.conversation-unread-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 6px;
+
+    margin-left: auto;
+
+    border-radius: 999px;
+
+    background: #d6b36a;
+    color: #111827;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1;
+
+    white-space: nowrap;
+
+    flex-shrink: 0;
+
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.18);
+
+    animation:
+        diplomacyUnreadPulse 1.8s ease-in-out infinite;
+}
+
+
+/*
+ * Keep the badge visible when the conversation
+ * item is hovered or active.
+ */
+.conversation-item:hover
+.conversation-unread-badge,
+.conversation-item.active
+.conversation-unread-badge {
+    opacity: 1;
+}
+
+
+/*
+ * Subtle attention animation.
+ */
+@keyframes diplomacyUnreadPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.06);
+    }
+}
+
+
+/*
+ * Public Council uses the same badge,
+ * but its container is the existing static
+ * conversation item.
+ */
+.conversation-item[data-conversation="public"]
+.conversation-unread-badge {
+    margin-left: auto;
+}
+
+/*
+ * Make sure conversation content doesn't
+ * push the badge outside the item.
+ */
+.conversation-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.conversation-details {
+    min-width: 0;
+    flex: 1;
+}

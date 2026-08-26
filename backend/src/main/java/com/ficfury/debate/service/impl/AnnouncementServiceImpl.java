@@ -10,6 +10,7 @@ import com.ficfury.debate.service.AnnouncementService;
 import com.ficfury.model.User;
 import com.ficfury.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import com.ficfury.websocket.CommitteeEventPublisher;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,16 +22,19 @@ public class AnnouncementServiceImpl
     private final AnnouncementRepository announcementRepository;
     private final DebateSessionRepository sessionRepository;
     private final UserRepository userRepository;
+    private final CommitteeEventPublisher committeeEventPublisher;
 
-    public AnnouncementServiceImpl(
-            AnnouncementRepository announcementRepository,
-            DebateSessionRepository sessionRepository,
-            UserRepository userRepository) {
+public AnnouncementServiceImpl(
+        AnnouncementRepository announcementRepository,
+        DebateSessionRepository sessionRepository,
+        UserRepository userRepository,
+        CommitteeEventPublisher committeeEventPublisher) {
 
-        this.announcementRepository = announcementRepository;
-        this.sessionRepository = sessionRepository;
-        this.userRepository = userRepository;
-    }
+    this.announcementRepository = announcementRepository;
+    this.sessionRepository = sessionRepository;
+    this.userRepository = userRepository;
+    this.committeeEventPublisher = committeeEventPublisher;
+}
 
     @Override
 public AnnouncementResponse publishAnnouncement(
@@ -81,7 +85,12 @@ public AnnouncementResponse publishAnnouncement(
 
     response.setCreatedAt(
             saved.getCreatedAt());
-
+committeeEventPublisher.publish(
+        session.getId(),
+        "ANNOUNCEMENT_PUBLISHED",
+        chair.getId(),
+        response
+);
     return response;
 
 }

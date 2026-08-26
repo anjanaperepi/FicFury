@@ -35,6 +35,7 @@ import com.ficfury.model.User;
 import com.ficfury.repository.UserRepository;
 import com.ficfury.debate.repository.VoteRepository;
 import org.springframework.transaction.annotation.Transactional;
+import com.ficfury.websocket.CommitteeEventPublisher;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -51,6 +52,7 @@ public class ResolutionServiceImpl implements ResolutionService {
     private final ResolutionClauseRepository clauseRepository;
     private final AmendmentRepository amendmentRepository;
     private final RegistrationRepository registrationRepository;
+    private final CommitteeEventPublisher committeeEventPublisher;
 
 private final ResolutionClauseParser clauseParser;
 @Autowired
@@ -66,7 +68,8 @@ public ResolutionServiceImpl(
         ResolutionClauseRepository clauseRepository,
          ResolutionClauseParser clauseParser,
          AmendmentRepository amendmentRepository,
-         RegistrationRepository registrationRepository) {
+RegistrationRepository registrationRepository,
+CommitteeEventPublisher committeeEventPublisher) {
 
     this.resolutionRepository = resolutionRepository;
     this.sessionRepository = sessionRepository;
@@ -79,6 +82,7 @@ public ResolutionServiceImpl(
     this.clauseParser = clauseParser;
     this.amendmentRepository = amendmentRepository;
     this.registrationRepository = registrationRepository;
+    this.committeeEventPublisher = committeeEventPublisher;
 }
 private User getCurrentUser() {
 
@@ -215,7 +219,17 @@ List<ResolutionClause> clauses =
 
 clauseRepository.saveAll(clauses);
 
-    return resolutionMapper.toResponse(resolution);
+    ResolutionResponse response =
+        resolutionMapper.toResponse(resolution);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "RESOLUTION_APPROVED",
+        getCurrentUser().getId(),
+        response
+);
+
+return response;
 }
 
 @Override
@@ -243,7 +257,17 @@ public ResolutionResponse rejectResolution(Long resolutionId) {
 
     resolution = resolutionRepository.save(resolution);
 
-    return resolutionMapper.toResponse(resolution);
+   ResolutionResponse response =
+        resolutionMapper.toResponse(resolution);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "RESOLUTION_REJECTED",
+        getCurrentUser().getId(),
+        response
+);
+
+return response;
 }
 
     @Override
@@ -315,24 +339,28 @@ public ResolutionResponse submitResolution(Long resolutionId) {
 
     resolution.setSubmittedAt(LocalDateTime.now());
 
-    resolution = resolutionRepository.save(resolution);
+   resolution = resolutionRepository.save(resolution);
 
+activityLogService.log(
+        resolution.getSession(),
+        resolution.getSubmittedBy(),
+        ActivityType.RESOLUTION_SUBMITTED,
+        "Resolution Submitted",
+        "Resolution '" + resolution.getTitle()
+                + "' was submitted for chair review."
+);
 
-    activityLogService.log(
+ResolutionResponse response =
+        resolutionMapper.toResponse(resolution);
 
-                resolution.getSession(),
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "RESOLUTION_SUBMITTED",
+        resolution.getSubmittedBy().getId(),
+        response
+);
 
-                resolution.getSubmittedBy(),
-
-                ActivityType.RESOLUTION_SUBMITTED,
-
-                "Resolution Submitted",
-
-                "Resolution '" + resolution.getTitle()
-                        + "' was submitted for chair review."
-
-        );
-    return resolutionMapper.toResponse(resolution);
+return response;
 }
 
 @Override
@@ -393,6 +421,14 @@ if(resolution.getStatus()
     resolution.setStatus(ResolutionStatus.VOTING);
 
     resolution = resolutionRepository.save(resolution);
+
+    committeeEventPublisher.publish(
+    resolution.getSession().getId(),
+    "VOTING_OPENED",
+    null,
+    resolutionMapper.toResponse(resolution)
+);
+
 activityLogService.log(
     resolution.getSession(),
     getCurrentUser(),
@@ -450,6 +486,26 @@ public ResolutionResponse closeVoting(Long resolutionId) {
             LocalDateTime.now());
 
     resolutionRepository.save(resolution);
+
+
+    ResolutionResponse response =
+        resolutionMapper.toResponse(resolution);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "VOTING_CLOSED",
+        getCurrentUser().getId(),
+        response
+);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        resolution.getStatus() == ResolutionStatus.PASSED
+                ? "RESOLUTION_PASSED"
+                : "RESOLUTION_FAILED",
+        getCurrentUser().getId(),
+        response
+);
 ActivityType resultType =
         resolution.getStatus() == ResolutionStatus.PASSED
                 ? ActivityType.RESOLUTION_PASSED
@@ -463,8 +519,7 @@ activityLogService.log(
     "Resolution '" + resolution.getTitle() +
     "' " + resolution.getStatus().name().toLowerCase() + "."
 );
-    return resolutionMapper.toResponse(
-            resolution);
+    return response;
 
 
 }
@@ -500,7 +555,17 @@ activityLogService.log(
     "Amendments Opened",
     "Amendment phase opened for '" + resolution.getTitle() + "'."
 );
-    return resolutionMapper.toResponse(resolution);
+   ResolutionResponse response =
+        resolutionMapper.toResponse(resolution);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "AMENDMENTS_OPENED",
+        getCurrentUser().getId(),
+        response
+);
+
+return response;
 
 }
 @Override
@@ -530,7 +595,17 @@ activityLogService.log(
     "Amendments Closed",
     "Amendment phase closed for '" + resolution.getTitle() + "'."
 );
-    return resolutionMapper.toResponse(resolution);
+    ResolutionResponse response =
+        resolutionMapper.toResponse(resolution);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "AMENDMENTS_CLOSED",
+        getCurrentUser().getId(),
+        response
+);
+
+return response;
 
 }
 

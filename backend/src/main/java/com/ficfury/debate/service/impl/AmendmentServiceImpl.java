@@ -21,6 +21,8 @@ import com.ficfury.repository.UserRepository;
 import com.ficfury.debate.entity.ClauseType;
 import com.ficfury.debate.entity.ResolutionClause;
 import com.ficfury.debate.repository.ResolutionClauseRepository;
+import com.ficfury.websocket.CommitteeEventPublisher;
+
 
 
 @Service
@@ -32,6 +34,7 @@ public class AmendmentServiceImpl implements AmendmentService {
     private final AmendmentMapper amendmentMapper;
 
     private final ResolutionClauseRepository clauseRepository;
+    private final CommitteeEventPublisher committeeEventPublisher;
 
 
 public AmendmentServiceImpl(
@@ -39,13 +42,15 @@ public AmendmentServiceImpl(
         ResolutionRepository resolutionRepository,
         ResolutionClauseRepository clauseRepository,
         UserRepository userRepository,
-        AmendmentMapper amendmentMapper) {
+        AmendmentMapper amendmentMapper,
+        CommitteeEventPublisher committeeEventPublisher) {
 
     this.amendmentRepository = amendmentRepository;
     this.resolutionRepository = resolutionRepository;
     this.clauseRepository = clauseRepository;
     this.userRepository = userRepository;
     this.amendmentMapper = amendmentMapper;
+    this.committeeEventPublisher = committeeEventPublisher;
 }
 
 
@@ -101,7 +106,17 @@ amendment.setProposedAt(LocalDateTime.now());
 
 amendment = amendmentRepository.save(amendment);
 
-return amendmentMapper.toResponse(amendment);
+AmendmentResponse response =
+        amendmentMapper.toResponse(amendment);
+
+committeeEventPublisher.publish(
+        resolution.getId(),
+        "AMENDMENT_SUBMITTED",
+        delegate.getId(),
+        response
+);
+
+return response;
     
 }
 
@@ -182,9 +197,19 @@ case DELETE:
     amendment.setStatus(AmendmentStatus.APPROVED);
     amendment.setReviewedAt(LocalDateTime.now());
 
-    amendment = amendmentRepository.save(amendment);
+amendment = amendmentRepository.save(amendment);
 
-    return amendmentMapper.toResponse(amendment);
+AmendmentResponse response =
+        amendmentMapper.toResponse(amendment);
+
+committeeEventPublisher.publish(
+        amendment.getResolution().getSession().getId(),
+        "AMENDMENT_APPROVED",
+        null,
+        response
+);
+
+return response;
 }
 
 @Override
@@ -203,9 +228,19 @@ public AmendmentResponse rejectAmendment(Long amendmentId) {
     amendment.setStatus(AmendmentStatus.REJECTED);
     amendment.setReviewedAt(LocalDateTime.now());
 
-    amendment = amendmentRepository.save(amendment);
+amendment = amendmentRepository.save(amendment);
 
-    return amendmentMapper.toResponse(amendment);
+AmendmentResponse response =
+        amendmentMapper.toResponse(amendment);
+
+committeeEventPublisher.publish(
+        amendment.getResolution().getSession().getId(),
+        "AMENDMENT_REJECTED",
+        null,
+        response
+);
+
+return response;
 }
 
 @Override

@@ -13,6 +13,7 @@ import com.ficfury.debate.repository.MotionRepository;
 import com.ficfury.debate.repository.DebateSessionRepository;
 import com.ficfury.debate.service.MotionService;
 import com.ficfury.repository.UserRepository;
+import com.ficfury.websocket.CommitteeEventPublisher;
 
 
 import com.ficfury.debate.entity.DebateSession;
@@ -38,17 +39,21 @@ public class MotionServiceImpl implements MotionService {
 
     private final MotionMapper motionMapper;
 
-    public MotionServiceImpl(
-            MotionRepository motionRepository,
-            DebateSessionRepository sessionRepository,
-            UserRepository userRepository,
-            MotionMapper motionMapper) {
+    private final CommitteeEventPublisher committeeEventPublisher;
 
-        this.motionRepository = motionRepository;
-        this.sessionRepository = sessionRepository;
-        this.userRepository = userRepository;
-        this.motionMapper = motionMapper;
-    }
+public MotionServiceImpl(
+        MotionRepository motionRepository,
+        DebateSessionRepository sessionRepository,
+        UserRepository userRepository,
+        MotionMapper motionMapper,
+        CommitteeEventPublisher committeeEventPublisher) {
+
+    this.motionRepository = motionRepository;
+    this.sessionRepository = sessionRepository;
+    this.userRepository = userRepository;
+    this.motionMapper = motionMapper;
+    this.committeeEventPublisher = committeeEventPublisher;
+}
 
 @Override
 public MotionResponse approveMotion(Long motionId, Long chairId) {
@@ -92,9 +97,19 @@ public MotionResponse approveMotion(Long motionId, Long chairId) {
     motion.setReviewedAt(LocalDateTime.now());
     motion.setUpdatedAt(LocalDateTime.now());
 
-    Motion savedMotion = motionRepository.save(motion);
+Motion savedMotion = motionRepository.save(motion);
 
-    return motionMapper.toMotionResponse(savedMotion);
+MotionResponse response =
+        motionMapper.toMotionResponse(savedMotion);
+
+committeeEventPublisher.publish(
+        session.getId(),
+        "MOTION_APPROVED",
+        chairId,
+        response
+);
+
+return response;
 }
 
 @Override
@@ -129,9 +144,19 @@ public MotionResponse dismissMotion(Long motionId, Long chairId) {
     motion.setReviewedAt(LocalDateTime.now());
     motion.setUpdatedAt(LocalDateTime.now());
 
-    Motion savedMotion = motionRepository.save(motion);
+Motion savedMotion = motionRepository.save(motion);
 
-    return motionMapper.toMotionResponse(savedMotion);
+MotionResponse response =
+        motionMapper.toMotionResponse(savedMotion);
+
+committeeEventPublisher.publish(
+        session.getId(),
+        "MOTION_DISMISSED",
+        chairId,
+        response
+);
+
+return response;
 }
 
 @Override
@@ -158,9 +183,19 @@ public MotionResponse executeMotion(Long motionId) {
     motion.setStatus(MotionStatus.EXECUTED);
     motion.setUpdatedAt(LocalDateTime.now());
 
-    Motion savedMotion = motionRepository.save(motion);
+Motion savedMotion = motionRepository.save(motion);
 
-    return motionMapper.toMotionResponse(savedMotion);
+MotionResponse response =
+        motionMapper.toMotionResponse(savedMotion);
+
+committeeEventPublisher.publish(
+        session.getId(),
+        "MOTION_EXECUTED",
+        null,
+        response
+);
+
+return response;
 }
 
 @Override
@@ -241,11 +276,20 @@ public MotionResponse raiseMotion(CreateMotionRequest request) {
     motion.setStatus(MotionStatus.PENDING);
 
     motion.setCreatedAt(LocalDateTime.now());
-        Motion savedMotion =
-            motionRepository.save(motion);
+Motion savedMotion =
+        motionRepository.save(motion);
 
-    return motionMapper.toMotionResponse(savedMotion);
+MotionResponse response =
+        motionMapper.toMotionResponse(savedMotion);
 
+committeeEventPublisher.publish(
+        session.getId(),
+        "MOTION_SUBMITTED",
+        request.getDelegateId(),
+        response
+);
+
+return response;
 
 
 }

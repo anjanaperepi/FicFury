@@ -24,6 +24,8 @@ import com.ficfury.debate.service.VoteService;
 import com.ficfury.debate.enums.SessionStatus;
 import java.util.Optional;
 
+import com.ficfury.websocket.CommitteeEventPublisher;
+
 @Service
 public class VoteServiceImpl implements VoteService {
 
@@ -32,20 +34,23 @@ public class VoteServiceImpl implements VoteService {
     private final UserRepository userRepository;
     private final VoteMapper voteMapper;
     private final ResolutionRepository resolutionRepository;
+    private final CommitteeEventPublisher committeeEventPublisher;
 
-    public VoteServiceImpl(
-            VoteRepository voteRepository,
-            DebateSessionRepository sessionRepository,
-            UserRepository userRepository,
-            VoteMapper voteMapper,
-            ResolutionRepository resolutionRepository) {
+public VoteServiceImpl(
+        VoteRepository voteRepository,
+        DebateSessionRepository sessionRepository,
+        UserRepository userRepository,
+        VoteMapper voteMapper,
+        ResolutionRepository resolutionRepository,
+        CommitteeEventPublisher committeeEventPublisher) {
 
-        this.voteRepository = voteRepository;
-        this.sessionRepository = sessionRepository;
-        this.userRepository = userRepository;
-        this.voteMapper = voteMapper;
-        this.resolutionRepository = resolutionRepository;
-    }
+    this.voteRepository = voteRepository;
+    this.sessionRepository = sessionRepository;
+    this.userRepository = userRepository;
+    this.voteMapper = voteMapper;
+    this.resolutionRepository = resolutionRepository;
+    this.committeeEventPublisher = committeeEventPublisher;
+}
 
     @Override
     public VoteResponse castVote(CastVoteRequest request) {
@@ -94,9 +99,20 @@ public class VoteServiceImpl implements VoteService {
         vote.setVoteType(request.getVoteType());
         vote.setVotedAt(LocalDateTime.now());
 
-        Vote savedVote = voteRepository.save(vote);
+Vote savedVote =
+        voteRepository.save(vote);
 
-        return voteMapper.toVoteResponse(savedVote);
+VoteResponse response =
+        voteMapper.toVoteResponse(savedVote);
+
+committeeEventPublisher.publish(
+        session.getId(),
+        "VOTE_CAST",
+        delegate.getId(),
+        response
+);
+
+return response;
     }
 
     @Override

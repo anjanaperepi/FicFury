@@ -20,6 +20,7 @@ import com.ficfury.debate.repository.ResolutionSponsorRepository;
 import com.ficfury.debate.service.ResolutionParticipationService;
 import com.ficfury.model.User;
 import com.ficfury.repository.UserRepository;
+import com.ficfury.websocket.CommitteeEventPublisher;
 
 @Service
 public class ResolutionParticipationServiceImpl
@@ -30,20 +31,23 @@ public class ResolutionParticipationServiceImpl
     private final ResolutionSignatoryRepository signatoryRepository;
     private final UserRepository userRepository;
     private final ResolutionParticipationMapper mapper;
+    private final CommitteeEventPublisher committeeEventPublisher;
 
-    public ResolutionParticipationServiceImpl(
-            ResolutionRepository resolutionRepository,
-            ResolutionSponsorRepository sponsorRepository,
-            ResolutionSignatoryRepository signatoryRepository,
-            UserRepository userRepository,
-            ResolutionParticipationMapper mapper) {
+public ResolutionParticipationServiceImpl(
+        ResolutionRepository resolutionRepository,
+        ResolutionSponsorRepository sponsorRepository,
+        ResolutionSignatoryRepository signatoryRepository,
+        UserRepository userRepository,
+        ResolutionParticipationMapper mapper,
+        CommitteeEventPublisher committeeEventPublisher) {
 
-        this.resolutionRepository = resolutionRepository;
-        this.sponsorRepository = sponsorRepository;
-        this.signatoryRepository = signatoryRepository;
-        this.userRepository = userRepository;
-        this.mapper = mapper;
-    }
+    this.resolutionRepository = resolutionRepository;
+    this.sponsorRepository = sponsorRepository;
+    this.signatoryRepository = signatoryRepository;
+    this.userRepository = userRepository;
+    this.mapper = mapper;
+    this.committeeEventPublisher = committeeEventPublisher;
+}
         @Override
     public SponsorResponse addSponsor(AddSponsorRequest request) {
 
@@ -84,6 +88,13 @@ if (resolution.getStatus() != ResolutionStatus.SUBMITTED) {
         sponsor.setSponsoredAt(LocalDateTime.now());
 
         sponsor = sponsorRepository.save(sponsor);
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "SPONSOR_ADDED",
+        delegate.getId(),
+        resolution.getId()
+);
 
         return mapper.toSponsorResponse(sponsor);
     }
@@ -137,6 +148,15 @@ if (resolution.getStatus() != ResolutionStatus.SUBMITTED) {
 
         signatory = signatoryRepository.save(signatory);
 
+     
+
+committeeEventPublisher.publish(
+        resolution.getSession().getId(),
+        "SIGNATORY_ADDED",
+        delegate.getId(),
+        resolution.getId()
+);
+
         return mapper.toSignatoryResponse(signatory);
     }
 @Override
@@ -165,12 +185,27 @@ public void removeSignatory(Long signatoryId) {
                     .orElseThrow(() ->
                             new RuntimeException("Signatory not found."));
 
-    if (signatory.getResolution().getStatus() != ResolutionStatus.DRAFT) {
+    if (signatory.getResolution().getStatus()
+            != ResolutionStatus.DRAFT) {
+
         throw new IllegalStateException(
                 "Signatories cannot be removed after submission.");
     }
 
+    Resolution resolution =
+            signatory.getResolution();
+
+    User delegate =
+            signatory.getDelegate();
+
     signatoryRepository.delete(signatory);
+
+    committeeEventPublisher.publish(
+            resolution.getSession().getId(),
+            "SIGNATORY_REMOVED",
+            delegate.getId(),
+            resolution.getId()
+    );
 }
 @Override
 public void removeSponsor(Long sponsorId) {
@@ -180,12 +215,27 @@ public void removeSponsor(Long sponsorId) {
                     .orElseThrow(() ->
                             new RuntimeException("Sponsor not found."));
 
-    if (sponsor.getResolution().getStatus() != ResolutionStatus.DRAFT) {
+    if (sponsor.getResolution().getStatus()
+            != ResolutionStatus.DRAFT) {
+
         throw new IllegalStateException(
                 "Sponsors cannot be removed after submission.");
     }
 
+    Resolution resolution =
+            sponsor.getResolution();
+
+    User delegate =
+            sponsor.getDelegate();
+
     sponsorRepository.delete(sponsor);
+
+    committeeEventPublisher.publish(
+            resolution.getSession().getId(),
+            "SPONSOR_REMOVED",
+            delegate.getId(),
+            resolution.getId()
+    );
 }
 
         }

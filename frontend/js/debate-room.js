@@ -53,6 +53,11 @@ if (!sessionLoaded) {
     return;
 }
 
+FURYWebSocket.connect(
+    this.state.sessionId
+);
+
+
     this.renderCommittee();
     
 this.renderSessionStatus(); 
@@ -201,11 +206,12 @@ chairSessionBadge:
         stopSessionBtn:
             document.getElementById("stopSessionBtn"),
 
-
-
         exitDebateBtn:
-    document.getElementById("exitDebateBtn"),
-    };
+            document.getElementById("exitDebateBtn"),
+
+        openDiplomacyBtn:
+            document.getElementById("openDiplomacyBtn"),
+            };
 
     },
 
@@ -479,6 +485,17 @@ if (this.elements.exitDebateBtn) {
     this.elements.exitDebateBtn.addEventListener(
         "click",
         () => this.exitDebate()
+    );
+
+}
+if (this.elements.openDiplomacyBtn) {
+
+    this.elements.openDiplomacyBtn.addEventListener(
+        "click",
+        () => {
+            window.location.href =
+                "diplomacy.html";
+        }
     );
 
 }

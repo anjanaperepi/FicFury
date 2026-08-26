@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Diplomacy | FIC FURY</title>
+
+
+    <!-- =====================================================
+         FONTS
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- =====================================================
+         ICONS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    >
+
+
+    <!-- =====================================================
+         SHARED FIC FURY STYLES
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/layout.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/sidebar.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/components.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/theme.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/forms.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../css/assets/responsive.css"
+    >
+
+
+    <!-- =====================================================
+         DIPLOMACY PAGE
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="../css/diplomacy.css"
+    >
+
+</head>
+
+
+<body>
+
+<div class="diplomacy-page">
+
+
+    <!-- =====================================================
+         DIPLOMACY HEADER
+    ====================================================== -->
+
+    <header class="diplomacy-header">
+
+        <div class="diplomacy-header-left">
+
+            <button
+                id="backToDebateBtn"
+                class="diplomacy-back-btn"
+                type="button"
+            >
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Debate Room
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <div class="diplomacy-header-center">
+
+            <div class="diplomacy-header-title">
+
+                <span class="diplomacy-header-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </span>
+
+                <div>
+
+                    <span class="diplomacy-header-kicker">
+                        DIPLOMACY
+                    </span>
+
+                    <h1>
+                        Diplomacy
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="diplomacy-header-right">
+
+            <div
+                id="diplomacyLiveStatus"
+                class="diplomacy-live-status"
+            >
+
+                <span class="live-indicator"></span>
+
+                <span>
+                    LIVE
+                </span>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         MAIN DIPLOMACY CONTENT
+    ====================================================== -->
+
+    <main class="diplomacy-main">
+
+        <div class="diplomacy-container">
+
+
+            <!-- =================================================
+                 COMMUNICATION WORKSPACE
+            ================================================== -->
+
+<section class="diplomacy-workspace">
+
+
+    <!-- =====================================================
+         DELEGATE CONVERSATIONS
+    ====================================================== -->
+
+    <aside class="diplomacy-conversations">
+
+        <div class="panel-heading">
+
+            <div>
+
+                <span class="panel-kicker">
+                    COMMUNICATIONS
+                </span>
+
+                <h2>
+                    Conversations
+                </h2>
+
+            </div>
+
+            <button
+                id="newConversationBtn"
+                class="icon-button"
+                type="button"
+                title="New conversation"
+            >
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
+        </div>
+
+
+        <!-- PUBLIC COUNCIL -->
+
+        <div class="conversation-section">
+
+            <button
+                class="conversation-item active"
+                data-conversation="public"
+                type="button"
+            >
+
+                <span class="conversation-icon public">
+
+                    <i class="fa-solid fa-globe"></i>
+
+                </span>
+
+                <span class="conversation-details">
+
+                    <strong>
+                        Public Council
+                    </strong>
+
+                    <small>
+                        Everyone in the council
+                    </small>
+
+                </span>
+
+            </button>
+
+        </div>
+
+
+        <!-- PRIVATE / GENERATED CONVERSATIONS -->
+
+        <div
+            id="privateConversations"
+            class="private-conversations"
+        >
+
+            <div class="conversation-section-label">
+                PRIVATE
+            </div>
+
+            <div
+                id="privateConversationList"
+                class="conversation-list"
+            >
+
+                <div class="empty-conversations">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <span>
+                        No private conversations yet.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         CHAIR OVERSIGHT NAVIGATOR
+
+         This occupies the same left column as the delegate
+         conversation navigator.
+
+         JS continues using:
+         #chairOversightPanel
+         #oversightConversationList
+    ====================================================== -->
+
+    <aside
+        id="chairOversightPanel"
+        class="chair-oversight-panel"
+        hidden
+    >
+
+        <div class="chair-panel-heading">
+
+            <div>
+
+                <span class="panel-kicker">
+                    CHAIR OVERSIGHT
+                </span>
+
+                <h2>
+                    Communications
+                </h2>
+
+            </div>
+
+            <span class="oversight-badge">
+
+                <i class="fa-solid fa-eye"></i>
+
+                VIEW ONLY
+
+            </span>
+
+        </div>
+
+
+        <div class="chair-panel-description">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <div>
+
+                <strong>
+                    Communication Monitor
+                </strong>
+
+                <span>
+                    Review all diplomatic conversations
+                    in this committee.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="oversightConversationList"
+            class="oversight-conversation-list"
+        >
+
+            <div class="empty-conversations">
+
+                Loading conversations...
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         SHARED CHAT / MESSAGE VIEW
+
+         Both Delegate and Chair use this panel.
+
+         Delegate:
+         - can send
+
+         Chair:
+         - view only
+    ====================================================== -->
+
+    <section class="diplomacy-chat">
+
+        <header class="chat-header">
+
+            <div class="chat-title">
+
+                <span
+                    id="conversationTypeIcon"
+                    class="chat-title-icon public"
+                >
+
+                    <i class="fa-solid fa-globe"></i>
+
+                </span>
+
+
+                <div>
+
+                    <span
+                        id="conversationType"
+                        class="chat-kicker"
+                    >
+                        PUBLIC COUNCIL
+                    </span>
+
+                    <h2 id="conversationTitle">
+                        Council
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="chatParticipantInfo"
+                class="chat-participant-info"
+            >
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+                    Council
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             MESSAGES
+        ================================================== -->
+
+        <div
+            id="messageList"
+            class="message-list"
+        >
+
+            <div class="chat-empty-state">
+
+                <div class="chat-empty-icon">
+
+                    <i class="fa-solid fa-comments"></i>
+
+                </div>
+
+                <h3>
+                    Select a conversation
+                </h3>
+
+                <p>
+                    Choose a conversation to view its messages.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             DELEGATE COMPOSER
+
+             Chair JS disables this automatically.
+        ================================================== -->
+
+        <form
+            id="messageForm"
+            class="message-composer"
+        >
+
+            <textarea
+                id="messageInput"
+                name="message"
+                rows="2"
+                maxlength="2000"
+                placeholder="Write your message..."
+                autocomplete="off"
+            ></textarea>
+
+
+            <div class="composer-footer">
+
+                <span id="messageCounter">
+                    0 / 2000
+                </span>
+
+
+                <button
+                    id="sendMessageBtn"
+                    class="send-message-btn"
+                    type="submit"
+                >
+
+                    <span>
+                        Send
+                    </span>
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                </button>
+
+            </div>
+
+        </form>
+
+
+        <!-- =================================================
+             CHAIR VIEW-ONLY FOOTER
+
+             Hidden for delegates.
+        ================================================== -->
+
+        <div
+            id="chairViewOnlyFooter"
+            class="chair-view-only-footer"
+        >
+
+            <i class="fa-solid fa-eye"></i>
+
+            <div>
+
+                <strong>
+                    View only
+                </strong>
+
+                <span>
+                    Chairs can monitor communications but
+                    cannot participate in diplomatic conversations.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</section>
+
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+
+<!-- =========================================================
+     NEW CONVERSATION MODAL
+
+     IDs/classes preserved for diplomacy.js
+========================================================== -->
+
+<div
+    id="newConversationModal"
+    class="diplomacy-modal"
+    hidden
+>
+
+    <div class="diplomacy-modal-backdrop"></div>
+
+
+    <div
+        class="diplomacy-modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="newConversationTitle"
+    >
+
+
+        <!-- =============================================
+             MODAL HEADER
+        ============================================== -->
+
+        <header class="diplomacy-modal-header">
+
+            <div>
+
+                <span class="panel-kicker">
+                    DIPLOMACY
+                </span>
+
+                <h2 id="newConversationTitle">
+                    New Conversation
+                </h2>
+
+            </div>
+
+
+            <button
+                id="closeNewConversationBtn"
+                class="icon-button"
+                type="button"
+                title="Close"
+            >
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </header>
+
+
+
+        <!-- =============================================
+             CONVERSATION TYPE
+        ============================================== -->
+
+        <div class="conversation-type-selector">
+
+            <span class="form-label">
+                Conversation Type
+            </span>
+
+
+            <div class="conversation-type-options">
+
+
+                <button
+                    type="button"
+                    class="conversation-type-option active"
+                    data-conversation-type="PUBLIC_GROUP"
+                >
+
+                    <span class="conversation-type-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </span>
+
+
+                    <span>
+
+                        <strong>
+                            Public Group
+                        </strong>
+
+                        <small>
+                            Visible to all participants
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+
+                <button
+                    type="button"
+                    class="conversation-type-option"
+                    data-conversation-type="PRIVATE_GROUP"
+                >
+
+                    <span class="conversation-type-icon">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </span>
+
+
+                    <span>
+
+                        <strong>
+                            Private Group
+                        </strong>
+
+                        <small>
+                            Only selected participants
+                        </small>
+
+                    </span>
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             PARTICIPANT SEARCH
+        ============================================== -->
+
+        <div class="participant-picker">
+
+            <div class="participant-picker-header">
+
+                <label
+                    for="participantSearch"
+                    class="form-label"
+                >
+                    Select Participants
+                </label>
+
+            </div>
+
+
+            <div class="participant-search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    id="participantSearch"
+                    type="search"
+                    placeholder="Search delegates..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <div
+                id="participantList"
+                class="participant-list"
+            >
+
+                <div class="empty-conversations">
+
+                    Loading delegates...
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =============================================
+             MODAL FOOTER
+        ============================================== -->
+
+        <footer class="diplomacy-modal-footer">
+
+            <button
+                id="cancelNewConversationBtn"
+                class="secondary-button"
+                type="button"
+            >
+                Cancel
+            </button>
+
+
+            <button
+                id="createConversationBtn"
+                class="primary-button"
+                type="button"
+            >
+
+                <i class="fa-solid fa-comments"></i>
+
+                Create Conversation
+
+            </button>
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7/bundles/stomp.umd.min.js"></script>
+<script src="../js/websocket-test.js"></script>
+<!-- =========================================================
+     SCRIPTS
+========================================================== -->
+
+<script src="../js/config.js"></script>
+
+<script src="../js/utils.js"></script>
+
+<script src="../js/api.js"></script>
+
+<script src="../js/auth.js"></script>
+
+<script src="../js/component-loader.js"></script>
+
+<script src="../js/app.js"></script>
+
+<script src="../js/sidebar.js"></script>
+
+<script src="../js/diplomacy.js"></script>
+
+
+</body>
+
+</html>

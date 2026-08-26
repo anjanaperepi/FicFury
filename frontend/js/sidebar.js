@@ -212,7 +212,6 @@ const SIDEBAR_MENU = {
             },
 
 
-
                 {
                     id: "announcements",
                     title: "Announcements",
@@ -313,6 +312,7 @@ const SIDEBAR_MENU = {
                 page: "debate-room.html",
                 enabled: true
             },
+
 
 
 
