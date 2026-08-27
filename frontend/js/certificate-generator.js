@@ -17,7 +17,7 @@ const CertificateGenerator = {
 
         await this.loadCommittees();
 
-        await this.showGeneratedCertificates();
+        
 
         await this.loadGeneratedCertificates();
 
@@ -99,6 +99,7 @@ confirmPreviewBtn?.addEventListener(
             "change",
             () => this.onCommitteeChange()
         );
+
 
 
         selectAllBtn?.addEventListener(
@@ -255,45 +256,35 @@ confirmPreview() {
     },
 
 
-    // =====================================================
-    // COMMITTEE CHANGE
-    // =====================================================
+async onCommitteeChange() {
 
-    async onCommitteeChange() {
-
-        const select =
-            document.getElementById(
-                "committeeSelect"
-            );
-
-
-        const committeeId =
-            select?.value;
-
-
-        this.recipients = [];
-
-        this.selectedRecipients.clear();
-
-        this.updateGenerateButton();
-
-
-        if (!committeeId) {
-
-            this.renderEmptyState(
-                "No Committee Selected",
-                "Select a committee above to view eligible recipients."
-            );
-
-            return;
-        }
-
-
-        await this.loadRecipients(
-            committeeId
+    const select =
+        document.getElementById(
+            "committeeSelect"
         );
-    },
 
+    const committeeId =
+        select?.value;
+
+    this.recipients = [];
+    this.selectedRecipients.clear();
+
+    this.updateGenerateButton();
+
+    if (!committeeId) {
+
+        this.renderEmptyState(
+            "No Committee Selected",
+            "Select a committee above to view eligible recipients."
+        );
+
+        return;
+    }
+
+    await this.loadRecipients(
+        committeeId
+    );
+},
 
     // =====================================================
     // LOAD ELIGIBLE RECIPIENTS
@@ -339,15 +330,13 @@ confirmPreview() {
 
         try {
 
-            const response =
-                await apiRequest(
-                    `/certificates/eligible?committeeId=${encodeURIComponent(
-                        committeeId
-                    )}`,
-                    "GET"
-                );
-
-
+const response =
+    await apiRequest(
+        `/certificates/eligible?committeeId=${encodeURIComponent(
+            committeeId
+        )}`,
+        "GET"
+    );
             console.log(
                 "👥 Eligible recipients:",
                 response
@@ -494,31 +483,43 @@ confirmPreview() {
                 "No character"
             );
 
+        const award =
+    this.escapeHtml(
+        this.formatAwardType(
+            recipient.awardType
+        )
+    );
 
-        return `
-            <label class="recipient-row">
 
-                <input
-                    type="checkbox"
-                    class="recipient-checkbox"
-                    data-id="${id}"
-                >
+return `
+    <label class="recipient-row">
 
-                <div class="recipient-info">
+        <input
+            type="checkbox"
+            class="recipient-checkbox"
+            data-id="${id}"
+        >
 
-                    <div class="recipient-name">
-                        ${name}
-                    </div>
+        <div class="recipient-info">
 
-                    <div class="recipient-character">
-                        Character:
-                        ${character}
-                    </div>
+            <div class="recipient-name">
+                ${name}
+            </div>
 
-                </div>
+            <div class="recipient-character">
+                Character:
+                ${character}
+            </div>
 
-            </label>
-        `;
+            <div class="recipient-award">
+                Award:
+                <strong>${award}</strong>
+            </div>
+
+        </div>
+
+    </label>
+`;
     },
 
 
@@ -649,10 +650,7 @@ confirmPreview() {
 
 previewCertificate() {
 
-    const certificateType =
-        document.getElementById(
-            "certificateType"
-        )?.value;
+
 
 
     const eventName =
@@ -661,15 +659,7 @@ previewCertificate() {
         )?.value.trim();
 
 
-    if (!certificateType) {
 
-        this.showMessage(
-            "Please select a certificate type.",
-            "error"
-        );
-
-        return;
-    }
 
 
     if (!eventName) {
@@ -717,17 +707,30 @@ previewCertificate() {
         return;
     }
 
+    const awardType =
+    recipient.awardType;
+
+if (!awardType) {
+
+    this.showMessage(
+        "The selected recipient has no assigned award.",
+        "error"
+    );
+
+    return;
+}
+
 
     /*
      * Populate preview
      */
 
-    document.getElementById(
-        "previewCertificateType"
-    ).textContent =
-        this.formatCertificateType(
-            certificateType
-        );
+document.getElementById(
+    "previewCertificateType"
+).textContent =
+    this.formatAwardType(
+        awardType
+    );
 
 
     document.getElementById(
@@ -737,12 +740,10 @@ previewCertificate() {
         "Recipient Name";
 
 
-    document.getElementById(
-        "previewCharacter"
-    ).textContent =
-        recipient.characterName
-            ? `Character: ${recipient.characterName}`
-            : "";
+document.getElementById(
+    "previewCharacter"
+).textContent =
+    recipient.characterName || "";
 
 
     document.getElementById(
@@ -756,25 +757,47 @@ previewCertificate() {
     ).textContent =
         recipient.committeeName ||
         "Committee";
+const selectedCommittee =
+    this.committees.find(
+        committee =>
+            Number(committee.id) ===
+            Number(
+                document.getElementById(
+                    "committeeSelect"
+                )?.value
+            )
+    );
 
+console.log(
+    "📜 SELECTED COMMITTEE:",
+    selectedCommittee
+);
 
-    document.getElementById(
-        "previewDate"
-    ).textContent =
-        new Date().toLocaleDateString(
-            "en-IN",
-            {
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            }
-        );
+document.getElementById(
+    "previewChairperson"
+).textContent =
+    selectedCommittee?.chairName ||
+    selectedCommittee?.chairpersonName ||
+    "";
+const date =
+    "DATE:  " +
+    new Date().toLocaleDateString(
+        "en-IN",
+        {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        }
+    );
 
+document.getElementById(
+    "previewDate"
+).textContent = date;
 
-    document.getElementById(
-        "previewCertificateNumber"
-    ).textContent =
-        "Certificate No. — Preview";
+document.getElementById(
+    "previewCertificateNumber"
+).textContent =
+    "";
 
 
     /*
@@ -795,7 +818,35 @@ previewCertificate() {
             "hidden";
     }
 },
+formatAwardType(type) {
 
+    const labels = {
+
+        BEST_DELEGATE:
+            "Best Delegate",
+
+        OUTSTANDING_DELEGATE:
+            "Outstanding Delegate",
+
+        HIGH_COMMENDATION:
+            "High Commendation",
+
+        SPECIAL_MENTION:
+            "Special Mention",
+
+        VERBAL_MENTION:
+            "Verbal Mention",
+
+        PARTICIPATION:
+            "Participation"
+    };
+
+    return (
+        labels[type] ||
+        type ||
+        ""
+    );
+},
 
     // =====================================================
     // GENERATE
@@ -813,10 +864,6 @@ async generateCertificates() {
             "eventName"
         )?.value.trim();
 
-    const certificateType =
-        document.getElementById(
-            "certificateType"
-        )?.value;
 
 
     // ==========================================
@@ -845,15 +892,6 @@ async generateCertificates() {
     }
 
 
-    if (!certificateType) {
-
-        this.showMessage(
-            "Please select a certificate type.",
-            "error"
-        );
-
-        return;
-    }
 
 
     if (
@@ -873,22 +911,19 @@ async generateCertificates() {
     // BUILD REQUEST
     // ==========================================
 
-    const payload = {
+const payload = {
 
-        committeeId:
-            Number(committeeId),
+    committeeId:
+        Number(committeeId),
 
-        eventName:
-            eventName,
+    eventName:
+        eventName,
 
-        certificateType:
-            certificateType,
-
-        registrationIds:
-            Array.from(
-                this.selectedRecipients
-            )
-    };
+    registrationIds:
+        Array.from(
+            this.selectedRecipients
+        )
+};
 
 
     console.log(
@@ -997,37 +1032,7 @@ this.showMessage(
     }
 },
 
-    formatCertificateType(
-    type
-) {
 
-    const labels = {
-
-        DELEGATE:
-            "Delegate",
-
-        CHAIRPERSON:
-            "Chairperson",
-
-        BEST_DELEGATE:
-            "Best Delegate",
-
-        OUTSTANDING_DELEGATE:
-            "Outstanding Delegate",
-
-        HONORABLE_MENTION:
-            "Honorable Mention",
-
-        PARTICIPATION:
-            "Participation"
-    };
-
-
-    return (
-        labels[type] ||
-        type
-    );
-},
 showGeneratedCertificates(certificates) {
 
     const section =
@@ -1093,12 +1098,12 @@ showGeneratedCertificates(certificates) {
                         );
 
 
-                    const certificateType =
-                        this.escapeHtml(
-                            this.formatCertificateType(
-                                certificate.certificateType
-                            )
-                        );
+const certificateType =
+    this.escapeHtml(
+        this.formatAwardType(
+            certificate.certificateType
+        )
+    );
 
 
                     const certificateNumber =
@@ -1157,6 +1162,17 @@ showGeneratedCertificates(certificates) {
     section.hidden = false;
 
 
+    console.log(
+    "📜 Generated certificate section:",
+    section
+);
+
+console.log(
+    "📜 Generated certificate rows:",
+    list.children.length
+);
+
+
     // ==========================================
     // DOWNLOAD BUTTON EVENTS
     // ==========================================
@@ -1183,7 +1199,6 @@ showGeneratedCertificates(certificates) {
             }
         );
 },
-
 async loadGeneratedCertificates() {
 
     const section =
@@ -1196,16 +1211,9 @@ async loadGeneratedCertificates() {
             "generatedCertificatesList"
         );
 
-    const summary =
-        document.getElementById(
-            "generatedCertificatesSummary"
-        );
-
-
     if (!section || !list) {
         return;
     }
-
 
     try {
 
@@ -1213,116 +1221,29 @@ async loadGeneratedCertificates() {
             "📜 Loading existing certificates..."
         );
 
-
         const certificates =
             await apiRequest(
                 "/certificates",
                 "GET"
             );
 
-
         console.log(
             "📜 Existing certificates:",
             certificates
         );
 
-
-        if (
-            !Array.isArray(certificates) ||
-            certificates.length === 0
-        ) {
-
-            section.hidden = true;
-
-            return;
-        }
-
-
-        if (summary) {
-
-            summary.textContent =
-                `${certificates.length} certificate${
-                    certificates.length === 1
-                        ? ""
-                        : "s"
-                } generated.`;
-        }
-
-
-        list.innerHTML =
+        /*
+         * Let the existing renderer handle
+         * displaying the certificates.
+         */
+        this.showGeneratedCertificates(
             certificates
-                .map(
-                    certificate => {
+        );
 
-                        const recipientName =
-                            this.escapeHtml(
-                                certificate.recipientName ||
-                                "Unknown Recipient"
-                            );
-
-
-                        const certificateType =
-                            this.escapeHtml(
-                                this.formatCertificateType(
-                                    certificate.certificateType
-                                )
-                            );
-
-
-                        const certificateNumber =
-                            this.escapeHtml(
-                                certificate.certificateNumber ||
-                                "N/A"
-                            );
-
-
-                        return `
-
-                            <div
-                                class="generated-certificate-row">
-
-                                <div
-                                    class="generated-certificate-info">
-
-                                    <strong>
-                                        ${recipientName}
-                                    </strong>
-
-                                    <span>
-                                        ${certificateType}
-                                    </span>
-
-                                    <code>
-                                        ${certificateNumber}
-                                    </code>
-
-                                </div>
-
-
-                                <button
-                                    type="button"
-                                    class="btn btn-primary download-certificate-btn"
-                                    data-certificate-id="${certificate.id}">
-
-                                    <i class="fa-solid fa-download"></i>
-
-                                    Download PDF
-
-                                </button>
-
-                            </div>
-
-                        `;
-                    }
-                )
-                .join("");
-
-
-        section.hidden = false;
-
-
-        this.bindDownloadButtons();
-
+        console.log(
+            "📜 Certificates rendered:",
+            list.children.length
+        );
 
     } catch (error) {
 
@@ -1330,13 +1251,6 @@ async loadGeneratedCertificates() {
             "❌ Failed to load generated certificates:",
             error
         );
-
-
-        /*
-         * Don't make the entire Certificate Generator
-         * fail just because the certificate history
-         * couldn't be loaded.
-         */
 
         section.hidden = true;
     }

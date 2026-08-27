@@ -8,11 +8,10 @@ import java.util.List;
 
 public interface CertificateService {
 
-    List<CertificateEligibleRecipientDTO>
-    getEligibleRecipients(
-            Long committeeId
-    );
 
+List<CertificateEligibleRecipientDTO> getEligibleRecipients(
+        Long committeeId
+);
     Certificate getCertificateById(
             Long id
     );

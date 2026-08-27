@@ -39,21 +39,21 @@ public class CertificateController {
     // ELIGIBLE RECIPIENTS
     // =====================================================
 
-    @GetMapping("/eligible")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<
-            List<CertificateEligibleRecipientDTO>
-            > getEligibleRecipients(
-                    @RequestParam Long committeeId
-            ) {
+@GetMapping("/eligible")
+@PreAuthorize("hasRole('ADMIN')")
+public ResponseEntity<
+        List<CertificateEligibleRecipientDTO>
+        > getEligibleRecipients(
+                @RequestParam Long committeeId
+        ) {
 
-        return ResponseEntity.ok(
-                certificateService
-                        .getEligibleRecipients(
-                                committeeId
-                        )
-        );
-    }
+    return ResponseEntity.ok(
+            certificateService
+                    .getEligibleRecipients(
+                            committeeId
+                    )
+    );
+}
 
 
     // =====================================================

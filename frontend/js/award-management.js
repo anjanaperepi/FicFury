@@ -57,7 +57,10 @@ const DOM = {
 
     emptyState: document.getElementById("emptyState"),
 
-    pagination: document.getElementById("pagination")
+    pagination: document.getElementById("pagination"),
+
+    awardCommittee:
+    document.getElementById("awardCommittee")
 
 };
 const State = {
@@ -140,11 +143,10 @@ async function loadInitialData() {
          * Now load the award-management data.
          */
 
-        await Promise.all([
-            loadCommittees(),
-            loadDelegates(),
-            loadAwards()
-        ]);
+await Promise.all([
+    loadCommittees(),
+    loadAwards()
+]);
 
     }
     catch (error) {
@@ -253,11 +255,17 @@ async function loadCommittees() {
 
     try {
 
-        const committees = await apiRequest("/committees");
+        const committees =
+    await apiRequest("/committees/my-committees");
 
-        AwardManager.committees = committees || [];
+AwardManager.committees =
+    Array.isArray(committees)
+        ? committees
+        : [];
 
-        populateCommitteeFilter();
+populateCommitteeFilter();
+
+populateAwardCommitteeOptions();
 
     }
 
@@ -639,6 +647,44 @@ function populateCommitteeFilter() {
     });
 
 }
+
+function populateAwardCommitteeOptions() {
+
+    const select =
+        DOM.awardCommittee;
+
+    if (!select) {
+        return;
+    }
+
+
+    select.innerHTML = `
+        <option value="">
+            Select a committee
+        </option>
+    `;
+
+
+    AwardManager.committees.forEach(
+        committee => {
+
+            if (!committee?.id) {
+                return;
+            }
+
+
+            select.appendChild(
+                new Option(
+                    committee.name ||
+                    `Committee ${committee.id}`,
+                    committee.id
+                )
+            );
+
+        }
+    );
+
+}
 function populateAwardFilter() {
 
     DOM.awardFilter.innerHTML = `
@@ -687,6 +733,37 @@ function registerEvents() {
     DOM.committeeFilter.addEventListener("change", applyFilters);
 
     DOM.awardFilter.addEventListener("change", applyFilters);
+
+    DOM.awardCommittee?.addEventListener(
+    "change",
+    () => {
+
+        currentCommitteeId =
+            DOM.awardCommittee.value
+                ? Number(
+                    DOM.awardCommittee.value
+                )
+                : null;
+
+
+        const selectedCommittee =
+            AwardManager.committees.find(
+                committee =>
+                    Number(committee.id) ===
+                    Number(currentCommitteeId)
+            );
+
+
+        currentCommitteeName =
+            selectedCommittee?.name || null;
+
+
+        loadDelegatesForCommittee(
+            currentCommitteeId
+        );
+
+    }
+);
 
     DOM.addAwardBtn.addEventListener("click", () => openAwardModal());
 
@@ -951,8 +1028,25 @@ function populateAwardForm(award) {
 }
 function clearAwardForm() {
 
-    const form = document.getElementById("awardForm");
+    const form =
+        document.getElementById("awardForm");
+
     form?.reset();
+
+
+    currentCommitteeId = null;
+
+    currentCommitteeName = null;
+
+
+    if (DOM.awardCommittee) {
+
+        DOM.awardCommittee.value = "";
+
+    }
+
+
+    AwardManager.delegates = [];
 
     populateDelegateOptions();
 
@@ -1339,6 +1433,59 @@ function normalizeAward(award) {
         presentedBy: award.presentedBy || "-",
         date: award.presentedDate || ""
     };
+
+}
+
+async function loadDelegatesForCommittee(
+    committeeId
+) {
+
+    AwardManager.delegates = [];
+
+    populateDelegateOptions();
+
+
+    if (!committeeId) {
+        return;
+    }
+
+
+    try {
+
+        const registrations =
+            await apiRequest(
+                `/registrations/chair?committeeId=${encodeURIComponent(
+                    committeeId
+                )}`
+            );
+
+
+        AwardManager.delegates =
+            Array.isArray(registrations)
+                ? registrations
+                : [];
+
+
+        populateDelegateOptions();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Failed to load delegates for committee:",
+            error
+        );
+
+
+        AwardManager.delegates = [];
+
+        populateDelegateOptions();
+
+        showToast(
+            "Unable to load delegates for this committee.",
+            "error"
+        );
+    }
 
 }
 function populateDelegateOptions() {

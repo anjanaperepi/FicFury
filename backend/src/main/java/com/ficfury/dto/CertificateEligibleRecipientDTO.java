@@ -1,5 +1,7 @@
 package com.ficfury.dto;
 
+import com.ficfury.model.AwardType;
+
 public class CertificateEligibleRecipientDTO {
 
     private Long userId;
@@ -16,20 +18,28 @@ public class CertificateEligibleRecipientDTO {
 
     private Long registrationId;
 
+    private AwardType awardType;
+
+
+
+
+    
+
 
     public CertificateEligibleRecipientDTO() {
     }
 
 
-    public CertificateEligibleRecipientDTO(
-            Long userId,
-            String recipientName,
-            Long characterId,
-            String characterName,
-            Long committeeId,
-            String committeeName,
-            Long registrationId
-    ) {
+public CertificateEligibleRecipientDTO(
+        Long userId,
+        String recipientName,
+        Long characterId,
+        String characterName,
+        Long committeeId,
+        String committeeName,
+        Long registrationId,
+        AwardType awardType
+) {
 
         this.userId = userId;
         this.recipientName = recipientName;
@@ -38,6 +48,7 @@ public class CertificateEligibleRecipientDTO {
         this.committeeId = committeeId;
         this.committeeName = committeeName;
         this.registrationId = registrationId;
+        this.awardType = awardType;
     }
 
 
@@ -109,5 +120,19 @@ public class CertificateEligibleRecipientDTO {
             Long registrationId
     ) {
         this.registrationId = registrationId;
+
+
     }
+
+
+    public AwardType getAwardType() {
+    return awardType;
 }
+
+public void setAwardType(AwardType awardType) {
+    this.awardType = awardType;
+}
+}
+
+
+

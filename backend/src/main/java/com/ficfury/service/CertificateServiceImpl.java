@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import com.ficfury.model.Certificate;
 import com.ficfury.model.CertificateStatus;
+import com.ficfury.model.CertificateType;
 import com.ficfury.repository.CertificateRepository;
 import com.ficfury.dto.CertificateGenerationRequest;
 import com.ficfury.dto.CertificateEligibleRecipientDTO;
@@ -17,6 +18,9 @@ import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.debate.entity.DebateSession;
 import com.ficfury.debate.enums.SessionStatus;
 import com.ficfury.debate.repository.DebateSessionRepository;
+import com.ficfury.model.Award;
+import com.ficfury.model.AwardType;
+import com.ficfury.repository.AwardRepository;
 
 import org.springframework.stereotype.Service;
 import java.io.IOException;
@@ -26,6 +30,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+
+
+
 @Service
 public class CertificateServiceImpl
         implements CertificateService {
@@ -33,6 +40,8 @@ public class CertificateServiceImpl
 private final CertificateRepository certificateRepository;
 
 private final RegistrationRepository registrationRepository;
+
+private final AwardRepository awardRepository;
 
 private final CertificatePdfService certificatePdfService;
 
@@ -43,6 +52,7 @@ private final DebateSessionRepository debateSessionRepository;
 public CertificateServiceImpl(
         CertificateRepository certificateRepository,
         RegistrationRepository registrationRepository,
+        AwardRepository awardRepository,
         CertificatePdfService certificatePdfService,
         UserRepository userRepository,
         DebateSessionRepository debateSessionRepository
@@ -53,6 +63,9 @@ public CertificateServiceImpl(
 
     this.registrationRepository =
             registrationRepository;
+
+   this.awardRepository = 
+            awardRepository;
 
     this.certificatePdfService =
             certificatePdfService;
@@ -65,13 +78,12 @@ public CertificateServiceImpl(
 }
 
 
-
 @Override
-public List<CertificateEligibleRecipientDTO>
-getEligibleRecipients(Long committeeId) {
+public List<CertificateEligibleRecipientDTO> getEligibleRecipients(
+        Long committeeId
+) {
 
     if (committeeId == null) {
-
         throw new IllegalArgumentException(
                 "Committee ID is required."
         );
@@ -113,66 +125,111 @@ getEligibleRecipients(Long committeeId) {
 
     /*
      * =====================================================
-     * FIND ACTIVE DELEGATE REGISTRATIONS
+     * FIND AWARDED ACTIVE REGISTRATIONS
      * =====================================================
+     *
+     * Only delegates who have actually been assigned
+     * an award by the Chair are eligible.
      */
 
-    List<Registration> registrations =
-            registrationRepository
-                    .findByCommittee_IdAndWorkflowStatus(
-                            committeeId,
-                            RegistrationStatus.ACTIVE
+    List<Award> awards =
+            awardRepository
+                    .findByRegistration_Committee_Id(
+                            committeeId
                     );
 
 
-    return registrations
+    return awards
             .stream()
+
+            /*
+             * The registration must exist.
+             */
             .filter(
-                    registration ->
-                            registration.getUser() != null
+                    award ->
+                            award.getRegistration() != null
             )
+
+            /*
+             * Only ACTIVE registrations.
+             */
             .filter(
-                    registration ->
-                            registration.getCommittee() != null
+                    award ->
+                            award.getRegistration()
+                                    .getWorkflowStatus()
+                                    == RegistrationStatus.ACTIVE
             )
+
+            /*
+             * Registration must have a user.
+             */
             .filter(
-                    registration ->
-                            registration.getCharacter() != null
+                    award ->
+                            award.getRegistration()
+                                    .getUser() != null
             )
+
+            /*
+             * Registration must have a character.
+             */
+            .filter(
+                    award ->
+                            award.getRegistration()
+                                    .getCharacter() != null
+            )
+
+            /*
+             * Award must have a type.
+             */
+            .filter(
+                    award ->
+                            award.getAwardType() != null
+            )
+
+            /*
+             * Convert Award → Eligible Recipient DTO.
+             */
             .map(
-                    registration ->
-                            new CertificateEligibleRecipientDTO(
+                    award -> {
 
-                                    registration
-                                            .getUser()
-                                            .getId(),
+                        Registration registration =
+                                award.getRegistration();
 
-                                    registration
-                                            .getUser()
-                                            .getFullName(),
+                        return new CertificateEligibleRecipientDTO(
 
-                                    registration
-                                            .getCharacter()
-                                            .getId(),
+                                registration
+                                        .getUser()
+                                        .getId(),
 
-                                    registration
-                                            .getCharacter()
-                                            .getName(),
+                                registration
+                                        .getUser()
+                                        .getFullName(),
 
-                                    registration
-                                            .getCommittee()
-                                            .getId(),
+                                registration
+                                        .getCharacter()
+                                        .getId(),
 
-                                    registration
-                                            .getCommittee()
-                                            .getName(),
+                                registration
+                                        .getCharacter()
+                                        .getName(),
 
-                                    registration.getId()
-                            )
+                                registration
+                                        .getCommittee()
+                                        .getId(),
+
+                                registration
+                                        .getCommittee()
+                                        .getName(),
+
+                                registration.getId(),
+
+                                award.getAwardType()
+                        );
+                    }
             )
+
             .toList();
 }
-
     @Override
     public Certificate getCertificateById(
             Long id
@@ -478,11 +535,6 @@ if (
     }
 
 
-    if (request.getCertificateType() == null) {
-        throw new IllegalArgumentException(
-                "Certificate type is required."
-        );
-    }
 
 
     if (
@@ -593,6 +645,48 @@ if (
             );
         }
 
+   /*
+ * =====================================================
+ * GET ASSIGNED AWARD
+ * =====================================================
+ *
+ * The award assigned by the Chair is the source
+ * of truth for the certificate type.
+ */
+
+Award award =
+        getAwardForRegistration(
+                registrationId
+        );
+
+AwardType awardType =
+        award.getAwardType();
+
+if (awardType == null) {
+
+    throw new RuntimeException(
+            "No award type has been assigned to registration "
+                    + registrationId
+    );
+}   
+
+CertificateType certificateType;
+
+try {
+
+    certificateType =
+            CertificateType.valueOf(
+                    awardType.name()
+            );
+
+} catch (IllegalArgumentException e) {
+
+    throw new RuntimeException(
+            "No certificate type exists for award type: "
+                    + awardType
+    );
+}
+
 
         Long recipientId =
                 registration
@@ -615,7 +709,7 @@ if (
                         .existsByRecipientIdAndCommitteeIdAndCertificateType(
                                 recipientId,
                                 committeeId,
-                                request.getCertificateType()
+                                certificateType
                         );
 
 
@@ -623,8 +717,7 @@ if (
 
             throw new RuntimeException(
                     "A "
-                            + request
-                                    .getCertificateType()
+                            + certificateType
                             + " certificate already exists for "
                             + registration
                                     .getUser()
@@ -677,10 +770,9 @@ if (
                         .getName()
         );
 
-
-        certificate.setCertificateType(
-                request.getCertificateType()
-        );
+certificate.setCertificateType(
+        certificateType
+);
 
 
         certificate.setEventName(
@@ -746,7 +838,29 @@ return certificateRepository.saveAll(
         certificates
 );
 }
+private Award getAwardForRegistration(Long registrationId) {
 
+    List<Award> awards =
+            awardRepository.findByRegistration_Id(
+                    registrationId
+            );
+
+    if (awards == null || awards.isEmpty()) {
+        throw new IllegalStateException(
+                "No award has been assigned to registration "
+                        + registrationId
+        );
+    }
+
+    if (awards.size() > 1) {
+        throw new IllegalStateException(
+                "Multiple awards found for registration "
+                        + registrationId
+        );
+    }
+
+    return awards.get(0);
+}
 private String generateCertificateNumber() {
 
     String year =
