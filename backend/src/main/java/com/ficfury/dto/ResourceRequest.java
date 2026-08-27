@@ -1,6 +1,9 @@
 package com.ficfury.dto;
 
 import com.ficfury.model.ResourceCategory;
+import com.ficfury.model.ResourceVisibility;
+
+import java.util.List;
 
 public class ResourceRequest {
 
@@ -13,6 +16,9 @@ public class ResourceRequest {
     private Long committeeId;
 
     private String externalLink;
+    private ResourceVisibility visibility;
+
+private List<Long> recipientRegistrationIds;
 
     public ResourceRequest() {
     }
@@ -75,4 +81,23 @@ public class ResourceRequest {
             String externalLink) {
         this.externalLink = externalLink;
     }
+
+    public ResourceVisibility getVisibility() {
+    return visibility;
+}
+
+public void setVisibility(
+        ResourceVisibility visibility) {
+    this.visibility = visibility;
+}
+
+public List<Long> getRecipientRegistrationIds() {
+    return recipientRegistrationIds;
+}
+
+public void setRecipientRegistrationIds(
+        List<Long> recipientRegistrationIds) {
+    this.recipientRegistrationIds =
+            recipientRegistrationIds;
+}
 }

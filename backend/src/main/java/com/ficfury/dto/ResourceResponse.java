@@ -2,6 +2,7 @@ package com.ficfury.dto;
 
 import com.ficfury.model.ResourceCategory;
 import com.ficfury.model.ResourceStatus;
+import com.ficfury.model.ResourceVisibility;
 
 import java.time.LocalDateTime;
 
@@ -40,6 +41,7 @@ public class ResourceResponse {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+    private ResourceVisibility visibility;
 
     public ResourceResponse() {
     }
@@ -234,4 +236,13 @@ public class ResourceResponse {
             LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public ResourceVisibility getVisibility() {
+    return visibility;
+}
+
+public void setVisibility(
+        ResourceVisibility visibility) {
+    this.visibility = visibility;
+}
 }

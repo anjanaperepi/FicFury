@@ -182,7 +182,10 @@ public void deleteRegistration(
 }
 @PreAuthorize("hasRole('CHAIR')")
 @GetMapping("/chair")
-public List<Registration> getChairRegistrations() {
-    return registrationService.getChairRegistrations();
+public List<Registration> getChairRegistrations(
+        @RequestParam Long committeeId) {
+
+    return registrationService
+            .getChairRegistrations(committeeId);
 }
 }

@@ -3,6 +3,8 @@ package com.ficfury.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 @Entity
@@ -38,6 +40,10 @@ public class Resource {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private ResourceStatus status;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ResourceVisibility visibility;
 
     @Column(length = 1000)
     private String adminFeedback;
@@ -96,6 +102,10 @@ public class Resource {
 
         if (status == null)
             status = ResourceStatus.PENDING;
+
+        if (visibility == null) {
+    visibility = ResourceVisibility.PUBLIC;
+}
     }
 
     @PreUpdate
@@ -127,6 +137,16 @@ public class Resource {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public Set<Registration> getRecipients() {
+    return recipients;
+}
+
+public void setRecipients(
+        Set<Registration> recipients
+) {
+    this.recipients = recipients;
+}
 
     public ResourceCategory getCategory() {
         return category;
@@ -182,6 +202,14 @@ public class Resource {
 
     public void setStatus(ResourceStatus status) {
         this.status = status;
+    }
+
+    public ResourceVisibility getVisibility() {
+    return visibility;
+    }
+
+    public void setVisibility(ResourceVisibility visibility) {
+        this.visibility = visibility;
     }
 
     public String getAdminFeedback() {
@@ -246,4 +274,13 @@ public class Resource {
                 ", category=" + category +
                 '}';
     }
+
+    @ManyToMany
+@JoinTable(
+        name = "resource_recipients",
+        joinColumns = @JoinColumn(name = "resource_id"),
+        inverseJoinColumns = @JoinColumn(name = "registration_id")
+)
+private Set<Registration> recipients =
+        new HashSet<>();
 }

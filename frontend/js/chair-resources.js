@@ -30,6 +30,21 @@ const ResourceManager = {
 
         this.modal = document.getElementById("uploadModal");
 
+        this.committeeSelect =
+    document.getElementById("committee");
+
+        this.visibilityPublic =
+            document.getElementById("visibilityPublic");
+
+        this.visibilityPrivate =
+            document.getElementById("visibilityPrivate");
+
+        this.privateRecipientsGroup =
+            document.getElementById("privateRecipientsGroup");
+
+        this.resourceRecipients =
+            document.getElementById("resourceRecipients");
+
     },
 
     registerEvents() {
@@ -80,7 +95,122 @@ this.uploadForm.addEventListener(
             () => this.renderResources()
         );
 
+        this.visibilityPublic.addEventListener(
+    "change",
+    () => this.updateVisibilityUI()
+);
+
+this.visibilityPrivate.addEventListener(
+    "change",
+    () => this.updateVisibilityUI()
+);
+
+this.updateVisibilityUI();
+
+this.committeeSelect.addEventListener(
+    "change",
+    () => {
+
+        this.loadResourceRecipients(
+            this.committeeSelect.value
+        );
+
+    }
+);
+
     },
+
+
+updateVisibilityUI() {
+
+    if (
+        this.visibilityPrivate.checked
+    ) {
+
+        this.privateRecipientsGroup
+            .classList.remove("hidden");
+
+    } else {
+
+        this.privateRecipientsGroup
+            .classList.add("hidden");
+
+        Array.from(
+            this.resourceRecipients.options
+        ).forEach(option => {
+            option.selected = false;
+        });
+    }
+
+},
+
+
+async loadResourceRecipients(committeeId) {
+
+    this.resourceRecipients.innerHTML = "";
+
+    if (!committeeId) {
+        return;
+    }
+
+    try {
+
+        const registrations =
+            await apiRequest(
+                `/registrations/chair?committeeId=${committeeId}`
+            );
+
+
+        registrations.forEach(
+            registration => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value =
+                    registration.id;
+
+
+                const characterName =
+                    registration.character?.name ||
+                    registration.characterName ||
+                    "Delegate";
+
+
+                const userName =
+                    registration.user?.name ||
+                    registration.user?.username ||
+                    registration.user?.email ||
+                    "";
+
+
+                option.textContent =
+                    userName
+                        ? `${characterName} — ${userName}`
+                        : characterName;
+
+
+                this.resourceRecipients
+                    .appendChild(option);
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Failed to load resource recipients:",
+            error
+        );
+
+        Utils.showToast(
+            "Unable to load delegates",
+            "error"
+        );
+    }
+
+},
 
 openModal() {
 
@@ -106,7 +236,8 @@ closeModal() {
 
     try {
 
-        const committees = await apiRequest("/committees");
+        const committees =
+    await apiRequest("/committees/my-committees");
 
         this.committees = committees;
 
@@ -361,10 +492,22 @@ closeModal() {
             document.getElementById("version").value
         ),
 
-        externalLink:
-            document.getElementById("externalLink").value
+externalLink:
+    document.getElementById("externalLink").value,
 
-    };
+visibility:
+    this.visibilityPrivate.checked
+        ? "PRIVATE"
+        : "PUBLIC",
+
+recipientRegistrationIds:
+    this.visibilityPrivate.checked
+        ? Array.from(
+            this.resourceRecipients.selectedOptions
+        ).map(option => Number(option.value))
+        : []
+
+};
 
     const formData = new FormData();
 

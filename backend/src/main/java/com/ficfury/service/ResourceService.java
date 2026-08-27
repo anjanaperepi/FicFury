@@ -11,6 +11,14 @@ import com.ficfury.repository.ResourceRepository;
 import com.ficfury.repository.UserRepository;
 import com.ficfury.util.FileStorageService;
 import com.ficfury.util.ResourceMapper;
+import com.ficfury.model.Registration;
+import com.ficfury.model.RegistrationStatus;
+import com.ficfury.model.ResourceVisibility;
+
+import com.ficfury.repository.RegistrationRepository;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,18 +39,22 @@ public class ResourceService {
 
     private final FileStorageService fileStorageService;
 
+    private final RegistrationRepository registrationRepository;
+        
 public ResourceService(
         ResourceRepository resourceRepository,
         CommitteeRepository committeeRepository,
         UserRepository userRepository,
         FileStorageService fileStorageService,
-        ResourceMapper resourceMapper) {
+        ResourceMapper resourceMapper,
+        RegistrationRepository registrationRepository) {
 
     this.resourceRepository = resourceRepository;
     this.committeeRepository = committeeRepository;
     this.userRepository = userRepository;
     this.fileStorageService = fileStorageService;
     this.resourceMapper = resourceMapper;
+    this.registrationRepository = registrationRepository;
 }
 
     /**
@@ -105,11 +117,106 @@ public ResourceService(
         resource.setVersion(1);
 
         resource.setStatus(
-                ResourceStatus.PENDING);
+        ResourceStatus.PENDING);
 
-       Resource saved = resourceRepository.save(resource);
+/*
+ * Default to PUBLIC when visibility
+ * is not supplied.
+ */
+ResourceVisibility visibility =
+        request.getVisibility();
+
+if (visibility == null) {
+    visibility = ResourceVisibility.PUBLIC;
+}
+
+resource.setVisibility(visibility);
+
+
+/*
+ * PRIVATE resources require selected
+ * recipients.
+ */
+if (
+        visibility == ResourceVisibility.PRIVATE
+) {
+
+    if (
+            request.getRecipientRegistrationIds() == null ||
+            request.getRecipientRegistrationIds().isEmpty()
+    ) {
+
+        throw new IllegalArgumentException(
+                "Private resources must have at least one recipient."
+        );
+    }
+
+
+    Set<Registration> recipients =
+            new HashSet<>();
+
+
+    for (
+            Long registrationId :
+            request.getRecipientRegistrationIds()
+    ) {
+
+        Registration registration =
+                registrationRepository
+                        .findById(registrationId)
+                        .orElseThrow(() ->
+                                new IllegalArgumentException(
+                                        "Recipient registration not found."
+                                )
+                        );
+
+
+        /*
+         * Recipient must belong to the
+         * same committee as the resource.
+         */
+        if (
+                registration.getCommittee() == null ||
+                !registration.getCommittee()
+                        .getId()
+                        .equals(committee.getId())
+        ) {
+
+            throw new IllegalArgumentException(
+                    "Recipient does not belong to the selected committee."
+            );
+        }
+
+
+        /*
+         * Only approved/active registrations
+         * should receive private resources.
+         */
+        if (
+                registration.getWorkflowStatus() !=
+                        RegistrationStatus.ACTIVE
+        ) {
+
+            throw new IllegalArgumentException(
+                    "Recipient is not an active delegate."
+            );
+        }
+
+
+        recipients.add(registration);
+    }
+
+
+    resource.setRecipients(recipients);
+}
+
+
+Resource saved =
+        resourceRepository.save(resource);
 
 return resourceMapper.toResponse(saved);
+
+
     }
 
     /**
@@ -138,21 +245,71 @@ public List<ResourceResponse> getAllResources() {
             .toList();
 }
 
-    /**
-     * Delegate views approved resources
-     * for one committee
-     */
-public List<ResourceResponse> getApprovedResources(Long committeeId) {
+public List<ResourceResponse> getApprovedResources(
+        Long committeeId,
+        String email) {
 
-    Committee committee = committeeRepository.findById(committeeId)
-            .orElseThrow(() ->
-                    new RuntimeException("Committee not found"));
+    Committee committee =
+            committeeRepository.findById(committeeId)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Committee not found"
+                            )
+                    );
+
+
+    User user =
+            userRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "User not found"
+                            )
+                    );
+
+
+    Registration registration =
+            registrationRepository
+                    .findByUser_IdAndCommittee_IdAndWorkflowStatus(
+                            user.getId(),
+                            committeeId,
+                            RegistrationStatus.ACTIVE
+                    )
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Active registration not found"
+                            )
+                    );
+
 
     return resourceRepository
             .findByCommitteeAndStatus(
                     committee,
-                    ResourceStatus.APPROVED)
+                    ResourceStatus.APPROVED
+            )
             .stream()
+            .filter(resource -> {
+
+                /*
+                 * PUBLIC resources are available
+                 * to everyone in the committee.
+                 */
+                if (
+                        resource.getVisibility() ==
+                        ResourceVisibility.PUBLIC
+                ) {
+
+                    return true;
+                }
+
+
+                /*
+                 * PRIVATE resources are available
+                 * only to selected registrations.
+                 */
+                return resource.getRecipients()
+                        .contains(registration);
+
+            })
             .map(resourceMapper::toResponse)
             .toList();
 }
@@ -307,21 +464,123 @@ public ResponseEntity<org.springframework.core.io.Resource> downloadResource(
         Long id,
         String email) {
 
-    User user = userRepository.findByEmail(email)
-            .orElseThrow(() ->
-                    new RuntimeException("User not found"));
+    User user =
+            userRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "User not found"
+                            )
+                    );
 
-    Resource resourceEntity = resourceRepository.findById(id)
-            .orElseThrow(() ->
-                    new RuntimeException("Resource not found"));
 
-                    if (!resourceEntity.getUploadedBy().getId().equals(user.getId())) {
-    throw new RuntimeException("Access denied");
-}
+    Resource resourceEntity =
+            resourceRepository.findById(id)
+                    .orElseThrow(() ->
+                            new RuntimeException(
+                                    "Resource not found"
+                            )
+                    );
+
+
+    /*
+     * =====================================================
+     * ACCESS CONTROL
+     * =====================================================
+     *
+     * The uploader / Chair always has access.
+     */
+    if (
+            resourceEntity.getUploadedBy()
+                    .getId()
+                    .equals(user.getId())
+    ) {
+
+        // Access granted.
+
+    }
+
+    /*
+     * PUBLIC resources are available to users
+     * belonging to the resource's committee.
+     */
+    else if (
+            resourceEntity.getVisibility() ==
+            ResourceVisibility.PUBLIC
+    ) {
+
+        boolean activeParticipant =
+                registrationRepository
+                        .findByUser_IdAndCommittee_IdAndWorkflowStatus(
+                                user.getId(),
+                                resourceEntity.getCommittee()
+                                        .getId(),
+                                RegistrationStatus.ACTIVE
+                        )
+                        .isPresent();
+
+        if (!activeParticipant) {
+
+            throw new RuntimeException(
+                    "Access denied"
+            );
+        }
+    }
+
+    /*
+     * PRIVATE resources are available only
+     * to their selected recipients.
+     */
+    else {
+
+        Registration registration =
+                registrationRepository
+                        .findByUser_IdAndCommittee_IdAndWorkflowStatus(
+                                user.getId(),
+                                resourceEntity.getCommittee()
+                                        .getId(),
+                                RegistrationStatus.ACTIVE
+                        )
+                        .orElseThrow(() ->
+                                new RuntimeException(
+                                        "Access denied"
+                                )
+                        );
+
+
+        if (
+                !resourceEntity.getRecipients()
+                        .contains(registration)
+        ) {
+
+            throw new RuntimeException(
+                    "Access denied"
+            );
+        }
+    }
+
+
+    /*
+     * =====================================================
+     * FILE DELIVERY
+     * =====================================================
+     */
+
+    if (
+            resourceEntity.getFilePath() == null ||
+            resourceEntity.getFilePath().isBlank()
+    ) {
+
+        throw new RuntimeException(
+                "No file attached to this resource"
+        );
+    }
+
 
     org.springframework.core.io.Resource file =
-        fileStorageService.loadFileAsResource(
-                resourceEntity.getFilePath());
+            fileStorageService.loadFileAsResource(
+                    resourceEntity.getFilePath()
+            );
+
 
     return ResponseEntity.ok()
             .header(

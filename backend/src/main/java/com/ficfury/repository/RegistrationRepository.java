@@ -54,6 +54,13 @@ List<Registration> findByCommittee_IdAndWorkflowStatus(
         Long committeeId,
         RegistrationStatus workflowStatus
 );
+
+Optional<Registration>
+findByUser_IdAndCommittee_IdAndWorkflowStatus(
+        Long userId,
+        Long committeeId,
+        RegistrationStatus workflowStatus
+);
 boolean existsByCharacter_IdAndWorkflowStatusIn(
         Long characterId,
         List<RegistrationStatus> statuses

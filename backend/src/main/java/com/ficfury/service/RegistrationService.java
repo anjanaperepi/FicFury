@@ -487,13 +487,32 @@ private void validateChairOwnsCommittee(
 }
 
 
-
-public List<Registration> getChairRegistrations() {
+public List<Registration> getChairRegistrations(
+        Long committeeId) {
 
     User chair = getLoggedInUser();
 
-    return registrationRepository.findChairRegistrations(
-            chair.getEmail());
+    List<Registration> registrations =
+            registrationRepository
+                    .findByCommittee_IdAndWorkflowStatus(
+                            committeeId,
+                            RegistrationStatus.ACTIVE
+                    );
 
+
+    /*
+     * Only return registrations belonging to
+     * committees actually chaired by this user.
+     */
+    return registrations
+            .stream()
+            .filter(registration ->
+                    registration.getCommittee()
+                            .getChairpersonEmail()
+                            .equalsIgnoreCase(
+                                    chair.getEmail()
+                            )
+            )
+            .toList();
 }
 }

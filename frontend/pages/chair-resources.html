@@ -277,18 +277,113 @@
 
             </div>
 
-            <div class="form-group">
+<div class="form-group">
 
-                <label>
+    <label>
+        External Link
+    </label>
 
-                    External Link
+    <input
+        id="externalLink">
 
-                </label>
+</div>
 
-                <input
-                    id="externalLink">
 
-            </div>
+<!-- Resource Visibility -->
+
+<div class="form-group resource-visibility-group">
+
+    <label>
+        Visibility
+    </label>
+
+    <div class="resource-visibility-options">
+
+        <label class="visibility-option">
+
+            <input
+                type="radio"
+                name="resourceVisibility"
+                id="visibilityPublic"
+                value="PUBLIC"
+                checked>
+
+            <span class="visibility-option-content">
+
+                <span class="visibility-option-title">
+
+                    <i class="fa-solid fa-globe"></i>
+
+                    Public
+
+                </span>
+
+                <small>
+                    Everyone in the committee can access this resource.
+                </small>
+
+            </span>
+
+        </label>
+
+
+        <label class="visibility-option">
+
+            <input
+                type="radio"
+                name="resourceVisibility"
+                id="visibilityPrivate"
+                value="PRIVATE">
+
+            <span class="visibility-option-content">
+
+                <span class="visibility-option-title">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    Private
+
+                </span>
+
+                <small>
+                    Only selected delegates can access this resource.
+                </small>
+
+            </span>
+
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- Private Resource Recipients -->
+
+<div
+    id="privateRecipientsGroup"
+    class="form-group private-recipients-group hidden">
+
+    <label for="resourceRecipients">
+
+        Select Delegates
+
+    </label>
+
+    <select
+        id="resourceRecipients"
+        multiple>
+
+    </select>
+
+    <small class="form-help">
+
+        Hold Ctrl (Windows) or Command (Mac) to select
+        multiple delegates.
+
+    </small>
+
+</div>
 
             <div class="modal-footer">
 
