@@ -957,7 +957,51 @@
                         placeholder="Tell us about your favourite universe, character, MUN experience, or anything else..."
                     ></textarea>
                 </div>
+                <div class="fury-field fury-field-full">
+    <label>CIVIL WAR REGISTRATION</label>
 
+    <div class="fury-radio-group">
+        <label class="fury-radio-label">
+            <input
+                type="radio"
+                name="civilWarRegistration"
+                value="yes"
+                id="civilWarYes"
+            >
+            <span>I want to register for Civil War</span>
+        </label>
+
+        <label class="fury-radio-label">
+            <input
+                type="radio"
+                name="civilWarRegistration"
+                value="no"
+                id="civilWarNo"
+                checked
+            >
+            <span>Not right now</span>
+        </label>
+    </div>
+</div>
+<div
+    class="fury-field fury-field-full"
+    id="civilWarCharacterField"
+    hidden
+>
+    <label>CIVIL WAR CHARACTER</label>
+
+    <div
+        class="fury-radio-group"
+        id="civilWarCharacterList"
+    >
+        <!-- Characters will be loaded here -->
+    </div>
+
+    <small
+        class="fury-field-error"
+        data-error-for="civilWarCharacter"
+    ></small>
+</div>
                 <div class="fury-field fury-field-full fury-consent">
                     <label class="fury-checkbox-label">
                         <input type="checkbox" id="furyConsent" name="consent" required>

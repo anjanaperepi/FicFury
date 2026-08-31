@@ -927,7 +927,79 @@ function initFuryRegistration() {
 
     const success =
         document.getElementById("furySuccess");
+    
+    const civilWarYes =
+    document.getElementById("civilWarYes");
 
+    const civilWarNo =
+        document.getElementById("civilWarNo");
+
+    const civilWarCharacterField =
+        document.getElementById("civilWarCharacterField");
+
+    const civilWarCharacterList =
+        document.getElementById("civilWarCharacterList");
+        
+function updateCivilWarRegistration() {
+
+    if (!civilWarCharacterField) {
+        return;
+    }
+
+    if (civilWarYes?.checked) {
+
+        civilWarCharacterField.hidden = false;
+
+        renderCivilWarCharacters();
+
+    } else {
+
+        civilWarCharacterField.hidden = true;
+
+        if (civilWarCharacterList) {
+            civilWarCharacterList.innerHTML = "";
+        }
+    }
+}
+civilWarYes?.addEventListener(
+    "change",
+    updateCivilWarRegistration
+);
+
+civilWarNo?.addEventListener(
+    "change",
+    updateCivilWarRegistration
+);
+const CIVIL_WAR_CHARACTERS = [
+    {
+        name: "Tony Stark",
+        alias: "Iron Man"
+    },
+    {
+        name: "Steve Rogers",
+        alias: "Captain America"
+    },
+    {
+        name: "Peter Parker",
+        alias: "Spider-Man"
+    },
+    {
+        name: "Reed Richards",
+        alias: "Mister Fantastic"
+    },
+    {
+        name: "T'Challa",
+        alias: "Black Panther"
+    },
+    {
+        name: "Ben Grimm",
+        alias: "The Thing"
+    },
+    {
+        name: "Maria Hill",
+        alias: "Maria Hill"
+    }
+];
 
     /*
      * Make sure the registration elements exist.
@@ -1336,6 +1408,23 @@ function initFuryRegistration() {
 
         }
 
+        /* -----------------------------------------------
+   CIVIL WAR CHARACTER
+------------------------------------------------ */
+
+if (
+    data.civilWarRegistration === "yes" &&
+    !data.civilWarCharacter
+) {
+
+    setError(
+        "civilWarCharacter",
+        "Please select a Civil War character."
+    );
+
+    valid = false;
+}
+
 
         return valid;
 
@@ -1401,7 +1490,13 @@ function initFuryRegistration() {
 
                 consent:
                     formData
-                        .get("consent") === "on"
+                        .get("consent") === "on",
+
+                civilWarRegistration:
+    formData.get("civilWarRegistration") || "no",
+
+civilWarCharacter:
+    formData.get("civilWarCharacter") || ""
 
             };
 
@@ -1495,6 +1590,18 @@ try {
         "consent",
         data.consent ? "Yes" : "No"
     );
+
+    payload.append(
+    "civilWarRegistration",
+    data.civilWarRegistration === "yes"
+        ? "Yes"
+        : "No"
+);
+
+payload.append(
+    "civilWarCharacter",
+    data.civilWarCharacter || ""
+);
 
 
     /*
@@ -1635,6 +1742,37 @@ try {
             });
 
     }
+    function renderCivilWarCharacters() {
+
+    if (!civilWarCharacterList) {
+        return;
+    }
+
+    civilWarCharacterList.innerHTML = "";
+
+    CIVIL_WAR_CHARACTERS.forEach((character, index) => {
+
+        const label = document.createElement("label");
+
+        label.className = "fury-radio-label";
+
+        label.innerHTML = `
+            <input
+                type="radio"
+                name="civilWarCharacter"
+                value="${escapeHtml(character.name)}"
+               
+            >
+
+            <span>
+                ${escapeHtml(character.name)}
+                — ${escapeHtml(character.alias)}
+            </span>
+        `;
+
+        civilWarCharacterList.appendChild(label);
+    });
+}
 
 
     /* ======================================================
