@@ -18,4 +18,7 @@ public interface ActivityLogRepository
             ActivityType activityType
     );
 
+    void deleteBySession(DebateSession session);
+    void deleteBySessionId(Long sessionId);
+
 }

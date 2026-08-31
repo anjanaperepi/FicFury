@@ -1,0 +1,109 @@
+/* =========================================================
+   FIC FURY — ADMIN SESSION MANAGEMENT
+   ========================================================= */
+
+.session-card {
+    width: 100%;
+    overflow-x: auto;
+    margin-top: 24px;
+    padding: 0;
+}
+
+/* ---------------------------------------------------------
+   SESSION TABLE
+   --------------------------------------------------------- */
+
+#sessionTable {
+    width: 100%;
+    min-width: 760px;
+}
+
+#sessionTable th {
+    white-space: nowrap;
+}
+
+#sessionTable td {
+    vertical-align: middle;
+}
+
+/* ---------------------------------------------------------
+   ACTIONS
+   --------------------------------------------------------- */
+
+.session-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.session-actions .btn {
+    white-space: nowrap;
+}
+
+/* Delete button */
+
+.delete-session-btn {
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    background: transparent;
+}
+
+.delete-session-btn:hover {
+    background: #dc3545;
+    color: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   SESSION STATUS
+   --------------------------------------------------------- */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ---------------------------------------------------------
+   EMPTY STATE
+   --------------------------------------------------------- */
+
+.session-empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: #777;
+}
+
+.session-empty i {
+    display: block;
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+    .session-card {
+        margin-top: 16px;
+    }
+
+    .session-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .session-actions .btn {
+        width: 100%;
+    }
+
+}

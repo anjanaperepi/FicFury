@@ -44,7 +44,7 @@ public interface DiplomacyConversationRepository
     findBySessionOrderByCreatedAtAsc(
             DebateSession session
     );
-
+   void deleteBySession(DebateSession session);
     
 
 }

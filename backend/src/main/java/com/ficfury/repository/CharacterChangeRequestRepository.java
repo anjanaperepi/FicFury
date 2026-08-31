@@ -18,6 +18,9 @@ public interface CharacterChangeRequestRepository
     List<CharacterChangeRequest>
     findByCommittee_Id(Long committeeId);
 
+    void deleteByCommittee_Id(Long committeeId);
+    void deleteByRequestedCharacter_Id(Long characterId);
+
 
     List<CharacterChangeRequest>
     findByStatus(RequestStatus status);

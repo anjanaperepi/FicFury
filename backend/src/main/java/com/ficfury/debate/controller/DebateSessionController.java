@@ -117,4 +117,13 @@ public ResponseEntity<DebateSessionResponse> getChairSession(
     );
 
 }
+
+@DeleteMapping("/{id}")
+public ResponseEntity<Void> deleteSession(
+        @PathVariable Long id) {
+
+    debateSessionService.deleteSession(id);
+
+    return ResponseEntity.noContent().build();
+}
 }

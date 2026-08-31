@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ficfury.dto.RegistrationRequest;
 import com.ficfury.exception.RegistrationException;
@@ -21,6 +22,8 @@ import com.ficfury.repository.CharacterRepository;
 import com.ficfury.repository.CommitteeRepository;
 import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.repository.UserRepository;
+import com.ficfury.repository.AwardRepository;
+import com.ficfury.repository.CertificateRepository;
 
 @Service
 public class RegistrationService {
@@ -29,17 +32,23 @@ public class RegistrationService {
     private final UserRepository userRepository;
     private final CommitteeRepository committeeRepository;
     private final CharacterRepository characterRepository;
+    private final AwardRepository awardRepository;
+    private final CertificateRepository certificateRepository;
 
-    public RegistrationService(
-            RegistrationRepository registrationRepository,
-            UserRepository userRepository,
-            CommitteeRepository committeeRepository,
-            CharacterRepository characterRepository
-    ) {
+public RegistrationService(
+        RegistrationRepository registrationRepository,
+        UserRepository userRepository,
+        CommitteeRepository committeeRepository,
+        CharacterRepository characterRepository,
+        AwardRepository awardRepository,
+        CertificateRepository certificateRepository
+) {
         this.registrationRepository = registrationRepository;
         this.userRepository = userRepository;
         this.committeeRepository = committeeRepository;
         this.characterRepository = characterRepository;
+        this.awardRepository = awardRepository;
+        this.certificateRepository = certificateRepository;
     }
 
    public Registration createRegistration(
@@ -417,16 +426,26 @@ public Registration updateRegistration(
 
     return registrationRepository.save(registration);
 }
+@Transactional
 public void deleteRegistration(Long id) {
 
     Registration registration =
             registrationRepository
                     .findById(id)
                     .orElseThrow(() ->
-                            new RuntimeException("Registration not found."));
+                            new RuntimeException(
+                                    "Registration not found."
+                            )
+                    );
 
+    // Delete dependent awards first.
+    awardRepository.deleteByRegistration_Id(id);
+
+    // Delete certificates belonging to this registration.
+    certificateRepository.deleteByRecipientId(id);
+
+    // Finally delete the registration.
     registrationRepository.delete(registration);
-
 }
 public List<Registration> getPendingAdminRegistrations() {
 

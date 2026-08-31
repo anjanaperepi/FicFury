@@ -13,4 +13,7 @@ public interface AnnouncementRepository
             DebateSession session
     );
 
+    void deleteBySession(DebateSession session);
+    void deleteBySessionId(Long sessionId);
+
 }

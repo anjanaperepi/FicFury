@@ -18,4 +18,5 @@ public interface MotionRepository extends JpaRepository<Motion, Long> {
             MotionStatus status);
 
     List<Motion> findByDelegateId(Long delegateId);
+    void deleteBySessionId(Long sessionId);
 }

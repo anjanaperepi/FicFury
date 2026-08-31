@@ -18,4 +18,6 @@ public interface ResolutionSignatoryRepository
 
     long countByResolution_Id(Long resolutionId);
 
+    void deleteByResolutionId(Long resolutionId);
+
 }

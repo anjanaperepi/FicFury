@@ -23,4 +23,5 @@ public interface SpeakerQueueRepository
             SpeakerStatus status);
 
     long countBySessionId(Long sessionId);
+    void deleteBySessionId(Long sessionId);
 }

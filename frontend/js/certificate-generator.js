@@ -1,3 +1,47 @@
+const CERTIFICATE_LAYOUT = {
+
+    award: {
+        x: 50.09,
+        y: 46.80
+    },
+
+    recipient: {
+        x: 50,
+        y: 57.2
+    },
+
+    character: {
+        x: 46.62,
+        y: 64.04
+    },
+
+    committee: {
+        x: 50,
+        y: 74
+    },
+
+    event: {
+        x: 50,
+        y: 77.8
+    },
+
+    chairperson: {
+        x: 29.79,
+        y: 84.71
+    },
+
+    certificateNumber: {
+        x: 77.4,
+        y: 93.1
+    },
+
+    date: {
+        x: 70.3,
+        y: 89.68
+    }
+
+};
+
 const CertificateGenerator = {
 
     committees: [],
@@ -14,6 +58,8 @@ const CertificateGenerator = {
         );
 
         this.bindEvents();
+
+        this.applyCertificateLayout();
 
         await this.loadCommittees();
 
@@ -124,6 +170,16 @@ confirmPreviewBtn?.addEventListener(
             "click",
             () => this.generateCertificates()
         );
+
+        const calibrationBtn =
+    document.getElementById(
+        "calibrationBtn"
+    );
+
+calibrationBtn?.addEventListener(
+    "click",
+    () => this.enableCalibrationMode()
+);
     },
 closePreview() {
 
@@ -1564,7 +1620,327 @@ savePdfBlob(
 
 
         return div.innerHTML;
+    },
+applyCertificateLayout() {
+
+    const certificate =
+        document.getElementById(
+            "certificatePreview"
+        );
+
+    if (!certificate) {
+        return;
     }
+
+    const fieldMap = {
+
+        award:
+            "previewCertificateType",
+
+        recipient:
+            "previewRecipientName",
+
+        character:
+            "previewCharacter",
+
+        committee:
+            "previewCommitteeName",
+
+        event:
+            "previewEventName",
+
+        chairperson:
+            "previewChairperson",
+
+        date:
+            "previewDate",
+
+        certificateNumber:
+            "previewCertificateNumber"
+
+    };
+
+    Object.entries(fieldMap).forEach(
+        ([field, elementId]) => {
+
+            const element =
+                document.getElementById(
+                    elementId
+                );
+
+            const position =
+                CERTIFICATE_LAYOUT[field];
+
+            if (!element || !position) {
+                return;
+            }
+
+            element.style.left =
+                `${position.x}%`;
+
+            element.style.top =
+                `${position.y}%`;
+
+            /*
+             * We are now using TOP coordinates
+             * everywhere.
+             */
+            element.style.bottom =
+                "auto";
+
+        }
+    );
+
+},
+enableCalibrationMode() {
+
+const certificate =
+    document.querySelector(
+        "#certificatePreview .certificate-border"
+    );
+
+    if (!certificate) {
+        return;
+    }
+
+    const calibrationMode =
+        !certificate.classList.contains(
+            "calibration-mode"
+        );
+
+    certificate.classList.toggle(
+        "calibration-mode",
+        calibrationMode
+    );
+
+    const calibrationBtn =
+        document.getElementById(
+            "calibrationBtn"
+        );
+
+    if (calibrationBtn) {
+
+        calibrationBtn.textContent =
+            calibrationMode
+                ? "📐 Exit Calibration"
+                : "📐 Calibration Mode";
+    }
+
+    const fields = [
+        "previewCertificateType",
+        "previewRecipientName",
+        "previewCharacter",
+        "previewEventName",
+        "previewCommitteeName",
+        "previewChairperson",
+        "previewDate",
+        "previewCertificateNumber"
+    ];
+
+    fields.forEach(id => {
+
+        const element =
+            document.getElementById(id);
+
+        if (!element) {
+            return;
+        }
+
+        if (calibrationMode) {
+
+            this.makeFieldDraggable(
+                element
+            );
+
+        }
+
+    });
+
+},
+makeFieldDraggable(element) {
+
+    if (!element) {
+        return;
+    }
+
+    if (element.dataset.calibrationBound === "true") {
+    return;
+}
+
+element.dataset.calibrationBound = "true";
+
+    let dragging = false;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    element.addEventListener(
+        "mousedown",
+        event => {
+
+            dragging = true;
+
+            element.classList.add(
+    "calibration-dragging"
+);
+
+            const rect =
+                element.getBoundingClientRect();
+
+            offsetX =
+                event.clientX -
+                (rect.left + rect.width / 2);
+
+            offsetY =
+                event.clientY -
+                (rect.top + rect.height / 2);
+
+            event.preventDefault();
+
+        }
+    );
+
+    document.addEventListener(
+        "mousemove",
+        event => {
+
+            if (!dragging) {
+                return;
+            }
+
+const certificate =
+    document.querySelector(
+        "#certificatePreview .certificate-border"
+    );
+            if (!certificate) {
+                return;
+            }
+
+            const parentRect =
+                certificate.getBoundingClientRect();
+
+            const x =
+                (
+                    (
+                        event.clientX -
+                        parentRect.left -
+                        offsetX
+                    )
+                    / parentRect.width
+                ) * 100;
+
+            const y =
+                (
+                    (
+                        event.clientY -
+                        parentRect.top -
+                        offsetY
+                    )
+                    / parentRect.height
+                ) * 100;
+
+            element.style.left =
+                `${x}%`;
+
+            element.style.top =
+                `${y}%`;
+
+            element.style.bottom =
+                "auto";
+
+            element.style.transform =
+                "translate(-50%, -50%)";
+
+        }
+    );
+
+    document.addEventListener(
+        "mouseup",
+        () => {
+
+            if (!dragging) {
+                return;
+            }
+
+            dragging = false;
+
+            element.classList.remove(
+    "calibration-dragging"
+);
+
+const certificate =
+    document.querySelector(
+        "#certificatePreview .certificate-border"
+    );
+
+            const parentRect =
+                certificate.getBoundingClientRect();
+
+            const rect =
+                element.getBoundingClientRect();
+
+            const x =
+                (
+                    (
+                        rect.left +
+                        rect.width / 2 -
+                        parentRect.left
+                    )
+                    / parentRect.width
+                ) * 100;
+
+            const y =
+                (
+                    (
+                        rect.top +
+                        rect.height / 2 -
+                        parentRect.top
+                    )
+                    / parentRect.height
+                ) * 100;
+
+const fieldMap = {
+
+    previewCertificateType:
+        "award",
+
+    previewRecipientName:
+        "recipient",
+
+    previewCharacter:
+        "character",
+
+    previewEventName:
+        "event",
+
+    previewCommitteeName:
+        "committee",
+
+    previewChairperson:
+        "chairperson",
+
+    previewDate:
+        "date",
+
+    previewCertificateNumber:
+        "certificateNumber"
+};
+
+const fieldName =
+    fieldMap[element.id] ||
+    element.id;
+
+console.log(
+    `📐 ${fieldName}:`,
+    `x: ${Number(x.toFixed(2))},`,
+    `y: ${Number(y.toFixed(2))}`
+);
+
+        }
+    );
+
+},
+
 };
 
 

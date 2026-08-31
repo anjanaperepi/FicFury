@@ -10,6 +10,9 @@ import java.util.Optional;
 
 public interface CertificateRepository
         extends JpaRepository<Certificate, Long> {
+
+
+    void deleteByRecipientId(Long recipientId);
     
     Optional<Certificate> findByCertificateNumber(
             String certificateNumber
@@ -30,4 +33,6 @@ public interface CertificateRepository
         Long committeeId,
         CertificateType certificateType
 );
+
+void deleteByCommitteeId(Long committeeId);
 }

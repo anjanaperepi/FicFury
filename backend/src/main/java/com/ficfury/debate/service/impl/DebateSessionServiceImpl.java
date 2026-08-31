@@ -2,7 +2,19 @@ package com.ficfury.debate.service.impl;
 
 import com.ficfury.debate.entity.DebateSession;
 import com.ficfury.debate.enums.SessionStatus;
+import com.ficfury.debate.repository.ActivityLogRepository;
+import com.ficfury.debate.repository.AmendmentRepository;
+import com.ficfury.debate.repository.AnnouncementRepository;
 import com.ficfury.debate.repository.DebateSessionRepository;
+import com.ficfury.debate.repository.DiplomacyConversationRepository;
+import com.ficfury.debate.repository.MotionRepository;
+import com.ficfury.debate.repository.ResolutionClauseRepository;
+import com.ficfury.debate.repository.ResolutionRepository;
+import com.ficfury.debate.repository.ResolutionSignatoryRepository;
+import com.ficfury.debate.repository.ResolutionSponsorRepository;
+import com.ficfury.debate.repository.ResultRepository;
+import com.ficfury.debate.repository.SpeakerQueueRepository;
+import com.ficfury.debate.repository.VoteRepository;
 import com.ficfury.debate.service.DebateSessionService;
 import org.springframework.stereotype.Service;
 import com.ficfury.debate.dto.request.CreateDebateSessionRequest;
@@ -16,6 +28,7 @@ import com.ficfury.repository.UserRepository;
 
 import com.ficfury.model.Committee;
 import com.ficfury.model.User;
+import com.ficfury.debate.entity.Resolution;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,19 +43,59 @@ public class DebateSessionServiceImpl implements DebateSessionService {
     private final UserRepository userRepository;
     private final DebateMapper debateMapper;
     private final CommitteeEventPublisher committeeEventPublisher;
+    private final VoteRepository voteRepository;
+        private final MotionRepository motionRepository;
+        private final SpeakerQueueRepository speakerQueueRepository;
+        private final AnnouncementRepository announcementRepository;
+        private final ActivityLogRepository activityLogRepository;
+        private final ResultRepository resultRepository;
+        private final DiplomacyConversationRepository diplomacyConversationRepository;
+        private final ResolutionRepository resolutionRepository;
+        private final AmendmentRepository amendmentRepository;
+        private final ResolutionSponsorRepository resolutionSponsorRepository;
+        private final ResolutionSignatoryRepository resolutionSignatoryRepository;
+        private final ResolutionClauseRepository resolutionClauseRepository;
 
 public DebateSessionServiceImpl(
         DebateSessionRepository sessionRepository,
         CommitteeRepository committeeRepository,
         UserRepository userRepository,
         DebateMapper debateMapper,
-        CommitteeEventPublisher committeeEventPublisher) {
+        CommitteeEventPublisher committeeEventPublisher,
+        VoteRepository voteRepository,
+        MotionRepository motionRepository,
+        SpeakerQueueRepository speakerQueueRepository,
+        AnnouncementRepository announcementRepository,
+        ActivityLogRepository activityLogRepository,
+        ResultRepository resultRepository,
+        DiplomacyConversationRepository diplomacyConversationRepository,
+        ResolutionRepository resolutionRepository,
+        AmendmentRepository amendmentRepository,
+        ResolutionSponsorRepository resolutionSponsorRepository,
+        ResolutionSignatoryRepository resolutionSignatoryRepository,
+        ResolutionClauseRepository resolutionClauseRepository) {
 
     this.sessionRepository = sessionRepository;
     this.committeeRepository = committeeRepository;
     this.userRepository = userRepository;
     this.debateMapper = debateMapper;
     this.committeeEventPublisher = committeeEventPublisher;
+     this.voteRepository = voteRepository;
+    this.motionRepository = motionRepository;
+    this.speakerQueueRepository = speakerQueueRepository;
+    this.announcementRepository = announcementRepository;
+    this.activityLogRepository = activityLogRepository;
+    this.resultRepository = resultRepository;
+    this.diplomacyConversationRepository =
+            diplomacyConversationRepository;
+    this.resolutionRepository = resolutionRepository;
+    this.amendmentRepository = amendmentRepository;
+    this.resolutionSponsorRepository =
+            resolutionSponsorRepository;
+    this.resolutionSignatoryRepository =
+            resolutionSignatoryRepository;
+    this.resolutionClauseRepository =
+            resolutionClauseRepository;
 }
 
 
@@ -331,5 +384,42 @@ public ActiveSessionResponse getActiveSession(Long committeeId) {
     response.setChairName(session.getChair().getFullName());
 
     return response;
+}
+
+@Override
+@Transactional
+public void deleteSession(Long sessionId) {
+
+    DebateSession session = sessionRepository.findById(sessionId)
+            .orElseThrow(() ->
+                    new RuntimeException("Debate session not found."));
+
+   List<Resolution> resolutions =
+            resolutionRepository.findBySessionId(sessionId);
+
+    for (Resolution resolution : resolutions) {
+
+        Long resolutionId = resolution.getId();
+
+        // Delete resolution children first
+        voteRepository.deleteByResolutionId(resolutionId);
+        amendmentRepository.deleteByResolutionId(resolutionId);
+        resolutionSponsorRepository.deleteByResolutionId(resolutionId);
+        resolutionSignatoryRepository.deleteByResolutionId(resolutionId);
+        resolutionClauseRepository.deleteByResolutionId(resolutionId);
+    }
+
+    // Delete records that directly reference the session
+voteRepository.deleteBySessionId(sessionId);
+motionRepository.deleteBySessionId(sessionId);
+speakerQueueRepository.deleteBySessionId(sessionId);
+announcementRepository.deleteBySessionId(sessionId);
+activityLogRepository.deleteBySessionId(sessionId);
+resultRepository.deleteBySession(session);
+diplomacyConversationRepository.deleteBySession(session);
+
+resolutionRepository.deleteBySessionId(sessionId);
+
+sessionRepository.delete(session);
 }
 }

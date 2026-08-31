@@ -1444,25 +1444,23 @@ async function confirmDeleteCharacter() {
 
         setLoading(true);
 
-        await apiRequest(
+await apiRequest(
+    `/characters/${CharacterApp.deletingCharacterId}`,
+    "DELETE"
+);
 
-            `/characters/${CharacterApp.deletingCharacterId}`,
+closeDeleteModal();
 
-            "DELETE"
+Utils.showToast(
+    "Character deleted successfully",
+    "success"
+);
+setTimeout(() => {
+    window.location.reload();
+}, 700);
 
-        );
 
-        Utils.showToast(
 
-            "Character deleted successfully",
-
-            "success"
-
-        );
-
-        closeDeleteModal();
-
-        await loadCharacters();
 
     }
 

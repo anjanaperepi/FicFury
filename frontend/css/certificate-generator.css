@@ -246,8 +246,8 @@
 .certificate-type {
     position: absolute;
 
-    top: 47.0%;
-    left: 50%;
+    top: 0;
+    left: 0;
 
     transform: translate(-50%, -50%);
 
@@ -265,8 +265,8 @@
 .certificate-recipient {
     position: absolute;
 
-    top: 57.2%;
-    left: 50%;
+    top: 0;
+    left: 0;
 
     transform: translate(-50%, -50%);
 
@@ -287,8 +287,8 @@
 .certificate-character {
     position: absolute;
 
-    top: 64%;
-    left: 49%;
+    top: 0;
+    left: 0;
 
     transform: translate(-50%, -50%);
 
@@ -305,8 +305,8 @@
 .certificate-event {
     position: absolute;
 
-    top: 77.8%;
-    left: 50%;
+    top: 0;
+    left: 0;
 
     transform: translate(-50%, -50%);
 
@@ -324,8 +324,8 @@
 .certificate-committee {
     position: absolute;
 
-    top: 74%;
-    left: 50%;
+    top: 0;
+    left: 0;
 
     transform: translate(-50%, -50%);
 
@@ -343,8 +343,8 @@
 .certificate-date-text {
     position: absolute;
 
-    left: 70.6%;
-    bottom: 9.5%;
+    left: 0;
+    bottom: 0;
 
     transform: translateX(-50%);
 
@@ -361,8 +361,8 @@
 .certificate-number {
     position: absolute;
 
-    left: 77.4%;
-    bottom: 6.94%;
+    left: 0;
+    bottom: 0;
 
     transform: translateX(-50%);
 
@@ -378,8 +378,8 @@
 .certificate-chairperson {
     position: absolute;
 
-    left: 30%;
-    bottom: 13.5%;
+    left: 0;
+    bottom: 0;
 
     transform: translateX(-50%);
 
@@ -630,4 +630,76 @@
     .download-certificate-btn {
         width: 100%;
     }
+}
+
+/* =========================================================
+   CERTIFICATE CALIBRATION MODE
+   ========================================================= */
+
+.certificate-preview.calibration-mode
+    .certificate-type,
+.certificate-preview.calibration-mode
+    .certificate-recipient,
+.certificate-preview.calibration-mode
+    .certificate-character,
+.certificate-preview.calibration-mode
+    .certificate-event,
+.certificate-preview.calibration-mode
+    .certificate-committee,
+.certificate-preview.calibration-mode
+    .certificate-chairperson,
+.certificate-preview.calibration-mode
+    .certificate-date-text,
+.certificate-preview.calibration-mode
+    .certificate-number {
+
+    outline: 2px dashed rgba(31, 79, 145, 0.75);
+
+    outline-offset: 5px;
+
+    cursor: move;
+
+    user-select: none;
+
+    background: rgba(255, 255, 255, 0.18);
+
+    z-index: 100;
+}
+
+
+/* Hover feedback */
+
+.certificate-preview.calibration-mode
+    .certificate-type:hover,
+.certificate-preview.calibration-mode
+    .certificate-recipient:hover,
+.certificate-preview.calibration-mode
+    .certificate-character:hover,
+.certificate-preview.calibration-mode
+    .certificate-event:hover,
+.certificate-preview.calibration-mode
+    .certificate-committee:hover,
+.certificate-preview.calibration-mode
+    .certificate-chairperson:hover,
+.certificate-preview.calibration-mode
+    .certificate-date-text:hover,
+.certificate-preview.calibration-mode
+    .certificate-number:hover {
+
+    outline-style: solid;
+
+    cursor: grab;
+}
+
+
+/* While dragging */
+
+.certificate-preview.calibration-mode
+    .calibration-dragging {
+
+    cursor: grabbing;
+
+    outline-style: solid;
+
+    outline-width: 3px;
 }

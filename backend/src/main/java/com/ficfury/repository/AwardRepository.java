@@ -26,6 +26,8 @@ DELETE FROM Award a
 WHERE a.registration.committee.id = :committeeId
 """)
 void deleteByRegistration_Committee_Id(Long committeeId);
+void deleteByRegistration_Id(Long registrationId);
+void deleteByRegistration_Character_Id(Long characterId);
 
 
 List<Award> findByRegistration_Id(Long registrationId);

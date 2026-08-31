@@ -19,4 +19,6 @@ public interface AmendmentRepository
         Long resolutionId,
         AmendmentStatus status);
 
+     void deleteByResolutionId(Long resolutionId);
+
 }

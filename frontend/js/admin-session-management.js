@@ -91,6 +91,11 @@ async handleTableClick(event) {
         await this.archiveSession(sessionId);
 
     }
+    else if (button.classList.contains("delete-session-btn")) {
+
+    await this.deleteSession(sessionId);
+
+}
 
 },
 
@@ -232,6 +237,61 @@ async archiveSession(sessionId) {
     }
 
 },
+async deleteSession(sessionId) {
+
+    const confirmed = confirm(
+        "Delete this debate session?\n\n" +
+        "This will permanently delete the session and all " +
+        "associated debate data.\n\n" +
+        "This action cannot be undone."
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    if (this.state.isProcessing) {
+        return;
+    }
+
+    this.state.isProcessing = true;
+
+    try {
+
+        await apiRequest(
+            `/debate/sessions/${sessionId}`,
+            "DELETE"
+        );
+
+        Utils.showToast(
+            "Debate session deleted successfully.",
+            "success"
+        );
+
+        await this.loadSessions();
+
+        this.renderSessions();
+
+    }
+    catch (error) {
+
+        console.error(
+            "Delete Session Error:",
+            error
+        );
+
+        Utils.showToast(
+            "Failed to delete the debate session.",
+            "error"
+        );
+
+    }
+    finally {
+
+        this.state.isProcessing = false;
+
+    }
+},
 async loadSessions() {
 
     try {
@@ -297,46 +357,106 @@ renderActions(session) {
 
 case "DRAFT":
 
-    return `
+return `
+    <div class="session-actions">
+
         <span class="status-text text-warning">
-
             Waiting for Chair to Initiate
-
         </span>
-    `;
+
+        <button
+            class="btn delete-session-btn"
+            data-id="${session.id}">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+        </button>
+
+    </div>
+`;
 
             case "INITIATED":
-        return `
-            <button class="btn btn-success activate-btn"
-                    data-id="${session.id}">
-                Activate
-            </button>
-        `;
+return `
+    <div class="session-actions">
 
+        <button
+            class="btn btn-success activate-btn"
+            data-id="${session.id}">
+            Activate
+        </button>
+
+        <button
+            class="btn delete-session-btn"
+            data-id="${session.id}">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+        </button>
+
+    </div>
+`;
 
         case "ACTIVE":
 
-            return `
-                <button
-                    class="btn btn-danger stop-btn"
-                    data-id="${session.id}">
-                    Stop
-                </button>
+return `
+    <div class="session-actions">
 
-                <button
-                    class="btn btn-secondary archive-btn"
-                    data-id="${session.id}">
-                    Archive
-                </button>
-            `;
+        <button
+            class="btn btn-danger stop-btn"
+            data-id="${session.id}">
+            Stop
+        </button>
 
+        <button
+            class="btn btn-secondary archive-btn"
+            data-id="${session.id}">
+            Archive
+        </button>
+
+        <button
+            class="btn delete-session-btn"
+            data-id="${session.id}">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+        </button>
+
+    </div>
+`;
+
+case "STOPPED":
+
+    return `
+        <div class="session-actions">
+
+            <span class="status-text">
+                Ended
+            </span>
+
+            <button
+                class="btn delete-session-btn"
+                data-id="${session.id}">
+                <i class="fa-solid fa-trash"></i>
+                Delete
+            </button>
+
+        </div>
+    `;
     case "ARCHIVED":
 
-        return `
-            <span class="status-text">
-                Archived
-            </span>
-        `;
+return `
+    <div class="session-actions">
+
+        <span class="status-text">
+            Archived
+        </span>
+
+        <button
+            class="btn delete-session-btn"
+            data-id="${session.id}">
+            <i class="fa-solid fa-trash"></i>
+            Delete
+        </button>
+
+    </div>
+`;
 
         default:
 

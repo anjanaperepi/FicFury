@@ -29,6 +29,7 @@ List<DebateSessionResponse> getAllSessions();
 
 List<DebateSessionResponse> getSessionsByStatus(SessionStatus status);
 ActiveSessionResponse getActiveSession(Long committeeId);
+void deleteSession(Long sessionId);
 
 
 

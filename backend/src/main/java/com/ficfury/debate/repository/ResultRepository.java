@@ -11,4 +11,6 @@ public interface ResultRepository
 
     Optional<Result> findBySession(DebateSession session);
 
+    void deleteBySession(DebateSession session);
+
 }

@@ -5,6 +5,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.repository.UserRepository;
+import com.ficfury.repository.AwardRepository;
+import com.ficfury.repository.CertificateRepository;
+import com.ficfury.repository.CharacterChangeRequestRepository;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,19 +26,29 @@ import com.ficfury.model.User;
 public class CharacterServiceImpl implements CharacterService {
 
     
-    private final CharacterRepository characterRepository;
+private final CharacterRepository characterRepository;
 private final RegistrationRepository registrationRepository;
 private final UserRepository userRepository;
+private final AwardRepository awardRepository;
+private final CertificateRepository certificateRepository;
+private final CharacterChangeRequestRepository characterChangeRequestRepository;
 
 
 public CharacterServiceImpl(
         CharacterRepository characterRepository,
         RegistrationRepository registrationRepository,
-        UserRepository userRepository) {
+        UserRepository userRepository,
+        AwardRepository awardRepository,
+        CertificateRepository certificateRepository,
+        CharacterChangeRequestRepository characterChangeRequestRepository) {
 
     this.characterRepository = characterRepository;
     this.registrationRepository = registrationRepository;
     this.userRepository = userRepository;
+    this.awardRepository = awardRepository;
+    this.certificateRepository = certificateRepository;
+    this.characterChangeRequestRepository =
+        characterChangeRequestRepository;
 }
 
     @Override
@@ -104,26 +117,36 @@ validateChairOwnsCommittee(
 @Override
 public void deleteCharacter(Long id) {
 
-    
+    Character character =
+            characterRepository.findById(id)
+                    .orElseThrow(() ->
+                            new ResponseStatusException(
+                                    HttpStatus.NOT_FOUND,
+                                    "Character not found"
+                            )
+                    );
 
-    Character character = characterRepository.findById(id)
-            .orElseThrow(() ->
-                    new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Character not found"));
+    User user = getLoggedInUser();
 
+    validateChairOwnsCommittee(
+            character,
+            user
+    );
 
-                            User user = getLoggedInUser();
+    // Delete awards attached to registrations
+    // belonging to this character.
+    awardRepository.deleteByRegistration_Character_Id(id);
 
-validateChairOwnsCommittee(
-        character,
-        user);
+    // Delete certificates belonging to the registrations.
+    // We'll handle this separately if certificates are
+    // actually linked to these registrations in your model.
 
-    // Delete all registrations assigned to this character
+    // Delete registrations assigned to this character.
     registrationRepository.deleteByCharacterId(id);
+characterChangeRequestRepository
+        .deleteByRequestedCharacter_Id(id);
 
-    // Delete the character
-    characterRepository.delete(character);
+characterRepository.delete(character);
 }
 
     @Override

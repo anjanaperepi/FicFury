@@ -10,6 +10,7 @@ import com.ficfury.debate.entity.ResolutionStatus;
 public interface ResolutionRepository extends JpaRepository<Resolution, Long> {
 
     List<Resolution> findBySessionId(Long sessionId);
+    void deleteBySessionId(Long sessionId);
 
     List<Resolution> findBySessionIdAndStatus(
             Long sessionId,
