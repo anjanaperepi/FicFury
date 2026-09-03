@@ -2,7 +2,7 @@ package com.ficfury.dto;
 
 import java.util.List;
 
-import com.ficfury.model.Attendance;
+
 import com.ficfury.model.Award;
 import com.ficfury.model.Character;
 import com.ficfury.model.Committee;
@@ -19,7 +19,7 @@ public class DelegateDashboardResponse {
 
     private Character character;
 
-    private List<Attendance> attendance;
+   
 
 
     private List<Award> awards;
@@ -60,15 +60,6 @@ public class DelegateDashboardResponse {
     public void setCharacter(Character character) {
         this.character = character;
     }
-
-    public List<Attendance> getAttendance() {
-        return attendance;
-    }
-
-    public void setAttendance(List<Attendance> attendance) {
-        this.attendance = attendance;
-    }
-
 
 
 

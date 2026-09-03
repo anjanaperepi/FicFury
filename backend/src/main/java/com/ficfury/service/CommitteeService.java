@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ficfury.model.Committee;
-import com.ficfury.repository.AttendanceRepository;
+
 import com.ficfury.repository.AwardRepository;
 import com.ficfury.repository.CharacterRepository;
 import com.ficfury.repository.CommitteeRepository;
@@ -35,7 +35,7 @@ public class CommitteeService {
 private final CommitteeRepository committeeRepository;
 private final CharacterRepository characterRepository;
 private final RegistrationRepository registrationRepository;
-private final AttendanceRepository attendanceRepository;
+
 private final AwardRepository awardRepository;
 private final UserRepository userRepository;
 private final DebateSessionService debateSessionService;
@@ -48,7 +48,7 @@ public CommitteeService(
         CommitteeRepository committeeRepository,
         CharacterRepository characterRepository,
         RegistrationRepository registrationRepository,
-        AttendanceRepository attendanceRepository,
+       
         AwardRepository awardRepository,
         UserRepository userRepository,
         DebateSessionService debateSessionService,
@@ -59,7 +59,7 @@ public CommitteeService(
     this.committeeRepository = committeeRepository;
     this.characterRepository = characterRepository;
     this.registrationRepository = registrationRepository;
-    this.attendanceRepository = attendanceRepository;
+
     this.awardRepository = awardRepository;
     this.userRepository = userRepository;
     this.debateSessionService = debateSessionService;
