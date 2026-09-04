@@ -63,11 +63,26 @@
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "FIC FURY",
-    "url": "https://ficfury.com/",
-    "logo": "https://ficfury.com/assets/favicon.png",
-    "description": "FIC FURY is a live fictional debate and roleplay experience where participants become characters, debate within fictional universes, negotiate decisions and shape how stories unfold."
+    "@graph": [
+        {
+            "@type": "Organization",
+            "@id": "https://ficfury.com/#organization",
+            "name": "FIC FURY",
+            "url": "https://ficfury.com/",
+            "logo": "https://ficfury.com/assets/favicon.png",
+            "description": "FIC FURY is a live fictional debate and roleplay experience where participants become characters, debate within fictional universes, negotiate decisions and shape how stories unfold."
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://ficfury.com/#website",
+            "name": "FIC FURY",
+            "url": "https://ficfury.com/",
+            "description": "FIC FURY is a live fictional debate and roleplay platform where participants become characters, debate within fictional universes, negotiate decisions and shape how stories unfold.",
+            "publisher": {
+                "@id": "https://ficfury.com/#organization"
+            }
+        }
+    ]
 }
 </script>
 
