@@ -188,15 +188,14 @@ return response;
 
 
 @Override
-public DebateSessionResponse getChairSession(Long chairId) {
+public DebateSessionResponse getChairSession(Long committeeId) {
 
     DebateSession session = sessionRepository
-            .findTopByChair_IdOrderByCreatedAtDesc(chairId)
+            .findTopByCommittee_IdOrderByCreatedAtDesc(committeeId)
             .orElseThrow(() ->
                     new RuntimeException("No debate session found."));
 
     return debateMapper.toDebateSessionResponse(session);
-
 }
 
 @Override
