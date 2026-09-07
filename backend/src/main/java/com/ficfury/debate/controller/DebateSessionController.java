@@ -106,15 +106,16 @@ getActiveSession(
 
 }
 
-@GetMapping("/chair/{committeeId}")
+@GetMapping("/chair/{chairId}")
 public ResponseEntity<DebateSessionResponse> getChairSession(
-        @PathVariable Long committeeId) {
+        @PathVariable Long chairId) {
 
-    System.out.println(">>> INSIDE CHAIR ENDPOINT <<<");
+                System.out.println(">>> INSIDE CHAIR ENDPOINT <<<");
 
     return ResponseEntity.ok(
-            debateSessionService.getChairSession(committeeId)
+            debateSessionService.getChairSession(chairId)
     );
+
 }
 
 @DeleteMapping("/{id}")
