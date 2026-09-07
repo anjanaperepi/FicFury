@@ -185,6 +185,6 @@ public void deleteRegistration(
 public List<Registration> getChairRegistrations() {
 
     return registrationService
-            .getPendingChairRegistrations();
+            .getChairRegistrations();
 }
 }
