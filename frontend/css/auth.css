@@ -1,3 +1,5 @@
+
+
 /* =========================================================
    FIC FURY AUTHENTICATION
    Shared styling for Login + Register
@@ -786,4 +788,41 @@ form {
     .auth-link {
         text-align: center;
     }
+}
+.password-toggle {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+
+    width: 36px !important;
+    height: 36px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+
+    color: #111 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    cursor: pointer !important;
+    font-size: 16px !important;
+}
+
+.password-toggle:hover {
+    background: transparent !important;
+    color: #ed1c24 !important;
+    opacity: 1 !important;
+}
+
+.password-toggle:focus {
+    outline: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
 }

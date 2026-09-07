@@ -1,7 +1,37 @@
 /* ==========================================================
    FIC FURY — LOGIN
    ========================================================== */
+/* ==========================================================
+   PASSWORD VISIBILITY TOGGLE
+   ========================================================== */
 
+const passwordInput = document.getElementById("password");
+const passwordToggle = document.getElementById("passwordToggle");
+
+passwordToggle.addEventListener("click", function () {
+
+    const isPassword =
+        passwordInput.type === "password";
+
+    passwordInput.type =
+        isPassword ? "text" : "password";
+
+    const icon =
+        passwordToggle.querySelector("i");
+
+    icon.className =
+        isPassword
+            ? "fa-solid fa-eye-slash"
+            : "fa-solid fa-eye";
+
+    passwordToggle.setAttribute(
+        "aria-label",
+        isPassword
+            ? "Hide password"
+            : "Show password"
+    );
+
+});
 document
     .getElementById("loginForm")
     .addEventListener(
