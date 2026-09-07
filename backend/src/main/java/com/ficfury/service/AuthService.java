@@ -20,6 +20,7 @@ import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.model.Committee;
 import com.ficfury.model.Registration;
 import com.ficfury.repository.CommitteeRepository;
+import com.ficfury.service.EmailNotificationService;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +39,8 @@ public class AuthService {
     private final CustomUserDetailsService userDetailsService;
 
     private final CommitteeRepository committeeRepository;
+
+    private final EmailNotificationService emailNotificationService;
     
 
     public String register(
@@ -112,9 +115,19 @@ if (request.getUsername() == null ||
             "Username is required.");
 }
 
-        userRepository.save(user);
+User savedUser = userRepository.save(user);
 
-        return "Registration Successful";
+emailNotificationService.sendAdminNotification(
+        "New FIC FURY User Registration",
+        "A new user has registered on FIC FURY.\n\n"
+        + "Name: " + savedUser.getFullName() + "\n"
+        + "Username: " + savedUser.getUsername() + "\n"
+        + "Email: " + savedUser.getEmail() + "\n"
+        + "Role: " + savedUser.getRole() + "\n\n"
+        + "The user account is now active."
+);
+
+return "Registration Successful";
 
     }
 public AuthResponse login(LoginRequest request) {

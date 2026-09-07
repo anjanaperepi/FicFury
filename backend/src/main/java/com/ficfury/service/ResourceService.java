@@ -14,6 +14,7 @@ import com.ficfury.util.ResourceMapper;
 import com.ficfury.model.Registration;
 import com.ficfury.model.RegistrationStatus;
 import com.ficfury.model.ResourceVisibility;
+import com.ficfury.service.EmailNotificationService;
 
 import com.ficfury.repository.RegistrationRepository;
 
@@ -40,6 +41,8 @@ public class ResourceService {
     private final FileStorageService fileStorageService;
 
     private final RegistrationRepository registrationRepository;
+
+    private final EmailNotificationService emailNotificationService;
         
 public ResourceService(
         ResourceRepository resourceRepository,
@@ -47,7 +50,8 @@ public ResourceService(
         UserRepository userRepository,
         FileStorageService fileStorageService,
         ResourceMapper resourceMapper,
-        RegistrationRepository registrationRepository) {
+        RegistrationRepository registrationRepository,
+        EmailNotificationService emailNotificationService) {
 
     this.resourceRepository = resourceRepository;
     this.committeeRepository = committeeRepository;
@@ -55,6 +59,7 @@ public ResourceService(
     this.fileStorageService = fileStorageService;
     this.resourceMapper = resourceMapper;
     this.registrationRepository = registrationRepository;
+        this.emailNotificationService = emailNotificationService;
 }
 
     /**
@@ -213,6 +218,21 @@ if (
 
 Resource saved =
         resourceRepository.save(resource);
+
+emailNotificationService.sendAdminNotification(
+        "New FIC FURY Resource Submission",
+        "A new resource has been submitted for admin review.\n\n"
+        + "Submitted By: " + user.getFullName() + "\n"
+        + "Username: " + user.getUsername() + "\n"
+        + "Email: " + user.getEmail() + "\n\n"
+        + "Committee: " + committee.getName() + "\n"
+        + "Resource Title: " + request.getTitle() + "\n"
+        + "Category: " + request.getCategory() + "\n"
+        + "Description: " + request.getDescription() + "\n"
+        + "Visibility: " + visibility + "\n"
+        + "Request ID: " + saved.getId() + "\n\n"
+        + "The resource is awaiting admin review."
+);
 
 return resourceMapper.toResponse(saved);
 

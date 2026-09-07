@@ -17,6 +17,9 @@ import com.ficfury.model.User;
 import com.ficfury.repository.ChairCommitteeProposalRequestRepository;
 import com.ficfury.repository.CommitteeRepository;
 import com.ficfury.repository.UserRepository;
+import com.ficfury.service.CommitteeService;
+import com.ficfury.service.EmailNotificationService;
+
 
 @Service
 public class ChairCommitteeProposalRequestService {
@@ -30,12 +33,14 @@ public class ChairCommitteeProposalRequestService {
 
     private final UserRepository userRepository;
 
+    private final EmailNotificationService emailNotificationService;
 
     public ChairCommitteeProposalRequestService(
             ChairCommitteeProposalRequestRepository requestRepository,
             CommitteeRepository committeeRepository,
             CommitteeService committeeService,
-            UserRepository userRepository
+            UserRepository userRepository,
+                EmailNotificationService emailNotificationService
     ) {
 
         this.requestRepository =
@@ -49,6 +54,9 @@ public class ChairCommitteeProposalRequestService {
 
         this.userRepository =
                 userRepository;
+
+        this.emailNotificationService =
+                emailNotificationService;
     }
 
 
@@ -209,9 +217,27 @@ public class ChairCommitteeProposalRequestService {
         );
 
 
-        return requestRepository.save(
-                request
-        );
+ChairCommitteeProposalRequest savedRequest =
+        requestRepository.save(request);
+System.out.println(">>> SENDING COMMITTEE PROPOSAL EMAIL <<<");
+emailNotificationService.sendAdminNotification(
+        "New FIC FURY Committee Proposal",
+        "A new committee proposal has been submitted.\n\n"
+        + "Proposed by Chair: " + chair.getFullName() + "\n"
+        + "Username: " + chair.getUsername() + "\n"
+        + "Email: " + chair.getEmail() + "\n\n"
+        + "Committee Name: " + request.getCommitteeName() + "\n"
+        + "Category: " + request.getCategory() + "\n"
+        + "Date: " + request.getDate() + "\n"
+        + "Time: " + request.getTime() + "\n"
+        + "Mode: " + request.getMode() + "\n"
+        + "Venue: " + request.getVenue() + "\n\n"
+        + "Proposal Reason: " + request.getProposalReason() + "\n"
+        + "Request ID: " + savedRequest.getId() + "\n\n"
+        + "The committee proposal is awaiting admin review."
+);
+System.out.println(">>> COMMITTEE PROPOSAL EMAIL SENT <<<");
+return savedRequest;
     }
 
 

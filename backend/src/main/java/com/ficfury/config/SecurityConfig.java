@@ -61,6 +61,7 @@ public class SecurityConfig {
                             .requestMatchers("/api/debate/**").permitAll()
 
                         .requestMatchers("/api/diplomacy/**").permitAll()
+                        
                       
                         .requestMatchers("/api/admin/**")
                         .hasRole("ADMIN")

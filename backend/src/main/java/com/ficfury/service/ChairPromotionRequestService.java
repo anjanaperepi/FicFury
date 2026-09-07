@@ -18,6 +18,7 @@ import com.ficfury.repository.ChairPromotionRequestRepository;
 import com.ficfury.repository.CommitteeRepository;
 import com.ficfury.repository.UserRepository;
 
+import com.ficfury.service.EmailNotificationService;
 @Service
 public class ChairPromotionRequestService {
 
@@ -30,12 +31,15 @@ public class ChairPromotionRequestService {
 
     private final UserRepository userRepository;
 
+    private final EmailNotificationService emailNotificationService;
+
 
     public ChairPromotionRequestService(
             ChairPromotionRequestRepository requestRepository,
             CommitteeRepository committeeRepository,
             CommitteeService committeeService,
-            UserRepository userRepository
+            UserRepository userRepository,
+                EmailNotificationService emailNotificationService
     ) {
 
         this.requestRepository =
@@ -49,6 +53,9 @@ public class ChairPromotionRequestService {
 
         this.userRepository =
                 userRepository;
+
+        this.emailNotificationService =
+                emailNotificationService;
 
     }
 
@@ -206,9 +213,27 @@ public class ChairPromotionRequestService {
         );
 
 
-        return requestRepository.save(
-                request
-        );
+ChairPromotionRequest savedRequest =
+        requestRepository.save(request);
+
+emailNotificationService.sendAdminNotification(
+        "New FIC FURY Chair Proposal",
+        "A new chair proposal has been submitted.\n\n"
+        + "Delegate: " + user.getFullName() + "\n"
+        + "Username: " + user.getUsername() + "\n"
+        + "Email: " + user.getEmail() + "\n\n"
+        + "Proposed Committee: " + request.getCommitteeName() + "\n"
+        + "Category: " + request.getCategory() + "\n"
+        + "Date: " + request.getDate() + "\n"
+        + "Time: " + request.getTime() + "\n"
+        + "Mode: " + request.getMode() + "\n"
+        + "Venue: " + request.getVenue() + "\n\n"
+        + "Proposal Reason: " + request.getProposalReason() + "\n"
+        + "Request ID: " + savedRequest.getId() + "\n\n"
+        + "The chair proposal is awaiting admin review."
+);
+
+return savedRequest;
 
     }
 

@@ -24,6 +24,7 @@ import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.repository.UserRepository;
 import com.ficfury.repository.AwardRepository;
 import com.ficfury.repository.CertificateRepository;
+import com.ficfury.service.EmailNotificationService;
 
 @Service
 public class RegistrationService {
@@ -34,6 +35,7 @@ public class RegistrationService {
     private final CharacterRepository characterRepository;
     private final AwardRepository awardRepository;
     private final CertificateRepository certificateRepository;
+    private final EmailNotificationService emailNotificationService;
 
 public RegistrationService(
         RegistrationRepository registrationRepository,
@@ -41,7 +43,8 @@ public RegistrationService(
         CommitteeRepository committeeRepository,
         CharacterRepository characterRepository,
         AwardRepository awardRepository,
-        CertificateRepository certificateRepository
+        CertificateRepository certificateRepository,
+        EmailNotificationService emailNotificationService
 ) {
         this.registrationRepository = registrationRepository;
         this.userRepository = userRepository;
@@ -49,6 +52,7 @@ public RegistrationService(
         this.characterRepository = characterRepository;
         this.awardRepository = awardRepository;
         this.certificateRepository = certificateRepository;
+        this.emailNotificationService = emailNotificationService;
     }
 
    public Registration createRegistration(
@@ -163,8 +167,22 @@ if (registrationRepository
         registration.setChairApproval(
                 ApprovalStatus.PENDING
         );
+Registration savedRegistration =
+        registrationRepository.save(registration);
 
-    return registrationRepository.save(registration);
+emailNotificationService.sendAdminNotification(
+        "New FIC FURY Registration Request",
+        "A new delegate registration request has been submitted.\n\n"
+        + "Delegate: " + user.getFullName() + "\n"
+        + "Username: " + user.getUsername() + "\n"
+        + "Email: " + user.getEmail() + "\n"
+        + "Committee: " + committee.getName() + "\n"
+        + "Character: " + character.getName() + "\n"
+        + "Registration ID: " + savedRegistration.getId() + "\n\n"
+        + "The registration is awaiting admin approval."
+);
+
+return savedRegistration;
 
 }
 

@@ -9,6 +9,7 @@ import com.ficfury.debate.repository.DebateSessionRepository;
 import com.ficfury.debate.repository.DiplomacyConversationRepository;
 import com.ficfury.debate.repository.MotionRepository;
 import com.ficfury.debate.repository.ResolutionClauseRepository;
+
 import com.ficfury.debate.repository.ResolutionRepository;
 import com.ficfury.debate.repository.ResolutionSignatoryRepository;
 import com.ficfury.debate.repository.ResolutionSponsorRepository;
@@ -25,7 +26,7 @@ import com.ficfury.websocket.CommitteeEventPublisher;
 
 import com.ficfury.repository.CommitteeRepository;
 import com.ficfury.repository.UserRepository;
-
+import com.ficfury.service.EmailNotificationService;
 import com.ficfury.model.Committee;
 import com.ficfury.model.User;
 import com.ficfury.debate.entity.Resolution;
@@ -55,6 +56,7 @@ public class DebateSessionServiceImpl implements DebateSessionService {
         private final ResolutionSponsorRepository resolutionSponsorRepository;
         private final ResolutionSignatoryRepository resolutionSignatoryRepository;
         private final ResolutionClauseRepository resolutionClauseRepository;
+        private final EmailNotificationService emailNotificationService;
 
 public DebateSessionServiceImpl(
         DebateSessionRepository sessionRepository,
@@ -73,7 +75,8 @@ public DebateSessionServiceImpl(
         AmendmentRepository amendmentRepository,
         ResolutionSponsorRepository resolutionSponsorRepository,
         ResolutionSignatoryRepository resolutionSignatoryRepository,
-        ResolutionClauseRepository resolutionClauseRepository) {
+        ResolutionClauseRepository resolutionClauseRepository,
+        EmailNotificationService emailNotificationService) {
 
     this.sessionRepository = sessionRepository;
     this.committeeRepository = committeeRepository;
@@ -96,6 +99,7 @@ public DebateSessionServiceImpl(
             resolutionSignatoryRepository;
     this.resolutionClauseRepository =
             resolutionClauseRepository;
+    this.emailNotificationService = emailNotificationService;
 }
 
 
@@ -171,6 +175,18 @@ public DebateSessionResponse initiateSession(Long sessionId) {
 
 DebateSession savedSession =
         sessionRepository.save(session);
+
+emailNotificationService.sendAdminNotification(
+        "FIC FURY Debate Session Initiated",
+        "A debate session has been initiated.\n\n"
+        + "Chair: " + savedSession.getChair().getFullName() + "\n"
+        + "Username: " + savedSession.getChair().getUsername() + "\n"
+        + "Email: " + savedSession.getChair().getEmail() + "\n\n"
+        + "Committee: " + savedSession.getCommittee().getName() + "\n"
+        + "Session ID: " + savedSession.getId() + "\n"
+        + "Status: " + savedSession.getStatus() + "\n\n"
+        + "The debate session has been initiated and is ready to be activated."
+);
 
 DebateSessionResponse response =
         debateMapper.toDebateSessionResponse(
@@ -283,6 +299,19 @@ public DebateSessionResponse stopSession(Long sessionId) {
 
 DebateSession savedSession =
         sessionRepository.save(session);
+
+emailNotificationService.sendAdminNotification(
+        "FIC FURY Debate Session Stopped",
+        "A debate session has been stopped.\n\n"
+        + "Chair: " + savedSession.getChair().getFullName() + "\n"
+        + "Username: " + savedSession.getChair().getUsername() + "\n"
+        + "Email: " + savedSession.getChair().getEmail() + "\n\n"
+        + "Committee: " + savedSession.getCommittee().getName() + "\n"
+        + "Session ID: " + savedSession.getId() + "\n"
+        + "Status: " + savedSession.getStatus() + "\n"
+        + "Ended At: " + savedSession.getEndedAt() + "\n\n"
+        + "The debate session has been stopped."
+);
 
 DebateSessionResponse response =
         debateMapper.toDebateSessionResponse(

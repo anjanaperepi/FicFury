@@ -19,6 +19,7 @@ import com.ficfury.repository.CharacterRepository;
 import com.ficfury.repository.CharacterChangeRequestRepository;
 import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.repository.UserRepository;
+import com.ficfury.service.EmailNotificationService;
 
 @Service
 public class CharacterChangeRequestService {
@@ -32,12 +33,15 @@ public class CharacterChangeRequestService {
 
     private final UserRepository userRepository;
 
+    private final EmailNotificationService emailNotificationService;
+
 
     public CharacterChangeRequestService(
             CharacterChangeRequestRepository requestRepository,
             RegistrationRepository registrationRepository,
             CharacterRepository characterRepository,
-            UserRepository userRepository
+            UserRepository userRepository,
+                EmailNotificationService emailNotificationService
     ) {
 
         this.requestRepository =
@@ -51,6 +55,9 @@ public class CharacterChangeRequestService {
 
         this.userRepository =
                 userRepository;
+
+        this.emailNotificationService =
+                emailNotificationService;
 
     }
 
@@ -208,9 +215,24 @@ public class CharacterChangeRequestService {
         );
 
 
-        return requestRepository.save(
-                changeRequest
-        );
+CharacterChangeRequest savedRequest =
+        requestRepository.save(changeRequest);
+
+emailNotificationService.sendAdminNotification(
+        "New FIC FURY Character Change Request",
+        "A new character change request has been submitted.\n\n"
+        + "Delegate: " + user.getFullName() + "\n"
+        + "Username: " + user.getUsername() + "\n"
+        + "Email: " + user.getEmail() + "\n\n"
+        + "Committee: " + registration.getCommittee().getName() + "\n"
+        + "Current Character: " + registration.getCharacter().getName() + "\n"
+        + "Requested Character: " + requestedCharacter.getName() + "\n\n"
+        + "Reason: " + request.getReason() + "\n"
+        + "Request ID: " + savedRequest.getId() + "\n\n"
+        + "The character change request is awaiting review."
+);
+
+return savedRequest;
 
     }
 

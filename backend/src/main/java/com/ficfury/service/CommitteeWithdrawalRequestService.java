@@ -18,6 +18,7 @@ import com.ficfury.repository.CommitteeWithdrawalRequestRepository;
 import com.ficfury.repository.RegistrationRepository;
 import com.ficfury.repository.UserRepository;
 
+
 @Service
 public class CommitteeWithdrawalRequestService {
 
@@ -27,6 +28,8 @@ public class CommitteeWithdrawalRequestService {
     private final RegistrationRepository registrationRepository;
 
     private final UserRepository userRepository;
+
+    
 
 
     public CommitteeWithdrawalRequestService(
