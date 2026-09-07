@@ -46,4 +46,6 @@ public interface CommitteeChangeRequestRepository
         RequestStatus status
     );
 
+    void deleteByCommittee_Id(Long committeeId);
+
 }

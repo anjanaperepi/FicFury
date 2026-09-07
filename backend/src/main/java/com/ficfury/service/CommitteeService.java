@@ -15,6 +15,8 @@ import com.ficfury.repository.UserRepository;
 import com.ficfury.repository.CertificateRepository;
 import com.ficfury.debate.repository.DebateSessionRepository;
 import com.ficfury.repository.CharacterChangeRequestRepository;
+import com.ficfury.repository.CommitteeChangeRequestRepository;
+import com.ficfury.repository.CommitteeWithdrawalRequestRepository;
 import com.ficfury.model.Role;
 import com.ficfury.model.User;
 
@@ -35,6 +37,8 @@ public class CommitteeService {
 private final CommitteeRepository committeeRepository;
 private final CharacterRepository characterRepository;
 private final RegistrationRepository registrationRepository;
+private final CommitteeChangeRequestRepository committeeChangeRequestRepository;
+private final CommitteeWithdrawalRequestRepository committeeWithdrawalRequestRepository;
 
 private final AwardRepository awardRepository;
 private final UserRepository userRepository;
@@ -54,7 +58,9 @@ public CommitteeService(
         DebateSessionService debateSessionService,
         CertificateRepository certificateRepository,
         DebateSessionRepository debateSessionRepository,
-        CharacterChangeRequestRepository characterChangeRequestRepository) {
+        CharacterChangeRequestRepository characterChangeRequestRepository,
+        CommitteeChangeRequestRepository committeeChangeRequestRepository,
+        CommitteeWithdrawalRequestRepository committeeWithdrawalRequestRepository) {
 
     this.committeeRepository = committeeRepository;
     this.characterRepository = characterRepository;
@@ -67,6 +73,8 @@ public CommitteeService(
     this.debateSessionRepository = debateSessionRepository;
     this.characterChangeRequestRepository =
         characterChangeRequestRepository;
+        this.committeeChangeRequestRepository = committeeChangeRequestRepository;
+        this.committeeWithdrawalRequestRepository = committeeWithdrawalRequestRepository;
 }
 
 
@@ -170,7 +178,6 @@ public void deleteCommittee(Long id) {
             debateSessionRepository.findByCommittee(committee);
 
     for (com.ficfury.debate.entity.DebateSession session : sessions) {
-
         debateSessionService.deleteSession(session.getId());
     }
 
@@ -186,10 +193,28 @@ public void deleteCommittee(Long id) {
 
     certificateRepository.deleteByCommitteeId(id);
 
+    // ---------------------------------------------------------
+    // 4. Delete character change requests
+    //    They reference characters
+    // ---------------------------------------------------------
+
     characterChangeRequestRepository.deleteByCommittee_Id(id);
 
     // ---------------------------------------------------------
-    // 4. Delete characters belonging to this committee
+    // 5. Delete withdrawal requests
+    //    They reference registrations
+    // ---------------------------------------------------------
+
+    committeeWithdrawalRequestRepository.deleteByRegistrationCommitteeId(id);
+
+    // ---------------------------------------------------------
+    // 6. Delete registrations BEFORE characters
+    // ---------------------------------------------------------
+
+    registrationRepository.deleteByCommitteeId(id);
+
+    // ---------------------------------------------------------
+    // 7. Delete characters belonging to this committee
     // ---------------------------------------------------------
 
     List<Character> characters =
@@ -198,13 +223,13 @@ public void deleteCommittee(Long id) {
     characterRepository.deleteAll(characters);
 
     // ---------------------------------------------------------
-    // 5. Delete registrations belonging to this committee
+    // 8. Delete committee change requests
     // ---------------------------------------------------------
 
-    registrationRepository.deleteByCommitteeId(id);
+    committeeChangeRequestRepository.deleteByCommittee_Id(id);
 
     // ---------------------------------------------------------
-    // 6. Finally delete the committee
+    // 9. Finally delete the committee
     // ---------------------------------------------------------
 
     committeeRepository.delete(committee);
