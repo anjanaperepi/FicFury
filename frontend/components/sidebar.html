@@ -109,4 +109,35 @@
     </footer>
 
 </aside>
+<!-- HOW TO MODAL -->
+<div id="howToModal" class="how-to-modal" aria-hidden="true">
+    <div class="how-to-backdrop" data-how-to-close></div>
+
+    <div class="how-to-dialog"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="howToTitle">
+
+        <div class="how-to-header">
+            <div>
+                <span class="how-to-label">FIC FURY GUIDE</span>
+                <h2 id="howToTitle">How To</h2>
+            </div>
+
+            <button
+                type="button"
+                id="howToClose"
+                class="how-to-close"
+                aria-label="Close How To">
+                &times;
+            </button>
+        </div>
+
+        <div class="how-to-body">
+            <p id="howToIntro"></p>
+            <div id="howToContent"></div>
+        </div>
+
+    </div>
+</div>
 <div id="sidebarBackdrop" class="sidebar-backdrop"></div>

@@ -2124,5 +2124,265 @@ body.sidebar-collapsed .logout-btn i {
         max-width: 88vw;
     }
 }
+/* =========================================================
+   HOW TO MODAL
+   ========================================================= */
+
+.how-to-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.how-to-modal.open {
+    display: flex;
+}
+
+.how-to-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(4px);
+}
+
+.how-to-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(680px, 100%);
+    max-height: 85vh;
+    overflow: hidden;
+
+    background: #fff;
+    border: 3px solid #111;
+    border-radius: 12px;
+
+    box-shadow: 10px 10px 0 #111;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.how-to-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 26px;
+    border-bottom: 3px solid #111;
+    background: #f5f5f5;
+}
+
+.how-to-label {
+    display: block;
+    margin-bottom: 4px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.how-to-header h2 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 900;
+    color: #111;
+}
+
+.how-to-close {
+    width: 38px;
+    height: 38px;
+
+    border: 2px solid #111;
+    border-radius: 50%;
+    background: #fff;
+
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.how-to-close:hover {
+    background: #111;
+    color: #fff;
+    transform: rotate(5deg);
+}
+
+.how-to-body {
+    padding: 26px;
+    overflow-y: auto;
+}
+
+#howToIntro {
+    margin: 0 0 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+#howToContent {
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+#howToContent h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    font-weight: 900;
+    color: #111;
+}
+
+#howToContent p {
+    margin: 0 0 14px;
+    color: #444;
+}
+
+#howToContent ol,
+#howToContent ul {
+    margin: 0 0 18px;
+    padding-left: 22px;
+}
+
+#howToContent li {
+    margin-bottom: 10px;
+}
+
+#howToContent strong {
+    color: #111;
+}
 
 
+/* Mobile */
+@media (max-width: 600px) {
+    .how-to-modal {
+        padding: 14px;
+    }
+
+    .how-to-dialog {
+        max-height: 90vh;
+        box-shadow: 6px 6px 0 #111;
+    }
+
+    .how-to-header {
+        padding: 18px 20px;
+    }
+
+    .how-to-header h2 {
+        font-size: 24px;
+    }
+
+    .how-to-body {
+        padding: 20px;
+    }
+}
+/* ==========================================================
+   FIC FURY — FLOATING HOW TO BUTTON
+   ========================================================== */
+
+.how-to-floating {
+    position: absolute !important;
+
+    right: 7px;
+    top: 50%;
+
+    width: 62px;
+    height: 62px;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--ff-yellow) !important;
+    color: #000 !important;
+
+    border: 3px solid #000 !important;
+    border-radius: 50% !important;
+
+    
+
+    transform: translateY(-50%) !important;
+
+    z-index: 50;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+/* Question-mark icon */
+
+.how-to-floating i {
+    width: auto !important;
+    min-width: 0 !important;
+
+    color: #000 !important;
+
+    font-size: 24px !important;
+    transform: none !important;
+}
+
+/* Hide "How To" text */
+
+.how-to-floating span {
+    display: none !important;
+}
+
+/* Hover */
+
+.how-to-floating:hover {
+    background: var(--ff-yellow) !important;
+
+    transform:
+        translateY(-50%)
+        scale(1.06) !important;
+
+    box-shadow:
+        6px 6px 0 var(--ff-red);
+}
+
+/* ==========================================================
+   COLLAPSED SIDEBAR
+   ========================================================== */
+
+body.sidebar-collapsed .how-to-floating {
+    right: -23px;
+
+    width: 52px;
+    height: 52px;
+}
+
+body.sidebar-collapsed .how-to-floating i {
+    font-size: 20px !important;
+}
+
+/* ==========================================================
+   MOBILE
+   ========================================================== */
+
+@media (max-width: 992px) {
+
+    .how-to-floating {
+        right: 12px;
+        top: 50%;
+
+        width: 54px;
+        height: 54px;
+    }
+
+}

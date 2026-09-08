@@ -353,6 +353,14 @@ const SIDEBAR_MENU = {
 
         items: [
 
+                    {
+            id: "how-to",
+            title: "How To",
+            icon: "circle-question",
+            page: "#",
+            enabled: true
+        },
+
             {
                 id: "profile",
                 title: "Profile",
@@ -484,18 +492,27 @@ function createSidebarMenuItem(item) {
 
     link.dataset.tooltip = item.title;
 
-    if (item.enabled) {
+if (item.enabled) {
 
-        link.href = item.page;
+    link.href = item.page;
 
-    } else {
+} else {
 
-        link.href = "#";
+    link.href = "#";
 
-        link.classList.add("disabled");
+    link.classList.add("disabled");
 
-    }
+}
 
+if (item.id === "how-to") {
+
+    link.classList.add("how-to-floating");
+
+    link.addEventListener("click", (event) => {
+        event.preventDefault();
+        HowToModal.open();
+    });
+}
     link.innerHTML = `
         <i class="fa-solid fa-${item.icon}"></i>
         <span>${item.title}</span>
@@ -789,3 +806,272 @@ Sidebar.attachEvents = function () {
     }
 
 };
+const HowToModal = {
+
+open() {
+    const modal = document.getElementById("howToModal");
+
+    if (!modal) return;
+
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+
+    this.loadPageInstructions();
+
+    const closeButton = document.getElementById("howToClose");
+    const backdrop = modal.querySelector("[data-how-to-close]");
+
+    closeButton.onclick = () => this.close();
+
+    backdrop.onclick = () => this.close();
+},
+    close() {
+        const modal = document.getElementById("howToModal");
+
+        if (!modal) return;
+
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+    },
+
+    loadPageInstructions() {
+
+        const title = document.getElementById("howToTitle");
+        const intro = document.getElementById("howToIntro");
+        const content = document.getElementById("howToContent");
+
+        if (!title || !intro || !content) return;
+
+        const page = window.location.pathname
+            .split("/")
+            .pop()
+            .toLowerCase();
+
+        const instructions = {
+
+"dashboard.html": {
+    title: "Your Dashboard",
+    intro: "Your dashboard gives you an overview of your FIC FURY participation.",
+    content: `
+        <h3>Getting started</h3>
+
+        <p>
+            If you haven't registered for a committee yet,
+            head to <strong>Explore Committees</strong> in the sidebar
+            to find and register for an available committee.
+        </p>
+
+        <p>
+            Once you're registered, your dashboard will show
+            information relevant to your committee and participation.
+        </p>
+
+        <p>
+            <strong>Tip:</strong>
+            Check your dashboard regularly for important updates.
+        </p>
+
+        
+    `
+},
+"committee-explorer.html": {
+    title: "Explore Committees",
+    intro: "Find a committee and register to participate in a FIC FURY debate.",
+    content: `
+        <h3>How to get started</h3>
+
+        <ol>
+            <li>
+                Browse the available committees.
+            </li>
+
+            <li>
+                Use the available filters to narrow down committees
+                by <strong>category</strong> or <strong>mode</strong>.
+            </li>
+
+            <li>
+                Open a committee to view its details before registering.
+            </li>
+
+            <li>
+                Choose a committee that interests you and
+                complete the registration process.
+            </li>
+
+            <li>
+                Once registered, your assigned committee and character
+                will appear on your dashboard.
+            </li>
+                        <li>
+                Once approved, you can access the Resources and Debate Room for your committee.
+            </li>
+        </ol>
+
+        <p>
+            <strong>Already registered?</strong>
+            Your assigned committee and character will appear
+            on your dashboard once your registration is active.
+        </p>
+    `
+},
+
+"debate-room.html": {
+    title: "Debate Room",
+    intro: "Your main space for participating in an active FIC FURY debate.",
+    content: `
+        <h3>During the debate</h3>
+
+        <ol>
+            <li>
+                Join the debate once your committee session is active.
+            </li>
+
+             <li>
+You can request to speak by clicking the <strong>Request to Speak</strong> button.
+            </li>
+ <li>
+Use Diplomacy Mode to send private messages to other delegates or the Chair.
+            </li>
+            <li>
+                Keep an eye on the <strong>speaker queue</strong>
+                to know when you are expected to speak.
+            </li>
+
+            <li>
+                Follow the Chair's instructions and participate
+                when you are called upon.
+            </li>
+
+            <li>
+                Use the available debate controls to participate
+                in the session.
+            </li>
+        </ol>
+
+        <p>
+            <strong>Tip:</strong>
+            Keep the Debate Room open during your committee session
+            so you don't miss updates or speaking opportunities.
+        </p>
+    `
+},
+
+"resources.html": {
+    title: "Resources",
+    intro: "Access and use resources provided for your FIC FURY committees.",
+    content: `
+        <h3>Using Resources</h3>
+
+        <ol>
+            <li>
+                Browse the resources available to you.
+            </li>
+
+            <li>
+                Open a resource to view its contents or access the
+                provided material.
+            </li>
+
+            <li>
+                Use these materials to research your committee,
+                character, and debate topic.
+            </li>
+        </ol>
+
+        <p>
+            <strong>Tip:</strong>
+            Check the Resources page regularly, as new materials
+            may be added during the course of your committee.
+        </p>
+    `
+},
+
+"awards-certificates.html": {
+    title: "Awards & Certificates",
+    intro: "Track your achievements and access certificates earned through FIC FURY.",
+    content: `
+        <h3>Your Achievements</h3>
+
+        <ol>
+            <li>
+                Check this page to view awards and achievements
+                associated with your FIC FURY participation.
+            </li>
+
+            <li>
+                Review your available certificates once you become
+                eligible to receive them.
+            </li>
+
+            <li>
+                Use the information here to keep track of your
+                participation and accomplishments.
+            </li>
+        </ol>
+
+        <p>
+            <strong>Tip:</strong>
+            Continue participating actively in your committees
+            to build your FIC FURY achievements.
+        </p>
+    `
+},
+
+"profile.html": {
+    title: "Your Profile",
+    intro: "Manage your FIC FURY account information and view your participation details.",
+    content: `
+        <h3>Managing Your Profile</h3>
+
+        <ol>
+            <li>
+                Review your personal and account information.
+            </li>
+
+            <li>
+                Get promoted to Chair with the proposal of a committee and approval from the FIC FURY team.
+            </li>
+
+            <li>
+                Check your profile details to make sure your
+                information is accurate.
+            </li>
+        </ol>
+
+
+    `
+},
+        };
+
+        const pageInfo = instructions[page];
+
+        if (pageInfo) {
+
+            title.textContent = pageInfo.title;
+            intro.textContent = pageInfo.intro;
+            content.innerHTML = pageInfo.content;
+
+        } else {
+
+            title.textContent = "How To";
+            intro.textContent = "Here's how to use this part of FIC FURY.";
+
+            content.innerHTML = `
+                <h3>Getting started</h3>
+                <p>
+                    Use the available controls and follow the instructions
+                    provided on this page.
+                </p>
+            `;
+        }
+    }
+};
+
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        HowToModal.close();
+    }
+});
+
