@@ -4908,3 +4908,15 @@ body {
         width: min(50vw, 720px);
     }
 }
+.preferred-source {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.preferred-source p {
+    margin: 0 0 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
